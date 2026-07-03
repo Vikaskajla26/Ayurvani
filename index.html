@@ -1,0 +1,3531 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>आयुर्वेद वाणी | Ayurved Vani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Noto+Serif+Devanagari:wght@500;700&family=Noto+Sans+Devanagari:wght@400;500;600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  /* ---------- Ambient Design System (Forest Dark Mode Default) ---------- */
+  :root{
+    --bg: #0A0F0D; /* Deep forest charcoal black */
+    --bg-soft: #111A16;
+    --card: rgba(20, 32, 27, 0.65); /* Glassmorphic cards */
+    --card-solid: #131E19;
+    --ink: #F3ECE8; /* Soft pearl cream */
+    --ink-soft: #A3B5AC; /* Moss-tinted sage grey */
+    --teal: #367C59; /* Vibrant forest green */
+    --teal-deep: #060A08;
+    --gold: #C59841; /* Rich ambient gold */
+    --gold-light: #F2DEC0;
+    --copper: #CE6A52; /* Terracotta copper */
+    --line: rgba(243,236,232,0.08);
+    --shadow: 0 12px 40px rgba(0,0,0,0.55);
+    --glass-bg: rgba(20, 32, 27, 0.45);
+    --glass-border: rgba(255, 255, 255, 0.05);
+    --accent: #CE6A52;
+  }
+
+  /* ---------- Serene Light Sand Mode ---------- */
+  body.light-mode{
+    --bg: #F5EFEB; /* Sand cream background */
+    --bg-soft: #E8E1C9;
+    --card: rgba(251, 248, 239, 0.8);
+    --card-solid: #FBF8EF;
+    --ink: #1E2B22; /* Charcoal leaf ink */
+    --ink-soft: #4A5A4E;
+    --teal: #1F4A3D; /* Classic ayurvedic teal */
+    --teal-deep: #14332A;
+    --gold: #B9862E;
+    --gold-light: #E4C170;
+    --copper: #9C4A2E;
+    --line: rgba(30,43,34,0.1);
+    --shadow: 0 12px 45px rgba(20,51,42,0.08);
+    --glass-bg: rgba(251, 248, 239, 0.6);
+    --glass-border: rgba(30,43,34,0.08);
+    --accent: #9C4A2E;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Inter',sans-serif; line-height:1.5;
+    transition: background 0.4s ease, color 0.4s ease;
+  }
+  .hin{font-family:'Noto Sans Devanagari',sans-serif;}
+  .hin-serif{font-family:'Noto Serif Devanagari',serif;}
+  h1,h2,h3,.display{font-family:'Fraunces',serif; letter-spacing:-0.01em;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit; text-decoration:none;}
+  button{font-family:inherit; cursor:pointer;}
+
+  /* ---------- Preloader Screen ---------- */
+  .preloader-overlay {
+    position: fixed;
+    inset: 0;
+    background: #0A0F0D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease-out;
+  }
+  .preloader-overlay.fade-out {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .preloader-content {
+    text-align: center;
+    color: var(--gold-light);
+  }
+  .mandala-loader {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto 28px;
+    border-radius: 50%;
+    border: 2px dashed var(--gold);
+    border-top-color: transparent;
+    animation: rotateMandala 8s linear infinite;
+    position: relative;
+    box-shadow: 0 0 25px rgba(197, 152, 65, 0.2);
+  }
+  .mandala-loader::after {
+    content: '';
+    position: absolute;
+    inset: 12px;
+    border-radius: 50%;
+    border: 2px dotted var(--copper);
+    animation: rotateMandalaReverse 6s linear infinite;
+  }
+  @keyframes rotateMandala {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  @keyframes rotateMandalaReverse {
+    0% { transform: rotate(360deg); }
+    100% { transform: rotate(0deg); }
+  }
+  .shlok-breathing {
+    font-family: 'Noto Serif Devanagari', serif;
+    font-size: 1.7rem;
+    color: var(--gold-light);
+    margin-bottom: 14px;
+    animation: breathText 3s ease-in-out infinite;
+    text-shadow: 0 0 15px rgba(242, 222, 192, 0.35);
+  }
+  @keyframes breathText {
+    0%, 100% { opacity: 0.35; transform: scale(0.97); }
+    50% { opacity: 1; transform: scale(1.03); }
+  }
+  .preloader-progress {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:var(--teal-deep); color:var(--gold-light);
+    padding:14px 28px; display:flex; align-items:center; justify-content:space-between;
+    box-shadow:0 2px 12px rgba(0,0,0,0.15);
+    flex-wrap:wrap; gap:10px;
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .logo{display:flex; align-items:center; gap:12px;}
+  .logo-mark{
+    width:36px; height:36px; border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, var(--gold-light), var(--gold) 60%, var(--copper) 100%);
+    box-shadow:0 0 12px rgba(197, 152, 65, 0.45);
+  }
+  .logo-text{font-family:'Fraunces',serif; font-size:1.35rem; color:#F6EFDD;}
+  .logo-text .sub{display:block; font-size:0.62rem; letter-spacing:0.18em; color:var(--gold); font-family:'Inter',sans-serif; text-transform:uppercase; margin-top:-2px;}
+  nav{display:flex; gap:4px; flex-wrap:wrap;}
+  nav button{
+    background:transparent; border:none; color:var(--ink-soft); padding:8px 16px;
+    border-radius:20px; font-size:0.92rem; font-weight:500; transition:.2s;
+  }
+  nav button:hover, nav button.active{background:rgba(197, 152, 65, 0.15); color:var(--gold-light);}
+  body.light-mode nav button:hover, body.light-mode nav button.active { background: rgba(31, 74, 61, 0.1); color: var(--teal-deep); }
+  
+  .header-right{display:flex; align-items:center; gap:12px;}
+  .lang-toggle{display:flex; background:rgba(255,255,255,0.06); border-radius:20px; padding:3px; border:1px solid var(--line);}
+  .lang-toggle button{padding:5px 12px; border-radius:16px; font-size:0.8rem; color:var(--ink-soft); border:none; background:transparent;}
+  .lang-toggle button.active{background:var(--gold); color:var(--teal-deep); font-weight:700;}
+  
+  .theme-btn {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--line);
+    color: var(--gold-light);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    transition: 0.2s;
+  }
+  .theme-btn:hover {
+    background: rgba(255,255,255,0.12);
+    color: #FFF;
+  }
+  body.light-mode .theme-btn {
+    background: rgba(30,43,34,0.06);
+    color: var(--teal);
+  }
+  body.light-mode .theme-btn:hover {
+    background: rgba(30,43,34,0.12);
+  }
+  
+  .login-btn{
+    background:var(--gold); color:var(--teal-deep); border:none; padding:8px 18px;
+    border-radius:20px; font-weight:700; font-size:0.85rem; transition:.2s;
+  }
+  .login-btn:hover{background:var(--gold-light); transform: translateY(-1px);}
+
+  main{max-width:1120px; margin:0 auto; padding:0 24px 80px;}
+  section{display:none;}
+  section.active{display:block;}
+
+  /* ---------- Scroll Track Hero Animation (Home Section Only) ---------- */
+  .scroll-track {
+    position: relative;
+    height: 280vh; /* 3 screens of scrolling for fine-grained frame scrubbing */
+    margin-bottom: 40px;
+    width: calc(100% + 48px);
+    margin-left: -24px;
+  }
+  .sticky-container {
+    position: sticky;
+    top: 60px; /* Offset header */
+    height: calc(100vh - 60px);
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #heroCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    filter: brightness(0.55) contrast(1.05);
+    transition: filter 0.5s ease;
+  }
+  body.light-mode #heroCanvas {
+    filter: brightness(0.82) contrast(0.98);
+  }
+  
+  .scroll-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 8%;
+    z-index: 5;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    transform: translateY(24px);
+  }
+  .scroll-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+  }
+  
+  .clickable-topic {
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .clickable-topic:hover {
+    border-color: var(--gold);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+    background: rgba(185, 134, 46, 0.05);
+  }
+  
+  .overlay-card {
+    max-width: 500px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    color: var(--ink);
+  }
+  .overlay-card h1 {
+    font-size: 2.7rem;
+    margin: 8px 0 14px;
+    color: var(--gold-light);
+    line-height: 1.1;
+  }
+  body.light-mode .overlay-card h1 {
+    color: var(--teal-deep);
+  }
+  .overlay-card .hindi-line {
+    font-family: 'Noto Serif Devanagari', serif;
+    font-size: 2.1rem;
+    color: var(--copper);
+    display: block;
+    margin-bottom: 4px;
+  }
+  .overlay-card p {
+    color: var(--ink-soft);
+    font-size: 1.02rem;
+    line-height: 1.6;
+    margin-bottom: 26px;
+  }
+  .hero-ctas {
+    display:flex; gap:12px;
+  }
+  
+  /* Right Float Overlay Card for Mala */
+  #overlay3 {
+    justify-content: flex-end;
+  }
+  .mala-panel {
+    width: 100%;
+    max-width: 380px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 28px;
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ---------- Mala counter (signature element) ---------- */
+  .mala-wrap{display:flex; flex-direction:column; align-items:center;}
+  .mala-ring{position:relative; width:250px; height:250px; cursor: pointer; transition: transform 0.2s;}
+  .mala-ring:active{transform: scale(0.98);}
+  .bead{
+    position:absolute; width:12px; height:12px; border-radius:50%;
+    background:#4A5A4E; top:50%; left:50%;
+    box-shadow:inset 0 1px 2px rgba(0,0,0,0.4);
+    transform-origin:0 0; transition:background .25s, box-shadow .25s;
+  }
+  body.light-mode .bead { background: #D8C9A3; }
+  .bead.lit{background:var(--gold); box-shadow:0 0 10px 2px rgba(197,152,65,0.75);}
+  .bead.guru{width:18px; height:18px; background:var(--copper);}
+  
+  .mala-center{
+    position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+    text-align:center; width:140px; height: 140px; border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.15);
+    border: 1px solid var(--line);
+    position: relative;
+    user-select: none;
+  }
+  body.light-mode .mala-center { background: rgba(255,255,255,0.25); }
+  
+  /* Breathing coach visual overlay inside mala center */
+  .mala-center::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    opacity: 0.12;
+    animation: coachBreath 8s ease-in-out infinite;
+    z-index: -1;
+  }
+  @keyframes coachBreath {
+    0%, 100% { transform: scale(1); opacity: 0.12; box-shadow: 0 0 0 0px var(--gold); }
+    50% { transform: scale(1.18); opacity: 0.45; box-shadow: 0 0 15px 4px var(--gold); }
+  }
+  
+  .mala-count{font-size:2.4rem; font-weight:700; color:var(--gold-light); line-height: 1.1;}
+  body.light-mode .mala-count { color: var(--teal-deep); }
+  .mala-label{font-size:0.72rem; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.1em;}
+  .mala-hint{margin-top:14px; font-size:0.85rem; color:var(--ink-soft); text-align:center; max-width: 280px;}
+  .mala-reset{margin-top:12px; background:none; border:1px solid var(--line); border-radius:16px; padding:6px 14px; font-size:0.8rem; color:var(--ink-soft); transition: .2s;}
+  .mala-reset:hover{background: rgba(255,255,255,0.06); color: var(--ink);}
+  body.light-mode .mala-reset:hover { background: rgba(30,43,34,0.06); }
+
+  /* ---------- Home Page Bottom Content ---------- */
+  .home-bottom-content {
+    max-width: 1072px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+  }
+
+  /* ---------- Sections Header & Toolbars ---------- */
+  .section-head{margin:56px 0 24px; display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  .section-head h2{font-size:1.9rem; color:var(--gold-light); margin:0;}
+  body.light-mode .section-head h2 { color: var(--teal-deep); }
+  .section-head .count{font-family:'JetBrains Mono',monospace; font-size:0.85rem; color:var(--copper);}
+
+  .toolbar{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:22px; align-items:center;}
+  .toolbar input[type=text]{
+    flex:1; min-width:200px; padding:12px 16px; border-radius:8px; border:1.5px solid var(--line);
+    background:var(--card-solid); font-size:0.95rem; color:var(--ink);
+  }
+  .chip{padding:7px 16px; border-radius:16px; border:1.5px solid var(--line); background:var(--card-solid); font-size:0.82rem; color:var(--ink-soft); transition: .2s;}
+  .chip:hover{border-color: var(--gold);}
+  .chip.active{background:var(--teal); color:#F6EFDD; border-color:var(--teal);}
+
+  /* ---------- Grid & Cards ---------- */
+  .grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(300px,1fr)); gap:20px;}
+  .card{
+    background:var(--card); border-radius:14px; padding:24px; border:1px solid var(--line);
+    box-shadow:var(--shadow); position:relative; display:flex; flex-direction:column; gap:12px;
+    transition: transform 0.25s, box-shadow 0.25s;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .card:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 16px 35px rgba(0,0,0,0.3);
+  }
+  body.light-mode .card:hover { box-shadow: var(--shadow); }
+  
+  .card .cat{font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--copper); font-weight:600;}
+  .card .sanskrit{font-family:'Noto Serif Devanagari',serif; font-size:1.28rem; color:var(--gold-light); line-height:1.5;}
+  body.light-mode .card .sanskrit { color: var(--teal-deep); }
+  .card .translit{font-style:italic; color:var(--ink-soft); font-size:0.88rem;}
+  .card .meaning{font-size:0.9rem; color:var(--ink); border-top:1px dashed var(--line); padding-top:10px; margin-top:4px;}
+  .card .book-title{font-size:1.18rem; font-weight:700; color:var(--gold-light); font-family:'Fraunces',serif;}
+  body.light-mode .card .book-title { color: var(--teal-deep); }
+  .card .book-meta{font-size:0.78rem; color:var(--copper); font-weight:600;}
+  .card .book-desc{font-size:0.88rem; color:var(--ink-soft);}
+  
+  .btn-primary, .btn-ghost{padding:12px 22px; border-radius:8px; font-weight:600; font-size:0.95rem; border:1.5px solid var(--teal); transition: .2s;}
+  .btn-primary{background:var(--teal); color:#F6EFDD; }
+  .btn-primary:hover{background:var(--teal-deep); transform: translateY(-1px);}
+  .btn-ghost{background:transparent; color:var(--gold-light); border-color: var(--gold);}
+  body.light-mode .btn-ghost { color: var(--teal); border-color: var(--teal); }
+  .btn-ghost:hover{background:rgba(197,152,65,0.08); transform: translateY(-1px);}
+
+  .fav-btn{
+    position:absolute; top:18px; right:18px; background:none; border:none; font-size:1.25rem;
+    color:var(--line); transition:.2s; cursor: pointer;
+  }
+  .fav-btn:hover { transform: scale(1.15); }
+  .fav-btn.saved{color:var(--copper);}
+  .play-btn{
+    background:var(--teal); color:#F6EFDD; border:none; padding:8px 18px; border-radius:16px;
+    font-size:0.82rem; font-weight:600; display:inline-flex; align-items:center; gap:6px;
+    transition: .2s;
+  }
+  .play-btn:hover{background:var(--teal-deep); transform: translateY(-1px);}
+  .play-btn.playing{background:var(--copper);}
+  .tts-note{font-size:0.7rem; color:var(--ink-soft); font-style:italic; margin-top:2px;}
+
+  /* ---------- About ---------- */
+  .about-wrap{
+    display:flex; gap:36px; align-items:flex-start; background:var(--card); border-radius:18px;
+    padding:44px; border:1px solid var(--line); box-shadow:var(--shadow); margin-top:20px; flex-wrap:wrap;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .about-avatar{
+    width:110px; height:110px; border-radius:50%; flex-shrink:0;
+    object-fit: cover;
+    box-shadow:0 0 20px rgba(197,152,65,0.35);
+  }
+  .about-info{flex:1; min-width:240px;}
+  .about-info h2{margin:0 0 4px; font-size:1.9rem; color:var(--gold-light);}
+  body.light-mode .about-info h2 { color: var(--teal-deep); }
+  .about-role{color:var(--copper); font-weight:600; font-size:0.9rem; margin-bottom:16px;}
+  .about-bio{color:var(--ink-soft); font-size:0.98rem; line-height:1.7; max-width:560px;}
+  .about-insta{
+    display:inline-flex; align-items:center; gap:8px; margin-top:20px; padding:10px 22px;
+    background:var(--teal); color:#F6EFDD; border-radius:24px; font-weight:600; font-size:0.92rem;
+    transition:.2s;
+  }
+  .about-insta:hover{background:var(--teal-deep); transform: translateY(-1px);}
+  .insta-icon{font-size:1.05rem;}
+  .empty-state{padding:60px 20px; text-align:center; color:var(--ink-soft);}
+  .empty-state .big{font-size:2.4rem; display:block; margin-bottom:8px;}
+
+  /* ---------- Modal ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(6, 10, 8, 0.7); display:none;
+    align-items:center; justify-content:center; z-index:100; padding:20px;
+    backdrop-filter: blur(4px);
+  }
+  .modal-overlay.show{display:flex;}
+  .modal{
+    background:var(--card-solid); border-radius:16px; padding:32px; width:100%; max-width:400px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.55);
+    border: 1px solid var(--line);
+    position:relative;
+  }
+  .modal h3{margin-top:0; color:var(--gold-light); font-size: 1.4rem;}
+  body.light-mode .modal h3 { color: var(--teal-deep); }
+  .modal label{display:block; font-size:0.8rem; color:var(--ink-soft); margin:14px 0 6px; font-weight:600;}
+  .modal input{
+    width:100%; padding:11px 14px; border-radius:8px; border:1.5px solid var(--line);
+    font-size:0.95rem; background: var(--bg-soft); color: var(--ink);
+  }
+  .modal-actions{display:flex; gap:10px; margin-top:22px;}
+  .modal-actions button{flex:1; padding:12px; border-radius:8px; border:none; font-weight:600;}
+  .modal-close{position:absolute; top:14px; right:18px; background:none; border:none; font-size:1.3rem; color:var(--ink-soft);}
+  .muted-note{font-size:0.75rem; color:var(--ink-soft); margin-top:16px; line-height:1.5;}
+
+  /* ---------- Admin ---------- */
+  .admin-form{background:var(--card); border-radius:14px; padding:24px; border:1px solid var(--line); margin-bottom:30px;}
+  .admin-form h3{margin-top:0; color:var(--gold-light);}
+  body.light-mode .admin-form h3 { color: var(--teal-deep); }
+  .admin-form .row{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  .admin-form label{font-size:0.78rem; color:var(--ink-soft); font-weight:600; display:block; margin:10px 0 5px;}
+  .admin-form input, .admin-form textarea, .admin-form select{
+    width:100%; padding:9px 12px; border-radius:8px; border:1.5px solid var(--line); font-size:0.9rem; font-family:inherit;
+    background: var(--bg-soft); color: var(--ink);
+  }
+  .admin-list-item{display:flex; justify-content:space-between; align-items:center; padding:12px 16px; border:1px solid var(--line); border-radius:10px; margin-bottom:8px; background:var(--card);}
+  .del-btn{background:none; border:none; color:var(--copper); font-weight:700; font-size:0.85rem;}
+  .save-btn{background:var(--teal); color:#F6EFDD; border:none; padding:10px 20px; border-radius:8px; font-weight:600; margin-top:16px;}
+  .tag-role{font-size:0.7rem; background:var(--gold); color:var(--teal-deep); padding:3px 10px; border-radius:10px; font-weight:700; margin-left:8px;}
+
+  .profile-pill{display:flex; align-items:center; gap:8px; background:rgba(197,152,65,0.15); padding:6px 14px; border-radius:20px; font-size:0.85rem; color:var(--gold-light);}
+  body.light-mode .profile-pill { background: rgba(31, 74, 61, 0.1); color: var(--teal-deep); }
+  
+  .toast{
+    position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+    background:var(--teal-deep); color:var(--gold-light); padding:12px 22px; border-radius:10px;
+    font-size:0.88rem; box-shadow:0 8px 24px rgba(0,0,0,0.45); z-index:2000; opacity:0; transition:.3s;
+    border: 1px solid var(--gold);
+  }
+  .toast.show{opacity:1;}
+  footer{text-align:center; padding:30px; color:var(--ink-soft); font-size:0.8rem; border-top:1px solid var(--line);}
+
+  /* ---------- Sticky Bottom Player Bar ---------- */
+  .bottom-player-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--card-solid);
+    border-top: 1px solid var(--line);
+    box-shadow: 0 -8px 30px rgba(0,0,0,0.3);
+    padding: 16px 32px;
+    z-index: 1000;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .bottom-player-bar.show {
+    transform: translateY(0);
+  }
+  .player-content {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .player-info {
+    flex: 1;
+    min-width: 200px;
+  }
+  .player-sanskrit {
+    font-family: 'Noto Serif Devanagari', serif;
+    font-size: 1.15rem;
+    color: var(--gold-light);
+    margin-bottom: 2px;
+  }
+  body.light-mode .player-sanskrit {
+    color: var(--teal-deep);
+  }
+  .player-translit {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+  .player-controls {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .player-btn-main {
+    background: var(--gold);
+    color: var(--teal-deep);
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(197, 152, 65, 0.3);
+    transition: transform 0.2s;
+    cursor: pointer;
+  }
+  .player-btn-main:hover {
+    transform: scale(1.08);
+  }
+  .player-close-btn {
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
+  .wave-visualizer {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 24px;
+    width: 40px;
+  }
+  .wave-visualizer span {
+    width: 3px;
+    height: 4px;
+    background: var(--copper);
+    border-radius: 2px;
+    animation: waveBounce 0.8s ease-in-out infinite alternate;
+    animation-play-state: paused;
+  }
+  .wave-visualizer.playing span {
+    animation-play-state: running;
+  }
+  .wave-visualizer span:nth-child(2) { animation-delay: 0.15s; }
+  .wave-visualizer span:nth-child(3) { animation-delay: 0.3s; }
+  .wave-visualizer span:nth-child(4) { animation-delay: 0.1s; }
+  .wave-visualizer span:nth-child(5) { animation-delay: 0.2s; }
+  
+  @keyframes waveBounce {
+    0% { height: 4px; }
+    100% { height: 22px; }
+  }
+  .speed-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+  .speed-selector select {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+
+  /* ---------- Shloka Search & Recitation Player ---------- */
+  .shloka-search-section {
+    padding: 52px 28px 40px;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+  .shloka-search-section .section-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .shloka-search-section h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 2rem;
+    margin: 0 0 6px;
+    color: var(--gold-light);
+    line-height: 1.2;
+  }
+  .shloka-search-section .subtitle {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+  .home-search-wrap {
+    position: relative;
+    margin-bottom: 0;
+  }
+  .home-search-input {
+    width: 100%;
+    padding: 16px 56px 16px 20px;
+    border-radius: 14px;
+    border: 1.5px solid var(--line);
+    background: var(--bg-soft);
+    color: var(--ink);
+    font-size: 1rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.25s, box-shadow 0.25s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  }
+  .home-search-input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(197,152,65,0.15), 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .home-search-icon {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  .home-search-dropdown {
+    display: none;
+    position: absolute;
+    left: 0; right: 0;
+    top: calc(100% + 8px);
+    background: var(--card-solid);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+    z-index: 200;
+    overflow: hidden;
+    max-height: 280px;
+    overflow-y: auto;
+  }
+  .home-search-dropdown-item {
+    padding: 12px 18px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .home-search-dropdown-item:hover { background: rgba(197,152,65,0.08); }
+  .home-search-dropdown-item:last-child { border-bottom: none; }
+  .home-sdi-icon { font-size: 1.4rem; line-height: 1; }
+  .home-sdi-text strong { display: block; font-size: 0.9rem; color: var(--ink); }
+  .home-sdi-text span { font-size: 0.75rem; color: var(--ink-soft); }
+  .home-sdi-has-audio {
+    margin-left: auto;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgba(54,124,89,0.18);
+    color: var(--teal);
+    padding: 3px 8px;
+    border-radius: 20px;
+    border: 1px solid rgba(54,124,89,0.3);
+    flex-shrink: 0;
+  }
+  /* Shloka Recitation Player Card */
+  .shloka-player-card {
+    display: none;
+    margin-top: 20px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    animation: fadeSlideUp 0.3s ease;
+    backdrop-filter: blur(12px);
+  }
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  .spc-header {
+    background: linear-gradient(135deg, rgba(197,152,65,0.12), rgba(54,124,89,0.08));
+    border-bottom: 1px solid var(--line);
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .spc-icon { font-size: 2rem; line-height: 1; }
+  .spc-meta { flex: 1; min-width: 0; }
+  .spc-meta .spc-cat {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--gold); margin-bottom: 4px;
+  }
+  .spc-meta .spc-sanskrit {
+    font-family: 'Noto Serif Devanagari', serif;
+    font-size: 1.3rem; color: var(--gold-light); line-height: 1.35;
+    margin-bottom: 3px;
+  }
+  .spc-meta .spc-translit {
+    font-size: 0.82rem; color: var(--ink-soft); line-height: 1.4;
+  }
+  .spc-body { padding: 18px 22px; }
+  .spc-meaning {
+    font-size: 0.9rem; color: var(--ink-soft); line-height: 1.6;
+    margin-bottom: 18px;
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.02);
+    border-radius: 8px;
+    border-left: 3px solid var(--gold);
+  }
+  /* Waveform animation bars */
+  .spc-waveform {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    height: 32px;
+    margin: 0 0 16px;
+  }
+  .spc-waveform .bar {
+    width: 4px;
+    border-radius: 2px;
+    background: var(--gold);
+    opacity: 0.4;
+    transition: height 0.2s ease;
+  }
+  .spc-waveform.playing .bar {
+    opacity: 1;
+    animation: waveBarAnim 0.8s ease-in-out infinite alternate;
+  }
+  .spc-waveform.playing .bar:nth-child(1) { animation-delay: 0s; }
+  .spc-waveform.playing .bar:nth-child(2) { animation-delay: 0.1s; }
+  .spc-waveform.playing .bar:nth-child(3) { animation-delay: 0.2s; }
+  .spc-waveform.playing .bar:nth-child(4) { animation-delay: 0.07s; }
+  .spc-waveform.playing .bar:nth-child(5) { animation-delay: 0.15s; }
+  .spc-waveform.playing .bar:nth-child(6) { animation-delay: 0.05s; }
+  .spc-waveform.playing .bar:nth-child(7) { animation-delay: 0.25s; }
+  .spc-waveform.playing .bar:nth-child(8) { animation-delay: 0.18s; }
+  .spc-waveform.playing .bar:nth-child(9) { animation-delay: 0.3s; }
+  .spc-waveform.playing .bar:nth-child(10) { animation-delay: 0.12s; }
+  @keyframes waveBarAnim {
+    from { height: 4px; }
+    to { height: 28px; }
+  }
+  .spc-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .spc-play-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 20px;
+    border-radius: 20px;
+    border: none;
+    background: var(--gold);
+    color: #111;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 16px rgba(197,152,65,0.35);
+  }
+  .spc-play-btn:hover { transform: scale(1.04); box-shadow: 0 6px 20px rgba(197,152,65,0.5); }
+  .spc-play-btn:active { transform: scale(0.97); }
+  .spc-upload-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1.5px dashed var(--line);
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    background: transparent;
+    font-family: inherit;
+  }
+  .spc-upload-label:hover { border-color: var(--gold); color: var(--gold); }
+  .spc-upload-label input { display: none; }
+  .spc-timer {
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    font-family: 'JetBrains Mono', monospace;
+    margin-left: auto;
+  }
+  .spc-audio-badge {
+    display: none;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgba(54,124,89,0.2);
+    color: #5dba8a;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(54,124,89,0.35);
+  }
+
+  @media(max-width:760px){
+    .scroll-track { height: 240vh; }
+    .scroll-overlay { padding: 0 4%; justify-content: center; }
+    #overlay3 { justify-content: center; }
+    .overlay-card { max-width: 100%; padding: 24px; }
+    .overlay-card h1 { font-size: 2rem; }
+    .overlay-card .hindi-line { font-size: 1.6rem; }
+    .mala-panel { max-width: 100%; }
+    .admin-form .row{grid-template-columns:1fr;}
+    .bottom-player-bar { padding: 12px 16px; }
+    .player-content { justify-content: center; text-align: center; }
+    .shloka-search-section { padding: 32px 18px 28px; }
+    .shloka-search-section h2 { font-size: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Ambient Preloader -->
+<div class="preloader-overlay" id="preloader">
+  <div class="preloader-content">
+    <div class="mandala-loader"></div>
+    <div class="shlok-breathing">स्वस्थस्य स्वास्थ्य रक्षणम्</div>
+    <div class="preloader-progress" id="preloadProgress">Loading sacred visuals... 0%</div>
+  </div>
+</div>
+
+<header>
+  <div class="logo">
+    <div class="logo-mark"></div>
+    <div class="logo-text">Ayurved Vani<span class="sub">chants · texts · wisdom</span></div>
+  </div>
+  <nav id="mainNav"></nav>
+  <div class="header-right">
+    <div class="lang-toggle" id="langToggle">
+      <button data-lang="hi">हिं</button>
+      <button data-lang="en" class="active">EN</button>
+    </div>
+    <button class="theme-btn" id="themeToggleBtn" onclick="toggleTheme()" aria-label="Toggle Theme">
+      <span class="theme-icon">🌙</span>
+    </button>
+    <div id="authArea"></div>
+  </div>
+</header>
+
+<main>
+
+  <section id="view-home" class="active">
+    
+    <!-- Dynamic Scroll Track Hero Container -->
+    <div class="scroll-track" id="homeScrollTrack">
+      <div class="sticky-container">
+        <canvas id="heroCanvas"></canvas>
+        
+        <!-- Frame Overlay 1 -->
+        <div class="scroll-overlay active" id="overlay1">
+          <div class="overlay-card">
+            <span class="hindi-line">आयुर्वेद वाणी</span>
+            <h1>Sacred sound, timeless healing</h1>
+            <p data-i18n="heroText">Ayurveda ke shlok, mantra aur classical granthon ka collection — ek jagah par. Scroll karein aur anubhav karein.</p>
+            <div class="hero-ctas">
+              <button class="btn-primary" onclick="showView('chants')">Chants dekhein</button>
+              <button class="btn-ghost" onclick="showView('books')">Books explore karein</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Frame Overlay 2 -->
+        <div class="scroll-overlay" id="overlay2">
+          <div class="overlay-card">
+            <span class="hindi-line" style="font-size: 1.8rem; color: var(--gold);">मंत्र और श्लोक</span>
+            <h2 style="font-size: 2.1rem; margin: 6px 0 12px; font-family:'Fraunces', serif;">Chitt ki shanti aur swasthya</h2>
+            <p>Sound is the first medicine. Sanskrit ke divya shlokon ka uchcharan aur unka arth hamare sharir aur chitt ko sanyamit aur swasthya-labh pradan karta hai.</p>
+          </div>
+        </div>
+        
+        <!-- Frame Overlay 3 -->
+        <div class="scroll-overlay" id="overlay3">
+          <div class="overlay-card">
+            <span class="hindi-line" style="font-size: 1.8rem; color: var(--gold);">स्वाध्याय और अभ्यास</span>
+            <h2 style="font-size: 2.1rem; margin: 6px 0 12px; font-family:'Fraunces', serif;">Shlokon ka swarup sunein</h2>
+            <p>Apne shlokon aur granthon ko naye roop mein khojein. AI recitation aur custom chanting ke sath swadhyaya ko aasan aur prabhavshali banayein.</p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- Home Bottom Content: Shloka Search & Recitation Player -->
+    <div class="home-bottom-content" id="homeBottomContent">
+
+      <!-- Shloka Search Section -->
+      <div class="shloka-search-section">
+        <div class="section-eyebrow">🎵 Shloka Recitation</div>
+        <h2>Apna Shloka Dhundein, Sunein</h2>
+        <p class="subtitle">Koi bhi shloka search karein — naam, category ya Sanskrit text se. Select karte hi audio recitation automatically chalegi.</p>
+
+        <div class="lang-toggle" style="margin-bottom: 22px; display: inline-flex; width: auto; background: rgba(255,255,255,0.03); border-radius: 20px; padding: 3px; border: 1px solid var(--line);">
+          <button id="tabSearchChants" class="active" onclick="switchShlokaTab('search')" style="padding: 6px 18px; border-radius: 16px; font-size: 0.82rem; border: none; background: var(--gold); color: var(--teal-deep); font-weight: 700;">🔍 Search Shlokas</button>
+          <button id="tabCustomChants" onclick="switchShlokaTab('custom')" style="padding: 6px 18px; border-radius: 16px; font-size: 0.82rem; border: none; background: transparent; color: var(--ink-soft);">✍️ Custom Recite</button>
+        </div>
+
+        <div id="shlokaSearchTabContent">
+          <div class="home-search-wrap">
+            <input
+              type="text"
+              id="homeShlokaSearch"
+              class="home-search-input"
+              placeholder="e.g. Dhanvantari, Om Namah Shivaya, Healing..."
+              oninput="homeShlokaSearchFilter()"
+              onfocus="homeShlokaSearchFilter()"
+              autocomplete="off"
+            >
+            <span class="home-search-icon">🔍</span>
+            <div id="homeShlokaDropdown" class="home-search-dropdown"></div>
+          </div>
+        </div>
+
+        <div id="shlokaCustomTabContent" style="display:none; flex-direction: column; gap: 14px; background: var(--card); border: 1px solid var(--line); padding: 24px; border-radius: 16px; backdrop-filter: blur(8px); margin-bottom: 14px;">
+          <textarea id="customShlokaText" rows="3" placeholder="Sanskrit Shloka likhein ya niche text file (.txt) upload karein..." style="width:100%; padding:12px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--ink); font-family:'Noto Serif Devanagari',serif; font-size:1.15rem; outline:none; transition:border-color 0.25s; resize:vertical;"></textarea>
+          
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+            <label class="spc-upload-label" style="margin:0; border-style:dashed;">
+              📂 Upload Shloka Text File (.txt)
+              <input type="file" id="customShlokaFile" accept=".txt" onchange="uploadCustomShlokaTextFile()">
+            </label>
+            
+            <div style="display:flex; align-items:center; gap:8px;">
+              <label for="customShlokaMeter" style="font-size:0.85rem; color:var(--ink-soft);">Meter (वृत्त):</label>
+              <select id="customShlokaMeter" style="padding:6px 12px; border-radius:6px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--ink); outline:none;">
+                <option value="anushtubh">Anushtubh (अनुष्टुभ्)</option>
+                <option value="gayatri">Gayatri (गायत्री)</option>
+                <option value="trishtubh">Trishtubh (त्रिष्टुभ्)</option>
+                <option value="vasantatilaka">Vasantatilaka (वसन्ततिलका)</option>
+                <option value="jajati">Jajati (ययाति)</option>
+              </select>
+            </div>
+
+            <button class="spc-play-btn" id="customReciteBtn" onclick="generateCustomAIChant()" style="background:var(--teal); color:#F6EFDD; box-shadow: 0 4px 16px rgba(54,124,89,0.35);">
+              🔊 AI Recite Shloka
+            </button>
+          </div>
+        </div>
+
+
+        <!-- Recitation Player Card (shown after selection) -->
+        <div class="shloka-player-card" id="shlokaPlayerCard">
+          <div class="spc-header">
+            <div class="spc-icon">🕉</div>
+            <div class="spc-meta">
+              <div class="spc-cat" id="spcCat"></div>
+              <div class="spc-sanskrit" id="spcSanskrit"></div>
+              <div class="spc-translit" id="spcTranslit"></div>
+            </div>
+            <span class="spc-audio-badge" id="spcAudioBadge">🎵 Audio Ready</span>
+          </div>
+          <div class="spc-body">
+            <div class="spc-meaning" id="spcMeaning"></div>
+
+            <!-- Waveform Bars -->
+            <div class="spc-waveform" id="spcWaveform">
+              <div class="bar" style="height:8px"></div>
+              <div class="bar" style="height:18px"></div>
+              <div class="bar" style="height:12px"></div>
+              <div class="bar" style="height:24px"></div>
+              <div class="bar" style="height:10px"></div>
+              <div class="bar" style="height:20px"></div>
+              <div class="bar" style="height:6px"></div>
+              <div class="bar" style="height:16px"></div>
+              <div class="bar" style="height:22px"></div>
+              <div class="bar" style="height:14px"></div>
+            </div>
+
+            <div class="spc-controls">
+              <button class="spc-play-btn" id="spcPlayBtn" onclick="toggleShlokaPlayer()">
+                <span id="spcPlayIcon">▶</span>
+                <span id="spcPlayLabel">Recitation Sunein</span>
+              </button>
+
+              <button class="spc-upload-label" id="spcAiBtn" onclick="generateAIChant()" style="display:none;border:1.5px solid var(--teal);color:#5dba8a;background:rgba(54,124,89,0.08);">
+                🤖 AI Chant Generate
+              </button>
+
+              <label class="spc-upload-label" title="Upload MP3 recitation for this shloka">
+                📂 MP3 Upload karein
+                <input type="file" id="spcMp3Upload" accept="audio/*" onchange="uploadShlokaAudio()">
+              </label>
+
+              <span class="spc-timer" id="spcTimer">0:00 / 0:00</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Shloka Chanting Practice Studio (Bottom Area) -->
+        <div id="homeRecordingStudio" style="display: none; background: rgba(54, 124, 89, 0.04); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 16px; padding: 20px; margin-top: 16px; backdrop-filter: blur(8px); animation: fadeSlideUp 0.3s ease-out;">
+          <div style="font-size: 0.95rem; font-weight: 600; color: var(--gold-light); margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <span>🎙️</span> Chanting Practice Studio
+          </div>
+          <p style="font-size:0.8rem; color:var(--ink-soft); margin:0 0 16px 0; text-align:center;">Apne swar mein shloka ka uchcharan record karein, playback karein, aur local library mein save karein.</p>
+          <div style="display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;">
+            <button id="btnRecord" class="spc-play-btn" onclick="togglePracticeRecording()" style="background: var(--gold); color: var(--teal-deep); font-weight: 700; margin: 0; padding: 8px 18px; border: none; border-radius: 20px;">
+              🎙️ Start Practice
+            </button>
+            
+            <div id="recordingTimer" style="display: none; align-items: center; gap: 6px; background: rgba(220, 53, 69, 0.15); color: #ff6b6b; padding: 6px 14px; border-radius: 12px; font-size: 0.85rem; font-family: monospace; border: 1px solid rgba(220, 53, 69, 0.3);">
+              <span class="pulse-dot" style="width: 8px; height: 8px; background: #ff6b6b; border-radius: 50%; display: inline-block;"></span>
+              <span id="recTime">0:00</span>
+            </div>
+
+            <button id="btnPlayRecording" class="btn-ghost" onclick="playPracticeRecording()" style="display: none; padding: 8px 16px; border-radius: 20px; font-size: 0.8rem; border: 1px solid var(--teal); color: var(--teal); background: transparent;">
+              ▶ Play My Voice
+            </button>
+            
+            <button id="btnSaveRecording" class="btn-ghost" onclick="savePracticeRecording()" style="display: none; padding: 8px 16px; border-radius: 20px; font-size: 0.8rem; border: 1px solid var(--gold); color: var(--gold-light); background: transparent;">
+              💾 Save to Library
+            </button>
+            
+            <button id="btnDownloadRecording" class="btn-ghost" onclick="downloadPracticeRecording()" style="display: none; padding: 8px 16px; border-radius: 20px; font-size: 0.8rem; border: 1px solid var(--line); color: var(--ink-soft); background: transparent;">
+              📥 Download MP3
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Aaj ka Chant -->
+      <div style="padding: 0 28px 40px; max-width:820px; margin:0 auto;">
+        <div class="section-head" style="padding:0 0 16px;">
+          <h2>Aaj ka chant</h2>
+        </div>
+        <div class="grid" id="featuredChant"></div>
+      </div>
+    </div>
+    
+  </section>
+
+  <section id="view-chants">
+    <div class="section-head">
+      <h2 class="hin-serif">मंत्र · Chants</h2>
+      <span class="count mono" id="chantCount"></span>
+    </div>
+    <div class="toolbar">
+      <input type="text" id="chantSearch" placeholder="Chant, devta ya keyword search karein...">
+    </div>
+    <div class="toolbar" id="chantChips"></div>
+    <div class="grid" id="chantGrid"></div>
+  </section>
+
+  <section id="view-books">
+    <div class="section-head">
+      <h2 class="hin-serif">ग्रंथ · Books</h2>
+      <span class="count mono" id="bookCount"></span>
+    </div>
+    
+    <div class="card" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; border:1px solid rgba(0, 136, 204, 0.3); background:rgba(0, 136, 204, 0.04); margin-bottom:20px; padding:16px 20px; border-radius:12px;">
+      <div style="display:flex; align-items:center; gap:12px; flex:1; min-width:260px;">
+        <span style="font-size:1.8rem; line-height:1;">🤖</span>
+        <div>
+          <h4 style="margin:0 0 4px; color:var(--ink); font-size:0.95rem;">Looking for more Ayurvedic E-Books?</h4>
+          <p style="margin:0; font-size:0.82rem; color:var(--ink-soft); line-height:1.4;">Use the official <strong>@ayurbot_bot</strong> on Telegram to instantly search and download BAMS textbooks & reference PDFs.</p>
+        </div>
+      </div>
+      <a href="https://t.me/ayurbot_bot" target="_blank" class="btn-primary" style="background:#0088cc; color:#fff; text-decoration:none; padding:8px 18px; font-size:0.85rem; display:inline-flex; align-items:center; gap:8px; border-radius:20px; border:none; font-weight:600; box-shadow:0 4px 12px rgba(0,136,204,0.25);">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.93 1.23-5.46 3.62-.51.35-.98.53-1.39.51-.46-.01-1.34-.26-1.99-.48-.8-.27-1.44-.41-1.39-.87.03-.24.36-.49.99-.75 3.87-1.68 6.45-2.79 7.74-3.32 3.69-1.5 4.45-1.76 4.95-1.77.11 0 .36.03.52.16.13.11.17.26.19.37.02.13.02.26 0 .4z"/></svg>
+        <span>Open Telegram Bot</span>
+      </a>
+    </div>
+    
+    <div class="toolbar">
+      <input type="text" id="bookSearch" placeholder="Book ya author search karein...">
+    </div>
+    <div class="grid" id="bookGrid"></div>
+  </section>
+
+  <section id="view-gemini-search">
+    <div class="section-head">
+      <h2 class="hin-serif">चरक संहिता खोज · Caraka Samhita Finder</h2>
+      <span class="count mono" style="color:var(--gold); text-transform: uppercase; font-weight:700;">Wiki Edition</span>
+    </div>
+    
+    <div class="card" style="margin-bottom: 24px; padding: 28px; border-color: var(--gold);">
+      <h3 style="margin-top:0; color:var(--gold-light); font-family:'Fraunces', serif;">Search Classical Treatise</h3>
+      <p style="font-size:0.92rem; color:var(--ink-soft); margin-bottom: 22px;">
+        Search any verse, chapter, disease, commentary (Tika), or Ayurvedic reference directly inside the comprehensive <strong>Caraka Samhita Online</strong> database.
+      </p>
+      
+      <div style="display:flex; gap:12px; margin-bottom: 12px;">
+        <input type="text" id="carakaSearchInput" placeholder="e.g. Jvara, Agni, Sutrasthana 1.20, Tika commentary..." style="flex:1; padding:12px 16px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--ink); font-size:0.95rem;">
+        <button class="btn-primary" onclick="triggerCarakaSearch()" style="padding:12px 24px; white-space:nowrap;">Search Shloka & Tika</button>
+      </div>
+      
+    <div class="card" style="margin-bottom: 24px; padding: 28px; border-color: var(--gold);">
+      <h3 style="margin-top:0; color:var(--gold-light); font-family:'Fraunces', serif;">Find Direct Reference (सन्दर्भ खोज)</h3>
+      <p style="font-size:0.92rem; color:var(--ink-soft); margin-bottom: 22px;">
+        Sthana, Chapter number aur Shloka/Verse number select karke direct reference link open karein.
+      </p>
+      
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:16px; margin-bottom: 20px;">
+        <div>
+          <label style="font-size:0.8rem; color:var(--ink-soft); font-weight:600; display:block; margin-bottom:6px;">Sthana (स्थान)</label>
+          <select id="carakaSthana" onchange="updateReferencePreview()" style="width:100%; padding:11px 14px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--ink); font-size:0.95rem; outline:none;">
+            <option value="Sutrasthana">Sutra Sthana (सूत्रस्थान)</option>
+            <option value="Nidanasthana">Nidan Sthana (निदानस्थान)</option>
+            <option value="Vimanasthana">Vimana Sthana (विमानस्थान)</option>
+            <option value="Sharirasthana">Sharira Sthana (शारीरिकस्थान)</option>
+            <option value="Indriyasthana">Indriya Sthana (इन्द्रियस्थान)</option>
+            <option value="Chikitsasthana">Chikitsa Sthana (चिकित्सास्थान)</option>
+            <option value="Kalpasthana">Kalpa Sthana (कल्पस्थान)</option>
+            <option value="Siddhisthana">Siddhi Sthana (सिद्धिस्थान)</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:0.8rem; color:var(--ink-soft); font-weight:600; display:block; margin-bottom:6px;">Chapter (अध्याय संख्या)</label>
+          <input type="number" id="carakaChapter" min="1" oninput="updateReferencePreview()" placeholder="e.g. 1" style="width:100%; padding:11px 14px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--ink); font-size:0.95rem; outline:none;">
+        </div>
+        <div>
+          <label style="font-size:0.8rem; color:var(--ink-soft); font-weight:600; display:block; margin-bottom:6px;">Shloka / Verse (श्लोक संख्या)</label>
+          <input type="number" id="carakaShloka" min="1" oninput="updateReferencePreview()" placeholder="e.g. 20 (Optional)" style="width:100%; padding:11px 14px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--ink); font-size:0.95rem; outline:none;">
+        </div>
+      </div>
+      
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+        <span style="font-size:0.82rem; color:var(--ink-soft);">
+          Format: <code style="background:rgba(255,255,255,0.05); padding:2px 6px; border-radius:4px;" id="referencePreview">Sutrasthana</code>
+        </span>
+        <button class="btn-primary" onclick="findCarakaReference()" style="padding:12px 24px; white-space:nowrap; background:var(--gold); color:var(--teal-deep); font-weight:700; border-color:var(--gold);">
+          🔍 Find Reference
+        </button>
+      </div>
+
+      <!-- Reference Result Block -->
+      <div id="carakaReferenceResult" style="display:none; margin-top:20px; border-top:1.5px dashed var(--line); padding-top:20px; animation:fadeSlideUp 0.3s ease;">
+        <div style="background:var(--bg-soft); border:1px solid var(--line); border-radius:12px; padding:20px;">
+          <h4 style="margin:0 0 12px; color:var(--gold-light); font-family:'Fraunces', serif;">Reference Result (सन्दर्भ परिणाम)</h4>
+          
+          <table style="width:100%; border-collapse:collapse; margin-bottom:16px; font-size:0.92rem;">
+            <tr style="border-bottom:1px solid var(--line);">
+              <td style="padding:8px 0; color:var(--ink-soft); font-weight:600; width:35%;">Sthana (स्थान)</td>
+              <td style="padding:8px 0; color:var(--ink);" id="resSthana">Sutrasthana (सूत्रस्थान)</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line);">
+              <td style="padding:8px 0; color:var(--ink-soft); font-weight:600;">Chapter (अध्याय)</td>
+              <td style="padding:8px 0; color:var(--ink);" id="resChapter">Chapter 1</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line);">
+              <td style="padding:8px 0; color:var(--ink-soft); font-weight:600;">Chapter Name (नाम)</td>
+              <td style="padding:8px 0; color:var(--gold-light); font-family:'Noto Serif Devanagari', serif; font-weight:700;" id="resChapterName">Deerghanjiviteeya Adhyaya (दीर्घञ्जीवितीयोऽध्यायः)</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--line);">
+              <td style="padding:8px 0; color:var(--ink-soft); font-weight:600;">Shloka (श्लोक)</td>
+              <td style="padding:8px 0; color:var(--ink);" id="resShloka">-</td>
+            </tr>
+          </table>
+
+          <!-- Dynamic Verse Detail Card (Loaded from server) -->
+          <div id="localVerseCard" style="display:none; margin-top:20px; margin-bottom:20px; background:rgba(255,255,255,0.02); border:1.5px solid var(--gold); border-radius:12px; padding:20px; box-shadow: 0 4px 20px rgba(197, 152, 65, 0.1);">
+            
+            <!-- Loading State -->
+            <div id="verseLoadingState" style="display:none; text-align:center; padding:30px;">
+              <div style="display:inline-block; width:36px; height:36px; border:3px solid var(--line); border-top-color:var(--gold); border-radius:50%; animation:spin 0.8s linear infinite;"></div>
+              <p style="margin:10px 0 0; color:var(--ink-soft); font-size:0.85rem;">Fetching verse from Charaka Samhita Online...</p>
+            </div>
+            
+            <!-- Verse Content (hidden during loading) -->
+            <div id="verseContentArea" style="display:none;">
+              <!-- Header with topic and recite button -->
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; border-bottom:1px dashed var(--line); padding-bottom:10px; flex-wrap:wrap; gap:8px;">
+                <div>
+                  <span id="localVerseRef" style="font-size:0.7rem; font-weight:700; color:var(--gold); text-transform:uppercase; letter-spacing:0.08em;">📖 Classical Verse (मूल श्लोक)</span>
+                  <span id="localVerseHeading" style="display:block; font-size:0.82rem; color:var(--copper); font-weight:600; margin-top:2px;"></span>
+                </div>
+                <button class="play-btn" id="btnReciteLocalVerse" onclick="reciteLocalVerse()" style="font-size:0.78rem; padding:4px 12px; margin:0; border-radius:12px; background:var(--gold); color:var(--teal-deep); font-weight:700;">🔊 AI Recite</button>
+              </div>
+              
+              <!-- Sanskrit Text -->
+              <p id="localVerseSanskrit" style="font-family:'Noto Serif Devanagari', serif; font-size:1.4rem; line-height:1.7; text-align:center; color:var(--gold-light); margin:0 0 18px; white-space:pre-line; text-shadow: 0 0 10px rgba(242, 222, 192, 0.2); font-weight:700;"></p>
+              
+              <!-- Translation -->
+              <div style="border-left:3px solid var(--copper); padding-left:12px; margin-bottom:18px;">
+                <strong style="font-size:0.82rem; color:var(--ink-soft); display:block; margin-bottom:4px;">📝 Translation (अनुवाद):</strong>
+                <p id="localVerseTranslation" style="font-size:0.92rem; color:var(--ink); margin:0; line-height:1.6;"></p>
+              </div>
+              
+              <!-- Tattva Vimarsha (Fundamental Principles) -->
+              <div id="tattvaVimarsha" style="display:none; background:rgba(197,152,65,0.04); border:1px solid rgba(197,152,65,0.15); border-radius:8px; padding:16px; margin-bottom:14px;">
+                <strong style="font-size:0.82rem; color:var(--gold); display:block; margin-bottom:8px; font-weight:700;">🔑 Tattva Vimarsha (Fundamental Principle):</strong>
+                <div id="tattvaContent" style="font-size:0.88rem; color:var(--ink); margin:0; line-height:1.6;"></div>
+              </div>
+              
+              <!-- Vidhi Vimarsha (Applied Inferences) -->
+              <div id="vidhiVimarsha" style="display:none; background:rgba(206,106,82,0.04); border:1px solid rgba(206,106,82,0.15); border-radius:8px; padding:16px; margin-bottom:14px;">
+                <strong style="font-size:0.82rem; color:var(--copper); display:block; margin-bottom:8px; font-weight:700;">📚 Vidhi Vimarsha (Applied Commentary):</strong>
+                <div id="vidhiContent" style="font-size:0.88rem; color:var(--ink); margin:0; line-height:1.6;"></div>
+              </div>
+              
+              <!-- Humanized Explanation -->
+              <div style="background:linear-gradient(135deg, rgba(197,152,65,0.06), rgba(206,106,82,0.04)); border:1px solid rgba(197,152,65,0.12); border-radius:8px; padding:16px;">
+                <strong style="font-size:0.82rem; color:var(--gold-light); display:block; margin-bottom:8px; font-weight:700;">💡 Easy Explanation (सरल व्याख्या):</strong>
+                <p id="localVerseEasy" style="font-size:0.9rem; color:var(--ink); margin:0; line-height:1.7; font-style:italic;"></p>
+              </div>
+              
+              <!-- Source Attribution -->
+              <p style="margin:12px 0 0; font-size:0.72rem; color:var(--ink-soft); text-align:right; opacity:0.7;">
+                Source: <span id="verseSourceLabel">carakasamhitaonline.com</span> • Deep Research from Tattva & Vidhi Vimarsha
+              </p>
+            </div>
+          </div>
+          
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <div style="display:flex; gap:10px; width:100%; flex-wrap:wrap;">
+              <button class="btn-primary" onclick="openCSO()" style="flex:1; min-width:180px; padding:10px; font-size:0.85rem; background:var(--gold); border-color:var(--gold); color:var(--teal-deep); font-weight:700;">
+                🌐 Open on Charaka Online
+              </button>
+              <button class="btn-primary" onclick="openECaraka()" style="flex:1; min-width:180px; padding:10px; font-size:0.85rem; background:var(--teal); border-color:var(--teal); color:#fff; font-weight:700;">
+                🏛️ Open e-Caraka (NIIMH)
+              </button>
+            </div>
+            
+            <div style="background:rgba(197,152,65,0.05); border:1px solid rgba(197,152,65,0.15); border-radius:8px; padding:12px; font-size:0.82rem; color:var(--ink-soft); line-height:1.4;">
+              <strong>💡 Navigating on e-Caraka (NIIMH) website:</strong><br>
+              1. Click "Open e-Caraka (NIIMH)" above to open the reader page.<br>
+              2. In the left-side index menu, select the proper Sthana: <strong style="color:var(--gold);" id="instructionSthana">Sutrasthana</strong>.<br>
+              3. Click the chapter name: <strong style="color:var(--gold);" id="instructionChapter">1. Deerghanjiviteeya Adhyaya</strong>.<br>
+              4. Scroll to view the Sanskrit text and English translations for your requested verse!
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <h3 style="color:var(--gold-light); font-family:'Fraunces', serif; margin-top: 30px;">Quick Search Categories</h3>
+    <div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin-top: 14px;">
+      <div class="card clickable-topic" onclick="quickCarakaSearch('Sutrasthana')">
+        <h4 style="margin: 0 0 6px; color: var(--gold);">Sutrasthana</h4>
+        <p style="font-size:0.8rem; color:var(--ink-soft); margin:0;">Core principles and philosophy.</p>
+      </div>
+      <div class="card clickable-topic" onclick="quickCarakaSearch('Nidanasthana')">
+        <h4 style="margin: 0 0 6px; color: var(--gold);">Nidanasthana</h4>
+        <p style="font-size:0.8rem; color:var(--ink-soft); margin:0;">Etiology and diagnosis.</p>
+      </div>
+      <div class="card clickable-topic" onclick="quickCarakaSearch('Vimanasthana')">
+        <h4 style="margin: 0 0 6px; color: var(--gold);">Vimanasthana</h4>
+        <p style="font-size:0.8rem; color:var(--ink-soft); margin:0;">Specific factors & pathology.</p>
+      </div>
+      <div class="card clickable-topic" onclick="quickCarakaSearch('Chikitsasthana')">
+        <h4 style="margin: 0 0 6px; color: var(--gold);">Chikitsasthana</h4>
+        <p style="font-size:0.8rem; color:var(--ink-soft); margin:0;">Therapeutics and treatment.</p>
+      </div>
+      <div class="card clickable-topic" onclick="quickCarakaSearch('Jvara')">
+        <h4 style="margin: 0 0 6px; color: var(--gold);">Jvara (Fever)</h4>
+        <p style="font-size:0.8rem; color:var(--ink-soft); margin:0;">Fever diagnostics and therapies.</p>
+      </div>
+      <div class="card clickable-topic" onclick="quickCarakaSearch('Agni')">
+        <h4 style="margin: 0 0 6px; color: var(--gold);">Agni (Digestive Fire)</h4>
+        <p style="font-size:0.8rem; color:var(--ink-soft); margin:0;">Metabolism and digestion.</p>
+      </div>
+      <div class="card clickable-topic" onclick="quickCarakaSearch('Rasayana')">
+        <h4 style="margin: 0 0 6px; color: var(--gold);">Rasayana</h4>
+        <p style="font-size:0.8rem; color:var(--ink-soft); margin:0;">Rejuvenation and longevity.</p>
+      </div>
+      <div class="card clickable-topic" onclick="quickCarakaSearch('Vajikarana')">
+        <h4 style="margin: 0 0 6px; color: var(--gold);">Vajikarana</h4>
+        <p style="font-size:0.8rem; color:var(--ink-soft); margin:0;">Aphrodisiac formulations.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-favorites">
+    <div class="section-head"><h2>Mere Favorites</h2></div>
+    <div id="favContent"></div>
+  </section>
+
+  <section id="view-about">
+    <div class="about-wrap">
+      <img src="ayur/about-me.jpg" alt="Vikas Kajla" class="about-avatar">
+      <div class="about-info">
+        <h2>Vikas Kajla</h2>
+        <div class="about-role">BAMS Student · All India Institute of Ayurveda (AIIA), Goa</div>
+        <p class="about-bio">Namaste 🙏 Main Vikas Kajla, BAMS (Bachelor of Ayurvedic Medicine and Surgery) kar raha hoon All India Institute of Ayurveda se. Ayurved Vani mera ek chhota sa prayaas hai — Ayurveda ke mantra, shlok aur classical granthon ko sabke liye ek jagah, saral bhasha mein pahunchane ka.</p>
+        <a class="about-insta" href="https://www.instagram.com/cinematicvaidya" target="_blank" rel="noopener noreferrer">
+          <span class="insta-icon">📸</span> @cinematicvaidya
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-admin">
+    <div class="section-head"><h2>Admin Panel <span class="tag-role">ADMIN</span></h2></div>
+
+
+
+    <div class="admin-form">
+      <h3 id="chantFormTitle">Naya chant add karein</h3>
+      <div class="row">
+        <div><label>Sanskrit</label><input id="af-sanskrit" placeholder="ॐ ..."></div>
+        <div><label>Transliteration</label><input id="af-translit" placeholder="Om ..."></div>
+      </div>
+      <div class="row">
+        <div><label>Category</label><input id="af-cat" placeholder="Healing / Deity / Peace"></div>
+        <div><label>Meaning (Hindi/English)</label><input id="af-meaning" placeholder="Arth..."></div>
+      </div>
+      <label>Audio URL <span style="font-weight:400;color:var(--ink-soft);">(external MP3 link, optional)</span></label>
+      <input id="af-audio" placeholder="https://example.com/dhanvantari-mantra.mp3">
+      <label style="margin-top:10px;">Or Upload MP3 File <span style="font-weight:400;color:var(--ink-soft);">(Stored locally in browser)</span></label>
+      <input type="file" id="af-audio-file" accept="audio/*" style="padding:6px 12px; border:1.5px solid var(--line); border-radius:8px; font-size:0.85rem; background:var(--bg-soft); color:var(--ink);">
+      <button class="save-btn" id="chantSaveBtn" onclick="addChant()">Chant save karein</button>
+    </div>
+
+    <div class="admin-form">
+      <h3 id="bookFormTitle">Nayi book add karein</h3>
+      <div class="row">
+        <div><label>Title (Devanagari)</label><input id="bf-title-hi" placeholder="चरक संहिता"></div>
+        <div><label>Title (English)</label><input id="bf-title-en" placeholder="Charak Samhita"></div>
+      </div>
+      <div class="row">
+        <div><label>Author / Era</label><input id="bf-author" placeholder="Acharya Charak · ~400 BCE"></div>
+        <div><label>Category</label><input id="bf-cat" placeholder="Foundational text"></div>
+      </div>
+      <div class="row" style="margin-top:10px;">
+        <div>
+          <label>BAMS Proff Year</label>
+          <select id="bf-proff" onchange="toggleAdminSubjectSelector()" style="width:100%; padding:9px 12px; border-radius:8px; border:1.5px solid var(--line); font-size:0.9rem; background: var(--bg-soft); color: var(--ink);">
+            <option value="1st Proff">1st Proff</option>
+            <option value="2nd Proff" selected>2nd Proff</option>
+            <option value="3rd Proff">3rd Proff</option>
+          </select>
+        </div>
+        <div>
+          <label>PDF URL / Link <span style="font-weight:400;color:var(--ink-soft);">(external link)</span></label>
+          <input id="bf-pdf" placeholder="e.g. https://example.com/book.pdf">
+        </div>
+      </div>
+      
+      <!-- Direct PDF File Upload Input -->
+      <div class="row" style="margin-top:10px;">
+        <div>
+          <label>Or Upload PDF File directly <span style="font-weight:400;color:var(--ink-soft);">(Stored locally)</span></label>
+          <input type="file" id="bf-file" accept="application/pdf" style="width:100%; padding:6px 12px; border:1.5px solid var(--line); border-radius:8px; font-size:0.85rem; background:var(--bg-soft); color:var(--ink);">
+        </div>
+        <div id="adminSubjectField" style="display:block;">
+          <label>Subject (for 2nd Proff)</label>
+          <select id="bf-subject" style="width:100%; padding:9px 12px; border-radius:8px; border:1.5px solid var(--line); font-size:0.9rem; background: var(--bg-soft); color: var(--ink);">
+            <option value="Charak Samhita">Charak Samhita (Purvardha)</option>
+            <option value="Dravyaguna">Dravyaguna</option>
+            <option value="Rasashastra & Bhaishajya">Rasashastra & Bhaishajya</option>
+            <option value="Roga Nidan">Roga Nidan</option>
+            <option value="Agada Tantra">Agada Tantra</option>
+            <option value="Swasthavritta & Yoga">Swasthavritta & Yoga</option>
+          </select>
+        </div>
+      </div>
+
+      <label>Description</label>
+      <textarea id="bf-desc" rows="2" placeholder="Short description..."></textarea>
+      <button class="save-btn" id="bookSaveBtn" onclick="addBook()">Book save karein</button>
+    </div>
+
+    <div class="section-head"><h2 style="font-size:1.2rem;">Existing content manage karein</h2></div>
+    <div id="adminChantList"></div>
+    <div id="adminBookList"></div>
+  </section>
+
+</main>
+
+<!-- Sticky Bottom Player Bar -->
+<div class="bottom-player-bar" id="bottomPlayerBar">
+  <div class="player-content">
+    <div class="player-info">
+      <div class="player-sanskrit" id="pb-sanskrit">ॐ धन्वन्तरye नमः</div>
+      <div class="player-translit" id="pb-translit">Om Dhanvantaraye Namah</div>
+    </div>
+    <div class="player-controls">
+      <button class="player-btn-main" id="pb-play-btn" onclick="togglePlayerPlay()">⏸</button>
+      <div class="wave-visualizer" id="pb-wave">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <div class="speed-selector">
+        <label for="pb-speed">Gati:</label>
+        <select id="pb-speed" onchange="changePlayerSpeed(this.value)">
+          <option value="0.5">0.5x</option>
+          <option value="0.75" selected>0.75x</option>
+          <option value="1.0">1.0x</option>
+          <option value="1.25">1.25x</option>
+        </select>
+      </div>
+    </div>
+    <button class="player-close-btn" onclick="stopPlayback()">×</button>
+  </div>
+</div>
+
+<footer>Ayurved Vani · shraddha se collected content · yeh ek prototype platform hai</footer>
+
+<!-- Login Modal -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h3>Sign in karein</h3>
+    <label>Aapka naam</label>
+    <input type="text" id="loginName" placeholder="e.g. Priya Sharma">
+    <label>Admin password <span style="font-weight:400;color:var(--ink-soft);">(optional — sirf admin ke liye)</span></label>
+    <input type="password" id="loginAdminPass" placeholder="Khaali chhodein agar admin nahi hain">
+    <div class="modal-actions">
+      <button style="background:var(--teal); color:#F6EFDD;" onclick="doLogin()">Sign in</button>
+    </div>
+    <div class="muted-note">Note: yeh ek demo login hai (naam-based), koi password-protected real account system nahi hai. Favorites hamesha browser local storage mein saved rehte hain.</div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ---------- Storage API Polyfill (Allows running in standard browsers) ----------
+if (!window.storage) {
+  window.storage = {
+    get: async function(key, isGlobal) {
+      const val = localStorage.getItem(key);
+      return val ? { value: val } : null;
+    },
+    set: async function(key, value, isGlobal) {
+      localStorage.setItem(key, value);
+      return true;
+    }
+  };
+}
+
+const ADMIN_DEMO_PASSWORD = "ayurved108";
+const NAV_ITEMS = [
+  {id:'home', hi:'होम', en:'Home'},
+  {id:'chants', hi:'मंत्र', en:'Chants'},
+  {id:'books', hi:'ग्रंथ', en:'Books'},
+  {id:'gemini-search', hi:'चरक खोज', en:'Caraka Finder'},
+  {id:'favorites', hi:'पसंदीदा', en:'Favorites'},
+  {id:'about', hi:'हमारे बारे में', en:'About Us'},
+];
+
+let state = {
+  lang: 'en',
+  profile: null,
+  favorites: {chants:[], books:[]},
+  chants: [],
+  books: [],
+  malaCount: 0,
+  nowPlaying: null,
+};
+let currentAudio = null;
+let images = [];
+let playbackRate = 0.75;
+let audioCtx = null;
+
+const DEFAULT_CHANTS = [
+  {id:'c1', cat:'Deity · Healing', sanskrit:'ॐ धन्वन्तरये नमः', translit:'Om Dhanvantaraye Namah', meaning:'Bhagwan Dhanvantari (Ayurveda ke devta) ko naman — rog-nivaran aur swasthya ke liye.', audioUrl:''},
+  {id:'c2', cat:'Healing', sanskrit:'ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम् । उर्वारुकमिव बन्धनान् मृत्योर्मुक्षीय मामृतात् ॥', translit:'Om Tryambakam Yajamahe...', meaning:'Mahamrityunjaya mantra — dirghayu, swasthya aur bhay se mukti ki prarthana.', audioUrl:''},
+  {id:'c3', cat:'Wisdom', sanskrit:'ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यं भर्गो देवस्य धीमहि धियो यो नः प्रचोदयात्', translit:'Om Bhur Bhuvah Swah...', meaning:'Gayatri mantra — buddhi aur prakash ke liye prarthana, healing aur clarity dono mein sahayak.', audioUrl:''},
+  {id:'c4', cat:'Herb · Tulsi', sanskrit:'महाप्रसाद जननी सर्व सौभाग्यवर्धिनी । आधि व्याधि हरा नित्यं तुलसी त्वं नमोऽस्तु ते ॥', translit:'Mahaprasada Janani...', meaning:'Tulsi (holy basil) ki stuti — rog aur mansik peeda ko dur karne wali maani jaati hai.', audioUrl:''},
+  {id:'c5', cat:'Shanti', sanskrit:'ॐ सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः । सर्वे भद्राणि पश्यन्तु मा कश्चिद्duःखभाग्भवेत् ॥', translit:'Om Sarve Bhavantu Sukhinah...', meaning:'Sabke sukh, swasthya aur mangal ki saamuhik prarthana — Ayurveda ki bhawna ka saar.', audioUrl:''},
+  {id:'c6', cat:'Wisdom · Subhashita', sanskrit:'आरोग्यं भास्करादिच्छेत् द्रविणं हुतवाहनात् ।', translit:'Arogyam Bhaskaradicchhet...', meaning:'Swasthya Surya se, dhan Agni se maango — ek prachin subhashita jo Ayurveda ke prakriti-sambandh ko darshata hai.', audioUrl:''},
+];
+
+const DEFAULT_BOOKS = [
+  {id:'b1', titleHi:'चरक संहिता', titleEn:'Charak Samhita', author:'Acharya Charak · ~400 BCE', cat:'Foundational text', proff:'2nd Proff', subject:'Charak Samhita', pdfUrl:'', desc:'Ayurveda ka sabse pramukh grantha, jisme internal medicine (Kaya Chikitsa), rog-nidaan aur chikitsa siddhant vistar se varnit hain.'},
+  {id:'b2', titleHi:'सुश्रुत संहिता', titleEn:'Sushruta Samhita', author:'Acharya Sushruta · ~600 BCE', cat:'Surgery text', proff:'3rd Proff', subject:'', pdfUrl:'', desc:'Shalya chikitsa (surgery) par kendrit granth — plastic surgery jaisi ancient techniques ka varnan bhi ismein milta hai.'},
+  {id:'b3', titleHi:'अष्टांग हृदयम्', titleEn:'Ashtanga Hridayam', author:'Vagbhata · ~7th century CE', cat:'Compilation', proff:'1st Proff', subject:'', pdfUrl:'', desc:'Charak aur Sushruta dono ke gyaan ko sankshep mein prastut karta hai — Ayurveda ke aath angon ka sarvangeen vivaran.'},
+  {id:'b4', titleHi:'भावप्रकाश', titleEn:'Bhavaprakasha', author:'Bhavamishra · 16th century CE', cat:'Materia medica', proff:'2nd Proff', subject:'Dravyaguna', pdfUrl:'', desc:'Aushadhiyon (herbs, minerals) ka vistrit varnan — dravyaguna shastra ka mahatvapurn granth.'},
+  {id:'b5', titleHi:'माधव निदानम्', titleEn:'Madhava Nidanam', author:'Madhavakara · ~7th century CE', cat:'Diagnosis text', proff:'2nd Proff', subject:'Roga Nidan', pdfUrl:'', desc:'Rog-nidaan (diagnosis) par kendrit — lakshan aur karan ke aadhar par rogon ka vargikaran.'},
+  {id:'b6', titleHi:'शारंगधर संहिता', titleEn:'Sharangdhara Samhita', author:'Sharangdhara · 13th century CE', cat:'Pharmacology', proff:'2nd Proff', subject:'Rasashastra & Bhaishajya', pdfUrl:'', desc:'Aushadhi nirman vidhi (pharmaceutical processes) aur nadi-pariksha (pulse diagnosis) ka vivaran.'},
+  {id:'b7', titleHi:'भैषज्य रत्नावली', titleEn:'Bhaishajya Ratnavali', author:'Govinda Das Sen · 18th century CE', cat:'Ayurvedic Pharmaceutics', proff:'2nd Proff', subject:'Rasashastra & Bhaishajya', pdfUrl:'', desc:'Bhaishajya Kalpana ka vistrit granth, jismein vibhinn rogon ke liye aushadhi nirmaan aur yogon ka varnan hai.'},
+  {id:'b8', titleHi:'द्रव्यगुण विज्ञान', titleEn:'Dravyaguna Vijnana', author:'Acharya Priyavrat Sharma', cat:'Pharmacology Text', proff:'2nd Proff', subject:'Dravyaguna', pdfUrl:'', desc:'Dravyaguna shastra ka aadhunik evam pramanik pathyapustak, jisme herbs ka shastriya aur vaigyanik vishleshan hai.'},
+  {id:'b9', titleHi:'अगद तंत्र', titleEn:'Agada Tantra', author:'Dr. Dilip Kumar Goswami', cat:'Toxicology Text', proff:'2nd Proff', subject:'Agada Tantra', pdfUrl:'', desc:'Vish-vigyan (Toxicology) aur forensic medicine ke prachin evam aadhunik siddhanton ka sangrah.'},
+  {id:'b10', titleHi:'स्वस्थवृत्त सुधा', titleEn:'Swasthavritta Sudha', author:'Dr. Kashinath Samagandi', cat:'Preventive Medicine', proff:'2nd Proff', subject:'Swasthavritta & Yoga', pdfUrl:'', desc:'Dinacharya, Ritucharya, sadvritta aur yogasanon dwara swasthya raksha ke niyamon ka varnan.'},
+];
+
+// ---------- Storage helpers ----------
+async function loadContent(){
+  try{
+    const c = await window.storage.get('ayurved-chants-data', true);
+    state.chants = c ? JSON.parse(c.value) : DEFAULT_CHANTS;
+    if(!c) await window.storage.set('ayurved-chants-data', JSON.stringify(DEFAULT_CHANTS), true);
+  }catch(e){ state.chants = DEFAULT_CHANTS; try{await window.storage.set('ayurved-chants-data', JSON.stringify(DEFAULT_CHANTS), true);}catch(_e){} }
+
+  try{
+    const b = await window.storage.get('ayurved-books-data', true);
+    state.books = b ? JSON.parse(b.value) : DEFAULT_BOOKS;
+    if(!b) await window.storage.set('ayurved-books-data', JSON.stringify(DEFAULT_BOOKS), true);
+  }catch(e){ state.books = DEFAULT_BOOKS; try{await window.storage.set('ayurved-books-data', JSON.stringify(DEFAULT_BOOKS), true);}catch(_e){} }
+
+  try{
+    const p = await window.storage.get('ayurved-profile', false);
+    state.profile = p ? JSON.parse(p.value) : null;
+  }catch(e){ state.profile = null; }
+
+  try{
+    const f = await window.storage.get('ayurved-favorites', false);
+    state.favorites = f ? JSON.parse(f.value) : {chants:[], books:[]};
+  }catch(e){ state.favorites = {chants:[], books:[]}; }
+
+  try{
+    const m = await window.storage.get('ayurved-mala', false);
+    state.malaCount = m ? JSON.parse(m.value) : 0;
+  }catch(e){ state.malaCount = 0; }
+}
+async function saveChants(){ try{ await window.storage.set('ayurved-chants-data', JSON.stringify(state.chants), true); }catch(e){ showToast('Save fail hua, phir try karein'); } }
+async function saveBooks(){ try{ await window.storage.set('ayurved-books-data', JSON.stringify(state.books), true); }catch(e){ showToast('Save fail hua, phir try karein'); } }
+async function saveProfile(){ try{ await window.storage.set('ayurved-profile', JSON.stringify(state.profile), false); }catch(e){} }
+async function saveFavorites(){ try{ await window.storage.set('ayurved-favorites', JSON.stringify(state.favorites), false); }catch(e){} }
+async function saveMala(){ try{ await window.storage.set('ayurved-mala', JSON.stringify(state.malaCount), false); }catch(e){} }
+
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 2200);
+}
+
+// ---------- Synthesized Audio Engine (Web Audio API) ----------
+function getAudioContext() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+  return audioCtx;
+}
+
+// Woody bead tick sound
+function playBeadClickSound() {
+  try {
+    const ctx = getAudioContext();
+    const now = ctx.currentTime;
+    
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(1200, now);
+    filter.Q.value = 2;
+    
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(450, now);
+    osc.frequency.exponentialRampToValueAtTime(150, now + 0.05);
+    
+    gain.gain.setValueAtTime(0.25, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+    
+    osc.connect(gain);
+    gain.connect(filter);
+    filter.connect(ctx.destination);
+    
+    osc.start(now);
+    osc.stop(now + 0.08);
+  } catch (e) {
+    console.warn("Audio Context sound blocked or error", e);
+  }
+}
+
+// Soothing, deep singing bowl / temple bell
+function playTempleBellSound() {
+  try {
+    const ctx = getAudioContext();
+    const now = ctx.currentTime;
+    
+    const fundFreq = 168; // Soothing deep note
+    const partials = [1.0, 1.48, 2.0, 2.58, 3.0, 3.75, 4.15]; 
+    const decays = [4.2, 3.2, 2.2, 1.8, 1.3, 0.9, 0.6];
+    const gains = [0.35, 0.22, 0.12, 0.08, 0.06, 0.04, 0.02];
+    
+    const masterGain = ctx.createGain();
+    masterGain.gain.setValueAtTime(0.55, now);
+    masterGain.gain.exponentialRampToValueAtTime(0.001, now + 4.5); 
+    masterGain.connect(ctx.destination);
+    
+    partials.forEach((mult, i) => {
+      const osc = ctx.createOscillator();
+      const pGain = ctx.createGain();
+      
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(fundFreq * mult, now);
+      
+      // Vibrato for singing bowl wobble
+      const lfo = ctx.createOscillator();
+      const lfoGain = ctx.createGain();
+      lfo.frequency.value = 4.2 + (i * 0.25);
+      lfoGain.gain.value = 1.3;
+      
+      lfo.connect(lfoGain);
+      lfoGain.connect(osc.frequency);
+      
+      pGain.gain.setValueAtTime(gains[i], now);
+      pGain.gain.exponentialRampToValueAtTime(0.001, now + decays[i]);
+      
+      osc.connect(pGain);
+      pGain.connect(masterGain);
+      
+      lfo.start(now);
+      osc.start(now);
+      
+      lfo.stop(now + decays[i] + 0.5);
+      osc.stop(now + decays[i] + 0.5);
+    });
+  } catch (e) {
+    console.warn("Temple bell blocked or error", e);
+  }
+}
+
+// ---------- Theme Switcher ----------
+async function initTheme() {
+  const storedTheme = await window.storage.get('ayurved-theme', false);
+  const theme = storedTheme ? storedTheme.value : 'dark';
+  if (theme === 'light') {
+    document.body.classList.add('light-mode');
+    document.getElementById('themeToggleBtn').querySelector('.theme-icon').textContent = '☀️';
+  } else {
+    document.body.classList.remove('light-mode');
+    document.getElementById('themeToggleBtn').querySelector('.theme-icon').textContent = '🌙';
+  }
+}
+
+async function toggleTheme() {
+  const isLight = document.body.classList.toggle('light-mode');
+  const btn = document.getElementById('themeToggleBtn');
+  btn.querySelector('.theme-icon').textContent = isLight ? '☀️' : '🌙';
+  await window.storage.set('ayurved-theme', isLight ? 'light' : 'dark', false);
+  
+  if (document.getElementById('view-home').classList.contains('active')) {
+    handleScroll();
+  }
+}
+
+// ---------- Visual Background Preloader ----------
+const TOTAL_FRAMES = 240;
+let frames = [];
+let canvas = null;
+let ctx = null;
+let lastRenderedFrame = -1;
+
+function preloadSageFrames() {
+  const progressText = document.getElementById('preloadProgress');
+  let loadedCount = 0;
+  
+  canvas = document.getElementById('heroCanvas');
+  if (canvas) ctx = canvas.getContext('2d');
+  
+  // Zero-padded filename helper (e.g. 1 -> "001")
+  function pad(num, size) {
+    let s = num + "";
+    while (s.length < size) s = "0" + s;
+    return s;
+  }
+  
+  let firstFrameLoaded = false;
+  
+  // Pre-populate the frames array so that frames.length is immediately 240
+  // This prevents race conditions where cached images fire onload synchronously
+  for (let i = 1; i <= TOTAL_FRAMES; i++) {
+    const img = new Image();
+    img.frameIndex = i; // Save index explicitly to avoid closure capture issues
+    frames.push(img);
+  }
+  
+  for (let i = 1; i <= TOTAL_FRAMES; i++) {
+    const img = frames[i - 1];
+    img.onload = () => {
+      img.isLoaded = true;
+      loadedCount++;
+      
+      const pct = Math.floor((loadedCount / TOTAL_FRAMES) * 100);
+      if (progressText) progressText.textContent = `Loading sacred visuals... ${pct}%`;
+      
+      // Open the app immediately once ANY single frame loads successfully
+      if (!firstFrameLoaded) {
+        firstFrameLoaded = true;
+        drawFrame(img.frameIndex);
+        finishPreloading();
+      }
+    };
+    img.onerror = () => {
+      loadedCount++;
+      if (!firstFrameLoaded) {
+        firstFrameLoaded = true;
+        finishPreloading();
+      }
+    };
+    img.src = `ayur/bg/ezgif-frame-${pad(i, 3)}.jpg`;
+  }
+}
+
+function drawFrame(index) {
+  if (!canvas || !ctx) return;
+  
+  // Locate the closest loaded frame to prevent flickering while other frames load in the background
+  let targetIndex = index;
+  if (!frames[targetIndex - 1] || !frames[targetIndex - 1].isLoaded) {
+    let found = false;
+    for (let offset = 1; offset < TOTAL_FRAMES; offset++) {
+      const left = targetIndex - offset;
+      const right = targetIndex + offset;
+      
+      if (left >= 1 && frames[left - 1] && frames[left - 1].isLoaded) {
+        targetIndex = left;
+        found = true;
+        break;
+      }
+      if (right <= TOTAL_FRAMES && frames[right - 1] && frames[right - 1].isLoaded) {
+        targetIndex = right;
+        found = true;
+        break;
+      }
+    }
+    if (!found) return; // No frames loaded yet
+  }
+  
+  const img = frames[targetIndex - 1];
+  
+  // Ensure canvas internal resolution matches display size dynamically
+  if (canvas.width !== canvas.clientWidth || canvas.height !== canvas.clientHeight) {
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
+  }
+  
+  // Guard against zero-width/height canvases (e.g. elements inside display:none containers)
+  const canvasWidth = canvas.width;
+  const canvasHeight = canvas.height;
+  if (canvasWidth <= 0 || canvasHeight <= 0) return;
+  
+  ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+  
+  // Cover object-fit scaling inside 2D context
+  const imgWidth = img.width || 1920;
+  const imgHeight = img.height || 1080;
+  
+  const imgRatio = imgWidth / imgHeight;
+  const canvasRatio = canvasWidth / canvasHeight;
+  
+  let sWidth = imgWidth;
+  let sHeight = imgHeight;
+  let sx = 0;
+  let sy = 0;
+  
+  if (canvasRatio > imgRatio) {
+    sHeight = imgWidth / canvasRatio;
+    sy = (imgHeight - sHeight) / 2;
+  } else {
+    sWidth = imgHeight * canvasRatio;
+    sx = (imgWidth - sWidth) / 2;
+  }
+  
+  ctx.drawImage(img, sx, sy, sWidth, sHeight, 0, 0, canvasWidth, canvasHeight);
+  lastRenderedFrame = index;
+}
+
+function finishPreloading() {
+  const preloader = document.getElementById('preloader');
+  if (preloader) {
+    preloader.classList.add('fade-out');
+    setTimeout(() => preloader.style.display = 'none', 800);
+  }
+  
+  // Render initial scroll overlays
+  handleScroll();
+}
+
+// ---------- Scroll scrubbing controller ----------
+let scrollTicking = false;
+
+window.addEventListener('scroll', () => {
+  if (!scrollTicking) {
+    window.requestAnimationFrame(() => {
+      handleScroll();
+      scrollTicking = false;
+    });
+    scrollTicking = true;
+  }
+});
+
+function getScrollPercent() {
+  const scrollTrack = document.getElementById('homeScrollTrack');
+  if (!scrollTrack || scrollTrack.style.display === 'none') return 0;
+  
+  const rect = scrollTrack.getBoundingClientRect();
+  const relativeScroll = -rect.top;
+  const totalScrollable = rect.height - window.innerHeight;
+  
+  if (totalScrollable <= 0) return 0;
+  return Math.max(0, Math.min(1, relativeScroll / totalScrollable));
+}
+
+function handleScroll() {
+  const viewHome = document.getElementById('view-home');
+  if (!viewHome || !viewHome.classList.contains('active')) return;
+  
+  const pct = getScrollPercent();
+  
+  // Transition text cards based on scroll ranges
+  const o1 = document.getElementById('overlay1');
+  const o2 = document.getElementById('overlay2');
+  const o3 = document.getElementById('overlay3');
+  
+  if (o1 && o2 && o3) {
+    o1.classList.toggle('active', pct >= 0 && pct <= 0.28);
+    o2.classList.toggle('active', pct > 0.28 && pct <= 0.65);
+    o3.classList.toggle('active', pct > 0.65 && pct <= 1.00);
+  }
+  
+  // Update canvas frame index
+  if (frames.length === TOTAL_FRAMES) {
+    const frameIndex = Math.min(TOTAL_FRAMES, Math.max(1, Math.floor(pct * (TOTAL_FRAMES - 1)) + 1));
+    if (frameIndex !== lastRenderedFrame) {
+      drawFrame(frameIndex);
+    }
+  }
+}
+
+// ---------- Nav & Views Router ----------
+function renderNav(){
+  const nav = document.getElementById('mainNav');
+  let items = [...NAV_ITEMS];
+  if(state.profile && state.profile.isAdmin) items.push({id:'admin', hi:'एडमिन', en:'Admin'});
+  nav.innerHTML = items.map(i=>`<button data-view="${i.id}" onclick="showView('${i.id}')">${state.lang==='hi'?i.hi:i.en}</button>`).join('');
+}
+
+function showView(id){
+  stopPlayback();
+  
+  // Router layout switches
+  const scrollTrack = document.getElementById('homeScrollTrack');
+  const homeBottom = document.getElementById('homeBottomContent');
+  
+  if (id === 'home') {
+    if (scrollTrack) scrollTrack.style.display = 'block';
+    if (homeBottom) homeBottom.style.display = 'block';
+    // Draw visual instantly
+    setTimeout(() => handleScroll(), 40);
+  } else {
+    if (scrollTrack) scrollTrack.style.display = 'none';
+    if (homeBottom) homeBottom.style.display = 'none';
+  }
+  
+  document.querySelectorAll('main > section').forEach(s=>s.classList.remove('active'));
+  const target = document.getElementById('view-'+id);
+  if (target) target.classList.add('active');
+  
+  document.querySelectorAll('#mainNav button').forEach(b=>b.classList.toggle('active', b.dataset.view===id));
+  
+  if(id==='favorites') renderFavorites();
+  if(id==='admin') renderAdmin();
+  
+  // Jump to top instantly on routing
+  window.scrollTo(0,0);
+}
+
+// ---------- Auth ----------
+function renderAuth(){
+  const area = document.getElementById('authArea');
+  if(state.profile){
+    area.innerHTML = `<div class="profile-pill">🙏 ${state.profile.name}${state.profile.isAdmin?' <span class="tag-role">ADMIN</span>':''}</div>`;
+  } else {
+    area.innerHTML = `<button class="login-btn" onclick="openModal()">Sign in</button>`;
+  }
+}
+function openModal(){ document.getElementById('loginModal').classList.add('show'); }
+function closeModal(){ document.getElementById('loginModal').classList.remove('show'); }
+async function doLogin(){
+  const name = document.getElementById('loginName').value.trim();
+  const pass = document.getElementById('loginAdminPass').value;
+  if(!name){ showToast('Naam daalein'); return; }
+  state.profile = {name, isAdmin: pass === ADMIN_DEMO_PASSWORD};
+  await saveProfile();
+  renderAuth(); renderNav(); closeModal();
+  showToast(`Namaste, ${name}!`);
+}
+
+// ---------- Shloka Chanting Practice & Media Recording Studio ----------
+let mediaRecorder = null;
+let recordedChunks = [];
+let audioBlob = null;
+let recordingTimerInterval = null;
+let recordingSeconds = 0;
+let currentHomeChantId = null;
+
+function searchChantsHome() {
+  const query = document.getElementById('chantSearchHome').value.trim().toLowerCase();
+  const dropdown = document.getElementById('homeChantSearchResults');
+  if (!query) {
+    dropdown.style.display = 'none';
+    return;
+  }
+  
+  const matches = state.chants.filter(c => 
+    c.translit.toLowerCase().includes(query) || 
+    c.sanskrit.includes(query) || 
+    c.meaning.toLowerCase().includes(query)
+  );
+  
+  if (matches.length > 0) {
+    dropdown.innerHTML = matches.map(c => 
+      `<div onclick="selectChantHome('${c.id}')" style="padding:8px 12px; cursor:pointer; font-size:0.82rem; border-bottom:1px solid var(--line); color:var(--ink);">
+        <strong>${c.translit.slice(0, 30)}...</strong> <br><span style="font-size:0.7rem;color:var(--ink-soft);">${c.cat}</span>
+      </div>`
+    ).join('');
+    dropdown.style.display = 'block';
+  } else {
+    dropdown.innerHTML = `<div style="padding:8px 12px; font-size:0.8rem; color:var(--ink-soft); text-align:center;">No chants found.</div>`;
+    dropdown.style.display = 'block';
+  }
+}
+
+function selectChantHome(id) {
+  const c = state.chants.find(x => x.id === id);
+  if (!c) return;
+  currentHomeChantId = id;
+  
+  // Close search results dropdown
+  document.getElementById('homeChantSearchResults').style.display = 'none';
+  document.getElementById('chantSearchHome').value = c.translit || c.sanskrit.slice(0, 25);
+  
+  // Check if they have a saved recording in IndexedDB for this chant
+  checkSavedPractice(id);
+  
+  const display = document.getElementById('homeChantDisplay');
+  display.innerHTML = `
+    <div class="sanskrit" style="font-size:1.15rem; margin-bottom:8px; font-weight:600; color:var(--gold-light); line-height:1.4;">${c.sanskrit}</div>
+    <div class="translit" style="font-size:0.85rem; color:var(--ink-soft); margin-bottom:10px; line-height:1.3;">${c.translit}</div>
+    <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+      <button class="play-btn" style="padding:4px 10px; font-size:0.75rem; background:rgba(212,175,55,0.15); border:1px solid var(--gold); color:var(--gold-light); margin:0;" onclick="playChant('${c.id}')">🔊 Listen Guide</button>
+      <button id="btnRecordedVoiceBadge" class="btn-ghost" style="display:none; padding:4px 10px; font-size:0.75rem; border-color:var(--teal); color:var(--teal);" onclick="playStoredPractice('${c.id}')">🎙 Play My Chant</button>
+    </div>
+  `;
+  
+  // Display Recording controls
+  document.getElementById('homeRecordingStudio').style.display = 'block';
+  resetRecordingControls();
+}
+
+async function togglePracticeRecording() {
+  const btn = document.getElementById('btnRecord');
+  if (mediaRecorder && mediaRecorder.state === 'recording') {
+    mediaRecorder.stop();
+    return;
+  }
+  
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    recordedChunks = [];
+    
+    let options = { mimeType: 'audio/webm' };
+    if (!MediaRecorder.isTypeSupported(options.mimeType)) options = { mimeType: 'audio/ogg' };
+    if (!MediaRecorder.isTypeSupported(options.mimeType)) options = { mimeType: 'audio/mp4' };
+    if (!MediaRecorder.isTypeSupported(options.mimeType)) options = {};
+    
+    mediaRecorder = new MediaRecorder(stream, options);
+    mediaRecorder.ondataavailable = (e) => {
+      if (e.data && e.data.size > 0) recordedChunks.push(e.data);
+    };
+    
+    mediaRecorder.onstop = () => {
+      clearInterval(recordingTimerInterval);
+      document.getElementById('recordingTimer').style.display = 'none';
+      
+      audioBlob = new Blob(recordedChunks, { type: mediaRecorder.mimeType || 'audio/webm' });
+      showToast("Chanting recorded successfully!");
+      
+      stream.getTracks().forEach(track => track.stop());
+      
+      btn.textContent = '🎙 Re-record';
+      btn.style.background = '';
+      document.getElementById('btnPlayRecording').style.display = 'inline-block';
+      document.getElementById('btnSaveRecording').style.display = 'inline-block';
+      document.getElementById('btnDownloadRecording').style.display = 'inline-block';
+    };
+    
+    mediaRecorder.start();
+    
+    recordingSeconds = 0;
+    document.getElementById('recTime').textContent = '0:00';
+    document.getElementById('recordingTimer').style.display = 'inline-flex';
+    btn.textContent = '⏹ Stop Practice';
+    btn.style.background = '#e74c3c';
+    
+    recordingTimerInterval = setInterval(() => {
+      recordingSeconds++;
+      const min = Math.floor(recordingSeconds / 60);
+      const sec = recordingSeconds % 60;
+      document.getElementById('recTime').textContent = `${min}:${sec < 10 ? '0' : ''}${sec}`;
+    }, 1000);
+    
+  } catch (err) {
+    console.error("Microphone recording error", err);
+    showToast("Microphone access blocked. Practice requires audio permissions.");
+  }
+}
+
+function playPracticeRecording() {
+  if (!audioBlob) return;
+  const audioURL = URL.createObjectURL(audioBlob);
+  const audio = new Audio(audioURL);
+  audio.play();
+}
+
+async function savePracticeRecording() {
+  if (!audioBlob || !currentHomeChantId) return;
+  showToast("Saving practice to local database...");
+  const saved = await savePDFBlob('practice_' + currentHomeChantId, audioBlob);
+  if (saved) {
+    showToast("Practice saved successfully!");
+    checkSavedPractice(currentHomeChantId);
+  } else {
+    showToast("Error saving practice.");
+  }
+}
+
+function downloadPracticeRecording() {
+  if (!audioBlob) return;
+  const url = URL.createObjectURL(audioBlob);
+  const a = document.createElement('a');
+  a.style.display = 'none';
+  a.href = url;
+  a.download = `practice_chant_${currentHomeChantId || 'recording'}.webm`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+async function checkSavedPractice(chantId) {
+  const blob = await getPDFBlob('practice_' + chantId);
+  const badge = document.getElementById('btnRecordedVoiceBadge');
+  if (badge) {
+    badge.style.display = blob ? 'inline-block' : 'none';
+  }
+}
+
+async function playStoredPractice(chantId) {
+  showToast("Retrieving your recorded voice...");
+  const blob = await getPDFBlob('practice_' + chantId);
+  if (!blob) {
+    showToast("Practice recording not found.");
+    return;
+  }
+  const url = URL.createObjectURL(blob);
+  const audio = new Audio(url);
+  audio.play();
+}
+
+function resetRecordingControls() {
+  audioBlob = null;
+  document.getElementById('btnPlayRecording').style.display = 'none';
+  document.getElementById('btnSaveRecording').style.display = 'none';
+  document.getElementById('btnDownloadRecording').style.display = 'none';
+  document.getElementById('btnRecord').textContent = '\uD83C\uDF99 Start Practice';
+  document.getElementById('btnRecord').style.background = '';
+}
+
+// ---------- Home Shloka Search & Recitation Player ----------
+let shlokaPlayerAudio = null;
+let shlokaPlayerChantId = null;
+
+function homeShlokaSearchFilter() {
+  const q = (document.getElementById('homeShlokaSearch').value || '').trim().toLowerCase();
+  const dropdown = document.getElementById('homeShlokaDropdown');
+  if (!q) { dropdown.style.display = 'none'; return; }
+
+  const hits = state.chants.filter(c =>
+    c.sanskrit.includes(q) ||
+    (c.translit || '').toLowerCase().includes(q) ||
+    (c.meaning || '').toLowerCase().includes(q) ||
+    (c.cat || '').toLowerCase().includes(q)
+  ).slice(0, 8);
+
+  if (hits.length === 0) {
+    dropdown.innerHTML = `<div class="home-search-dropdown-item" style="pointer-events:none;opacity:0.6;">🔍 Koi shloka nahi mila — thoda aur likho</div>`;
+  } else {
+    dropdown.innerHTML = hits.map(c => {
+      const hasAudio = !!(c.audioUrl);  // shown in dropdown badge
+      const preview = (c.translit || c.sanskrit).slice(0, 42);
+      return `<div class="home-search-dropdown-item" onclick="selectShlokaHome('${c.id}')">
+        <span class="home-sdi-icon">🕉</span>
+        <span class="home-sdi-text">
+          <strong>${preview}${preview.length >= 42 ? '...' : ''}</strong>
+          <span>${c.cat || 'Shloka'}</span>
+        </span>
+        ${hasAudio ? '<span class="home-sdi-has-audio">🎵 Audio</span>' : ''}
+      </div>`;
+    }).join('');
+  }
+  dropdown.style.display = 'block';
+}
+
+async function selectShlokaHome(id) {
+  const c = state.chants.find(x => x.id === id);
+  if (!c) return;
+
+  // Stop any existing audio
+  if (shlokaPlayerAudio) { shlokaPlayerAudio.pause(); shlokaPlayerAudio = null; }
+  shlokaPlayerChantId = id;
+
+  // Close dropdown and fill search bar
+  const dd = document.getElementById('homeShlokaDropdown');
+  if (dd) dd.style.display = 'none';
+  const si = document.getElementById('homeShlokaSearch');
+  if (si) si.value = c.translit || c.sanskrit.slice(0, 40);
+
+  // Fill player card fields
+  document.getElementById('spcCat').textContent = c.cat || 'Shloka';
+  document.getElementById('spcSanskrit').textContent = c.sanskrit;
+  document.getElementById('spcTranslit').textContent = c.translit || '';
+  document.getElementById('spcMeaning').textContent = c.meaning || '';
+  document.getElementById('spcTimer').textContent = '0:00 / 0:00';
+
+  // Reset waveform
+  const waveform = document.getElementById('spcWaveform');
+  if (waveform) waveform.classList.remove('playing');
+  document.getElementById('spcPlayIcon').textContent = '\u25B6';
+  document.getElementById('spcPlayLabel').textContent = 'Recitation Sunein';
+
+  // Check for stored local audio blob
+  const localBlob = await getPDFBlob('audio_' + id);
+  const hasStoredAudio = !!(c.audioUrl && c.audioUrl !== 'stored-blob') || !!localBlob;
+
+  const badge = document.getElementById('spcAudioBadge');
+  if (badge) badge.style.display = hasStoredAudio ? 'inline-block' : 'none';
+
+  // Show AI generate button if no audio
+  const aiBtn = document.getElementById('spcAiBtn');
+  if (aiBtn) {
+    aiBtn.style.display = hasStoredAudio ? 'none' : 'inline-flex';
+  }
+
+  // Show player card always
+  const card = document.getElementById('shlokaPlayerCard');
+  card.style.display = 'block';
+  card.style.animation = 'none';
+  requestAnimationFrame(() => { card.style.animation = 'fadeSlideUp 0.3s ease'; });
+
+  // Auto-play if audio is available
+  if (hasStoredAudio) {
+    setTimeout(() => startShlokaAudio(c, localBlob), 350);
+  }
+}
+
+async function startShlokaAudio(c, localBlob) {
+  let audioSrc = null;
+  if (localBlob) {
+    audioSrc = URL.createObjectURL(localBlob);
+  } else if (c.audioUrl && c.audioUrl !== 'stored-blob') {
+    audioSrc = c.audioUrl;
+  }
+  if (!audioSrc) { showToast('Koi audio nahi hai. Neeche MP3 upload karein ya AI Generate karein.'); return; }
+
+  shlokaPlayerAudio = new Audio(audioSrc);
+
+  shlokaPlayerAudio.addEventListener('loadedmetadata', updateSpcTimer);
+  shlokaPlayerAudio.addEventListener('timeupdate', updateSpcTimer);
+  shlokaPlayerAudio.addEventListener('ended', () => {
+    document.getElementById('spcWaveform').classList.remove('playing');
+    document.getElementById('spcPlayIcon').textContent = '\u25B6';
+    document.getElementById('spcPlayLabel').textContent = 'Dobara Sunein';
+  });
+  shlokaPlayerAudio.addEventListener('error', () => {
+    showToast('Audio load nahi hua. URL check karein ya naya MP3 upload karein.');
+    document.getElementById('spcWaveform').classList.remove('playing');
+  });
+
+  shlokaPlayerAudio.play().then(() => {
+    document.getElementById('spcWaveform').classList.add('playing');
+    document.getElementById('spcPlayIcon').textContent = '\u23F8';
+    document.getElementById('spcPlayLabel').textContent = 'Pause';
+  }).catch(err => {
+    console.warn('Autoplay blocked:', err);
+    showToast('Click "Recitation Sunein" to start audio.');
+  });
+}
+
+// ---------- Vāgdhenu AI Chant Generation ----------
+const VAGDHENU_SERVER = 'http://localhost:5001';
+let vagdhenuAvailable = null;  // null=unchecked, true/false
+
+async function checkVagdhenuServer() {
+  try {
+    const r = await fetch(VAGDHENU_SERVER + '/health', { signal: AbortSignal.timeout(3000) });
+    vagdhenuAvailable = r.ok;
+  } catch {
+    vagdhenuAvailable = false;
+  }
+  return vagdhenuAvailable;
+}
+
+async function generateAIChant() {
+  if (!shlokaPlayerChantId) { showToast('Pehle koi shloka select karein.'); return; }
+  const c = state.chants.find(x => x.id === shlokaPlayerChantId);
+  if (!c) return;
+
+  const aiBtn = document.getElementById('spcAiBtn');
+  if (aiBtn) { aiBtn.disabled = true; aiBtn.innerHTML = '\u23F3 Generating...'; }
+  showToast('\uD83C\uDF0A Vagdhenu AI se Sanskrit chanting generate ho rahi hai...');
+
+  // Check server
+  const online = await checkVagdhenuServer();
+  if (!online) {
+    showToast('\u26A0\uFE0F Vagdhenu server offline hai. Run karein: python vagdhenu/scripts/server.py');
+    if (aiBtn) { aiBtn.disabled = false; aiBtn.innerHTML = '\uD83E\uDD16 AI Chant Generate'; }
+    return;
+  }
+
+  try {
+    const text = encodeURIComponent(c.sanskrit);
+    const meter = encodeURIComponent(c.cat && c.cat.toLowerCase().includes('gayatri') ? 'gayatri' : 'anushtubh');
+    const url = `${VAGDHENU_SERVER}/recite?text=${text}&meter=${meter}&seed=42&speed=0.90`;
+
+    const resp = await fetch(url);
+    if (!resp.ok) throw new Error('Server error: ' + resp.status);
+
+    const blob = await resp.blob();
+    // Save generated audio to IndexedDB for this shloka
+    const saved = await savePDFBlob('audio_' + shlokaPlayerChantId, blob);
+
+    showToast('\uD83C\uDFB5 AI chanting ready! Playing...');
+    if (aiBtn) { aiBtn.style.display = 'none'; }
+    const badge = document.getElementById('spcAudioBadge');
+    if (badge) badge.style.display = 'inline-block';
+
+    if (shlokaPlayerAudio) { shlokaPlayerAudio.pause(); shlokaPlayerAudio = null; }
+    const localBlob = await getPDFBlob('audio_' + shlokaPlayerChantId);
+    await startShlokaAudio(c, localBlob);
+  } catch (err) {
+    console.error('AI generation error:', err);
+    showToast('\u274C Generation failed: ' + err.message);
+    if (aiBtn) { aiBtn.disabled = false; aiBtn.innerHTML = '\uD83E\uDD16 AI Chant Generate'; }
+  }
+}
+
+function updateSpcTimer() {
+  const audio = shlokaPlayerAudio;
+  if (!audio) return;
+  const fmt = t => { const m = Math.floor(t / 60), s = Math.floor(t % 60); return `${m}:${s < 10 ? '0' : ''}${s}`; };
+  const cur = isFinite(audio.currentTime) ? audio.currentTime : 0;
+  const dur = isFinite(audio.duration) ? audio.duration : 0;
+  const el = document.getElementById('spcTimer');
+  if (el) el.textContent = `${fmt(cur)} / ${fmt(dur)}`;
+}
+
+async function toggleShlokaPlayer() {
+  if (!shlokaPlayerChantId) { showToast('Pehle koi shloka select karein.'); return; }
+
+  if (shlokaPlayerAudio && !shlokaPlayerAudio.paused) {
+    shlokaPlayerAudio.pause();
+    document.getElementById('spcWaveform').classList.remove('playing');
+    document.getElementById('spcPlayIcon').textContent = '\u25B6';
+    document.getElementById('spcPlayLabel').textContent = 'Resume';
+    return;
+  }
+  if (shlokaPlayerAudio && shlokaPlayerAudio.paused) {
+    shlokaPlayerAudio.play();
+    document.getElementById('spcWaveform').classList.add('playing');
+    document.getElementById('spcPlayIcon').textContent = '\u23F8';
+    document.getElementById('spcPlayLabel').textContent = 'Pause';
+    return;
+  }
+
+  const c = state.chants.find(x => x.id === shlokaPlayerChantId);
+  if (!c) return;
+  const localBlob = await getPDFBlob('audio_' + shlokaPlayerChantId);
+  await startShlokaAudio(c, localBlob);
+}
+
+async function uploadShlokaAudio() {
+  const fileInput = document.getElementById('spcMp3Upload');
+  const file = fileInput ? fileInput.files[0] : null;
+  if (!file) return;
+  if (!shlokaPlayerChantId) { showToast('Pehle koi shloka select karein.'); return; }
+
+  showToast('Saving MP3 to local database...');
+  const saved = await savePDFBlob('audio_' + shlokaPlayerChantId, file);
+  if (!saved) { showToast('Error saving audio.'); return; }
+
+  showToast('\uD83C\uDFB5 MP3 saved! Playing...');
+  const badge = document.getElementById('spcAudioBadge');
+  if (badge) badge.style.display = 'inline-block';
+
+  if (shlokaPlayerAudio) { shlokaPlayerAudio.pause(); shlokaPlayerAudio = null; }
+  const localBlob = await getPDFBlob('audio_' + shlokaPlayerChantId);
+  const c = state.chants.find(x => x.id === shlokaPlayerChantId);
+  if (c && localBlob) await startShlokaAudio(c, localBlob);
+  if (fileInput) fileInput.value = '';
+}
+
+// ---------- Custom Shloka Recitation Handlers ----------
+function switchShlokaTab(tab) {
+  const tabSearch = document.getElementById('tabSearchChants');
+  const tabCustom = document.getElementById('tabCustomChants');
+  const contentSearch = document.getElementById('shlokaSearchTabContent');
+  const contentCustom = document.getElementById('shlokaCustomTabContent');
+  
+  if (tab === 'search') {
+    tabSearch.className = 'active';
+    tabSearch.style.background = 'var(--gold)';
+    tabSearch.style.color = 'var(--teal-deep)';
+    tabSearch.style.fontWeight = '700';
+    
+    tabCustom.className = '';
+    tabCustom.style.background = 'transparent';
+    tabCustom.style.color = 'var(--ink-soft)';
+    tabCustom.style.fontWeight = '500';
+    
+    contentSearch.style.display = 'block';
+    contentCustom.style.display = 'none';
+  } else {
+    tabCustom.className = 'active';
+    tabCustom.style.background = 'var(--gold)';
+    tabCustom.style.color = 'var(--teal-deep)';
+    tabCustom.style.fontWeight = '700';
+    
+    tabSearch.className = '';
+    tabSearch.style.background = 'transparent';
+    tabSearch.style.color = 'var(--ink-soft)';
+    tabSearch.style.fontWeight = '500';
+    
+    contentSearch.style.display = 'none';
+    contentCustom.style.display = 'flex';
+  }
+}
+
+function uploadCustomShlokaTextFile() {
+  const fileInput = document.getElementById('customShlokaFile');
+  const file = fileInput ? fileInput.files[0] : null;
+  if (!file) return;
+  
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const text = e.target.result;
+    document.getElementById('customShlokaText').value = text;
+    showToast('📄 Text file successfully uploaded!');
+    fileInput.value = '';
+  };
+  reader.onerror = function() {
+    showToast('❌ File read error.');
+  };
+  reader.readAsText(file);
+}
+
+async function generateCustomAIChant() {
+  const text = (document.getElementById('customShlokaText').value || '').trim();
+  if (!text) { showToast('Pehle shloka text input karein ya text file upload karein.'); return; }
+  
+  const meterSelect = document.getElementById('customShlokaMeter');
+  const meter = meterSelect ? meterSelect.value : 'anushtubh';
+  
+  const reciteBtn = document.getElementById('customReciteBtn');
+  if (reciteBtn) { reciteBtn.disabled = true; reciteBtn.innerHTML = '⏳ Reciting...'; }
+  showToast('🌊 Vagdhenu AI se custom recitation generate ho rahi hai...');
+  
+  // Stop existing audio
+  if (shlokaPlayerAudio) { shlokaPlayerAudio.pause(); shlokaPlayerAudio = null; }
+  
+  const online = await checkVagdhenuServer();
+  if (!online) {
+    showToast('⚠️ Vagdhenu server offline hai. Run karein: python vagdhenu/scripts/server.py');
+    if (reciteBtn) { reciteBtn.disabled = false; reciteBtn.innerHTML = '🔊 AI Recite Shloka'; }
+    return;
+  }
+  
+  try {
+    const encodedText = encodeURIComponent(text);
+    const url = `${VAGDHENU_SERVER}/recite?text=${encodedText}&meter=${meter}&seed=42&speed=0.90`;
+    
+    const resp = await fetch(url);
+    if (!resp.ok) throw new Error('Server error: ' + resp.status);
+    
+    const blob = await resp.blob();
+    
+    // Save to IndexedDB under custom key
+    shlokaPlayerChantId = 'custom_generation';
+    await savePDFBlob('audio_custom_generation', blob);
+    
+    // Display in Player Card
+    document.getElementById('spcCat').textContent = 'Custom Recitation';
+    document.getElementById('spcSanskrit').textContent = text;
+    document.getElementById('spcTranslit').textContent = `Meter: ${meter}`;
+    document.getElementById('spcMeaning').textContent = 'Generated dynamically using your uploaded shloka text.';
+    document.getElementById('spcTimer').textContent = '0:00 / 0:00';
+    
+    const badge = document.getElementById('spcAudioBadge');
+    if (badge) badge.style.display = 'inline-block';
+    
+    // Hide standard AI button since we just generated it
+    const aiBtn = document.getElementById('spcAiBtn');
+    if (aiBtn) aiBtn.style.display = 'none';
+    
+    // Show player card
+    const card = document.getElementById('shlokaPlayerCard');
+    card.style.display = 'block';
+    card.style.animation = 'none';
+    requestAnimationFrame(() => { card.style.animation = 'fadeSlideUp 0.3s ease'; });
+    
+    // Play immediately
+    await startShlokaAudio({ id: 'custom_generation', audioUrl: 'stored-blob' }, blob);
+    
+  } catch (err) {
+    console.error('Custom generation error:', err);
+    showToast('❌ Recitation failed: ' + err.message);
+  } finally {
+    if (reciteBtn) { reciteBtn.disabled = false; reciteBtn.innerHTML = '🔊 AI Recite Shloka'; }
+  }
+}
+
+// Close search dropdown when clicking outside
+document.addEventListener('click', (e) => {
+  const wrap = document.querySelector('.home-search-wrap');
+  const dd = document.getElementById('homeShlokaDropdown');
+  if (wrap && dd && !wrap.contains(e.target)) dd.style.display = 'none';
+});
+
+
+function updatePlayerBar(c) {
+  const bar = document.getElementById('bottomPlayerBar');
+  document.getElementById('pb-sanskrit').textContent = c.sanskrit;
+  document.getElementById('pb-translit').textContent = c.translit || c.meaning.slice(0, 30);
+  
+  const playBtn = document.getElementById('pb-play-btn');
+  playBtn.textContent = '⏸';
+  
+  const wave = document.getElementById('pb-wave');
+  if (wave) wave.classList.add('playing');
+  
+  if (bar) bar.classList.add('show');
+}
+
+function togglePlayerPlay() {
+  if (state.nowPlaying) {
+    stopPlayback();
+  } else {
+    if (state.chants.length > 0) {
+      playChant(state.chants[0].id);
+    }
+  }
+}
+
+function changePlayerSpeed(val) {
+  playbackRate = parseFloat(val);
+  if (state.nowPlaying) {
+    const c = state.chants.find(x => x.id === state.nowPlaying);
+    if (c) {
+      const activeId = state.nowPlaying;
+      stopPlayback();
+      state.nowPlaying = activeId;
+      updatePlayerBar(c);
+      
+      if (c.audioUrl) {
+        currentAudio = new Audio(c.audioUrl);
+        currentAudio.playbackRate = playbackRate;
+        currentAudio.play().catch(() => speakChant(c));
+        currentAudio.onended = () => { stopPlayback(); };
+      } else {
+        speakChant(c);
+      }
+    }
+  }
+}
+
+function stopPlayback(){
+  if(currentAudio){ currentAudio.pause(); currentAudio = null; }
+  if(window.speechSynthesis) window.speechSynthesis.cancel();
+  state.nowPlaying = null;
+  
+  const bar = document.getElementById('bottomPlayerBar');
+  if (bar) bar.classList.remove('show');
+  
+  const playBtn = document.getElementById('pb-play-btn');
+  if (playBtn) playBtn.textContent = '▶';
+  
+  const wave = document.getElementById('pb-wave');
+  if (wave) wave.classList.remove('playing');
+  
+  renderChants(); renderFeatured();
+  if(document.getElementById('view-favorites').classList.contains('active')) renderFavorites();
+}
+
+function playChant(id){
+  const wasPlaying = state.nowPlaying === id;
+  stopPlayback();
+  if(wasPlaying){ 
+    renderChants(); renderFeatured(); 
+    if(document.getElementById('view-favorites').classList.contains('active')) renderFavorites(); 
+    return; 
+  }
+
+  const c = state.chants.find(x=>x.id===id);
+  if(!c) return;
+  state.nowPlaying = id;
+  renderChants(); renderFeatured(); 
+  if(document.getElementById('view-favorites').classList.contains('active')) renderFavorites();
+
+  updatePlayerBar(c);
+
+  if(c.audioUrl){
+    currentAudio = new Audio(c.audioUrl);
+    currentAudio.playbackRate = playbackRate;
+    currentAudio.play().catch(()=>{ showToast('Audio file load nahi ho payi, browser voice try kar rahe hain'); speakChant(c); });
+    currentAudio.onended = ()=>{ stopPlayback(); };
+    currentAudio.onerror = ()=>{ speakChant(c); };
+  } else {
+    speakChant(c);
+  }
+}
+
+function speakChant(c){
+  if(!window.speechSynthesis){ 
+    showToast('Is browser mein speech synthesis support nahi hai'); 
+    stopPlayback(); 
+    return; 
+  }
+  const utter = new SpeechSynthesisUtterance(c.sanskrit);
+  utter.lang = 'hi-IN';
+  utter.rate = playbackRate;
+  utter.onend = ()=>{ stopPlayback(); };
+  utter.onerror = ()=>{ stopPlayback(); };
+  window.speechSynthesis.speak(utter);
+}
+
+function chantChipsList(){ return ['Sabhi', ...new Set(state.chants.map(c=>c.cat))]; }
+let activeChip = 'Sabhi';
+function renderChantChips(){
+  document.getElementById('chantChips').innerHTML = chantChipsList().map(c=>
+    `<button class="chip ${c===activeChip?'active':''}" onclick="setChip('${c.replace(/'/g,"\\'")}')">${c}</button>`
+  ).join('');
+}
+function setChip(c){ activeChip = c; renderChantChips(); renderChants(); }
+
+function renderChants(){
+  const search = (document.getElementById('chantSearch').value || '').toLowerCase();
+  let list = state.chants.filter(c=>
+    (activeChip==='Sabhi' || c.cat===activeChip) &&
+    (c.sanskrit.toLowerCase().includes(search) || c.translit.toLowerCase().includes(search) || c.meaning.toLowerCase().includes(search) || c.cat.toLowerCase().includes(search))
+  );
+  document.getElementById('chantCount').textContent = `${list.length} chants`;
+  document.getElementById('chantGrid').innerHTML = list.length ? list.map(chantCard).join('') :
+    `<div class="empty-state" style="grid-column:1/-1;"><span class="big">🔍</span>Kuch nahi mila. Dobara search karein.</div>`;
+}
+
+function chantCard(c){
+  const saved = state.favorites.chants.includes(c.id);
+  const playing = state.nowPlaying === c.id;
+  return `<div class="card">
+    <button class="fav-btn ${saved?'saved':''}" onclick="toggleFav('chants','${c.id}')">${saved?'♥':'♡'}</button>
+    <div class="cat">${c.cat}</div>
+    <div class="sanskrit">${c.sanskrit}</div>
+    <div class="translit">${c.translit}</div>
+    <div class="meaning">${c.meaning}</div>
+    <div style="display:flex; gap:8px; margin-top:4px; flex-wrap:wrap;">
+      <button class="play-btn ${playing?'playing':''}" onclick="playChant('${c.id}')">${playing? '⏸ Sun rahe hain...' : '🔊 Sunein'}</button>
+      <button class="btn-ghost" style="padding:6px 14px; font-size:0.8rem;" onclick="showView('home'); selectChantHome('${c.id}'); setTimeout(()=>document.getElementById('homeScrollTrack').scrollIntoView({ behavior: 'smooth', block: 'end' }), 200);">🎙 Practice Chanting</button>
+    </div>
+    ${!c.audioUrl ? '<div class="tts-note">Browser voice mein (Audio file upload nahi hui)</div>' : ''}
+  </div>`;
+}
+
+function renderFeatured(){
+  const c = state.chants[new Date().getDate() % state.chants.length];
+  document.getElementById('featuredChant').innerHTML = chantCard(c);
+}
+
+// ---------- Rendering: Books ----------
+let activeBookProff = 'All';
+let activeBookSubject = 'All';
+
+function setBookProff(proff) {
+  activeBookProff = proff;
+  activeBookSubject = 'All';
+  renderBooks();
+}
+
+function setBookSubject(subj) {
+  activeBookSubject = subj;
+  renderBooks();
+}
+
+function renderBooks(){
+  const search = (document.getElementById('bookSearch').value || '').toLowerCase();
+  let list = state.books.filter(b => {
+    const matchesSearch = b.titleEn.toLowerCase().includes(search) || b.titleHi.includes(search) || b.author.toLowerCase().includes(search);
+    const matchesProff = activeBookProff === 'All' || b.proff === activeBookProff;
+    const matchesSubject = activeBookProff !== '2nd Proff' || activeBookSubject === 'All' || b.subject === activeBookSubject;
+    return matchesSearch && matchesProff && matchesSubject;
+  });
+  
+  // Render Proff Filter Buttons
+  const proffs = ['All', '1st Proff', '2nd Proff', '3rd Proff'];
+  let filterHtml = `<div class="chips-container" style="display:flex; gap:8px; margin-bottom:12px; overflow-x:auto; padding-bottom:4px;">` +
+    proffs.map(p => {
+      const active = p === activeBookProff ? 'active' : '';
+      const label = p === 'All' ? 'All Proffs' : `BAMS ${p}`;
+      return `<button class="chip ${active}" onclick="setBookProff('${p}')">${label}</button>`;
+    }).join('') + `</div>`;
+    
+  // Render 2nd Proff Subject Filters under it if active
+  if (activeBookProff === '2nd Proff') {
+    const subjects = ['All', 'Charak Samhita', 'Dravyaguna', 'Rasashastra & Bhaishajya', 'Roga Nidan', 'Agada Tantra', 'Swasthavritta & Yoga'];
+    filterHtml += `<div class="chips-container" style="display:flex; gap:8px; margin-bottom:12px; overflow-x:auto; padding-bottom:4px; border-top: 1px solid var(--line); padding-top: 10px;">` +
+      subjects.map(s => {
+        const active = s === activeBookSubject ? 'active' : '';
+        const label = s === 'All' ? 'All Subjects' : s;
+        return `<button class="chip ${active}" style="font-size:0.75rem; padding:4px 10px; border-color:var(--copper);" onclick="setBookSubject('${s}')">${label}</button>`;
+      }).join('') + `</div>`;
+  }
+  
+  const toolbar = document.querySelector('#view-books .toolbar');
+  if (toolbar) {
+    let filterDiv = document.getElementById('bookProffFilters');
+    if (!filterDiv) {
+      filterDiv = document.createElement('div');
+      filterDiv.id = 'bookProffFilters';
+      toolbar.parentNode.insertBefore(filterDiv, toolbar.nextSibling);
+    }
+    filterDiv.innerHTML = filterHtml;
+  }
+  
+  document.getElementById('bookCount').textContent = `${list.length} books`;
+  document.getElementById('bookGrid').innerHTML = list.length ? list.map(bookCard).join('') :
+    `<div class="empty-state" style="grid-column:1/-1;"><span class="big">📚</span>No books found. Try modifying your search or subject filters.</div>`;
+}
+
+function bookCard(b){
+  const saved = state.favorites.books.includes(b.id);
+  const badgeColor = b.proff === '1st Proff' ? 'var(--gold)' : b.proff === '2nd Proff' ? 'var(--copper)' : 'var(--teal)';
+  const badgeLabel = (b.proff === '2nd Proff' && b.subject) ? `2nd Proff · ${b.subject}` : (b.proff || 'General');
+  return `<div class="card">
+    <button class="fav-btn ${saved?'saved':''}" onclick="toggleFav('books','${b.id}')">${saved?'♥':'♡'}</button>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+      <div class="cat" style="margin:0;">${b.cat}</div>
+      <span style="font-size:0.65rem; font-weight:700; color:${badgeColor}; border:1px solid ${badgeColor}; padding:2px 8px; border-radius:12px; text-transform:uppercase; letter-spacing:0.3px;">${badgeLabel}</span>
+    </div>
+    <div class="book-title hin-serif">${b.titleHi}</div>
+    <div class="book-title" style="font-size:0.95rem; color:var(--ink-soft); font-weight:500;">${b.titleEn}</div>
+    <div class="book-meta">${b.author}</div>
+    <div class="book-desc" style="margin-bottom:12px;">${b.desc}</div>
+    
+    <div style="margin-top:auto; display:flex; gap:8px; align-items:center; border-top:1px dashed var(--line); padding-top:12px;">
+      ${b.pdfUrl ? 
+        (b.pdfUrl === 'stored-blob' ? 
+          `<button class="play-btn" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:6px; font-size:0.8rem; padding:6px 12px; margin-top:0;" onclick="openStoredPDF('${b.id}')">📖 Read PDF</button>` :
+          `<a href="${b.pdfUrl}" target="_blank" class="play-btn" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:6px; font-size:0.8rem; padding:6px 12px; margin-top:0;">📖 Read PDF</a>`
+        ) : 
+        `<button class="btn-ghost" style="padding:6px 12px; font-size:0.8rem; opacity:0.5; cursor:not-allowed;" disabled>📄 PDF not linked</button>`
+      }
+    </div>
+  </div>`;
+}
+
+// ---------- Favorites ----------
+async function toggleFav(type, id){
+  if(!state.profile){ openModal(); showToast('Favorites ke liye sign in karein'); return; }
+  const arr = state.favorites[type];
+  const idx = arr.indexOf(id);
+  if(idx>-1) arr.splice(idx,1); else arr.push(id);
+  await saveFavorites();
+  renderChants(); renderBooks(); renderFeatured();
+  if(document.getElementById('view-favorites').classList.contains('active')) renderFavorites();
+}
+function renderFavorites(){
+  const c = state.chants.filter(x=>state.favorites.chants.includes(x.id));
+  const b = state.books.filter(x=>state.favorites.books.includes(x.id));
+  const el = document.getElementById('favContent');
+  if(!state.profile){ el.innerHTML = `<div class="empty-state"><span class="big">🔒</span>Favorites dekhne ke liye sign in karein.</div>`; return; }
+  if(!c.length && !b.length){ el.innerHTML = `<div class="empty-state"><span class="big">🤍</span>Abhi koi favorite nahi hai. Chants ya Books mein ♡ par click karein.</div>`; return; }
+  el.innerHTML = (c.length ? `<h3 class="hin-serif" style="margin-top:20px;">मंत्र</h3><div class="grid">${c.map(chantCard).join('')}</div>` : '') +
+                 (b.length ? `<h3 style="margin-top:30px;">Books</h3><div class="grid">${b.map(bookCard).join('')}</div>` : '');
+}
+
+// ---------- Admin ----------
+async function addChant(){
+  const s = document.getElementById('af-sanskrit').value.trim();
+  const t = document.getElementById('af-translit').value.trim();
+  const cat = document.getElementById('af-cat').value.trim() || 'General';
+  const m = document.getElementById('af-meaning').value.trim();
+  const audioUrl = document.getElementById('af-audio').value.trim();
+  if(!s || !m){ showToast('Sanskrit aur meaning zaroori hai'); return; }
+  
+  const chantId = 'c' + Date.now();
+  const fileInput = document.getElementById('af-audio-file');
+  const file = fileInput ? fileInput.files[0] : null;
+  let finalAudioUrl = audioUrl;
+  
+  if (file) {
+    showToast('Saving audio file to local database...');
+    const saved = await savePDFBlob('audio_' + chantId, file);
+    if (saved) {
+      finalAudioUrl = 'stored-blob';
+      showToast('\uD83C\uDFB5 Audio file saved!');
+    } else {
+      showToast('Error saving audio file.');
+    }
+  }
+  
+  state.chants.push({id: chantId, cat, sanskrit: s, translit: t, meaning: m, audioUrl: finalAudioUrl});
+  await saveChants();
+  ['af-sanskrit','af-translit','af-cat','af-meaning','af-audio'].forEach(id => document.getElementById(id).value = '');
+  if (fileInput) fileInput.value = '';
+  showToast('Chant add ho gaya');
+  renderChants(); renderChantChips(); renderAdmin();
+}
+async function addBook(){
+  const th = document.getElementById('bf-title-hi').value.trim();
+  const te = document.getElementById('bf-title-en').value.trim();
+  const author = document.getElementById('bf-author').value.trim();
+  const cat = document.getElementById('bf-cat').value.trim() || 'General';
+  const proff = document.getElementById('bf-proff').value;
+  const pdfUrl = document.getElementById('bf-pdf').value.trim();
+  const subject = proff === '2nd Proff' ? document.getElementById('bf-subject').value : '';
+  const desc = document.getElementById('bf-desc').value.trim();
+  if(!te || !desc){ showToast('Title aur description zaroori hai'); return; }
+  
+  const fileInput = document.getElementById('bf-file');
+  const file = fileInput ? fileInput.files[0] : null;
+  let finalPdfUrl = pdfUrl;
+  const bookId = 'b' + Date.now();
+  
+  if (file) {
+    showToast("Saving PDF to local database...");
+    const saved = await savePDFBlob(bookId, file);
+    if (saved) {
+      finalPdfUrl = 'stored-blob';
+    } else {
+      showToast("Database error saving PDF file.");
+      return;
+    }
+  }
+  
+  state.books.push({id:bookId, titleHi:th, titleEn:te, author, cat, proff, subject, pdfUrl:finalPdfUrl, desc});
+  await saveBooks();
+  ['bf-title-hi','bf-title-en','bf-author','bf-cat','bf-pdf','bf-desc'].forEach(id=>document.getElementById(id).value='');
+  if (fileInput) fileInput.value = '';
+  showToast('Book add ho gayi');
+  renderBooks(); renderAdmin();
+}
+
+function toggleAdminSubjectSelector() {
+  const proff = document.getElementById('bf-proff').value;
+  const field = document.getElementById('adminSubjectField');
+  if (field) {
+    field.style.display = (proff === '2nd Proff') ? 'block' : 'none';
+  }
+}
+
+// ---------- Admin Edit/Update Controller ----------
+let editingBookId = null;
+let editingChantId = null;
+
+function editBook(id) {
+  const b = state.books.find(x => x.id === id);
+  if (!b) return;
+  
+  document.getElementById('bf-title-hi').value = b.titleHi || '';
+  document.getElementById('bf-title-en').value = b.titleEn || '';
+  document.getElementById('bf-author').value = b.author || '';
+  document.getElementById('bf-cat').value = b.cat || '';
+  document.getElementById('bf-proff').value = b.proff || '2nd Proff';
+  document.getElementById('bf-pdf').value = b.pdfUrl || '';
+  
+  // Update subject visibility
+  toggleAdminSubjectSelector();
+  if (b.proff === '2nd Proff') {
+    document.getElementById('bf-subject').value = b.subject || 'Charak Samhita';
+  }
+  document.getElementById('bf-desc').value = b.desc || '';
+  
+  editingBookId = id;
+  document.getElementById('bookFormTitle').textContent = 'Book details edit karein';
+  
+  const btn = document.getElementById('bookSaveBtn');
+  btn.textContent = 'Book update karein';
+  btn.onclick = () => updateBook(id);
+  
+  // Insert Cancel Button
+  let cancelBtn = document.getElementById('bookCancelEditBtn');
+  if (!cancelBtn) {
+    cancelBtn = document.createElement('button');
+    cancelBtn.id = 'bookCancelEditBtn';
+    cancelBtn.className = 'btn-ghost';
+    cancelBtn.style.marginLeft = '8px';
+    cancelBtn.style.padding = '10px 20px';
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.onclick = resetBookForm;
+    btn.parentNode.insertBefore(cancelBtn, btn.nextSibling);
+  }
+  
+  // Scroll to form view smoothly
+  document.getElementById('bookFormTitle').scrollIntoView({ behavior: 'smooth' });
+}
+
+function resetBookForm() {
+  editingBookId = null;
+  ['bf-title-hi','bf-title-en','bf-author','bf-cat','bf-pdf','bf-desc'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  const fileInput = document.getElementById('bf-file');
+  if (fileInput) fileInput.value = '';
+  
+  document.getElementById('bf-proff').value = '2nd Proff';
+  toggleAdminSubjectSelector();
+  
+  document.getElementById('bookFormTitle').textContent = 'Nayi book add karein';
+  const btn = document.getElementById('bookSaveBtn');
+  if (btn) {
+    btn.textContent = 'Book save karein';
+    btn.onclick = addBook;
+  }
+  const cancelBtn = document.getElementById('bookCancelEditBtn');
+  if (cancelBtn) cancelBtn.remove();
+}
+
+async function updateBook(id) {
+  const b = state.books.find(x => x.id === id);
+  if (!b) return;
+  
+  const th = document.getElementById('bf-title-hi').value.trim();
+  const te = document.getElementById('bf-title-en').value.trim();
+  const author = document.getElementById('bf-author').value.trim();
+  const cat = document.getElementById('bf-cat').value.trim() || 'General';
+  const proff = document.getElementById('bf-proff').value;
+  const pdfUrl = document.getElementById('bf-pdf').value.trim();
+  const subject = proff === '2nd Proff' ? document.getElementById('bf-subject').value : '';
+  const desc = document.getElementById('bf-desc').value.trim();
+  
+  if(!te || !desc){ showToast('Title aur description zaroori hai'); return; }
+  
+  const fileInput = document.getElementById('bf-file');
+  const file = fileInput ? fileInput.files[0] : null;
+  let finalPdfUrl = pdfUrl || b.pdfUrl;
+  
+  if (file) {
+    showToast("Saving PDF to local database...");
+    const saved = await savePDFBlob(id, file);
+    if (saved) {
+      finalPdfUrl = 'stored-blob';
+    } else {
+      showToast("Database error saving PDF file.");
+      return;
+    }
+  }
+  
+  b.titleHi = th;
+  b.titleEn = te;
+  b.author = author;
+  b.cat = cat;
+  b.proff = proff;
+  b.subject = subject;
+  b.pdfUrl = finalPdfUrl;
+  b.desc = desc;
+  
+  await saveBooks();
+  resetBookForm();
+  showToast('Book details update ho gayi');
+  renderBooks(); renderAdmin();
+}
+
+function editChant(id) {
+  const c = state.chants.find(x => x.id === id);
+  if (!c) return;
+  
+  document.getElementById('af-sanskrit').value = c.sanskrit || '';
+  document.getElementById('af-translit').value = c.translit || '';
+  document.getElementById('af-cat').value = c.cat || '';
+  document.getElementById('af-meaning').value = c.meaning || '';
+  document.getElementById('af-audio').value = c.audioUrl || '';
+  
+  editingChantId = id;
+  document.getElementById('chantFormTitle').textContent = 'Chant details edit karein';
+  
+  const btn = document.getElementById('chantSaveBtn');
+  btn.textContent = 'Chant update karein';
+  btn.onclick = () => updateChant(id);
+  
+  // Insert Cancel Button
+  let cancelBtn = document.getElementById('chantCancelEditBtn');
+  if (!cancelBtn) {
+    cancelBtn = document.createElement('button');
+    cancelBtn.id = 'chantCancelEditBtn';
+    cancelBtn.className = 'btn-ghost';
+    cancelBtn.style.marginLeft = '8px';
+    cancelBtn.style.padding = '10px 20px';
+    cancelBtn.textContent = 'Cancel';
+    cancelBtn.onclick = resetChantForm;
+    btn.parentNode.insertBefore(cancelBtn, btn.nextSibling);
+  }
+  
+  // Scroll to form view smoothly
+  document.getElementById('chantFormTitle').scrollIntoView({ behavior: 'smooth' });
+}
+
+function resetChantForm() {
+  editingChantId = null;
+  ['af-sanskrit','af-translit','af-cat','af-meaning','af-audio'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  
+  document.getElementById('chantFormTitle').textContent = 'Naya chant add karein';
+  const btn = document.getElementById('chantSaveBtn');
+  if (btn) {
+    btn.textContent = 'Chant save karein';
+    btn.onclick = addChant;
+  }
+  const cancelBtn = document.getElementById('chantCancelEditBtn');
+  if (cancelBtn) cancelBtn.remove();
+}
+
+async function updateChant(id) {
+  const c = state.chants.find(x => x.id === id);
+  if (!c) return;
+  
+  const s = document.getElementById('af-sanskrit').value.trim();
+  const t = document.getElementById('af-translit').value.trim();
+  const cat = document.getElementById('af-cat').value.trim() || 'General';
+  const m = document.getElementById('af-meaning').value.trim();
+  const audioUrl = document.getElementById('af-audio').value.trim();
+  
+  if(!s || !m){ showToast('Sanskrit aur meaning zaroori hai'); return; }
+  
+  c.sanskrit = s;
+  c.translit = t;
+  c.cat = cat;
+  c.meaning = m;
+  c.audioUrl = audioUrl;
+  
+  await saveChants();
+  resetChantForm();
+  showToast('Chant details update ho gayi');
+  renderChants(); renderChantChips(); renderAdmin();
+}
+
+async function deleteChant(id){ state.chants = state.chants.filter(c=>c.id!==id); await saveChants(); renderChants(); renderChantChips(); renderAdmin(); }
+async function deleteBook(id){ 
+  state.books = state.books.filter(b=>b.id!==id); 
+  await saveBooks(); 
+  await deletePDFBlob(id); // Delete from IndexedDB if stored
+  renderBooks(); renderAdmin(); 
+}
+
+function renderAdmin(){
+  toggleAdminSubjectSelector();
+  document.getElementById('adminChantList').innerHTML = `<h3 style="color:var(--gold-light);">Chants (${state.chants.length})</h3>` +
+    state.chants.map(c=>`<div class="admin-list-item">
+      <span>${c.translit || c.sanskrit.slice(0,30)} ${c.audioUrl?'🎵':''}</span>
+      <div style="display:flex; gap:8px;">
+        <button class="btn-primary" style="padding:4px 10px; font-size:0.75rem; background:var(--gold); border:none; border-radius:6px; font-weight:600;" onclick="editChant('${c.id}')">Edit</button>
+        <button class="del-btn" onclick="deleteChant('${c.id}')">Delete</button>
+      </div>
+    </div>`).join('');
+  document.getElementById('adminBookList').innerHTML = `<h3 style="color:var(--gold-light);">Books (${state.books.length})</h3>` +
+    state.books.map(b=>`<div class="admin-list-item">
+      <span>${b.titleEn} ${b.subject ? `(${b.subject})` : ''}</span>
+      <div style="display:flex; gap:8px;">
+        <button class="btn-primary" style="padding:4px 10px; font-size:0.75rem; background:var(--gold); border:none; border-radius:6px; font-weight:600;" onclick="editBook('${b.id}')">Edit</button>
+        <button class="del-btn" onclick="deleteBook('${b.id}')">Delete</button>
+      </div>
+    </div>`).join('');
+}
+
+// ---------- Caraka Samhita Online Search ----------
+function triggerCarakaSearch() {
+  const query = document.getElementById('carakaSearchInput').value.trim();
+  if (!query) {
+    showToast("Kuch search keyword type karein!");
+    return;
+  }
+  quickCarakaSearch(query);
+}
+
+function quickCarakaSearch(query) {
+  const searchUrl = `https://www.carakasamhitaonline.com/index.php?search=${encodeURIComponent(query)}`;
+  window.open(searchUrl, '_blank');
+}
+
+const CARAKA_CHAPTERS = {
+  Sutrasthana: {
+    nameHi: "सूत्रस्थान",
+    chapters: {
+      1: { en: "Deerghanjiviteeya Adhyaya", hi: "दीर्घञ्जीवितीयोऽध्यायः" },
+      2: { en: "Apamargatanduleeya Adhyaya", hi: "अपामार्गतण्डुलीय" },
+      3: { en: "Aragvadheeya Adhyaya", hi: "आरग्वधीय" },
+      4: { en: "Shadvirechanashatasashriteeya Adhyaya", hi: "षड्विरेचनशताश्रितीय" },
+      5: { en: "Matrashiteeya Adhyaya", hi: "मात्राशितीय" },
+      6: { en: "Tasyashiteeya Adhyaya", hi: "तस्याशितीय" },
+      7: { en: "Navegandharaneeya Adhyaya", hi: "नवेगान्धारणीय" },
+      8: { en: "Indriyopakramaneeya Adhyaya", hi: "इन्द्रियोपक्रमणीय" },
+      9: { en: "Khuddakachatushpada Adhyaya", hi: "खुड्डाकचतुष्पाद" },
+      10: { en: "Mahaachatushpada Adhyaya", hi: "महाचतुष्पाद" },
+      11: { en: "Tisraishaneeya Adhyaya", hi: "तिस्रैषणीय" },
+      12: { en: "Vatakalakaleeya Adhyaya", hi: "वातकलाकलीय" },
+      13: { en: "Snehadhyaya", hi: "स्नेहाध्याय" },
+      14: { en: "Swedadhyaya", hi: "स्वेदाध्याय" },
+      15: { en: "Upakalpaneeya Adhyaya", hi: "उपकल्पनीय" },
+      16: { en: "Chikitsaprabhriteeya Adhyaya", hi: "चिकित्साप्रभृतीय" },
+      17: { en: "Kiyanta Shiraseeya Adhyaya", hi: "कियन्तःशिरसीय" },
+      18: { en: "Trishotheeya Adhyaya", hi: "त्रिशोथीय" },
+      19: { en: "Ashtodareeya Adhyaya", hi: "अष्टोदरीय" },
+      20: { en: "Maharoga Adhyaya", hi: "महारोग" },
+      21: { en: "Ashtouninditeeya Adhyaya", hi: "अष्टौनिन्दितीय" },
+      22: { en: "Langhanabrimhaneeya Adhyaya", hi: "लङ्घनबृंहणीय" },
+      23: { en: "Santarpaneeya Adhyaya", hi: "सन्तर्पणीय" },
+      24: { en: "Vidhishoniteeya Adhyaya", hi: "विधिशोणितीय" },
+      25: { en: "Yajjah Purusheeya Adhyaya", hi: "यज्जःपुरुषीय" },
+      26: { en: "Atreyabhadrakapyeeya Adhyaya", hi: "आत्रेयभद्रकाप्यीय" },
+      27: { en: "Annapanavidhi", hi: "अन्नपानविधि" },
+      28: { en: "Vividhashitapeeteeya Adhyaya", hi: "विविधाशितपीतीय" },
+      29: { en: "Dashapranayataneeya Adhyaya", hi: "दशप्राणायतनीय" },
+      30: { en: "Artayedashamahamoola Adhyaya", hi: "अर्थेदशमहामूलीय" }
+    }
+  },
+  Nidanasthana: {
+    nameHi: "निदानस्थान",
+    chapters: {
+      1: { en: "Jvara Nidana", hi: "ज्वरनिदान" },
+      2: { en: "Raktapitta Nidana", hi: "रक्तपित्तनिदान" },
+      3: { en: "Gulma Nidana", hi: "गुल्मनिदान" },
+      4: { en: "Prameha Nidana", hi: "प्रमेहनिदान" },
+      5: { en: "Kushtha Nidana", hi: "कुष्ठनिदान" },
+      6: { en: "Shosha Nidana", hi: "शोषनिदान" },
+      7: { en: "Unmada Nidana", hi: "उन्मादनिदान" },
+      8: { en: "Apasmara Nidana", hi: "अपस्मारनिदान" }
+    }
+  },
+  Vimanasthana: {
+    nameHi: "विमानस्थान",
+    chapters: {
+      1: { en: "Rasa Vimana", hi: "रसविमान" },
+      2: { en: "Trividha Kuksheeya", hi: "त्रिविधकुक्षीय" },
+      3: { en: "Janapadodhvansaneeya", hi: "जनपदोध्वंसनीय" },
+      4: { en: "Trividha Rogavishesha Vijnaneeya", hi: "त्रिविधरोगविशेषविज्ञानीय" },
+      5: { en: "Srotas Vimana", hi: "स्रोतोविमान" },
+      6: { en: "Roganika Vimana", hi: "रोगानीकविमान" },
+      7: { en: "Vyadhita Roopiya", hi: "व्याधितरूपीय" },
+      8: { en: "Rogabhishagjitiya", hi: "रोगभिषग्जितीय" }
+    }
+  },
+  Sharirasthana: {
+    nameHi: "शारीरिकस्थान",
+    chapters: {
+      1: { en: "Katidhapurusha Sharira", hi: "कतिधापुरुषीय" },
+      2: { en: "Atulyagotriya Sharira", hi: "अतुल्यगोत्रीय" },
+      3: { en: "Khuddika Garbhavakranti", hi: "खुड्डिका गर्भावक्रान्ति" },
+      4: { en: "Mahati Garbhavakranti", hi: "महती गर्भावक्रान्ति" },
+      5: { en: "Purusha Vichaya", hi: "पुरुषविचय" },
+      6: { en: "Shareera Vichaya", hi: "शरीरविचय" },
+      7: { en: "Shareera Sankhya", hi: "शरीरसंख्या" },
+      8: { en: "Jatisutriya Sharira", hi: "जातिसूत्रीय" }
+    }
+  },
+  Indriyasthana: {
+    nameHi: "इन्द्रियस्थान",
+    chapters: {
+      1: { en: "Varnaswariya Indriya", hi: "वर्णस्वरीय" },
+      2: { en: "Pushpitaka Indriya", hi: "पुष्पितक" },
+      3: { en: "Parimarshana Indriya", hi: "परिमर्शन" },
+      4: { en: "Indriyaneeka Indriya", hi: "इन्द्रियानीक" },
+      5: { en: "Purvarupeeya Indriya", hi: "पूर्वरूपीय" },
+      6: { en: "Katamani Shareeriya", hi: "कतमानिशारीरीय" },
+      7: { en: "Pannarupa Indriya", hi: "पन्नरूपी" },
+      8: { en: "Apachaya Indriya", hi: "अपचाय" },
+      9: { en: "Yasya Syava Nimittiya", hi: "यस्यश्यावनिमित्तीय" },
+      10: { en: "Sadyomaraniya Indriya", hi: "सद्योमरणीय" },
+      11: { en: "Anujyoteeya Indriya", hi: "अणुज्योतीय" },
+      12: { en: "Gomayachurniya Indriya", hi: "गोमयचूर्णीय" }
+    }
+  },
+  Chikitsasthana: {
+    nameHi: "चिकित्सास्थान",
+    chapters: {
+      1: { en: "Rasayana Chikitsa Adhyaya", hi: "रसायन चिकित्सा" },
+      2: { en: "Vajikarana Chikitsa Adhyaya", hi: "वाजीकरण चिकित्सा" },
+      3: { en: "Jvara Chikitsa Adhyaya", hi: "ज्वर चिकित्सा" },
+      4: { en: "Raktapitta Chikitsa Adhyaya", hi: "रक्तपित्त चिकित्सा" },
+      5: { en: "Gulma Chikitsa Adhyaya", hi: "गुल्म चिकित्सा" },
+      6: { en: "Prameha Chikitsa Adhyaya", hi: "प्रमेह चिकित्सा" },
+      7: { en: "Kushtha Chikitsa Adhyaya", hi: "कुष्ठ चिकित्सा" },
+      8: { en: "Rajayakshma Chikitsa Adhyaya", hi: "राजयक्ष्मा चिकित्सा" },
+      9: { en: "Unmada Chikitsa Adhyaya", hi: "उन्माद चिकित्सा" },
+      10: { en: "Apasmara Chikitsa Adhyaya", hi: "अपस्मार चिकित्सा" },
+      11: { en: "Kshata Kshin Chikitsa Adhyaya", hi: "क्षतक्षीण चिकित्सा" },
+      12: { en: "Shvayathu Chikitsa Adhyaya", hi: "श्वयथु चिकित्सा" },
+      13: { en: "Udara Chikitsa Adhyaya", hi: "उदर चिकित्सा" },
+      14: { en: "Arsha Chikitsa Adhyaya", hi: "अर्श चिकित्सा" },
+      15: { en: "Grahani Chikitsa Adhyaya", hi: "ग्रहणी चिकित्सा" },
+      16: { en: "Pandu Chikitsa Adhyaya", hi: "पाण्डु चिकित्सा" },
+      17: { en: "Hikka Shwasa Chikitsa Adhyaya", hi: "हिक्काश्वास चिकित्सा" },
+      18: { en: "Kasa Chikitsa Adhyaya", hi: "कास चिकित्सा" },
+      19: { en: "Atisara Chikitsa Adhyaya", hi: "अतिसार चिकित्सा" },
+      20: { en: "Chardi Chikitsa Adhyaya", hi: "छर्दि चिकित्सा" },
+      21: { en: "Visarpa Chikitsa Adhyaya", hi: "विसर्प चिकित्सा" },
+      22: { en: "Trishna Chikitsa Adhyaya", hi: "तृष्णा चिकित्सा" },
+      23: { en: "Visha Chikitsa Adhyaya", hi: "विष चिकित्सा" },
+      24: { en: "Madatyaya Chikitsa Adhyaya", hi: "मदात्यय चिकित्सा" },
+      25: { en: "Dwivraneeya Chikitsa Adhyaya", hi: "द्विव्रणीय चिकित्सा" },
+      26: { en: "Trimarmeeya Chikitsa Adhyaya", hi: "त्रिमर्मीय चिकित्सा" },
+      27: { en: "Urustambha Chikitsa Adhyaya", hi: "ऊरुस्तम्भ चिकित्सा" },
+      28: { en: "Vata Vyadhi Chikitsa Adhyaya", hi: "वातव्याधि चिकित्सा" },
+      29: { en: "Vatarakta Chikitsa Adhyaya", hi: "वातरक्त चिकित्सा" },
+      30: { en: "Yonivyapat Chikitsa Adhyaya", hi: "योनिव्यापत् चिकित्सा" }
+    }
+  },
+  Kalpasthana: {
+    nameHi: "कल्पस्थान",
+    chapters: {
+      1: { en: "Madanaphala Kalpa", hi: "मदनकल्प" },
+      2: { en: "Jimutaka Kalpa", hi: "जीमूतककल्प" },
+      3: { en: "Ikshvaku Kalpa", hi: "इक्ष्वाकुकल्प" },
+      4: { en: "Dhamargava Kalpa", hi: "धामार्गवकल्प" },
+      5: { en: "Vatsaka Kalpa", hi: "वत्सककल्प" },
+      6: { en: "Kritavedhana Kalpa", hi: "कृतवेधनकल्प" },
+      7: { en: "Shyama Trivrit Kalpa", hi: "श्यामात्रिवृत्कल्प" },
+      8: { en: "Chaturangula Kalpa", hi: "चतुरङ्गुलकल्प" },
+      9: { en: "Tilvaka Kalpa", hi: "तिल्वककल्प" },
+      10: { en: "Sudha Kalpa", hi: "सुधाकल्प" },
+      11: { en: "Saptala Shankhini Kalpa", hi: "सप्तलाशङ्खिनीकल्प" },
+      12: { en: "Dantidravanti Kalpa", hi: "दन्तीद्रवन्तीकल्प" }
+    }
+  },
+  Siddhisthana: {
+    nameHi: "सिद्धिस्थान",
+    chapters: {
+      1: { en: "Kalpana Siddhi", hi: "कल्पनासिद्धि" },
+      2: { en: "Panchakarma Siddhi", hi: "पञ्चकर्मसिद्धि" },
+      3: { en: "Basti Sutri Siddhi", hi: "बस्तीसूत्रीय" },
+      4: { en: "Snehavyapadiki Siddhi", hi: "स्नेहव्यापद्िकीसिद्धि" },
+      5: { en: "Netrabasti Vyapad Siddhi", hi: "नेत्रबस्तीव्यापसिद्धि" },
+      6: { en: "Ganda Vyapad Siddhi", hi: "गण्डव्यापत्सिद्धि" },
+      7: { en: "Uttarabasti Siddhi", hi: "उत्तरबस्तिसिद्धि" },
+      8: { en: "Prasrita Yogeeya Siddhi", hi: "प्रासृतयोगीय" },
+      9: { en: "Trimarmasiddhi", hi: "त्रिमर्मीयसिद्धि" },
+      10: { en: "Bastisiddhi", hi: "बस्तिसिद्धि" },
+      11: { en: "Phalamātra Siddhi", hi: "फलमात्रासिद्धि" },
+      12: { en: "Uttara-Siddhi", hi: "उत्तरसिद्धि" }
+    }
+  }
+};
+
+let currentCSOQuery = "";
+let currentECarakaSthanaText = "";
+let currentECarakaChapterText = "";
+let currentLocalVerseText = "";
+
+function updateReferencePreview() {
+  const sthanaSelect = document.getElementById('carakaSthana');
+  const sthana = sthanaSelect ? sthanaSelect.value : 'Sutrasthana';
+  const chapter = (document.getElementById('carakaChapter').value || '').trim();
+  const shloka = (document.getElementById('carakaShloka').value || '').trim();
+  
+  let preview = sthana;
+  if (chapter) preview += ` Chapter ${chapter}`;
+  if (shloka) preview += ` Verse ${shloka}`;
+  
+  const el = document.getElementById('referencePreview');
+  if (el) el.textContent = preview;
+}
+
+function _generateEasyExplanation(data) {
+  // Build a humanized, student-friendly explanation from translation + vimarsha
+  let easy = '';
+  
+  if (data.translation && data.translation !== 'Translation not available for this verse.') {
+    easy = '📌 In simple words: ' + data.translation;
+  }
+  
+  if (data.tattva_vimarsha && data.tattva_vimarsha.length > 0) {
+    easy += '\n\n🧠 Key Takeaway: ' + data.tattva_vimarsha[0];
+  }
+  
+  if (!easy) {
+    easy = 'This verse is part of the ' + (data.section_heading || data.chapter_title) + ' section of the Charaka Samhita. Please refer to the Sanskrit text and external sources for detailed meaning.';
+  }
+  
+  return easy;
+}
+
+async function findCarakaReference() {
+  const sthanaSelect = document.getElementById('carakaSthana');
+  const sthana = sthanaSelect ? sthanaSelect.value : 'Sutrasthana';
+  const chapterNum = parseInt((document.getElementById('carakaChapter').value || '').trim(), 10);
+  const shloka = (document.getElementById('carakaShloka').value || '').trim();
+  
+  if (!chapterNum || isNaN(chapterNum)) {
+    showToast("Pehle chapter number input karein!");
+    return;
+  }
+  
+  const sthanaInfo = CARAKA_CHAPTERS[sthana];
+  let chapterNameHi = "Unknown";
+  let chapterNameEn = "Unknown";
+  
+  if (sthanaInfo && sthanaInfo.chapters[chapterNum]) {
+    chapterNameHi = sthanaInfo.chapters[chapterNum].hi;
+    chapterNameEn = sthanaInfo.chapters[chapterNum].en;
+  }
+  
+  const sthanaProperHi = sthanaInfo ? `${sthana} (${sthanaInfo.nameHi})` : sthana;
+  document.getElementById('resSthana').textContent = sthanaProperHi;
+  document.getElementById('resChapter').textContent = `Chapter ${chapterNum}`;
+  document.getElementById('resChapterName').textContent = `${chapterNameEn} (${chapterNameHi})`;
+  document.getElementById('resShloka').textContent = shloka ? `Verse ${shloka}` : '-';
+  
+  currentCSOQuery = sthana;
+  if (chapterNum) currentCSOQuery += ` Chapter ${chapterNum}`;
+  if (shloka) currentCSOQuery += ` Verse ${shloka}`;
+  
+  currentECarakaSthanaText = sthanaInfo ? sthanaInfo.nameHi : sthana;
+  currentECarakaChapterText = `${chapterNum}. ${chapterNameEn} (${chapterNameHi})`;
+  
+  document.getElementById('instructionSthana').textContent = currentECarakaSthanaText;
+  document.getElementById('instructionChapter').textContent = currentECarakaChapterText;
+  
+  // Show result area
+  const resultDiv = document.getElementById('carakaReferenceResult');
+  resultDiv.style.display = 'block';
+  
+  const localVerseCard = document.getElementById('localVerseCard');
+  const loadingState = document.getElementById('verseLoadingState');
+  const contentArea = document.getElementById('verseContentArea');
+  
+  // If shloka number is provided, fetch the verse dynamically from server
+  if (shloka && parseInt(shloka)) {
+    localVerseCard.style.display = 'block';
+    loadingState.style.display = 'block';
+    contentArea.style.display = 'none';
+    
+    resultDiv.scrollIntoView({ behavior: 'smooth' });
+    
+    try {
+      const url = `${VAGDHENU_SERVER}/fetch_verse?sthana=${encodeURIComponent(sthana)}&chapter=${chapterNum}&verse=${shloka}`;
+      const resp = await fetch(url);
+      const data = await resp.json();
+      
+      if (data.error) {
+        showToast('⚠️ ' + data.error);
+        localVerseCard.style.display = 'none';
+        return;
+      }
+      
+      // Populate Sanskrit text and reference header
+      document.getElementById('localVerseSanskrit').textContent = data.sanskrit || '';
+      currentLocalVerseText = data.sanskrit || '';
+      
+      const refEl = document.getElementById('localVerseRef');
+      if (refEl) {
+        const chapTitle = data.chapter_title || chapterNameEn;
+        refEl.textContent = `📖 ${data.sthana} • Chapter ${data.chapter} (${chapTitle}) • Verse ${data.verse}`;
+      }
+      
+      // Populate section heading
+      const headingEl = document.getElementById('localVerseHeading');
+      if (data.section_heading) {
+        headingEl.textContent = '§ ' + data.section_heading;
+        headingEl.style.display = 'block';
+      } else {
+        headingEl.style.display = 'none';
+      }
+      
+      // Populate translation
+      document.getElementById('localVerseTranslation').textContent = data.translation || '';
+      
+      // Populate Tattva Vimarsha
+      const tattvaDiv = document.getElementById('tattvaVimarsha');
+      const tattvaContent = document.getElementById('tattvaContent');
+      if (data.tattva_vimarsha && data.tattva_vimarsha.length > 0) {
+        tattvaContent.innerHTML = data.tattva_vimarsha.map(t => `<p style="margin:0 0 8px; padding-left:12px; border-left:2px solid var(--gold); opacity:0.95;">• ${t}</p>`).join('');
+        tattvaDiv.style.display = 'block';
+      } else {
+        tattvaDiv.style.display = 'none';
+      }
+      
+      // Populate Vidhi Vimarsha
+      const vidhiDiv = document.getElementById('vidhiVimarsha');
+      const vidhiContent = document.getElementById('vidhiContent');
+      if (data.vidhi_vimarsha && data.vidhi_vimarsha.length > 0) {
+        vidhiContent.innerHTML = data.vidhi_vimarsha.map(v => `<p style="margin:0 0 8px; padding-left:12px; border-left:2px solid var(--copper); opacity:0.95;">• ${v}</p>`).join('');
+        vidhiDiv.style.display = 'block';
+      } else {
+        vidhiDiv.style.display = 'none';
+      }
+      
+      // Generate humanized easy explanation
+      const easyExplanation = _generateEasyExplanation(data);
+      document.getElementById('localVerseEasy').textContent = easyExplanation;
+      
+      // Show content, hide loading
+      loadingState.style.display = 'none';
+      contentArea.style.display = 'block';
+      
+      showToast('✅ Verse fetched with deep research from Charaka Samhita Online!');
+      
+    } catch (err) {
+      console.error('Verse fetch error:', err);
+      loadingState.style.display = 'none';
+      localVerseCard.style.display = 'none';
+      showToast('⚠️ Server offline - Run: python vagdhenu/scripts/server.py');
+    }
+  } else {
+    localVerseCard.style.display = 'none';
+    currentLocalVerseText = "";
+    resultDiv.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+function openCSO() {
+  if (currentCSOQuery) {
+    quickCarakaSearch(currentCSOQuery);
+  }
+}
+
+function openECaraka() {
+  window.open("https://niimh.nic.in/ebooks/ecaraka/?mod=read", "_blank");
+}
+
+async function reciteLocalVerse() {
+  if (!currentLocalVerseText) return;
+  
+  const btn = document.getElementById('btnReciteLocalVerse');
+  if (btn) { btn.disabled = true; btn.innerHTML = '⏳ Reciting...'; }
+  showToast('🌊 Vagdhenu AI se verse recitation generate ho rahi hai...');
+  
+  if (shlokaPlayerAudio) { shlokaPlayerAudio.pause(); shlokaPlayerAudio = null; }
+  
+  const online = await checkVagdhenuServer();
+  if (!online) {
+    showToast('⚠️ Vagdhenu server offline hai. Run karein: python vagdhenu/scripts/server.py');
+    if (btn) { btn.disabled = false; btn.innerHTML = '🔊 AI Recite'; }
+    return;
+  }
+  
+  try {
+    const encodedText = encodeURIComponent(currentLocalVerseText);
+    const url = `${VAGDHENU_SERVER}/recite?text=${encodedText}&meter=anushtubh&seed=42&speed=0.90`;
+    
+    const resp = await fetch(url);
+    if (!resp.ok) throw new Error('Server error: ' + resp.status);
+    
+    const blob = await resp.blob();
+    shlokaPlayerChantId = 'local_verse_generation';
+    await savePDFBlob('audio_local_verse_generation', blob);
+    
+    await startShlokaAudio({ id: 'local_verse_generation', audioUrl: 'stored-blob' }, blob);
+    
+  } catch (err) {
+    console.error('Local verse recitation error:', err);
+    showToast('❌ Recitation failed: ' + err.message);
+  } finally {
+    if (btn) { btn.disabled = false; btn.innerHTML = '🔊 AI Recite'; }
+  }
+}
+
+// ---------- Language Switcher ----------
+function setLang(l){
+  state.lang = l;
+  document.querySelectorAll('#langToggle button').forEach(b=>b.classList.toggle('active', b.dataset.lang===l));
+  renderNav();
+  const heroText = document.querySelector('[data-i18n=heroText]');
+  if(heroText) {
+    heroText.textContent = l==='hi'
+      ? 'Ayurveda ke shlok, mantra aur classical granthon ka collection — ek jagah par. Scroll karein aur anubhav karein.'
+      : 'A sacred collection of Ayurvedic mantras, chants, and classical treatises — all in one place. Scroll to experience.';
+  }
+}
+
+// ---------- IndexedDB Storage API for PDF Blobs ----------
+const DB_NAME = 'AyurvaniDB';
+const STORE_NAME = 'pdfStore';
+let db = null;
+
+function initDB() {
+  return new Promise((resolve) => {
+    const request = indexedDB.open(DB_NAME, 1);
+    request.onupgradeneeded = (e) => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains(STORE_NAME)) {
+        db.createObjectStore(STORE_NAME);
+      }
+    };
+    request.onsuccess = (e) => {
+      db = e.target.result;
+      resolve(db);
+    };
+    request.onerror = (e) => {
+      console.error("IndexedDB open error", e);
+      resolve(null);
+    };
+  });
+}
+
+function savePDFBlob(bookId, blob) {
+  return new Promise((resolve) => {
+    if (!db) { resolve(false); return; }
+    const transaction = db.transaction([STORE_NAME], 'readwrite');
+    const store = transaction.objectStore(STORE_NAME);
+    const request = store.put(blob, bookId);
+    request.onsuccess = () => resolve(true);
+    request.onerror = () => resolve(false);
+  });
+}
+
+function getPDFBlob(bookId) {
+  return new Promise((resolve) => {
+    if (!db) { resolve(null); return; }
+    const transaction = db.transaction([STORE_NAME], 'readonly');
+    const store = transaction.objectStore(STORE_NAME);
+    const request = store.get(bookId);
+    request.onsuccess = (e) => resolve(e.target.result);
+    request.onerror = () => resolve(null);
+  });
+}
+
+function deletePDFBlob(bookId) {
+  return new Promise((resolve) => {
+    if (!db) { resolve(false); return; }
+    const transaction = db.transaction([STORE_NAME], 'readwrite');
+    const store = transaction.objectStore(STORE_NAME);
+    const request = store.delete(bookId);
+    request.onsuccess = () => resolve(true);
+    request.onerror = () => resolve(false);
+  });
+}
+
+async function openStoredPDF(bookId) {
+  showToast("Retrieving PDF from local database...");
+  const blob = await getPDFBlob(bookId);
+  if (!blob) {
+    showToast("Error: Local PDF blob not found.");
+    return;
+  }
+  const fileURL = URL.createObjectURL(blob);
+  window.open(fileURL, '_blank');
+}
+
+// ---------- Init ----------
+async function init(){
+  await initDB(); // Initialize IndexedDB first
+  await loadContent();
+  await initTheme();
+  
+  setLang(state.lang);
+  renderAuth(); renderChantChips(); renderChants(); renderBooks(); renderFeatured();
+  
+  // Preload local sage visual image sequence
+  preloadSageFrames();
+  
+  showView('home');
+
+  document.getElementById('chantSearch').addEventListener('input', renderChants);
+  document.getElementById('bookSearch').addEventListener('input', renderBooks);
+  
+  // Caraka search keyboard triggers
+  const carakaInput = document.getElementById('carakaSearchInput');
+  if (carakaInput) {
+    carakaInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        triggerCarakaSearch();
+      }
+    });
+  }
+  document.querySelectorAll('#langToggle button').forEach(b=>b.addEventListener('click', ()=>setLang(b.dataset.lang)));
+  document.getElementById('loginModal').addEventListener('click', e=>{ if(e.target.id==='loginModal') closeModal(); });
+}
+init();
+</script>
+</body>
+</html>
