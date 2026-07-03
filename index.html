@@ -1905,10 +1905,42 @@
   </section>
 
   <section id="view-admin">
-    <div class="section-head">
-      <h2>Admin Panel <span class="tag-role">ADMIN</span></h2>
-      <p style="color:var(--ink-soft); font-size:0.9rem; margin:4px 0 0;">Manage shlokas, books, PDFs and site content</p>
+    <!-- Admin Lock Screen (Protected Access) -->
+    <div id="adminLockScreen" style="display: block; max-width: 440px; margin: 50px auto; padding: 32px; background: var(--card); border: 1.5px solid var(--gold); border-radius: 16px; box-shadow: var(--shadow); backdrop-filter: blur(8px); text-align: center; animation: fadeSlideUp 0.4s ease;">
+      <div style="font-size: 3.2rem; margin-bottom: 16px;">🔐</div>
+      <h3 style="margin-top:0; color:var(--gold-light); font-size:1.45rem; font-family:'Cormorant Garamond',serif; letter-spacing: 0.02em;">Admin Verification Required</h3>
+      <p style="font-size:0.86rem; color:var(--ink-soft); margin-bottom: 24px; line-height: 1.55;">
+        Sanskrit shlokas and books can only be added, updated, or deleted by authorized administrators. Please verify your credentials.
+      </p>
+      
+      <div style="text-align: left; display: flex; flex-direction: column; gap: 14px;">
+        <div>
+          <label style="font-size:0.75rem; font-weight:600; color:var(--ink-soft); text-transform: uppercase; display:block; margin-bottom:6px; letter-spacing:0.04em;">Username</label>
+          <input type="text" id="adminUsernameInput" placeholder="e.g. admin" style="width:100%; padding:11px 14px; border-radius:10px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-size:0.95rem; outline:none;">
+        </div>
+        <div>
+          <label style="font-size:0.75rem; font-weight:600; color:var(--ink-soft); text-transform: uppercase; display:block; margin-bottom:6px; letter-spacing:0.04em;">Password</label>
+          <input type="password" id="adminPasswordInput" placeholder="Enter admin password" style="width:100%; padding:11px 14px; border-radius:10px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-size:0.95rem; outline:none;" onkeydown="if(event.key==='Enter') verifyAdminCredentials()">
+        </div>
+        <button class="save-btn" onclick="verifyAdminCredentials()" style="width:100%; margin-top:8px; padding:12px; font-weight:700;">
+          🔓 Unlock Admin Panel
+        </button>
+      </div>
+      
+      <div style="margin-top:22px; padding-top:14px; border-top: 1px dashed var(--line); font-size:0.78rem; color:var(--ink-soft); line-height:1.45;">
+        💡 Demo Access: Username <code style="color:var(--gold); font-weight:600;">admin</code> & Password <code style="color:var(--gold); font-weight:600;">ayurved108</code>
+      </div>
     </div>
+
+    <!-- Admin Content Area (Hidden by default, shown only if verified) -->
+    <div id="adminContentArea" style="display: none;">
+      <div class="section-head">
+        <h2>Admin Panel <span class="tag-role">ADMIN</span></h2>
+        <div style="display:flex; align-items:center; gap:8px; margin-left: auto;">
+          <p style="color:var(--ink-soft); font-size:0.9rem; margin:0;">Manage shlokas, books and site content</p>
+          <button class="del-btn" onclick="lockAdminPanel()" style="padding: 5px 12px; border-radius: 7px; margin-left: 8px;">🔒 Lock Panel</button>
+        </div>
+      </div>
 
     <!-- Admin Tab Navigation -->
     <div class="admin-tab-bar">
@@ -2080,7 +2112,7 @@
           <button class="del-btn" style="padding:10px 18px; font-size:0.85rem;" onclick="if(confirm('This will delete ALL shlokas and books. Are you sure?')) clearAllContent()">🗑️ Clear All Content</button>
         </div>
       </div>
-    </div>
+    </div> <!-- #adminContentArea -->
 
   </section>
 
@@ -4043,7 +4075,52 @@ async function clearAllContent() {
   renderChants(); renderBooks(); renderAdmin();
 }
 
+async function verifyAdminCredentials() {
+  const user = document.getElementById('adminUsernameInput').value.trim();
+  const pass = document.getElementById('adminPasswordInput').value;
+  
+  if (user === 'admin' && pass === ADMIN_DEMO_PASSWORD) {
+    state.profile = { name: 'Admin', isAdmin: true };
+    await saveProfile();
+    showToast('Admin verify ho gaya!');
+    
+    // Clear inputs
+    document.getElementById('adminUsernameInput').value = '';
+    document.getElementById('adminPasswordInput').value = '';
+    
+    // Refresh views
+    renderAuth();
+    renderAdmin();
+  } else {
+    showToast('Galat Username ya Password!');
+  }
+}
+
+async function lockAdminPanel() {
+  state.profile = null;
+  await saveProfile();
+  renderAuth();
+  renderAdmin();
+  showToast('Admin panel locked');
+}
+
 function renderAdmin() {
+  const lockScreen = document.getElementById('adminLockScreen');
+  const contentArea = document.getElementById('adminContentArea');
+  
+  const isAdminLoggedIn = state.profile && state.profile.isAdmin;
+  
+  if (lockScreen && contentArea) {
+    if (isAdminLoggedIn) {
+      lockScreen.style.display = 'none';
+      contentArea.style.display = 'block';
+    } else {
+      lockScreen.style.display = 'block';
+      contentArea.style.display = 'none';
+      return; // Stop here if locked
+    }
+  }
+
   toggleAdminSubjectSelector();
 
   const chantCountBadge = document.getElementById('chantCountBadge');
