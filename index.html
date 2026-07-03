@@ -2115,7 +2115,7 @@ async function toggleTheme() {
 }
 
 // ---------- Visual Background Preloader ----------
-const TOTAL_FRAMES = 240;
+const TOTAL_FRAMES = 192;
 let frames = [];
 let canvas = null;
 let ctx = null;
@@ -2128,7 +2128,7 @@ function preloadSageFrames() {
   canvas = document.getElementById('heroCanvas');
   if (canvas) ctx = canvas.getContext('2d');
   
-  // Zero-padded filename helper (e.g. 1 -> "001")
+  // Zero-padded filename helper (e.g. 1 -> "000001")
   function pad(num, size) {
     let s = num + "";
     while (s.length < size) s = "0" + s;
@@ -2137,7 +2137,7 @@ function preloadSageFrames() {
   
   let firstFrameLoaded = false;
   
-  // Pre-populate the frames array so that frames.length is immediately 240
+  // Pre-populate the frames array so that frames.length is immediately 192
   // This prevents race conditions where cached images fire onload synchronously
   for (let i = 1; i <= TOTAL_FRAMES; i++) {
     const img = new Image();
@@ -2168,7 +2168,7 @@ function preloadSageFrames() {
         finishPreloading();
       }
     };
-    img.src = `ayur/bg/ezgif-frame-${pad(i, 3)}.jpg`;
+    img.src = `ayur/bg new/frame_${pad(i, 6)}.jpg`;
   }
 }
 
