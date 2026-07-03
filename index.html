@@ -333,19 +333,21 @@
   /* ---------- Scroll Track Hero Animation (Home Section Only) ---------- */
   .scroll-track {
     position: relative;
-    height: calc(100vh - 66px);
-    margin-bottom: 40px;
+    height: 200vh;
+    margin-bottom: 0;
     width: calc(100% + 48px);
     margin-left: -24px;
-    overflow: hidden;
+    overflow: visible;
   }
   .sticky-container {
-    position: relative;
-    height: 100%;
+    position: sticky;
+    top: 0;
+    height: calc(100vh - 66px);
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
   }
   #heroCanvas {
     position: absolute;
@@ -355,7 +357,7 @@
     height: 100%;
     object-fit: cover;
     z-index: 1;
-    filter: brightness(0.55) contrast(1.05);
+    filter: brightness(0.52) contrast(1.1);
     transition: filter 0.5s ease;
   }
   body.light-mode #heroCanvas {
@@ -837,20 +839,34 @@
   }
   .home-search-input {
     width: 100%;
-    padding: 16px 56px 16px 20px;
+    padding: 18px 56px 18px 22px;
     border-radius: 14px;
-    border: 1.5px solid var(--line);
-    background: var(--bg-soft);
-    color: var(--ink);
-    font-size: 1rem;
+    border: 1.5px solid rgba(228, 201, 124, 0.45);
+    background: rgba(28, 51, 39, 0.7);
+    color: #f3eedf;
+    font-size: 1.05rem;
     font-family: inherit;
     outline: none;
-    transition: border-color 0.25s, box-shadow 0.25s;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .home-search-input::placeholder {
+    color: rgba(243, 238, 223, 0.55);
+  }
+  body.light-mode .home-search-input {
+    background: rgba(255,254,250,0.88);
+    color: #14241E;
+    border-color: rgba(163,120,39,0.4);
+  }
+  body.light-mode .home-search-input::placeholder {
+    color: rgba(20,36,30,0.45);
   }
   .home-search-input:focus {
     border-color: var(--gold);
-    box-shadow: 0 0 0 3px rgba(197,152,65,0.15), 0 4px 20px rgba(0,0,0,0.15);
+    background: rgba(28, 51, 39, 0.85);
+    box-shadow: 0 0 0 3px rgba(228,201,124,0.18), 0 4px 24px rgba(0,0,0,0.2);
   }
   .home-search-icon {
     position: absolute;
@@ -1306,46 +1322,37 @@
     <div class="scroll-track" id="homeScrollTrack">
       <div class="sticky-container">
         <canvas id="heroCanvas"></canvas>
-        
-        <div class="hero-intro-overlay" style="display: flex; align-items: center; justify-content: space-between; gap: 40px; padding: 40px min(8vw, 80px); width: 100%; max-width: 1200px; margin: 0 auto; height: 100%; position: relative; z-index: 2;">
-          
-          <!-- LEFT COLUMN: COPY -->
-          <div class="hero-copy" style="max-width: 620px; text-align: left;">
-            <div class="eyebrow" style="display: flex; align-items: center; gap: 10px; color: var(--sage); font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 22px;">Shloka · Samhita · Sadhana</div>
-            <h1 style="font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: clamp(38px, 5.5vw, 68px); line-height: 1.05; color: var(--cream); margin: 0;">
-              The <span class="hin" style="color: var(--gold); font-family: 'Tiro Devanagari Hindi', serif; font-style: normal;">वाणी</span><br>of ancient healing
+
+        <!-- PAGE 1: Scroll hint only — pure background -->
+        <div id="homePageOne" style="position:absolute; inset:0; z-index:5; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:40px; pointer-events:none; transition: opacity 0.5s ease;">
+          <div style="display:flex; flex-direction:column; align-items:center; gap:8px; animation: fadeSlideUp 1.2s ease-out 0.5s both;">
+            <span style="font-family:'Tiro Devanagari Hindi',serif; font-size:1.1rem; color:rgba(243,238,223,0.7); letter-spacing:0.08em;">स्वस्थस्य स्वास्थ्य रक्षणम्</span>
+            <span style="font-size:0.75rem; color:rgba(243,238,223,0.45); letter-spacing:0.15em; text-transform:uppercase;">Scroll to explore</span>
+            <div style="width:1.5px; height:32px; background:linear-gradient(to bottom, rgba(228,201,124,0.6), transparent); margin-top:4px;"></div>
+          </div>
+        </div>
+
+        <!-- PAGE 2: Intro copy — fades in at 50%+ scroll -->
+        <div id="homePageTwo" style="position:absolute; inset:0; z-index:6; display:flex; align-items:center; padding: 0 min(8vw,80px); opacity:0; transform:translateY(30px); transition: opacity 0.6s cubic-bezier(0.25,1,0.5,1), transform 0.7s cubic-bezier(0.25,1,0.5,1); pointer-events:none;">
+          <div style="max-width:640px;">
+            <div style="display:flex; align-items:center; gap:10px; color:var(--sage); font-size:13px; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:22px;">
+              <span style="width:26px; height:1px; background:var(--sage); display:inline-block;"></span>
+              Shloka · Samhita · Sadhana
+            </div>
+            <h1 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(38px,5.5vw,72px); line-height:1.05; color:#f3eedf; margin:0; text-shadow:0 2px 20px rgba(0,0,0,0.6);">
+              The <span style="color:var(--gold); font-family:'Tiro Devanagari Hindi',serif;">वाणी</span><br>of ancient healing
             </h1>
-            <p class="sub" style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; color: var(--sage); margin: 18px 0 0 0;">read aloud, understood anew</p>
-            <p class="desc" style="margin: 22px 0 0 0; font-size: 15.5px; line-height: 1.75; color: rgba(243,238,223,0.72); max-width: 480px;">
+            <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:22px; color:var(--sage); margin:18px 0 0;">read aloud, understood anew</p>
+            <p style="margin:20px 0 0; font-size:15.5px; line-height:1.75; color:rgba(243,238,223,0.75); max-width:480px; text-shadow:0 1px 8px rgba(0,0,0,0.5);">
               Search shlokas from the Caraka Samhita, hear them chanted with correct svara, and build a daily practice — all in one calm, considered space.
             </p>
-            <div class="actions" style="margin-top: 34px; display: flex; gap: 16px; align-items: center;">
-              <button class="btn-primary" onclick="showView('chants')" style="background: var(--gold); color: var(--teal-deep); border: none; padding: 14px 26px; border-radius: 12px; font-weight: 600; font-size: 14.5px; cursor: pointer; display: flex; align-items: center; gap: 8px; transition: transform .25s ease, box-shadow .25s ease;">Begin reading →</button>
-              <button class="btn-ghost" onclick="showView('chants'); setTimeout(() => window.scrollTo({ top: document.getElementById('homeBottomContent').offsetTop - 20, behavior: 'smooth' }), 200);" style="color: var(--cream); font-size: 14.5px; border: 1px solid var(--line); padding: 14px 22px; border-radius: 12px; background: transparent; cursor: pointer; transition: border-color .25s ease, color .25s ease;">Listen to a shloka</button>
+            <div style="margin-top:34px; display:flex; gap:16px; flex-wrap:wrap;">
+              <button onclick="showView('chants')" style="background:var(--gold); color:var(--teal-deep); border:none; padding:14px 28px; border-radius:12px; font-weight:700; font-size:14.5px; cursor:pointer; pointer-events:all; transition:transform .25s ease, box-shadow .25s ease;">Begin reading →</button>
+              <button onclick="showView('chants')" style="color:#f3eedf; font-size:14.5px; border:1.5px solid rgba(243,238,223,0.35); padding:14px 22px; border-radius:12px; background:rgba(28,51,39,0.45); cursor:pointer; pointer-events:all; backdrop-filter:blur(8px); transition:border-color .25s;">Listen to a shloka</button>
             </div>
           </div>
-
-          <!-- RIGHT COLUMN: ORNAMENT -->
-          <div class="ornament" aria-hidden="true" style="width: min(35vw, 380px); height: min(35vw, 380px); position: relative; flex-shrink: 0;">
-            <svg viewBox="0 0 400 400" style="width: 100%; height: 100%;">
-              <g class="ring" stroke="var(--sage)" stroke-width="1.2" fill="none" opacity="0.5" style="transform-origin: center; animation: rotate-slow 60s linear infinite;">
-                <circle cx="200" cy="200" r="150"/>
-                <circle cx="200" cy="200" r="150" stroke-dasharray="2 10"/>
-              </g>
-              <g class="ring2" stroke="var(--gold)" stroke-width="1.2" fill="none" opacity="0.6" style="transform-origin: center; animation: rotate-slow-rev 90s linear infinite;">
-                <circle cx="200" cy="200" r="110"/>
-              </g>
-              <g stroke="var(--cream)" stroke-width="1.2" fill="none" opacity="0.85">
-                <path d="M200 120c22 20 22 60 0 80-22-20-22-60 0-80Z"/>
-                <path d="M200 200c22 20 22 60 0 80-22-20-22-60 0-80Z"/>
-                <path d="M120 200c20-22 60-22 80 0-20 22-60 22-80 0Z"/>
-                <path d="M200 200c20-22 60-22 80 0-20 22-60 22-80 0Z"/>
-              </g>
-              <circle cx="200" cy="200" r="6" fill="var(--gold)"/>
-            </svg>
-          </div>
-
         </div>
+
       </div>
     </div>
 
@@ -2284,10 +2291,11 @@ function finishPreloading() {
     setTimeout(() => preloader.style.display = 'none', 800);
   }
   
-  const viewHome = document.getElementById('view-home');
-  if (viewHome && viewHome.classList.contains('active')) {
-    startBreathingAnimation();
+  // Draw the first frame immediately, scroll will drive the rest
+  if (frames.length > 0 && frames[0].isLoaded) {
+    drawFrame(1);
   }
+  handleScroll();
 }
 
 function getScrollPercent() {
@@ -2308,18 +2316,30 @@ function handleScroll() {
   
   const pct = getScrollPercent();
   
-  // Transition text cards based on scroll ranges
-  const o1 = document.getElementById('overlay1');
-  const o2 = document.getElementById('overlay2');
-  const o3 = document.getElementById('overlay3');
-  
-  if (o1 && o2 && o3) {
-    o1.classList.toggle('active', pct >= 0 && pct <= 0.28);
-    o2.classList.toggle('active', pct > 0.28 && pct <= 0.65);
-    o3.classList.toggle('active', pct > 0.65 && pct <= 1.00);
+  // Page 1 → fade out the scroll hint as user scrolls
+  const pageOne = document.getElementById('homePageOne');
+  if (pageOne) {
+    const p1opacity = Math.max(0, 1 - pct * 5); // disappears by 20% scroll
+    pageOne.style.opacity = p1opacity;
   }
   
-  // Update canvas frame index
+  // Page 2 → fade in intro copy after 50% scroll
+  const pageTwo = document.getElementById('homePageTwo');
+  if (pageTwo) {
+    if (pct >= 0.45) {
+      const p2opacity = Math.min(1, (pct - 0.45) * 6);
+      const p2translate = Math.max(0, 30 - (pct - 0.45) * 200);
+      pageTwo.style.opacity = p2opacity;
+      pageTwo.style.transform = `translateY(${p2translate}px)`;
+      pageTwo.style.pointerEvents = p2opacity > 0.5 ? 'auto' : 'none';
+    } else {
+      pageTwo.style.opacity = 0;
+      pageTwo.style.transform = 'translateY(30px)';
+      pageTwo.style.pointerEvents = 'none';
+    }
+  }
+  
+  // Update canvas frame index based on scroll position
   if (frames.length === TOTAL_FRAMES) {
     const frameIndex = Math.min(TOTAL_FRAMES, Math.max(1, Math.floor(pct * (TOTAL_FRAMES - 1)) + 1));
     if (frameIndex !== lastRenderedFrame) {
@@ -2344,7 +2364,8 @@ function showView(id){
   
   if (id === 'home') {
     if (scrollTrack) scrollTrack.style.display = 'block';
-    startBreathingAnimation();
+    // Scroll drives frames — just sync current position
+    setTimeout(() => handleScroll(), 50);
   } else {
     if (scrollTrack) scrollTrack.style.display = 'none';
     stopBreathingAnimation();
