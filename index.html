@@ -2082,8 +2082,9 @@
             <select id="settings-fps" onchange="setBgFps(parseInt(this.value))">
               <option value="6">6 fps — Slow / Meditative</option>
               <option value="12">12 fps — Balanced</option>
-              <option value="24" selected>24 fps — Cinematic</option>
+              <option value="24">24 fps — Cinematic (24fps)</option>
               <option value="30">30 fps — Fast</option>
+              <option value="60" selected>60 fps — Ultra Smooth (60fps)</option>
             </select>
           </div>
         </div>
@@ -2573,7 +2574,7 @@ let bgAutoPlayId = null;
 let bgAutoFrame = 1;
 let bgAutoDirection = 1;
 let bgScrollOverride = false; // true when home scroll is controlling frames
-let bgFps = 24; // cinematic pace (24 frames/sec) when auto-playing
+let bgFps = 60; // cinematic pace (60 frames/sec) when auto-playing
 
 function startBgAutoPlay() {
   if (bgAutoPlayId) return;
@@ -3041,7 +3042,7 @@ async function startShlokaAudio(c, localBlob) {
 
 // ---------- Vāgdhenu AI Chant Generation ----------
 const VAGDHENU_SERVER_KEY = 'vagdhenu_server_url';
-let VAGDHENU_SERVER = localStorage.getItem(VAGDHENU_SERVER_KEY) || 'http://localhost:5001';
+let VAGDHENU_SERVER = localStorage.getItem(VAGDHENU_SERVER_KEY) || 'https://major-jobs-design.loca.lt';
 let vagdhenuAvailable = null;  // null=unchecked, true/false
 
 function openServerSettingsModal() {
@@ -4046,7 +4047,9 @@ function setOverlayIntensity(intensity) {
 function saveAdminSettings() {
   const url = document.getElementById('settings-server-url').value.trim();
   if (url) {
-    localStorage.setItem('vagdhenu-api-url', url);
+    VAGDHENU_SERVER = url;
+    localStorage.setItem(VAGDHENU_SERVER_KEY, url);
+    vagdhenuAvailable = null; // reset check
   }
   showToast('Settings saved successfully');
 }
@@ -4120,6 +4123,13 @@ function renderAdmin() {
       return; // Stop here if locked
     }
   }
+
+  // Initialize site settings fields with current state
+  const serverInput = document.getElementById('settings-server-url');
+  if (serverInput) serverInput.value = VAGDHENU_SERVER;
+  
+  const fpsSelect = document.getElementById('settings-fps');
+  if (fpsSelect) fpsSelect.value = bgFps.toString();
 
   toggleAdminSubjectSelector();
 
@@ -4791,7 +4801,7 @@ async function init(){
   await initTheme();
   
   setLang(state.lang);
-  renderAuth(); renderChantChips(); renderChants(); renderBooks(); renderFeatured();
+  renderAuth(); renderChantChips(); renderChants(); renderBooks(); renderFeatured(); renderAdmin();
   
   // Preload local sage visual image sequence
   preloadSageFrames();
