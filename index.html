@@ -866,19 +866,167 @@
     border: 1px solid rgba(54,124,89,0.35);
   }
 
+  .search-row {
+    display: flex;
+    gap: 12px;
+  }
+  .custom-chant-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
   @media(max-width:760px){
-    .scroll-track { height: 240vh; }
-    .scroll-overlay { padding: 0 4%; justify-content: center; }
+    /* Layout & Main Containers */
+    main { padding: 0 12px 90px; }
+    .scroll-track { height: 220vh; width: calc(100% + 24px); margin-left: -12px; }
+    .scroll-overlay { padding: 0 12px; justify-content: center; }
     #overlay3 { justify-content: center; }
-    .overlay-card { max-width: 100%; padding: 24px; }
-    .overlay-card h1 { font-size: 2rem; }
-    .overlay-card .hindi-line { font-size: 1.6rem; }
-    .mala-panel { max-width: 100%; }
-    .admin-form .row{grid-template-columns:1fr;}
-    .bottom-player-bar { padding: 12px 16px; }
-    .player-content { justify-content: center; text-align: center; }
-    .shloka-search-section { padding: 32px 18px 28px; }
-    .shloka-search-section h2 { font-size: 1.5rem; }
+    
+    /* Typography & Core components */
+    .overlay-card { max-width: 100%; padding: 22px 18px; border-radius: 16px; }
+    .overlay-card h1 { font-size: 1.8rem; margin: 4px 0 10px; }
+    .overlay-card .hindi-line { font-size: 1.45rem; }
+    .overlay-card p { font-size: 0.92rem; margin-bottom: 18px; }
+    
+    /* Mala panel & forms */
+    .mala-panel { max-width: 100%; padding: 20px 16px; }
+    .admin-form .row{ grid-template-columns: 1fr; }
+    .admin-form { padding: 16px; }
+    
+    /* Cards visual spacing */
+    .card { padding: 16px; gap: 8px; border-radius: 12px; }
+    .card .sanskrit { font-size: 1.15rem; }
+    .card .meaning { font-size: 0.85rem; padding-top: 8px; }
+    
+    /* Grid gap adjustment */
+    .grid { gap: 16px; }
+    
+    /* Search blocks responsiveness */
+    .shloka-search-section { padding: 24px 12px 20px; }
+    .shloka-search-section h2 { font-size: 1.45rem; }
+    .shloka-search-section .subtitle { font-size: 0.82rem; margin-bottom: 18px; }
+    .search-row { flex-direction: column; gap: 8px; }
+    .search-row button { width: 100%; text-align: center; }
+    
+    .custom-chant-actions {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+    }
+    .custom-chant-actions button,
+    .custom-chant-actions select,
+    .custom-chant-actions label {
+      width: 100% !important;
+      box-sizing: border-box;
+      justify-content: center;
+      text-align: center;
+    }
+    
+    /* Table font adjustments */
+    table { font-size: 0.85rem !important; }
+    table td { padding: 6px 0 !important; }
+
+    /* Sanskrit Text Display Card */
+    #localVerseSanskrit { font-size: 1.22rem !important; line-height: 1.5 !important; }
+
+    /* Modals layout optimization */
+    .modal { padding: 20px; max-width: 94%; }
+    .modal h3 { font-size: 1.2rem; }
+    .modal-actions { margin-top: 16px; gap: 8px; }
+    
+    /* Header optimization for mobile flow */
+    header {
+      display: grid !important;
+      grid-template-columns: 1fr auto !important;
+      grid-template-areas: 
+        "logo right"
+        "navigation navigation" !important;
+      padding: 10px 16px !important;
+      gap: 10px 0 !important;
+    }
+    .logo { grid-area: logo; }
+    .header-right { grid-area: right; justify-self: end; gap: 8px !important; }
+    nav {
+      grid-area: navigation;
+      display: flex !important;
+      gap: 6px !important;
+      flex-wrap: nowrap !important;
+      overflow-x: auto !important;
+      padding-bottom: 2px !important;
+      margin: 0 -16px !important;
+      padding: 0 16px !important;
+      scrollbar-width: none !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
+    nav::-webkit-scrollbar {
+      display: none !important;
+    }
+    nav button {
+      flex-shrink: 0 !important;
+      padding: 5px 12px !important;
+      font-size: 0.8rem !important;
+    }
+    
+    /* Compact Sticky Bottom Player Bar */
+    .bottom-player-bar { 
+      padding: 8px 12px; 
+    }
+    .player-content { 
+      display: flex !important;
+      flex-wrap: nowrap !important;
+      justify-content: space-between !important; 
+      align-items: center !important; 
+      gap: 10px !important;
+      text-align: left !important;
+    }
+    .player-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .player-sanskrit {
+      font-size: 0.9rem !important;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .player-translit {
+      font-size: 0.7rem !important;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .player-controls {
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+    .player-btn-main {
+      width: 32px !important;
+      height: 32px !important;
+      font-size: 0.85rem !important;
+      box-shadow: 0 2px 6px rgba(197, 152, 65, 0.25) !important;
+    }
+    .wave-visualizer {
+      display: none !important;
+    }
+    .speed-selector {
+      font-size: 0.72rem !important;
+    }
+    .speed-selector label {
+      display: none;
+    }
+    .speed-selector select {
+      padding: 2px 4px !important;
+      font-size: 0.72rem !important;
+      border-radius: 4px !important;
+    }
+    .player-close-btn {
+      font-size: 1.2rem !important;
+      padding: 0 4px !important;
+    }
   }
 </style>
 </head>
@@ -990,7 +1138,7 @@
         <div id="shlokaCustomTabContent" style="display:none; flex-direction: column; gap: 14px; background: var(--card); border: 1px solid var(--line); padding: 24px; border-radius: 16px; backdrop-filter: blur(8px); margin-bottom: 14px;">
           <textarea id="customShlokaText" rows="3" placeholder="Sanskrit Shloka likhein ya niche text file (.txt) upload karein..." style="width:100%; padding:12px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--ink); font-family:'Noto Serif Devanagari',serif; font-size:1.15rem; outline:none; transition:border-color 0.25s; resize:vertical;"></textarea>
           
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+          <div class="custom-chant-actions">
             <label class="spc-upload-label" style="margin:0; border-style:dashed;">
               📂 Upload Shloka Text File (.txt)
               <input type="file" id="customShlokaFile" accept=".txt" onchange="uploadCustomShlokaTextFile()">
@@ -1154,7 +1302,7 @@
         Search any verse, chapter, disease, commentary (Tika), or Ayurvedic reference directly inside the comprehensive <strong>Caraka Samhita Online</strong> database.
       </p>
       
-      <div style="display:flex; gap:12px; margin-bottom: 12px;">
+      <div class="search-row" style="margin-bottom: 12px;">
         <input type="text" id="carakaSearchInput" placeholder="e.g. Jvara, Agni, Sutrasthana 1.20, Tika commentary..." style="flex:1; padding:12px 16px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--ink); font-size:0.95rem;">
         <button class="btn-primary" onclick="triggerCarakaSearch()" style="padding:12px 24px; white-space:nowrap;">Search Shloka & Tika</button>
       </div>
