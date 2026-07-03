@@ -904,6 +904,9 @@
       <button data-lang="hi">हिं</button>
       <button data-lang="en" class="active">EN</button>
     </div>
+    <button class="theme-btn" id="serverSettingsBtn" onclick="openServerSettingsModal()" aria-label="Audio Server Settings" style="margin-right: 4px;">
+      <span class="theme-icon">⚙️</span>
+    </button>
     <button class="theme-btn" id="themeToggleBtn" onclick="toggleTheme()" aria-label="Toggle Theme">
       <span class="theme-icon">🌙</span>
     </button>
@@ -1456,6 +1459,29 @@
 </div>
 
 <footer>Ayurved Vani · shraddha se collected content · yeh ek prototype platform hai</footer>
+
+<!-- Server Settings Modal -->
+<div class="modal-overlay" id="serverSettingsModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeServerSettingsModal()">×</button>
+    <h3>🎙️ Chanting Settings</h3>
+    <label for="inputServerUrl">Vāgdhenu AI Speech Server URL</label>
+    <input type="text" id="inputServerUrl" placeholder="e.g., http://localhost:5001 or https://xxxx.ngrok-free.app">
+    
+    <div style="font-size:0.8rem; color:var(--ink-soft); line-height:1.4; margin-top:12px;">
+      <p style="margin: 0 0 6px 0;"><strong>Kaise connect karein:</strong></p>
+      <ul style="margin:0; padding-left:16px;">
+        <li><strong>Local device:</strong> Agar server isi PC par chal raha hai, toh <code>http://localhost:5001</code> use karein.</li>
+        <li><strong>Other devices (Phone/Safari):</strong> Vercel HTTPS support karta hai, isliye unencrypted HTTP blocking se bachne ke liye <code>ngrok</code> ya <code>localtunnel</code> ka HTTPS URL daalein.</li>
+      </ul>
+      <p style="margin: 8px 0 0 0;"><em>Expose local server command:</em> <code>lt --port 5001</code></p>
+    </div>
+    
+    <div class="modal-actions">
+      <button style="background:var(--teal); color:#F6EFDD;" onclick="saveServerSettings()">Save Settings</button>
+    </div>
+  </div>
+</div>
 
 <!-- Login Modal -->
 <div class="modal-overlay" id="loginModal">
@@ -2238,8 +2264,36 @@ async function startShlokaAudio(c, localBlob) {
 }
 
 // ---------- Vāgdhenu AI Chant Generation ----------
-const VAGDHENU_SERVER = 'http://localhost:5001';
+const VAGDHENU_SERVER_KEY = 'vagdhenu_server_url';
+let VAGDHENU_SERVER = localStorage.getItem(VAGDHENU_SERVER_KEY) || 'http://localhost:5001';
 let vagdhenuAvailable = null;  // null=unchecked, true/false
+
+function openServerSettingsModal() {
+  document.getElementById('inputServerUrl').value = VAGDHENU_SERVER;
+  document.getElementById('serverSettingsModal').classList.add('show');
+}
+
+function closeServerSettingsModal() {
+  document.getElementById('serverSettingsModal').classList.remove('show');
+}
+
+function saveServerSettings() {
+  const url = document.getElementById('inputServerUrl').value.trim();
+  if (url) {
+    VAGDHENU_SERVER = url;
+    localStorage.setItem(VAGDHENU_SERVER_KEY, url);
+    showToast('⚙️ Chanting server URL saved: ' + url);
+    vagdhenuAvailable = null; // reset check
+    closeServerSettingsModal();
+  }
+}
+
+function getFetchVerseUrl(sthana, chapter, verse) {
+  const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+  const base = isLocalhost ? VAGDHENU_SERVER : '';
+  const endpoint = isLocalhost ? '/fetch_verse' : '/api/fetch_verse';
+  return `${base}${endpoint}?sthana=${encodeURIComponent(sthana)}&chapter=${chapter}&verse=${verse}`;
+}
 
 async function checkVagdhenuServer() {
   try {
@@ -3292,7 +3346,7 @@ async function findCarakaReference() {
     resultDiv.scrollIntoView({ behavior: 'smooth' });
     
     try {
-      const url = `${VAGDHENU_SERVER}/fetch_verse?sthana=${encodeURIComponent(sthana)}&chapter=${chapterNum}&verse=${shloka}`;
+      const url = getFetchVerseUrl(sthana, chapterNum, shloka);
       const resp = await fetch(url);
       const data = await resp.json();
       
@@ -3524,6 +3578,7 @@ async function init(){
   }
   document.querySelectorAll('#langToggle button').forEach(b=>b.addEventListener('click', ()=>setLang(b.dataset.lang)));
   document.getElementById('loginModal').addEventListener('click', e=>{ if(e.target.id==='loginModal') closeModal(); });
+  document.getElementById('serverSettingsModal').addEventListener('click', e=>{ if(e.target.id==='serverSettingsModal') closeServerSettingsModal(); });
 }
 init();
 </script>
