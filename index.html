@@ -60,6 +60,9 @@
   }
 
   *{box-sizing:border-box;}
+  body, a, button, select, input, textarea, .dock-item, .admin-tab {
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><path d='M8 16c0 5 4 9 9 9s9-4 9-9H8z' fill='%23e4c97c' stroke='%231c3327' stroke-width='1.5'/><path d='M6 13h22v3H6z' fill='%23c1633b' stroke='%231c3327' stroke-width='1.5'/><path d='M13 25h8v2h-8z' fill='%23c1633b'/><path d='M21 5l-8 11 3 2 8-11z' fill='%23a9c2a0' stroke='%231c3327' stroke-width='1.5'/></svg>") 12 14, auto;
+  }
   body{
     margin:0;
     background:
@@ -69,6 +72,27 @@
     color: var(--cream);
     font-family:'Inter',sans-serif; line-height:1.5;
     transition: background 0.4s ease, color 0.4s ease;
+  }
+  
+  /* Magic reveal cursor trail particles */
+  .magic-particle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    animation: magicFade 0.6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+  }
+  @keyframes magicFade {
+    0% {
+      transform: translate(-50%, -50%) scale(1) rotate(0deg);
+      opacity: 1;
+      filter: blur(0px);
+    }
+    100% {
+      transform: translate(calc(-50% + var(--drift-x, 0px)), calc(-50% + var(--drift-y, 0px))) scale(0.1) rotate(180deg);
+      opacity: 0;
+      filter: blur(1.5px);
+    }
   }
   .hin{font-family:'Tiro Devanagari Hindi',sans-serif;}
   .hin-serif{font-family:'Tiro Devanagari Hindi',serif;}
@@ -4846,6 +4870,69 @@ async function init(){
     dock.addEventListener('mouseleave', resetDock);
   }
 }
+
+// ---------- Magic Reveal Cursor Trail ----------
+let lastParticleTime = 0;
+window.addEventListener('mousemove', (e) => {
+  const now = Date.now();
+  if (now - lastParticleTime < 24) return; // Limit creation rate to maintain 60 FPS
+  lastParticleTime = now;
+  
+  createMagicParticle(e.clientX, e.clientY);
+});
+
+function createMagicParticle(x, y) {
+  const particle = document.createElement('div');
+  particle.className = 'magic-particle';
+  
+  // Randomize size between 6px and 14px
+  const size = Math.random() * 8 + 6;
+  particle.style.width = `${size}px`;
+  particle.style.height = `${size}px`;
+  
+  // Position directly at cursor coordinate
+  particle.style.left = `${x}px`;
+  particle.style.top = `${y}px`;
+  
+  // Select a random color from the Ayurvedic color system
+  const colors = [
+    'var(--gold)',
+    'var(--gold-light)',
+    'var(--sage)',
+    'var(--copper)',
+    'var(--cream)',
+    'rgba(242, 222, 192, 0.8)'
+  ];
+  const randomColor = colors[Math.floor(Math.random() * colors.length)];
+  particle.style.background = randomColor;
+  
+  // Add a soft glow style matching color
+  particle.style.boxShadow = `0 0 ${size}px ${randomColor}`;
+  
+  // Randomly assign shapes: Circle, Star, or Diamond
+  const shapeRand = Math.random();
+  if (shapeRand < 0.33) {
+    particle.style.borderRadius = '50%';
+  } else if (shapeRand < 0.66) {
+    particle.style.clipPath = 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)';
+  } else {
+    particle.style.transform = 'translate(-50%, -50%) rotate(45deg)';
+  }
+  
+  // Random dispersion velocity offsets (drifts outwards)
+  const driftX = (Math.random() - 0.5) * 60;
+  const driftY = (Math.random() - 0.5) * 60 - 25; // Drift upwards slightly
+  particle.style.setProperty('--drift-x', `${driftX}px`);
+  particle.style.setProperty('--drift-y', `${driftY}px`);
+  
+  document.body.appendChild(particle);
+  
+  // Clean up element after animation is complete (600ms)
+  setTimeout(() => {
+    particle.remove();
+  }, 600);
+}
+
 init();
 </script>
 </body>
