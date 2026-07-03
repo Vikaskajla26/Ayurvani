@@ -2667,15 +2667,6 @@ function handleScroll() {
       pageTwo.style.pointerEvents = 'none';
     }
   }
-  
-  // Override auto-play with scroll-driven frame index on home page
-  if (frames.length === TOTAL_FRAMES) {
-    bgScrollOverride = true;
-    const frameIndex = Math.min(TOTAL_FRAMES, Math.max(1, Math.floor(pct * (TOTAL_FRAMES - 1)) + 1));
-    // Sync the auto-play pointer so it continues smoothly after leaving home
-    bgAutoFrame = frameIndex;
-    drawFrame(frameIndex);
-  }
 }
 
 // ---------- Nav & Views Router ----------
@@ -2693,13 +2684,11 @@ function showView(id){
   
   if (id === 'home') {
     if (scrollTrack) scrollTrack.style.display = 'block';
-    // On home, scroll drives frames
     setTimeout(() => handleScroll(), 50);
   } else {
     if (scrollTrack) scrollTrack.style.display = 'none';
-    // Release scroll override — auto-play takes over for other sections
-    bgScrollOverride = false;
   }
+  bgScrollOverride = false;
   
   document.querySelectorAll('main > section').forEach(s=>s.classList.remove('active'));
   const target = document.getElementById('view-'+id);
