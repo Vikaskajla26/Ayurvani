@@ -330,7 +330,43 @@
   section{display:none;}
   section.active{display:block;}
 
-  /* ---------- Scroll Track Hero Animation (Home Section Only) ---------- */
+  /* ---------- Fixed Full-Page Background Canvas ---------- */
+  #bgCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -2;
+    filter: brightness(0.52) contrast(1.12) saturate(1.05);
+    transition: opacity 0.6s ease, filter 0.8s ease;
+  }
+  #bgCanvas.canvas-b {
+    z-index: -3;
+  }
+  body.light-mode #bgCanvas {
+    filter: brightness(0.82) contrast(0.98);
+  }
+  /* Gradient overlay — dark vignette on top of background */
+  #bgGradient {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      to bottom,
+      rgba(18, 35, 26, 0.70) 0%,
+      rgba(18, 35, 26, 0.45) 30%,
+      rgba(18, 35, 26, 0.45) 70%,
+      rgba(18, 35, 26, 0.88) 100%
+    );
+    pointer-events: none;
+  }
+  /* Legacy heroCanvas inside scroll-track — hidden, replaced by bgCanvas */
+  #heroCanvas {
+    display: none;
+  }
+  /* Scroll Track — now a transparent spacer for scroll events only */
   .scroll-track {
     position: relative;
     height: 200vh;
@@ -338,6 +374,7 @@
     width: calc(100% + 48px);
     margin-left: -24px;
     overflow: visible;
+    pointer-events: none;
   }
   .sticky-container {
     position: sticky;
@@ -348,20 +385,16 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    background: transparent;
   }
-  #heroCanvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: 1;
-    filter: brightness(0.52) contrast(1.1);
-    transition: filter 0.5s ease;
-  }
-  body.light-mode #heroCanvas {
-    filter: brightness(0.82) contrast(0.98);
+  body.light-mode #bgGradient {
+    background: linear-gradient(
+      to bottom,
+      rgba(18, 35, 26, 0.45) 0%,
+      rgba(18, 35, 26, 0.20) 40%,
+      rgba(18, 35, 26, 0.20) 60%,
+      rgba(18, 35, 26, 0.55) 100%
+    );
   }
   
   .scroll-overlay {
@@ -1248,6 +1281,11 @@
 </head>
 <body>
 
+<!-- Fixed full-page background canvas (scroll-animated) -->
+<canvas id="bgCanvas"></canvas>
+<!-- Gradient overlay for depth and legibility -->
+<div id="bgGradient"></div>
+
 <!-- Ambient Preloader -->
 <div class="preloader-overlay" id="preloader">
   <div class="preloader-content">
@@ -1318,11 +1356,10 @@
 
   <section id="view-home" class="active">
     
-    <!-- Dynamic Hero Container -->
+    <!-- Dynamic Hero Container (scroll spacer — canvas is global fixed) -->
     <div class="scroll-track" id="homeScrollTrack">
       <div class="sticky-container">
-        <canvas id="heroCanvas"></canvas>
-
+        <!-- canvas is now a fixed full-page element outside this tree -->
         <!-- PAGE 1: Scroll hint only — pure background -->
         <div id="homePageOne" style="position:absolute; inset:0; z-index:5; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:40px; pointer-events:none; transition: opacity 0.5s ease;">
           <div style="display:flex; flex-direction:column; align-items:center; gap:8px; animation: fadeSlideUp 1.2s ease-out 0.5s both;">
@@ -2121,168 +2158,180 @@ async function toggleTheme() {
   }
 }
 
-// ---------- Visual Background Preloader ----------
+// ---------- Visual Background Preloader (Fixed Full-Page Canvas) ----------
 const TOTAL_FRAMES = 192;
 let frames = [];
-let canvas = null;
-let ctx = null;
 let lastRenderedFrame = -1;
 
+// Dual canvas for smooth crossfade
+let canvasA = null, ctxA = null;
+let canvasB = null, ctxB = null;
+let activeCanvas = 'A'; // which canvas is on top
+let crossfadeRafId = null;
+
+function initCanvases() {
+  canvasA = document.getElementById('bgCanvas');
+  if (!canvasA) return;
+  canvasA.style.zIndex = '-2';
+  canvasA.style.opacity = '1';
+
+  // Create second canvas for crossfade
+  canvasB = document.createElement('canvas');
+  canvasB.id = 'bgCanvasB';
+  canvasB.style.cssText = `
+    position: fixed; top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    object-fit: cover; z-index: -3;
+    opacity: 0;
+    filter: brightness(0.52) contrast(1.12) saturate(1.05);
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+  `;
+  document.body.insertBefore(canvasB, canvasA.nextSibling);
+
+  ctxA = canvasA.getContext('2d');
+  ctxB = canvasB.getContext('2d');
+  syncCanvasSize();
+  window.addEventListener('resize', syncCanvasSize);
+}
+
+function syncCanvasSize() {
+  const w = window.innerWidth, h = window.innerHeight;
+  if (canvasA) { canvasA.width = w; canvasA.height = h; }
+  if (canvasB) { canvasB.width = w; canvasB.height = h; }
+}
+
 function preloadSageFrames() {
+  initCanvases();
   const progressText = document.getElementById('preloadProgress');
   let loadedCount = 0;
-  
-  canvas = document.getElementById('heroCanvas');
-  if (canvas) ctx = canvas.getContext('2d');
-  
+
   // Zero-padded filename helper (e.g. 1 -> "000001")
   function pad(num, size) {
-    let s = num + "";
-    while (s.length < size) s = "0" + s;
+    let s = num + '';
+    while (s.length < size) s = '0' + s;
     return s;
   }
-  
+
   let firstFrameLoaded = false;
-  
-  // Pre-populate the frames array so that frames.length is immediately 192
-  // This prevents race conditions where cached images fire onload synchronously
+
+  // Pre-populate frames array to avoid race conditions
   for (let i = 1; i <= TOTAL_FRAMES; i++) {
     const img = new Image();
-    img.frameIndex = i; // Save index explicitly to avoid closure capture issues
+    img.frameIndex = i;
     frames.push(img);
   }
-  
+
   for (let i = 1; i <= TOTAL_FRAMES; i++) {
     const img = frames[i - 1];
     img.onload = () => {
       img.isLoaded = true;
       loadedCount++;
-      
       const pct = Math.floor((loadedCount / TOTAL_FRAMES) * 100);
       if (progressText) progressText.textContent = `Loading sacred visuals... ${pct}%`;
-      
-      // Open the app immediately once ANY single frame loads successfully
       if (!firstFrameLoaded) {
         firstFrameLoaded = true;
-        drawFrame(img.frameIndex);
+        drawFrameDirect(img.frameIndex, ctxA, canvasA);
         finishPreloading();
       }
     };
     img.onerror = () => {
       loadedCount++;
-      if (!firstFrameLoaded) {
-        firstFrameLoaded = true;
-        finishPreloading();
-      }
+      if (!firstFrameLoaded) { firstFrameLoaded = true; finishPreloading(); }
     };
     img.src = `ayur/bg new/frame_${pad(i, 6)}.jpg`;
   }
 }
 
-function drawFrame(index) {
-  if (!canvas || !ctx) return;
-  
-  // Locate the closest loaded frame to prevent flickering while other frames load in the background
+// Draw directly to a specific ctx/canvas without crossfade
+function drawFrameDirect(index, ctx, canvas) {
+  if (!ctx || !canvas) return;
   let targetIndex = index;
   if (!frames[targetIndex - 1] || !frames[targetIndex - 1].isLoaded) {
-    let found = false;
     for (let offset = 1; offset < TOTAL_FRAMES; offset++) {
-      const left = targetIndex - offset;
-      const right = targetIndex + offset;
-      
-      if (left >= 1 && frames[left - 1] && frames[left - 1].isLoaded) {
-        targetIndex = left;
-        found = true;
-        break;
-      }
-      if (right <= TOTAL_FRAMES && frames[right - 1] && frames[right - 1].isLoaded) {
-        targetIndex = right;
-        found = true;
-        break;
-      }
+      const left = targetIndex - offset, right = targetIndex + offset;
+      if (left >= 1 && frames[left - 1]?.isLoaded) { targetIndex = left; break; }
+      if (right <= TOTAL_FRAMES && frames[right - 1]?.isLoaded) { targetIndex = right; break; }
     }
-    if (!found) return; // No frames loaded yet
   }
-  
   const img = frames[targetIndex - 1];
-  
-  // Ensure canvas internal resolution matches display size dynamically
-  if (canvas.width !== canvas.clientWidth || canvas.height !== canvas.clientHeight) {
-    canvas.width = canvas.clientWidth;
-    canvas.height = canvas.clientHeight;
-  }
-  
-  // Guard against zero-width/height canvases (e.g. elements inside display:none containers)
-  const canvasWidth = canvas.width;
-  const canvasHeight = canvas.height;
-  if (canvasWidth <= 0 || canvasHeight <= 0) return;
-  
-  ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-  
-  // Cover object-fit scaling inside 2D context
-  const imgWidth = img.width || 1920;
-  const imgHeight = img.height || 1080;
-  
-  const imgRatio = imgWidth / imgHeight;
-  const canvasRatio = canvasWidth / canvasHeight;
-  
-  let sWidth = imgWidth;
-  let sHeight = imgHeight;
-  let sx = 0;
-  let sy = 0;
-  
-  if (canvasRatio > imgRatio) {
-    sHeight = imgWidth / canvasRatio;
-    sy = (imgHeight - sHeight) / 2;
-  } else {
-    sWidth = imgHeight * canvasRatio;
-    sx = (imgWidth - sWidth) / 2;
-  }
-  
-  ctx.drawImage(img, sx, sy, sWidth, sHeight, 0, 0, canvasWidth, canvasHeight);
-  lastRenderedFrame = index;
+  if (!img || !img.isLoaded) return;
+
+  const cw = canvas.width, ch = canvas.height;
+  if (cw <= 0 || ch <= 0) return;
+
+  const iw = img.naturalWidth || img.width || 1920;
+  const ih = img.naturalHeight || img.height || 1080;
+  const imgRatio = iw / ih, canvasRatio = cw / ch;
+
+  let sx = 0, sy = 0, sw = iw, sh = ih;
+  if (canvasRatio > imgRatio) { sh = iw / canvasRatio; sy = (ih - sh) / 2; }
+  else { sw = ih * canvasRatio; sx = (iw - sw) / 2; }
+
+  ctx.clearRect(0, 0, cw, ch);
+  ctx.drawImage(img, sx, sy, sw, sh, 0, 0, cw, ch);
 }
 
-let breathingAnimationId = null;
-let breathingDirection = 1;
-let currentBreathingFrame = 1;
+// Smooth crossfade between frames
+function drawFrame(index) {
+  if (index === lastRenderedFrame) return;
+  lastRenderedFrame = index;
 
-function startBreathingAnimation() {
-  if (breathingAnimationId) return;
-  
-  function tick() {
-    const viewHome = document.getElementById('view-home');
-    if (!viewHome || !viewHome.classList.contains('active')) {
-      breathingAnimationId = null;
-      return;
-    }
-    
-    currentBreathingFrame += breathingDirection * 0.18;
-    if (currentBreathingFrame >= TOTAL_FRAMES) {
-      currentBreathingFrame = TOTAL_FRAMES;
-      breathingDirection = -1;
-    } else if (currentBreathingFrame <= 1) {
-      currentBreathingFrame = 1;
-      breathingDirection = 1;
-    }
-    
-    const frameIndex = Math.floor(currentBreathingFrame);
-    if (frameIndex !== lastRenderedFrame) {
-      drawFrame(frameIndex);
-    }
-    
-    breathingAnimationId = requestAnimationFrame(tick);
+  if (!canvasA || !canvasB) return;
+
+  if (activeCanvas === 'A') {
+    // Draw next frame onto B, then fade B in and A out
+    drawFrameDirect(index, ctxB, canvasB);
+    canvasB.style.zIndex = '-2';
+    canvasA.style.zIndex = '-3';
+    canvasB.style.opacity = '1';
+    canvasA.style.opacity = '0';
+    activeCanvas = 'B';
+  } else {
+    // Draw next frame onto A, then fade A in and B out
+    drawFrameDirect(index, ctxA, canvasA);
+    canvasA.style.zIndex = '-2';
+    canvasB.style.zIndex = '-3';
+    canvasA.style.opacity = '1';
+    canvasB.style.opacity = '0';
+    activeCanvas = 'A';
   }
-  
-  breathingAnimationId = requestAnimationFrame(tick);
+}
+
+
+
+
+// ---------- Global Background Animation (runs on all pages) ----------
+let bgAutoPlayId = null;
+let bgAutoFrame = 1;
+let bgAutoDirection = 1;
+let bgScrollOverride = false; // true when home scroll is controlling frames
+
+function startBgAutoPlay() {
+  if (bgAutoPlayId) return;
+  let lastTime = 0;
+  const FPS = 6; // gentle pace: 6 frames/sec when auto-playing
+  const interval = 1000 / FPS;
+
+  function tick(timestamp) {
+    if (timestamp - lastTime >= interval) {
+      lastTime = timestamp;
+      if (!bgScrollOverride) {
+        bgAutoFrame += bgAutoDirection;
+        if (bgAutoFrame >= TOTAL_FRAMES) { bgAutoFrame = TOTAL_FRAMES; bgAutoDirection = -1; }
+        else if (bgAutoFrame <= 1) { bgAutoFrame = 1; bgAutoDirection = 1; }
+        drawFrame(bgAutoFrame);
+      }
+    }
+    bgAutoPlayId = requestAnimationFrame(tick);
+  }
+  bgAutoPlayId = requestAnimationFrame(tick);
 }
 
 function stopBreathingAnimation() {
-  if (breathingAnimationId) {
-    cancelAnimationFrame(breathingAnimationId);
-    breathingAnimationId = null;
-  }
+  // Keep alias for backwards compat; auto-play keeps running
 }
+
 
 function finishPreloading() {
   const preloader = document.getElementById('preloader');
@@ -2291,10 +2340,12 @@ function finishPreloading() {
     setTimeout(() => preloader.style.display = 'none', 800);
   }
   
-  // Draw the first frame immediately, scroll will drive the rest
+  // Draw the first frame and start the global auto-play animation
   if (frames.length > 0 && frames[0].isLoaded) {
-    drawFrame(1);
+    drawFrameDirect(1, ctxA, canvasA);
+    lastRenderedFrame = 1;
   }
+  startBgAutoPlay();
   handleScroll();
 }
 
@@ -2312,7 +2363,10 @@ function getScrollPercent() {
 
 function handleScroll() {
   const viewHome = document.getElementById('view-home');
-  if (!viewHome || !viewHome.classList.contains('active')) return;
+  if (!viewHome || !viewHome.classList.contains('active')) {
+    bgScrollOverride = false; // Let auto-play run on other pages
+    return;
+  }
   
   const pct = getScrollPercent();
   
@@ -2339,12 +2393,13 @@ function handleScroll() {
     }
   }
   
-  // Update canvas frame index based on scroll position
+  // Override auto-play with scroll-driven frame index on home page
   if (frames.length === TOTAL_FRAMES) {
+    bgScrollOverride = true;
     const frameIndex = Math.min(TOTAL_FRAMES, Math.max(1, Math.floor(pct * (TOTAL_FRAMES - 1)) + 1));
-    if (frameIndex !== lastRenderedFrame) {
-      drawFrame(frameIndex);
-    }
+    // Sync the auto-play pointer so it continues smoothly after leaving home
+    bgAutoFrame = frameIndex;
+    drawFrame(frameIndex);
   }
 }
 
@@ -2364,11 +2419,12 @@ function showView(id){
   
   if (id === 'home') {
     if (scrollTrack) scrollTrack.style.display = 'block';
-    // Scroll drives frames — just sync current position
+    // On home, scroll drives frames
     setTimeout(() => handleScroll(), 50);
   } else {
     if (scrollTrack) scrollTrack.style.display = 'none';
-    stopBreathingAnimation();
+    // Release scroll override — auto-play takes over for other sections
+    bgScrollOverride = false;
   }
   
   document.querySelectorAll('main > section').forEach(s=>s.classList.remove('active'));
