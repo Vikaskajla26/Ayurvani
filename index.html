@@ -696,20 +696,126 @@
   .modal-close{position:absolute; top:14px; right:18px; background:none; border:none; font-size:1.3rem; color:var(--ink-soft);}
   .muted-note{font-size:0.75rem; color:var(--ink-soft); margin-top:16px; line-height:1.5;}
 
-  /* ---------- Admin ---------- */
-  .admin-form{background:var(--card); border-radius:14px; padding:24px; border:1px solid var(--line); margin-bottom:30px;}
-  .admin-form h3{margin-top:0; color:var(--gold-light);}
-  body.light-mode .admin-form h3 { color: var(--teal-deep); }
-  .admin-form .row{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
-  .admin-form label{font-size:0.78rem; color:var(--ink-soft); font-weight:600; display:block; margin:10px 0 5px;}
-  .admin-form input, .admin-form textarea, .admin-form select{
-    width:100%; padding:9px 12px; border-radius:8px; border:1.5px solid var(--line); font-size:0.9rem; font-family:inherit;
-    background: var(--bg-soft); color: var(--ink);
+  /* ---------- Admin Panel ---------- */
+  .admin-tab-bar {
+    display: flex; gap: 6px; margin-bottom: 28px;
+    background: var(--card); padding: 6px; border-radius: 14px;
+    border: 1px solid var(--line);
   }
-  .admin-list-item{display:flex; justify-content:space-between; align-items:center; padding:12px 16px; border:1px solid var(--line); border-radius:10px; margin-bottom:8px; background:var(--card);}
-  .del-btn{background:none; border:none; color:var(--copper); font-weight:700; font-size:0.85rem;}
-  .save-btn{background:var(--teal); color:#F6EFDD; border:none; padding:10px 20px; border-radius:8px; font-weight:600; margin-top:16px;}
-  .tag-role{font-size:0.7rem; background:var(--gold); color:var(--teal-deep); padding:3px 10px; border-radius:10px; font-weight:700; margin-left:8px;}
+  .admin-tab {
+    flex: 1; padding: 10px 8px; border: none; border-radius: 10px;
+    background: transparent; color: var(--ink-soft); font-size: 0.85rem;
+    font-weight: 600; cursor: pointer; transition: all 0.2s ease;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .admin-tab.active {
+    background: linear-gradient(135deg, var(--teal), var(--teal-deep));
+    color: var(--gold); box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  .admin-tab:hover:not(.active) { background: var(--bg-soft); color: var(--ink); }
+  .admin-panel { display: none; }
+  .admin-panel.active { display: block; animation: fadeSlideUp 0.3s ease; }
+  .admin-form {
+    background: var(--card); border-radius: 16px; padding: 28px;
+    border: 1px solid var(--line); margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .admin-form h3 { margin-top:0; color:var(--gold-light); font-size:1.1rem; }
+  body.light-mode .admin-form h3 { color: var(--teal-deep); }
+  .admin-form .row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .admin-form label {
+    font-size:0.78rem; color:var(--ink-soft); font-weight:600;
+    display:block; margin:12px 0 5px; letter-spacing:0.04em; text-transform:uppercase;
+  }
+  .admin-form input, .admin-form textarea, .admin-form select {
+    width:100%; padding:11px 14px; border-radius:10px; border:1.5px solid var(--line);
+    font-size:0.9rem; font-family:inherit; background:var(--bg-soft); color:var(--ink);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .admin-form input:focus, .admin-form textarea:focus, .admin-form select:focus {
+    border-color: var(--gold); outline:none;
+    box-shadow: 0 0 0 3px rgba(228,201,124,0.15);
+  }
+  .admin-form .file-drop {
+    border: 2px dashed var(--line); border-radius: 12px; padding: 24px;
+    text-align: center; cursor: pointer; transition: all 0.2s;
+    color: var(--ink-soft); font-size: 0.88rem; background: rgba(0,0,0,0.04);
+  }
+  .admin-form .file-drop:hover, .admin-form .file-drop.drag-over {
+    border-color: var(--gold); background: rgba(228,201,124,0.06); color: var(--gold);
+  }
+  .admin-form .file-drop .file-icon { font-size: 2rem; margin-bottom: 8px; }
+  .upload-progress {
+    height: 4px; background: var(--line); border-radius: 4px; margin-top: 10px; overflow: hidden; display:none;
+  }
+  .upload-progress-bar {
+    height: 100%; width: 0%; background: linear-gradient(90deg, var(--sage), var(--gold));
+    border-radius: 4px; transition: width 0.3s ease;
+  }
+  .admin-list-item {
+    display:flex; align-items:center; padding:14px 18px;
+    border:1px solid var(--line); border-radius:12px;
+    margin-bottom:10px; background:var(--card);
+    gap: 12px; transition: box-shadow 0.2s;
+  }
+  .admin-list-item:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+  .admin-list-item .item-info { flex: 1; min-width: 0; }
+  .admin-list-item .item-title { font-weight: 600; font-size: 0.92rem; color: var(--ink); }
+  .admin-list-item .item-meta { font-size: 0.78rem; color: var(--ink-soft); margin-top: 2px; }
+  .admin-list-item .item-actions { display:flex; gap:8px; flex-shrink:0; }
+  .edit-btn {
+    background: rgba(169,194,160,0.15); border: 1px solid var(--sage);
+    color: var(--sage); font-size: 0.78rem; font-weight: 600;
+    padding: 5px 12px; border-radius: 7px; cursor: pointer; transition: all 0.15s;
+  }
+  .edit-btn:hover { background: var(--sage); color: var(--teal-deep); }
+  .del-btn {
+    background: rgba(193,99,59,0.12); border: 1px solid rgba(193,99,59,0.3);
+    color: var(--copper); font-size: 0.78rem; font-weight: 600;
+    padding: 5px 12px; border-radius: 7px; cursor: pointer; transition: all 0.15s;
+  }
+  .del-btn:hover { background: var(--copper); color: #fff; }
+  .save-btn {
+    background: linear-gradient(135deg, var(--teal), var(--teal-deep));
+    color: var(--gold); border: none; padding: 12px 26px;
+    border-radius: 10px; font-weight: 700; margin-top: 18px;
+    cursor: pointer; font-size: 0.92rem; letter-spacing: 0.03em;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  }
+  .save-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+  .cancel-btn {
+    background: transparent; border: 1.5px solid var(--line);
+    color: var(--ink-soft); padding: 12px 20px; border-radius: 10px;
+    font-weight: 600; margin-top: 18px; margin-left: 10px;
+    cursor: pointer; font-size: 0.88rem; transition: all 0.2s;
+  }
+  .cancel-btn:hover { border-color: var(--copper); color: var(--copper); }
+  .tag-role { font-size:0.7rem; background:var(--gold); color:var(--teal-deep); padding:3px 10px; border-radius:10px; font-weight:700; margin-left:8px; }
+  /* Scroll nav advance indicator */
+  .scroll-next-hint {
+    position: fixed; bottom: 90px; right: 28px;
+    display: flex; flex-direction: column; align-items: center; gap: 5px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 80;
+  }
+  .scroll-next-hint.visible { opacity: 1; }
+  .scroll-next-hint .hint-label {
+    font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(243,238,223,0.55);
+  }
+  .scroll-next-hint .hint-arrow {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: rgba(228,201,124,0.18); border: 1px solid rgba(228,201,124,0.35);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold); font-size: 0.9rem;
+    animation: scrollBounce 1.4s ease-in-out infinite;
+  }
+  @keyframes scrollBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
+  }
 
   .profile-pill{display:flex; align-items:center; gap:8px; background:rgba(197,152,65,0.15); padding:6px 14px; border-radius:20px; font-size:0.85rem; color:var(--gold-light);}
   body.light-mode .profile-pill { background: rgba(31, 74, 61, 0.1); color: var(--teal-deep); }
@@ -1794,82 +1900,192 @@
   </section>
 
   <section id="view-admin">
-    <div class="section-head"><h2>Admin Panel <span class="tag-role">ADMIN</span></h2></div>
-
-
-
-    <div class="admin-form">
-      <h3 id="chantFormTitle">Naya chant add karein</h3>
-      <div class="row">
-        <div><label>Sanskrit</label><input id="af-sanskrit" placeholder="ॐ ..."></div>
-        <div><label>Transliteration</label><input id="af-translit" placeholder="Om ..."></div>
-      </div>
-      <div class="row">
-        <div><label>Category</label><input id="af-cat" placeholder="Healing / Deity / Peace"></div>
-        <div><label>Meaning (Hindi/English)</label><input id="af-meaning" placeholder="Arth..."></div>
-      </div>
-      <label>Audio URL <span style="font-weight:400;color:var(--ink-soft);">(external MP3 link, optional)</span></label>
-      <input id="af-audio" placeholder="https://example.com/dhanvantari-mantra.mp3">
-      <label style="margin-top:10px;">Or Upload MP3 File <span style="font-weight:400;color:var(--ink-soft);">(Stored locally in browser)</span></label>
-      <input type="file" id="af-audio-file" accept="audio/*" style="padding:6px 12px; border:1.5px solid var(--line); border-radius:8px; font-size:0.85rem; background:var(--bg-soft); color:var(--ink);">
-      <button class="save-btn" id="chantSaveBtn" onclick="addChant()">Chant save karein</button>
+    <div class="section-head">
+      <h2>Admin Panel <span class="tag-role">ADMIN</span></h2>
+      <p style="color:var(--ink-soft); font-size:0.9rem; margin:4px 0 0;">Manage shlokas, books, PDFs and site content</p>
     </div>
 
-    <div class="admin-form">
-      <h3 id="bookFormTitle">Nayi book add karein</h3>
-      <div class="row">
-        <div><label>Title (Devanagari)</label><input id="bf-title-hi" placeholder="चरक संहिता"></div>
-        <div><label>Title (English)</label><input id="bf-title-en" placeholder="Charak Samhita"></div>
-      </div>
-      <div class="row">
-        <div><label>Author / Era</label><input id="bf-author" placeholder="Acharya Charak · ~400 BCE"></div>
-        <div><label>Category</label><input id="bf-cat" placeholder="Foundational text"></div>
-      </div>
-      <div class="row" style="margin-top:10px;">
-        <div>
-          <label>BAMS Proff Year</label>
-          <select id="bf-proff" onchange="toggleAdminSubjectSelector()" style="width:100%; padding:9px 12px; border-radius:8px; border:1.5px solid var(--line); font-size:0.9rem; background: var(--bg-soft); color: var(--ink);">
-            <option value="1st Proff">1st Proff</option>
-            <option value="2nd Proff" selected>2nd Proff</option>
-            <option value="3rd Proff">3rd Proff</option>
-          </select>
-        </div>
-        <div>
-          <label>PDF URL / Link <span style="font-weight:400;color:var(--ink-soft);">(external link)</span></label>
-          <input id="bf-pdf" placeholder="e.g. https://example.com/book.pdf">
-        </div>
-      </div>
-      
-      <!-- Direct PDF File Upload Input -->
-      <div class="row" style="margin-top:10px;">
-        <div>
-          <label>Or Upload PDF File directly <span style="font-weight:400;color:var(--ink-soft);">(Stored locally)</span></label>
-          <input type="file" id="bf-file" accept="application/pdf" style="width:100%; padding:6px 12px; border:1.5px solid var(--line); border-radius:8px; font-size:0.85rem; background:var(--bg-soft); color:var(--ink);">
-        </div>
-        <div id="adminSubjectField" style="display:block;">
-          <label>Subject (for 2nd Proff)</label>
-          <select id="bf-subject" style="width:100%; padding:9px 12px; border-radius:8px; border:1.5px solid var(--line); font-size:0.9rem; background: var(--bg-soft); color: var(--ink);">
-            <option value="Charak Samhita">Charak Samhita (Purvardha)</option>
-            <option value="Dravyaguna">Dravyaguna</option>
-            <option value="Rasashastra & Bhaishajya">Rasashastra & Bhaishajya</option>
-            <option value="Roga Nidan">Roga Nidan</option>
-            <option value="Agada Tantra">Agada Tantra</option>
-            <option value="Swasthavritta & Yoga">Swasthavritta & Yoga</option>
-          </select>
-        </div>
-      </div>
-
-      <label>Description</label>
-      <textarea id="bf-desc" rows="2" placeholder="Short description..."></textarea>
-      <button class="save-btn" id="bookSaveBtn" onclick="addBook()">Book save karein</button>
+    <!-- Admin Tab Navigation -->
+    <div class="admin-tab-bar">
+      <button class="admin-tab active" id="tab-shlokas" onclick="switchAdminTab('shlokas')">
+        <span>🕉️</span> Shlokas
+      </button>
+      <button class="admin-tab" id="tab-books" onclick="switchAdminTab('books')">
+        <span>📚</span> Books & PDFs
+      </button>
+      <button class="admin-tab" id="tab-settings" onclick="switchAdminTab('settings')">
+        <span>⚙️</span> Settings
+      </button>
     </div>
 
-    <div class="section-head"><h2 style="font-size:1.2rem;">Existing content manage karein</h2></div>
-    <div id="adminChantList"></div>
-    <div id="adminBookList"></div>
+    <!-- ===== SHLOKAS PANEL ===== -->
+    <div class="admin-panel active" id="panel-shlokas">
+      <div class="admin-form">
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
+          <h3 id="chantFormTitle" style="margin:0;">✨ Add New Shloka</h3>
+          <span id="chantEditBadge" style="display:none; background:rgba(228,201,124,0.15); color:var(--gold); font-size:0.78rem; padding:4px 12px; border-radius:20px; border:1px solid rgba(228,201,124,0.3);">Editing Mode</span>
+        </div>
+        <input type="hidden" id="af-edit-id">
+        <div class="row">
+          <div><label>Sanskrit Text</label><input id="af-sanskrit" placeholder="ॐ ..."></div>
+          <div><label>Transliteration</label><input id="af-translit" placeholder="Om ..."></div>
+        </div>
+        <div class="row">
+          <div><label>Category</label><input id="af-cat" placeholder="Healing / Deity / Peace"></div>
+          <div><label>Meaning (Hindi/English)</label><input id="af-meaning" placeholder="Meaning..."></div>
+        </div>
+        <label>Audio URL <span style="font-weight:400; text-transform:none;">(external MP3 link, optional)</span></label>
+        <input id="af-audio" placeholder="https://example.com/mantra.mp3">
+        <label style="margin-top:14px;">Or Upload MP3 File</label>
+        <div class="file-drop" id="audioDropZone" onclick="document.getElementById('af-audio-file').click()" ondragover="event.preventDefault(); this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleAudioDrop(event)">
+          <div class="file-icon">🎵</div>
+          <div id="audioDropLabel">Click or drag MP3 / audio file here</div>
+        </div>
+        <input type="file" id="af-audio-file" accept="audio/*" style="display:none" onchange="handleAudioFileSelect(this)">
+        <div class="upload-progress" id="audioUploadProgress"><div class="upload-progress-bar" id="audioProgressBar"></div></div>
+        <div style="margin-top:18px; display:flex; gap:0; flex-wrap:wrap;">
+          <button class="save-btn" id="chantSaveBtn" onclick="addChant()">💾 Save Shloka</button>
+          <button class="cancel-btn" id="chantCancelBtn" style="display:none" onclick="resetChantForm()">✕ Cancel Edit</button>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+        <h3 style="margin:0; font-family:'Cormorant Garamond',serif; font-size:1.15rem; color:var(--gold-light);">All Shlokas</h3>
+        <span id="chantCountBadge" style="font-size:0.78rem; color:var(--ink-soft);"></span>
+      </div>
+      <div id="adminChantList"></div>
+    </div>
+
+    <!-- ===== BOOKS & PDFs PANEL ===== -->
+    <div class="admin-panel" id="panel-books">
+      <div class="admin-form">
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
+          <h3 id="bookFormTitle" style="margin:0;">📖 Add New Book</h3>
+          <span id="bookEditBadge" style="display:none; background:rgba(228,201,124,0.15); color:var(--gold); font-size:0.78rem; padding:4px 12px; border-radius:20px; border:1px solid rgba(228,201,124,0.3);">Editing Mode</span>
+        </div>
+        <input type="hidden" id="bf-edit-id">
+        <div class="row">
+          <div><label>Title (Devanagari)</label><input id="bf-title-hi" placeholder="चरक संहिता"></div>
+          <div><label>Title (English)</label><input id="bf-title-en" placeholder="Charak Samhita"></div>
+        </div>
+        <div class="row">
+          <div><label>Author / Era</label><input id="bf-author" placeholder="Acharya Charak · ~400 BCE"></div>
+          <div><label>Category</label><input id="bf-cat" placeholder="Foundational text"></div>
+        </div>
+        <div class="row" style="margin-top:4px;">
+          <div>
+            <label>BAMS Proff Year</label>
+            <select id="bf-proff" onchange="toggleAdminSubjectSelector()">
+              <option value="1st Proff">1st Proff</option>
+              <option value="2nd Proff" selected>2nd Proff</option>
+              <option value="3rd Proff">3rd Proff</option>
+            </select>
+          </div>
+          <div id="adminSubjectField">
+            <label>Subject (for 2nd Proff)</label>
+            <select id="bf-subject">
+              <option value="Charak Samhita">Charak Samhita (Purvardha)</option>
+              <option value="Dravyaguna">Dravyaguna</option>
+              <option value="Rasashastra & Bhaishajya">Rasashastra & Bhaishajya</option>
+              <option value="Roga Nidan">Roga Nidan</option>
+              <option value="Agada Tantra">Agada Tantra</option>
+              <option value="Swasthavritta & Yoga">Swasthavritta & Yoga</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Cover Image Upload -->
+        <label style="margin-top:14px;">Cover Image</label>
+        <div class="file-drop" id="coverDropZone" onclick="document.getElementById('bf-cover-file').click()" ondragover="event.preventDefault(); this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleCoverDrop(event)">
+          <div class="file-icon">🖼️</div>
+          <div id="coverDropLabel">Click or drag JPG/PNG cover image here</div>
+        </div>
+        <input type="file" id="bf-cover-file" accept="image/*" style="display:none" onchange="handleCoverFileSelect(this)">
+        <img id="coverPreview" style="display:none; max-height:80px; border-radius:8px; margin-top:10px; border:1px solid var(--line);">
+
+        <!-- PDF Upload -->
+        <label style="margin-top:14px;">PDF File Upload</label>
+        <div class="file-drop" id="pdfDropZone" onclick="document.getElementById('bf-file').click()" ondragover="event.preventDefault(); this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handlePdfDrop(event)">
+          <div class="file-icon">📄</div>
+          <div id="pdfDropLabel">Click or drag PDF file here</div>
+        </div>
+        <input type="file" id="bf-file" accept="application/pdf" style="display:none" onchange="handlePdfFileSelect(this)">
+        <div class="upload-progress" id="pdfUploadProgress"><div class="upload-progress-bar" id="pdfProgressBar"></div></div>
+
+        <label style="margin-top:14px;">Or PDF External URL</label>
+        <input id="bf-pdf" placeholder="https://example.com/book.pdf">
+
+        <label>Description</label>
+        <textarea id="bf-desc" rows="2" placeholder="Short description of the book..."></textarea>
+        <div style="margin-top:0; display:flex; gap:0; flex-wrap:wrap;">
+          <button class="save-btn" id="bookSaveBtn" onclick="addBook()">💾 Save Book</button>
+          <button class="cancel-btn" id="bookCancelBtn" style="display:none" onclick="resetBookForm()">✕ Cancel Edit</button>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+        <h3 style="margin:0; font-family:'Cormorant Garamond',serif; font-size:1.15rem; color:var(--gold-light);">All Books</h3>
+        <span id="bookCountBadge" style="font-size:0.78rem; color:var(--ink-soft);"></span>
+      </div>
+      <div id="adminBookList"></div>
+    </div>
+
+    <!-- ===== SETTINGS PANEL ===== -->
+    <div class="admin-panel" id="panel-settings">
+      <div class="admin-form">
+        <h3>🌐 Site Settings</h3>
+        <div class="row">
+          <div>
+            <label>Default Language</label>
+            <select id="settings-lang" onchange="setLang(this.value)">
+              <option value="en">English</option>
+              <option value="hi">Hindi (हिंदी)</option>
+            </select>
+          </div>
+          <div>
+            <label>Background Animation Speed</label>
+            <select id="settings-fps" onchange="setBgFps(parseInt(this.value))">
+              <option value="6">6 fps — Slow / Meditative</option>
+              <option value="12">12 fps — Balanced</option>
+              <option value="24" selected>24 fps — Cinematic</option>
+              <option value="30">30 fps — Fast</option>
+            </select>
+          </div>
+        </div>
+        <div class="row" style="margin-top:4px;">
+          <div>
+            <label>Audio Server URL</label>
+            <input id="settings-server-url" placeholder="https://major-jobs-design.loca.lt">
+          </div>
+          <div>
+            <label>Gradient Overlay Intensity</label>
+            <select id="settings-overlay" onchange="setOverlayIntensity(this.value)">
+              <option value="light">Light — More Visible BG</option>
+              <option value="medium" selected>Medium — Balanced</option>
+              <option value="dark">Dark — Better Readability</option>
+            </select>
+          </div>
+        </div>
+        <button class="save-btn" onclick="saveAdminSettings()">💾 Save Settings</button>
+      </div>
+
+      <div class="admin-form">
+        <h3>🗑️ Data Management</h3>
+        <p style="color:var(--ink-soft); font-size:0.88rem; margin-bottom:16px;">These actions are irreversible. Use with caution.</p>
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <button class="del-btn" style="padding:10px 18px; font-size:0.85rem;" onclick="if(confirm('Export all data as JSON?')) exportAllData()">📤 Export All Data</button>
+          <button class="del-btn" style="padding:10px 18px; font-size:0.85rem;" onclick="if(confirm('This will delete ALL shlokas and books. Are you sure?')) clearAllContent()">🗑️ Clear All Content</button>
+        </div>
+      </div>
+    </div>
+
   </section>
 
 </main>
+
+<!-- Scroll-to-next-section hint indicator -->
+<div class="scroll-next-hint" id="scrollNextHint">
+  <div class="hint-label" id="scrollNextLabel">Next</div>
+  <div class="hint-arrow">↓</div>
+</div>
 
 <!-- Sticky Bottom Player Bar -->
 <div class="bottom-player-bar" id="bottomPlayerBar">
@@ -2306,14 +2522,14 @@ let bgAutoPlayId = null;
 let bgAutoFrame = 1;
 let bgAutoDirection = 1;
 let bgScrollOverride = false; // true when home scroll is controlling frames
+let bgFps = 24; // cinematic pace (24 frames/sec) when auto-playing
 
 function startBgAutoPlay() {
   if (bgAutoPlayId) return;
   let lastTime = 0;
-  const FPS = 6; // gentle pace: 6 frames/sec when auto-playing
-  const interval = 1000 / FPS;
 
   function tick(timestamp) {
+    const interval = 1000 / bgFps;
     if (timestamp - lastTime >= interval) {
       lastTime = timestamp;
       if (!bgScrollOverride) {
@@ -2326,6 +2542,13 @@ function startBgAutoPlay() {
     bgAutoPlayId = requestAnimationFrame(tick);
   }
   bgAutoPlayId = requestAnimationFrame(tick);
+}
+
+function setBgFps(fps) {
+  bgFps = Math.max(1, Math.min(60, fps));
+  const selectEl = document.getElementById('settings-fps');
+  if (selectEl) selectEl.value = bgFps.toString();
+  showToast(`Background speed set to ${bgFps} FPS`);
 }
 
 function stopBreathingAnimation() {
@@ -3240,18 +3463,45 @@ function renderBooks(){
   document.getElementById('bookCount').textContent = `${list.length} books`;
   document.getElementById('bookGrid').innerHTML = list.length ? list.map(bookCard).join('') :
     `<div class="empty-state" style="grid-column:1/-1;"><span class="big">📚</span>No books found. Try modifying your search or subject filters.</div>`;
+  
+  // Asynchronously load any local covers stored as blob in IndexedDB
+  loadBookCovers();
+}
+
+async function loadBookCovers() {
+  const imgs = document.querySelectorAll('img[data-book-cover]');
+  for (const img of imgs) {
+    const bookId = img.getAttribute('data-book-cover');
+    const b = state.books.find(x => x.id === bookId);
+    if (b && b.coverUrl === 'stored-blob') {
+      const blob = await getPDFBlob('cover_' + bookId);
+      if (blob) {
+        img.src = URL.createObjectURL(blob);
+        const placeholder = img.nextElementSibling;
+        if (placeholder) placeholder.style.display = 'none';
+      }
+    }
+  }
 }
 
 function bookCard(b){
   const saved = state.favorites.books.includes(b.id);
   const badgeColor = b.proff === '1st Proff' ? 'var(--gold)' : b.proff === '2nd Proff' ? 'var(--copper)' : 'var(--teal)';
   const badgeLabel = (b.proff === '2nd Proff' && b.subject) ? `2nd Proff · ${b.subject}` : (b.proff || 'General');
+  
+  const coverHtml = b.coverUrl ? 
+    `<div class="book-cover-wrap" style="height:140px; background:rgba(0,0,0,0.15); border-radius:10px; overflow:hidden; margin-bottom:14px; display:flex; align-items:center; justify-content:center; border:1px solid var(--line); position:relative;">
+       <img data-book-cover="${b.id}" style="height:100%; width:100%; object-fit:cover; display:none;" onload="this.style.display='block'">
+       <span class="cover-placeholder" style="font-size:2.2rem; opacity:0.65; transition:opacity .2s;">📖</span>
+     </div>` : '';
+
   return `<div class="card">
     <button class="fav-btn ${saved?'saved':''}" onclick="toggleFav('books','${b.id}')">${saved?'♥':'♡'}</button>
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
       <div class="cat" style="margin:0;">${b.cat}</div>
       <span style="font-size:0.65rem; font-weight:700; color:${badgeColor}; border:1px solid ${badgeColor}; padding:2px 8px; border-radius:12px; text-transform:uppercase; letter-spacing:0.3px;">${badgeLabel}</span>
     </div>
+    ${coverHtml}
     <div class="book-title hin-serif">${b.titleHi}</div>
     <div class="book-title" style="font-size:0.95rem; color:var(--ink-soft); font-weight:500;">${b.titleEn}</div>
     <div class="book-meta">${b.author}</div>
@@ -3289,39 +3539,245 @@ function renderFavorites(){
                  (b.length ? `<h3 style="margin-top:30px;">Books</h3><div class="grid">${b.map(bookCard).join('')}</div>` : '');
 }
 
-// ---------- Admin ----------
-async function addChant(){
+// ---------- Admin Controller & File Uploads ----------
+let selectedAudioFile = null;
+let selectedCoverFile = null;
+let selectedPdfFile = null;
+
+function switchAdminTab(tab) {
+  document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+  
+  const targetPanel = document.getElementById('panel-' + tab);
+  if (targetPanel) targetPanel.classList.add('active');
+  
+  const targetTab = document.getElementById('tab-' + tab);
+  if (targetTab) targetTab.classList.add('active');
+}
+
+// File Select & Drag-and-Drop Handlers
+function handleAudioFileSelect(input) {
+  const file = input.files[0];
+  if (file) {
+    selectedAudioFile = file;
+    document.getElementById('audioDropLabel').textContent = `Selected: ${file.name} (${(file.size/1024/1024).toFixed(2)} MB)`;
+  }
+}
+
+function handleAudioDrop(e) {
+  e.preventDefault();
+  document.getElementById('audioDropZone').classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('audio/')) {
+    selectedAudioFile = file;
+    const fileInput = document.getElementById('af-audio-file');
+    if (fileInput) fileInput.files = e.dataTransfer.files;
+    document.getElementById('audioDropLabel').textContent = `Dropped: ${file.name} (${(file.size/1024/1024).toFixed(2)} MB)`;
+  } else {
+    showToast('Sirf audio file upload karein');
+  }
+}
+
+function handleCoverFileSelect(input) {
+  const file = input.files[0];
+  if (file) {
+    selectedCoverFile = file;
+    document.getElementById('coverDropLabel').textContent = `Selected: ${file.name}`;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = document.getElementById('coverPreview');
+      img.src = e.target.result;
+      img.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function handleCoverDrop(e) {
+  e.preventDefault();
+  document.getElementById('coverDropZone').classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) {
+    selectedCoverFile = file;
+    const fileInput = document.getElementById('bf-cover-file');
+    if (fileInput) fileInput.files = e.dataTransfer.files;
+    document.getElementById('coverDropLabel').textContent = `Dropped: ${file.name}`;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = document.getElementById('coverPreview');
+      img.src = e.target.result;
+      img.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  } else {
+    showToast('Sirf image file upload karein');
+  }
+}
+
+function handlePdfFileSelect(input) {
+  const file = input.files[0];
+  if (file) {
+    selectedPdfFile = file;
+    document.getElementById('pdfDropLabel').textContent = `Selected: ${file.name} (${(file.size/1024/1024).toFixed(2)} MB)`;
+  }
+}
+
+function handlePdfDrop(e) {
+  e.preventDefault();
+  document.getElementById('pdfDropZone').classList.remove('drag-over');
+  const file = e.dataTransfer.files[0];
+  if (file && file.type === 'application/pdf') {
+    selectedPdfFile = file;
+    const fileInput = document.getElementById('bf-file');
+    if (fileInput) fileInput.files = e.dataTransfer.files;
+    document.getElementById('pdfDropLabel').textContent = `Dropped: ${file.name} (${(file.size/1024/1024).toFixed(2)} MB)`;
+  } else {
+    showToast('Sirf PDF file upload karein');
+  }
+}
+
+// Chants Add / Edit / Update / Delete
+async function addChant() {
   const s = document.getElementById('af-sanskrit').value.trim();
   const t = document.getElementById('af-translit').value.trim();
   const cat = document.getElementById('af-cat').value.trim() || 'General';
   const m = document.getElementById('af-meaning').value.trim();
   const audioUrl = document.getElementById('af-audio').value.trim();
-  if(!s || !m){ showToast('Sanskrit aur meaning zaroori hai'); return; }
-  
+  if (!s || !m) { showToast('Sanskrit aur meaning zaroori hai'); return; }
+
   const chantId = 'c' + Date.now();
-  const fileInput = document.getElementById('af-audio-file');
-  const file = fileInput ? fileInput.files[0] : null;
   let finalAudioUrl = audioUrl;
-  
-  if (file) {
+
+  if (selectedAudioFile) {
     showToast('Saving audio file to local database...');
-    const saved = await savePDFBlob('audio_' + chantId, file);
+    const progressBar = document.getElementById('audioProgressBar');
+    const progressContainer = document.getElementById('audioUploadProgress');
+    if (progressContainer) progressContainer.style.display = 'block';
+    if (progressBar) progressBar.style.width = '50%';
+
+    const saved = await savePDFBlob('audio_' + chantId, selectedAudioFile);
     if (saved) {
       finalAudioUrl = 'stored-blob';
-      showToast('\uD83C\uDFB5 Audio file saved!');
+      if (progressBar) progressBar.style.width = '100%';
+      showToast('🎵 Audio file saved!');
     } else {
       showToast('Error saving audio file.');
     }
+    setTimeout(() => { if (progressContainer) progressContainer.style.display = 'none'; }, 1000);
   }
-  
-  state.chants.push({id: chantId, cat, sanskrit: s, translit: t, meaning: m, audioUrl: finalAudioUrl});
+
+  state.chants.push({ id: chantId, cat, sanskrit: s, translit: t, meaning: m, audioUrl: finalAudioUrl });
   await saveChants();
-  ['af-sanskrit','af-translit','af-cat','af-meaning','af-audio'].forEach(id => document.getElementById(id).value = '');
-  if (fileInput) fileInput.value = '';
+  resetChantForm();
   showToast('Chant add ho gaya');
   renderChants(); renderChantChips(); renderAdmin();
 }
-async function addBook(){
+
+function editChant(id) {
+  const c = state.chants.find(x => x.id === id);
+  if (!c) return;
+
+  document.getElementById('af-sanskrit').value = c.sanskrit || '';
+  document.getElementById('af-translit').value = c.translit || '';
+  document.getElementById('af-cat').value = c.cat || '';
+  document.getElementById('af-meaning').value = c.meaning || '';
+  document.getElementById('af-audio').value = c.audioUrl === 'stored-blob' ? '' : (c.audioUrl || '');
+
+  if (c.audioUrl === 'stored-blob') {
+    document.getElementById('audioDropLabel').textContent = '🎵 Audio already stored in database (upload again to replace)';
+  }
+
+  editingChantId = id;
+  document.getElementById('chantFormTitle').textContent = '📝 Edit Shloka Details';
+  document.getElementById('chantEditBadge').style.display = 'inline-block';
+
+  const btn = document.getElementById('chantSaveBtn');
+  btn.textContent = '💾 Update Shloka';
+  btn.onclick = () => updateChant(id);
+
+  const cancelBtn = document.getElementById('chantCancelBtn');
+  if (cancelBtn) cancelBtn.style.display = 'inline-block';
+
+  document.getElementById('chantFormTitle').scrollIntoView({ behavior: 'smooth' });
+}
+
+function resetChantForm() {
+  editingChantId = null;
+  ['af-sanskrit', 'af-translit', 'af-cat', 'af-meaning', 'af-audio'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  selectedAudioFile = null;
+  const fileInput = document.getElementById('af-audio-file');
+  if (fileInput) fileInput.value = '';
+  document.getElementById('audioDropLabel').textContent = 'Click or drag MP3 / audio file here';
+  document.getElementById('chantFormTitle').textContent = '✨ Add New Shloka';
+  document.getElementById('chantEditBadge').style.display = 'none';
+
+  const btn = document.getElementById('chantSaveBtn');
+  if (btn) {
+    btn.textContent = '💾 Save Shloka';
+    btn.onclick = addChant;
+  }
+  const cancelBtn = document.getElementById('chantCancelBtn');
+  if (cancelBtn) cancelBtn.style.display = 'none';
+}
+
+async function updateChant(id) {
+  const c = state.chants.find(x => x.id === id);
+  if (!c) return;
+
+  const s = document.getElementById('af-sanskrit').value.trim();
+  const t = document.getElementById('af-translit').value.trim();
+  const cat = document.getElementById('af-cat').value.trim() || 'General';
+  const m = document.getElementById('af-meaning').value.trim();
+  const audioUrl = document.getElementById('af-audio').value.trim();
+
+  if (!s || !m) { showToast('Sanskrit aur meaning zaroori hai'); return; }
+
+  let finalAudioUrl = audioUrl || c.audioUrl;
+
+  if (selectedAudioFile) {
+    showToast('Saving audio file...');
+    const progressBar = document.getElementById('audioProgressBar');
+    const progressContainer = document.getElementById('audioUploadProgress');
+    if (progressContainer) progressContainer.style.display = 'block';
+    if (progressBar) progressBar.style.width = '50%';
+
+    const saved = await savePDFBlob('audio_' + id, selectedAudioFile);
+    if (saved) {
+      finalAudioUrl = 'stored-blob';
+      if (progressBar) progressBar.style.width = '100%';
+      showToast('🎵 Audio file updated!');
+    } else {
+      showToast('Error saving audio file.');
+    }
+    setTimeout(() => { if (progressContainer) progressContainer.style.display = 'none'; }, 1000);
+  }
+
+  c.sanskrit = s;
+  c.translit = t;
+  c.cat = cat;
+  c.meaning = m;
+  c.audioUrl = finalAudioUrl;
+
+  await saveChants();
+  resetChantForm();
+  showToast('Chant details update ho gayi');
+  renderChants(); renderChantChips(); renderAdmin();
+}
+
+async function deleteChant(id) {
+  if (!confirm('Are you sure you want to delete this shloka?')) return;
+  state.chants = state.chants.filter(c => c.id !== id);
+  await saveChants();
+  await deletePDFBlob('audio_' + id);
+  showToast('Shloka deleted');
+  renderChants(); renderChantChips(); renderAdmin();
+}
+
+// Books Add / Edit / Update / Delete
+async function addBook() {
   const th = document.getElementById('bf-title-hi').value.trim();
   const te = document.getElementById('bf-title-en').value.trim();
   const author = document.getElementById('bf-author').value.trim();
@@ -3330,29 +3786,189 @@ async function addBook(){
   const pdfUrl = document.getElementById('bf-pdf').value.trim();
   const subject = proff === '2nd Proff' ? document.getElementById('bf-subject').value : '';
   const desc = document.getElementById('bf-desc').value.trim();
-  if(!te || !desc){ showToast('Title aur description zaroori hai'); return; }
-  
-  const fileInput = document.getElementById('bf-file');
-  const file = fileInput ? fileInput.files[0] : null;
-  let finalPdfUrl = pdfUrl;
+  if (!te || !desc) { showToast('Title aur description zaroori hai'); return; }
+
   const bookId = 'b' + Date.now();
-  
-  if (file) {
-    showToast("Saving PDF to local database...");
-    const saved = await savePDFBlob(bookId, file);
+  let finalPdfUrl = pdfUrl;
+  let finalCoverUrl = '';
+
+  if (selectedPdfFile) {
+    showToast("Saving PDF file...");
+    const progressBar = document.getElementById('pdfProgressBar');
+    const progressContainer = document.getElementById('pdfUploadProgress');
+    if (progressContainer) progressContainer.style.display = 'block';
+    if (progressBar) progressBar.style.width = '50%';
+
+    const saved = await savePDFBlob(bookId, selectedPdfFile);
     if (saved) {
       finalPdfUrl = 'stored-blob';
+      if (progressBar) progressBar.style.width = '100%';
     } else {
       showToast("Database error saving PDF file.");
       return;
     }
+    setTimeout(() => { if (progressContainer) progressContainer.style.display = 'none'; }, 1000);
   }
-  
-  state.books.push({id:bookId, titleHi:th, titleEn:te, author, cat, proff, subject, pdfUrl:finalPdfUrl, desc});
+
+  if (selectedCoverFile) {
+    showToast("Saving cover image...");
+    const saved = await savePDFBlob('cover_' + bookId, selectedCoverFile);
+    if (saved) {
+      finalCoverUrl = 'stored-blob';
+    }
+  }
+
+  state.books.push({ id: bookId, titleHi: th, titleEn: te, author, cat, proff, subject, pdfUrl: finalPdfUrl, coverUrl: finalCoverUrl, desc });
   await saveBooks();
-  ['bf-title-hi','bf-title-en','bf-author','bf-cat','bf-pdf','bf-desc'].forEach(id=>document.getElementById(id).value='');
-  if (fileInput) fileInput.value = '';
+  resetBookForm();
   showToast('Book add ho gayi');
+  renderBooks(); renderAdmin();
+}
+
+async function editBook(id) {
+  const b = state.books.find(x => x.id === id);
+  if (!b) return;
+
+  document.getElementById('bf-title-hi').value = b.titleHi || '';
+  document.getElementById('bf-title-en').value = b.titleEn || '';
+  document.getElementById('bf-author').value = b.author || '';
+  document.getElementById('bf-cat').value = b.cat || '';
+  document.getElementById('bf-proff').value = b.proff || '2nd Proff';
+  document.getElementById('bf-pdf').value = b.pdfUrl === 'stored-blob' ? '' : (b.pdfUrl || '');
+  document.getElementById('bf-desc').value = b.desc || '';
+
+  if (b.pdfUrl === 'stored-blob') {
+    document.getElementById('pdfDropLabel').textContent = '📄 PDF already stored in database (upload again to replace)';
+  }
+  if (b.coverUrl === 'stored-blob') {
+    document.getElementById('coverDropLabel').textContent = '🖼️ Cover image already stored (upload again to replace)';
+    const blob = await getPDFBlob('cover_' + b.id);
+    if (blob) {
+      const img = document.getElementById('coverPreview');
+      img.src = URL.createObjectURL(blob);
+      img.style.display = 'block';
+    }
+  }
+
+  toggleAdminSubjectSelector();
+  if (b.proff === '2nd Proff') {
+    document.getElementById('bf-subject').value = b.subject || 'Charak Samhita';
+  }
+
+  editingBookId = id;
+  document.getElementById('bookFormTitle').textContent = '📝 Edit Book Details';
+  document.getElementById('bookEditBadge').style.display = 'inline-block';
+
+  const btn = document.getElementById('bookSaveBtn');
+  btn.textContent = '💾 Update Book';
+  btn.onclick = () => updateBook(id);
+
+  const cancelBtn = document.getElementById('bookCancelBtn');
+  if (cancelBtn) cancelBtn.style.display = 'inline-block';
+
+  document.getElementById('bookFormTitle').scrollIntoView({ behavior: 'smooth' });
+}
+
+function resetBookForm() {
+  editingBookId = null;
+  ['bf-title-hi', 'bf-title-en', 'bf-author', 'bf-cat', 'bf-pdf', 'bf-desc'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  selectedPdfFile = null;
+  selectedCoverFile = null;
+  const fileInput = document.getElementById('bf-file');
+  if (fileInput) fileInput.value = '';
+  const coverInput = document.getElementById('bf-cover-file');
+  if (coverInput) coverInput.value = '';
+
+  document.getElementById('pdfDropLabel').textContent = 'Click or drag PDF file here';
+  document.getElementById('coverDropLabel').textContent = 'Click or drag JPG/PNG cover image here';
+  document.getElementById('coverPreview').style.display = 'none';
+  document.getElementById('coverPreview').src = '';
+
+  document.getElementById('bf-proff').value = '2nd Proff';
+  toggleAdminSubjectSelector();
+
+  document.getElementById('bookFormTitle').textContent = '📖 Add New Book';
+  document.getElementById('bookEditBadge').style.display = 'none';
+
+  const btn = document.getElementById('bookSaveBtn');
+  if (btn) {
+    btn.textContent = '💾 Save Book';
+    btn.onclick = addBook;
+  }
+  const cancelBtn = document.getElementById('bookCancelBtn');
+  if (cancelBtn) cancelBtn.style.display = 'none';
+}
+
+async function updateBook(id) {
+  const b = state.books.find(x => x.id === id);
+  if (!b) return;
+
+  const th = document.getElementById('bf-title-hi').value.trim();
+  const te = document.getElementById('bf-title-en').value.trim();
+  const author = document.getElementById('bf-author').value.trim();
+  const cat = document.getElementById('bf-cat').value.trim() || 'General';
+  const proff = document.getElementById('bf-proff').value;
+  const pdfUrl = document.getElementById('bf-pdf').value.trim();
+  const subject = proff === '2nd Proff' ? document.getElementById('bf-subject').value : '';
+  const desc = document.getElementById('bf-desc').value.trim();
+
+  if (!te || !desc) { showToast('Title aur description zaroori hai'); return; }
+
+  let finalPdfUrl = pdfUrl || b.pdfUrl;
+  let finalCoverUrl = b.coverUrl || '';
+
+  if (selectedPdfFile) {
+    showToast("Saving PDF file...");
+    const progressBar = document.getElementById('pdfProgressBar');
+    const progressContainer = document.getElementById('pdfUploadProgress');
+    if (progressContainer) progressContainer.style.display = 'block';
+    if (progressBar) progressBar.style.width = '50%';
+
+    const saved = await savePDFBlob(id, selectedPdfFile);
+    if (saved) {
+      finalPdfUrl = 'stored-blob';
+      if (progressBar) progressBar.style.width = '100%';
+    } else {
+      showToast("Database error saving PDF file.");
+      return;
+    }
+    setTimeout(() => { if (progressContainer) progressContainer.style.display = 'none'; }, 1000);
+  }
+
+  if (selectedCoverFile) {
+    showToast("Saving cover image...");
+    const saved = await savePDFBlob('cover_' + id, selectedCoverFile);
+    if (saved) {
+      finalCoverUrl = 'stored-blob';
+    }
+  }
+
+  b.titleHi = th;
+  b.titleEn = te;
+  b.author = author;
+  b.cat = cat;
+  b.proff = proff;
+  b.subject = subject;
+  b.pdfUrl = finalPdfUrl;
+  b.coverUrl = finalCoverUrl;
+  b.desc = desc;
+
+  await saveBooks();
+  resetBookForm();
+  showToast('Book details update ho gayi');
+  renderBooks(); renderAdmin();
+}
+
+async function deleteBook(id) {
+  if (!confirm('Are you sure you want to delete this book?')) return;
+  state.books = state.books.filter(b => b.id !== id);
+  await saveBooks();
+  await deletePDFBlob(id);
+  await deletePDFBlob('cover_' + id);
+  showToast('Book deleted');
   renderBooks(); renderAdmin();
 }
 
@@ -3364,220 +3980,91 @@ function toggleAdminSubjectSelector() {
   }
 }
 
-// ---------- Admin Edit/Update Controller ----------
-let editingBookId = null;
-let editingChantId = null;
-
-function editBook(id) {
-  const b = state.books.find(x => x.id === id);
-  if (!b) return;
-  
-  document.getElementById('bf-title-hi').value = b.titleHi || '';
-  document.getElementById('bf-title-en').value = b.titleEn || '';
-  document.getElementById('bf-author').value = b.author || '';
-  document.getElementById('bf-cat').value = b.cat || '';
-  document.getElementById('bf-proff').value = b.proff || '2nd Proff';
-  document.getElementById('bf-pdf').value = b.pdfUrl || '';
-  
-  // Update subject visibility
-  toggleAdminSubjectSelector();
-  if (b.proff === '2nd Proff') {
-    document.getElementById('bf-subject').value = b.subject || 'Charak Samhita';
+// Settings management
+function setOverlayIntensity(intensity) {
+  const bgGradient = document.getElementById('bgGradient');
+  if (!bgGradient) return;
+  if (intensity === 'light') {
+    bgGradient.style.background = 'linear-gradient(to bottom, rgba(18, 35, 26, 0.45), rgba(18, 35, 26, 0.2), rgba(18, 35, 26, 0.2), rgba(18, 35, 26, 0.55))';
+  } else if (intensity === 'dark') {
+    bgGradient.style.background = 'linear-gradient(to bottom, rgba(18, 35, 26, 0.85), rgba(18, 35, 26, 0.6), rgba(18, 35, 26, 0.6), rgba(18, 35, 26, 0.95))';
+  } else {
+    bgGradient.style.background = 'linear-gradient(to bottom, rgba(18, 35, 26, 0.70), rgba(18, 35, 26, 0.45), rgba(18, 35, 26, 0.45), rgba(18, 35, 26, 0.88))';
   }
-  document.getElementById('bf-desc').value = b.desc || '';
-  
-  editingBookId = id;
-  document.getElementById('bookFormTitle').textContent = 'Book details edit karein';
-  
-  const btn = document.getElementById('bookSaveBtn');
-  btn.textContent = 'Book update karein';
-  btn.onclick = () => updateBook(id);
-  
-  // Insert Cancel Button
-  let cancelBtn = document.getElementById('bookCancelEditBtn');
-  if (!cancelBtn) {
-    cancelBtn = document.createElement('button');
-    cancelBtn.id = 'bookCancelEditBtn';
-    cancelBtn.className = 'btn-ghost';
-    cancelBtn.style.marginLeft = '8px';
-    cancelBtn.style.padding = '10px 20px';
-    cancelBtn.textContent = 'Cancel';
-    cancelBtn.onclick = resetBookForm;
-    btn.parentNode.insertBefore(cancelBtn, btn.nextSibling);
-  }
-  
-  // Scroll to form view smoothly
-  document.getElementById('bookFormTitle').scrollIntoView({ behavior: 'smooth' });
 }
 
-function resetBookForm() {
-  editingBookId = null;
-  ['bf-title-hi','bf-title-en','bf-author','bf-cat','bf-pdf','bf-desc'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.value = '';
-  });
-  const fileInput = document.getElementById('bf-file');
-  if (fileInput) fileInput.value = '';
-  
-  document.getElementById('bf-proff').value = '2nd Proff';
-  toggleAdminSubjectSelector();
-  
-  document.getElementById('bookFormTitle').textContent = 'Nayi book add karein';
-  const btn = document.getElementById('bookSaveBtn');
-  if (btn) {
-    btn.textContent = 'Book save karein';
-    btn.onclick = addBook;
+function saveAdminSettings() {
+  const url = document.getElementById('settings-server-url').value.trim();
+  if (url) {
+    localStorage.setItem('vagdhenu-api-url', url);
   }
-  const cancelBtn = document.getElementById('bookCancelEditBtn');
-  if (cancelBtn) cancelBtn.remove();
+  showToast('Settings saved successfully');
 }
 
-async function updateBook(id) {
-  const b = state.books.find(x => x.id === id);
-  if (!b) return;
-  
-  const th = document.getElementById('bf-title-hi').value.trim();
-  const te = document.getElementById('bf-title-en').value.trim();
-  const author = document.getElementById('bf-author').value.trim();
-  const cat = document.getElementById('bf-cat').value.trim() || 'General';
-  const proff = document.getElementById('bf-proff').value;
-  const pdfUrl = document.getElementById('bf-pdf').value.trim();
-  const subject = proff === '2nd Proff' ? document.getElementById('bf-subject').value : '';
-  const desc = document.getElementById('bf-desc').value.trim();
-  
-  if(!te || !desc){ showToast('Title aur description zaroori hai'); return; }
-  
-  const fileInput = document.getElementById('bf-file');
-  const file = fileInput ? fileInput.files[0] : null;
-  let finalPdfUrl = pdfUrl || b.pdfUrl;
-  
-  if (file) {
-    showToast("Saving PDF to local database...");
-    const saved = await savePDFBlob(id, file);
-    if (saved) {
-      finalPdfUrl = 'stored-blob';
-    } else {
-      showToast("Database error saving PDF file.");
-      return;
-    }
-  }
-  
-  b.titleHi = th;
-  b.titleEn = te;
-  b.author = author;
-  b.cat = cat;
-  b.proff = proff;
-  b.subject = subject;
-  b.pdfUrl = finalPdfUrl;
-  b.desc = desc;
-  
-  await saveBooks();
-  resetBookForm();
-  showToast('Book details update ho gayi');
-  renderBooks(); renderAdmin();
+function exportAllData() {
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(state, null, 2));
+  const downloadAnchor = document.createElement('a');
+  downloadAnchor.setAttribute("href", dataStr);
+  downloadAnchor.setAttribute("download", "ayurvani_data_export.json");
+  document.body.appendChild(downloadAnchor);
+  downloadAnchor.click();
+  downloadAnchor.remove();
 }
 
-function editChant(id) {
-  const c = state.chants.find(x => x.id === id);
-  if (!c) return;
-  
-  document.getElementById('af-sanskrit').value = c.sanskrit || '';
-  document.getElementById('af-translit').value = c.translit || '';
-  document.getElementById('af-cat').value = c.cat || '';
-  document.getElementById('af-meaning').value = c.meaning || '';
-  document.getElementById('af-audio').value = c.audioUrl || '';
-  
-  editingChantId = id;
-  document.getElementById('chantFormTitle').textContent = 'Chant details edit karein';
-  
-  const btn = document.getElementById('chantSaveBtn');
-  btn.textContent = 'Chant update karein';
-  btn.onclick = () => updateChant(id);
-  
-  // Insert Cancel Button
-  let cancelBtn = document.getElementById('chantCancelEditBtn');
-  if (!cancelBtn) {
-    cancelBtn = document.createElement('button');
-    cancelBtn.id = 'chantCancelEditBtn';
-    cancelBtn.className = 'btn-ghost';
-    cancelBtn.style.marginLeft = '8px';
-    cancelBtn.style.padding = '10px 20px';
-    cancelBtn.textContent = 'Cancel';
-    cancelBtn.onclick = resetChantForm;
-    btn.parentNode.insertBefore(cancelBtn, btn.nextSibling);
-  }
-  
-  // Scroll to form view smoothly
-  document.getElementById('chantFormTitle').scrollIntoView({ behavior: 'smooth' });
-}
-
-function resetChantForm() {
-  editingChantId = null;
-  ['af-sanskrit','af-translit','af-cat','af-meaning','af-audio'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.value = '';
-  });
-  
-  document.getElementById('chantFormTitle').textContent = 'Naya chant add karein';
-  const btn = document.getElementById('chantSaveBtn');
-  if (btn) {
-    btn.textContent = 'Chant save karein';
-    btn.onclick = addChant;
-  }
-  const cancelBtn = document.getElementById('chantCancelEditBtn');
-  if (cancelBtn) cancelBtn.remove();
-}
-
-async function updateChant(id) {
-  const c = state.chants.find(x => x.id === id);
-  if (!c) return;
-  
-  const s = document.getElementById('af-sanskrit').value.trim();
-  const t = document.getElementById('af-translit').value.trim();
-  const cat = document.getElementById('af-cat').value.trim() || 'General';
-  const m = document.getElementById('af-meaning').value.trim();
-  const audioUrl = document.getElementById('af-audio').value.trim();
-  
-  if(!s || !m){ showToast('Sanskrit aur meaning zaroori hai'); return; }
-  
-  c.sanskrit = s;
-  c.translit = t;
-  c.cat = cat;
-  c.meaning = m;
-  c.audioUrl = audioUrl;
-  
+async function clearAllContent() {
+  state.chants = [];
+  state.books = [];
   await saveChants();
-  resetChantForm();
-  showToast('Chant details update ho gayi');
-  renderChants(); renderChantChips(); renderAdmin();
+  await saveBooks();
+  if (db) {
+    const transaction = db.transaction([STORE_NAME], 'readwrite');
+    const store = transaction.objectStore(STORE_NAME);
+    store.clear();
+  }
+  showToast('All content cleared');
+  renderChants(); renderBooks(); renderAdmin();
 }
 
-async function deleteChant(id){ state.chants = state.chants.filter(c=>c.id!==id); await saveChants(); renderChants(); renderChantChips(); renderAdmin(); }
-async function deleteBook(id){ 
-  state.books = state.books.filter(b=>b.id!==id); 
-  await saveBooks(); 
-  await deletePDFBlob(id); // Delete from IndexedDB if stored
-  renderBooks(); renderAdmin(); 
-}
-
-function renderAdmin(){
+function renderAdmin() {
   toggleAdminSubjectSelector();
-  document.getElementById('adminChantList').innerHTML = `<h3 style="color:var(--gold-light);">Chants (${state.chants.length})</h3>` +
-    state.chants.map(c=>`<div class="admin-list-item">
-      <span>${c.translit || c.sanskrit.slice(0,30)} ${c.audioUrl?'🎵':''}</span>
-      <div style="display:flex; gap:8px;">
-        <button class="btn-primary" style="padding:4px 10px; font-size:0.75rem; background:var(--gold); border:none; border-radius:6px; font-weight:600;" onclick="editChant('${c.id}')">Edit</button>
-        <button class="del-btn" onclick="deleteChant('${c.id}')">Delete</button>
+
+  const chantCountBadge = document.getElementById('chantCountBadge');
+  if (chantCountBadge) chantCountBadge.textContent = `${state.chants.length} shlokas`;
+
+  const bookCountBadge = document.getElementById('bookCountBadge');
+  if (bookCountBadge) bookCountBadge.textContent = `${state.books.length} books`;
+
+  const chantList = document.getElementById('adminChantList');
+  if (chantList) {
+    chantList.innerHTML = state.chants.map(c => `
+      <div class="admin-list-item">
+        <div class="item-info">
+          <div class="item-title">${c.sanskrit.slice(0, 50)}...</div>
+          <div class="item-meta">${c.cat} · ${c.audioUrl === 'stored-blob' ? '📁 Local MP3' : c.audioUrl ? '🔗 Remote MP3' : '🔇 No Audio'}</div>
+        </div>
+        <div class="item-actions">
+          <button class="edit-btn" onclick="editChant('${c.id}')">✏️ Edit</button>
+          <button class="del-btn" onclick="deleteChant('${c.id}')">🗑️ Delete</button>
+        </div>
       </div>
-    </div>`).join('');
-  document.getElementById('adminBookList').innerHTML = `<h3 style="color:var(--gold-light);">Books (${state.books.length})</h3>` +
-    state.books.map(b=>`<div class="admin-list-item">
-      <span>${b.titleEn} ${b.subject ? `(${b.subject})` : ''}</span>
-      <div style="display:flex; gap:8px;">
-        <button class="btn-primary" style="padding:4px 10px; font-size:0.75rem; background:var(--gold); border:none; border-radius:6px; font-weight:600;" onclick="editBook('${b.id}')">Edit</button>
-        <button class="del-btn" onclick="deleteBook('${b.id}')">Delete</button>
+    `).join('') || '<div class="empty-state">No shlokas added yet.</div>';
+  }
+
+  const bookList = document.getElementById('adminBookList');
+  if (bookList) {
+    bookList.innerHTML = state.books.map(b => `
+      <div class="admin-list-item">
+        <div class="item-info">
+          <div class="item-title">${b.titleEn} (${b.titleHi})</div>
+          <div class="item-meta">${b.author} · ${b.proff} ${b.subject ? `· ${b.subject}` : ''} · ${b.pdfUrl === 'stored-blob' ? '📁 Local PDF' : b.pdfUrl ? '🔗 Remote Link' : '📄 No PDF'}</div>
+        </div>
+        <div class="item-actions">
+          <button class="edit-btn" onclick="editBook('${b.id}')">✏️ Edit</button>
+          <button class="del-btn" onclick="deleteBook('${b.id}')">🗑️ Delete</button>
+        </div>
       </div>
-    </div>`).join('');
+    `).join('') || '<div class="empty-state">No books added yet.</div>';
+  }
 }
 
 // ---------- Caraka Samhita Online Search ----------
@@ -4053,6 +4540,129 @@ async function openStoredPDF(bookId) {
   window.open(fileURL, '_blank');
 }
 
+// ---------- Scroll-Based Page Navigation Advance ----------
+let lastScrollAdvanceTime = 0;
+
+function initScrollNavAdvance() {
+  window.addEventListener('scroll', () => {
+    updateScrollAdvanceIndicator();
+  });
+
+  // Track swipe gestures on mobile
+  let touchStartY = 0;
+  window.addEventListener('touchstart', (e) => {
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  window.addEventListener('touchmove', (e) => {
+    const touchY = e.touches[0].clientY;
+    const diff = touchStartY - touchY; // positive means swipe up / scroll down
+    if (Math.abs(diff) > 75) {
+      if (diff > 0) {
+        checkScrollAdvanceGesture(1);
+      } else {
+        checkScrollAdvanceGesture(-1);
+      }
+      touchStartY = touchY; // Reset to prevent double trigger
+    }
+  }, { passive: true });
+
+  // Track mouse wheel scroll past ends
+  window.addEventListener('wheel', (e) => {
+    if (Math.abs(e.deltaY) > 40) {
+      if (e.deltaY > 0) {
+        checkScrollAdvanceGesture(1); // Down
+      } else {
+        checkScrollAdvanceGesture(-1); // Up
+      }
+    }
+  }, { passive: true });
+}
+
+function getCurrentActiveNavIndex() {
+  const activeSection = document.querySelector('main > section.active');
+  if (!activeSection) return -1;
+  const activeId = activeSection.id.replace('view-', '');
+  return NAV_ITEMS.findIndex(item => item.id === activeId);
+}
+
+function updateScrollAdvanceIndicator() {
+  const currIdx = getCurrentActiveNavIndex();
+  if (currIdx === -1) return;
+
+  const hintEl = document.getElementById('scrollNextHint');
+  const labelEl = document.getElementById('scrollNextLabel');
+  if (!hintEl || !labelEl) return;
+
+  const isAtBottom = checkIfAtBottom();
+  if (isAtBottom && currIdx < NAV_ITEMS.length - 1) {
+    const nextItem = NAV_ITEMS[currIdx + 1];
+    labelEl.textContent = state.lang === 'hi' ? 'अगला: ' + nextItem.hi : 'Next: ' + nextItem.en;
+    hintEl.classList.add('visible');
+  } else {
+    hintEl.classList.remove('visible');
+  }
+}
+
+function checkIfAtBottom() {
+  const currIdx = getCurrentActiveNavIndex();
+  if (currIdx === -1) return false;
+
+  const activeId = NAV_ITEMS[currIdx].id;
+  if (activeId === 'home') {
+    return getScrollPercent() >= 0.98;
+  } else {
+    const scrollTolerance = 30; // pixels
+    return (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - scrollTolerance);
+  }
+}
+
+function checkIfAtTop() {
+  return window.scrollY <= 6;
+}
+
+function checkScrollAdvanceGesture(dir) {
+  const now = Date.now();
+  if (now - lastScrollAdvanceTime < 1400) return; // Prevent double transition spam
+
+  const currIdx = getCurrentActiveNavIndex();
+  if (currIdx === -1) return;
+
+  if (dir === 1) { // Scroll Down -> Next page
+    const isAtBottom = checkIfAtBottom();
+    if (isAtBottom && currIdx < NAV_ITEMS.length - 1) {
+      lastScrollAdvanceTime = now;
+      const nextItem = NAV_ITEMS[currIdx + 1];
+      showToast(state.lang === 'hi' ? `${nextItem.hi} पर जा रहे हैं...` : `Navigating to ${nextItem.en}...`);
+      
+      const hintArrow = document.querySelector('.scroll-next-hint .hint-arrow');
+      if (hintArrow) hintArrow.style.transform = 'translateY(15px)';
+      
+      setTimeout(() => {
+        if (hintArrow) hintArrow.style.transform = '';
+        showView(nextItem.id);
+      }, 400);
+    }
+  } else if (dir === -1) { // Scroll Up -> Previous page
+    const isAtTop = checkIfAtTop();
+    if (isAtTop && currIdx > 0) {
+      lastScrollAdvanceTime = now;
+      const prevItem = NAV_ITEMS[currIdx - 1];
+      showToast(state.lang === 'hi' ? `${prevItem.hi} पर वापस जा रहे हैं...` : `Going back to ${prevItem.en}...`);
+      
+      showView(prevItem.id);
+      setTimeout(() => {
+        if (prevItem.id === 'home') {
+          const track = document.getElementById('homeScrollTrack');
+          if (track) window.scrollTo(0, track.scrollHeight);
+        } else {
+          window.scrollTo(0, document.documentElement.scrollHeight - window.innerHeight - 20);
+        }
+      }, 100);
+    }
+  }
+}
+
 // ---------- Init ----------
 async function init(){
   await initDB(); // Initialize IndexedDB first
@@ -4064,6 +4674,7 @@ async function init(){
   
   // Preload local sage visual image sequence
   preloadSageFrames();
+  initScrollNavAdvance();
   
   showView('home');
 
