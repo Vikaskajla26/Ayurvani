@@ -3085,9 +3085,67 @@ function getFetchVerseUrl(sthana, chapter, verse) {
   return `${base}${endpoint}?sthana=${encodeURIComponent(sthana)}&chapter=${chapter}&verse=${verse}`;
 }
 
+let speechUtterance = null;
+
+function fallbackRecite(text, onFinished) {
+  if (!('speechSynthesis' in window)) {
+    showToast('Browser does not support Speech Synthesis');
+    if (onFinished) onFinished();
+    return;
+  }
+  
+  window.speechSynthesis.cancel();
+  speechUtterance = new SpeechSynthesisUtterance(text);
+  
+  const voices = window.speechSynthesis.getVoices();
+  const selectedVoice = voices.find(v => v.lang === 'sa-IN' || v.lang === 'sa') || 
+                        voices.find(v => v.lang === 'hi-IN' || v.lang === 'hi') || 
+                        voices.find(v => v.lang.startsWith('hi') || v.lang.startsWith('sa'));
+  if (selectedVoice) speechUtterance.voice = selectedVoice;
+  
+  speechUtterance.rate = 0.76; 
+  speechUtterance.pitch = 0.88; 
+  
+  speechUtterance.onstart = () => {
+    document.getElementById('spcWaveform').classList.add('playing');
+    document.getElementById('spcPlayIcon').textContent = '\u23F8';
+    document.getElementById('spcPlayLabel').textContent = 'Pause';
+    
+    shlokaPlayerAudio = {
+      isSpeech: true,
+      play: async () => { window.speechSynthesis.resume(); return Promise.resolve(); },
+      pause: () => { window.speechSynthesis.pause(); },
+      paused: false,
+      currentTime: 0,
+      duration: text.length * 0.1,
+      addEventListener: () => {},
+      removeEventListener: () => {}
+    };
+  };
+  
+  speechUtterance.onend = () => {
+    document.getElementById('spcWaveform').classList.remove('playing');
+    document.getElementById('spcPlayIcon').textContent = '\u25B6';
+    document.getElementById('spcPlayLabel').textContent = 'Recitation Sunein';
+    shlokaPlayerAudio = null;
+    if (onFinished) onFinished();
+  };
+  
+  speechUtterance.onerror = () => {
+    document.getElementById('spcWaveform').classList.remove('playing');
+    shlokaPlayerAudio = null;
+    if (onFinished) onFinished();
+  };
+  
+  window.speechSynthesis.speak(speechUtterance);
+}
+
 async function checkVagdhenuServer() {
   try {
-    const r = await fetch(VAGDHENU_SERVER + '/health', { signal: AbortSignal.timeout(3000) });
+    const r = await fetch(VAGDHENU_SERVER + '/health', { 
+      headers: { 'Bypass-Tunnel-Reminder': 'true' },
+      signal: AbortSignal.timeout(3000) 
+    });
     vagdhenuAvailable = r.ok;
   } catch {
     vagdhenuAvailable = false;
@@ -3102,13 +3160,15 @@ async function generateAIChant() {
 
   const aiBtn = document.getElementById('spcAiBtn');
   if (aiBtn) { aiBtn.disabled = true; aiBtn.innerHTML = '\u23F3 Generating...'; }
-  showToast('\uD83C\uDF0A Vagdhenu AI se Sanskrit chanting generate ho rahi hai...');
+  showToast('\uD83C\uDF0A Chanting request process ho rahi hai...');
 
   // Check server
   const online = await checkVagdhenuServer();
   if (!online) {
-    showToast('\u26A0\uFE0F Vagdhenu server offline hai. Run karein: python vagdhenu/scripts/server.py');
-    if (aiBtn) { aiBtn.disabled = false; aiBtn.innerHTML = '\uD83E\uDD16 AI Chant Generate'; }
+    showToast('\u2139\uFE0F Vagdhenu server offline. Browser Speech Chanting active...');
+    fallbackRecite(c.sanskrit, () => {
+      if (aiBtn) { aiBtn.disabled = false; aiBtn.innerHTML = '\uD83E\uDD16 AI Chant Generate'; }
+    });
     return;
   }
 
@@ -3117,7 +3177,9 @@ async function generateAIChant() {
     const meter = encodeURIComponent(c.cat && c.cat.toLowerCase().includes('gayatri') ? 'gayatri' : 'anushtubh');
     const url = `${VAGDHENU_SERVER}/recite?text=${text}&meter=${meter}&seed=42&speed=0.90`;
 
-    const resp = await fetch(url);
+    const resp = await fetch(url, {
+      headers: { 'Bypass-Tunnel-Reminder': 'true' }
+    });
     if (!resp.ok) throw new Error('Server error: ' + resp.status);
 
     const blob = await resp.blob();
@@ -3264,8 +3326,27 @@ async function generateCustomAIChant() {
   
   const online = await checkVagdhenuServer();
   if (!online) {
-    showToast('⚠️ Vagdhenu server offline hai. Run karein: python vagdhenu/scripts/server.py');
-    if (reciteBtn) { reciteBtn.disabled = false; reciteBtn.innerHTML = '🔊 AI Recite Shloka'; }
+    showToast('ℹ️ Vagdhenu server offline. Browser Speech Chanting active...');
+    
+    // Display in Player Card
+    document.getElementById('spcCat').textContent = 'Custom Recitation (Browser TTS)';
+    document.getElementById('spcSanskrit').textContent = text;
+    document.getElementById('spcTranslit').textContent = `Meter: ${meter}`;
+    document.getElementById('spcMeaning').textContent = 'Spoken dynamically via client-side Browser Speech synthesis.';
+    document.getElementById('spcTimer').textContent = '0:00 / 0:00';
+    
+    const badge = document.getElementById('spcAudioBadge');
+    if (badge) badge.style.display = 'inline-block';
+    
+    const aiBtn = document.getElementById('spcAiBtn');
+    if (aiBtn) aiBtn.style.display = 'none';
+    
+    const card = document.getElementById('shlokaPlayerCard');
+    card.style.display = 'block';
+    
+    fallbackRecite(text, () => {
+      if (reciteBtn) { reciteBtn.disabled = false; reciteBtn.innerHTML = '🔊 AI Recite Shloka'; }
+    });
     return;
   }
   
@@ -3273,7 +3354,9 @@ async function generateCustomAIChant() {
     const encodedText = encodeURIComponent(text);
     const url = `${VAGDHENU_SERVER}/recite?text=${encodedText}&meter=${meter}&seed=42&speed=0.90`;
     
-    const resp = await fetch(url);
+    const resp = await fetch(url, {
+      headers: { 'Bypass-Tunnel-Reminder': 'true' }
+    });
     if (!resp.ok) throw new Error('Server error: ' + resp.status);
     
     const blob = await resp.blob();
@@ -4550,8 +4633,10 @@ async function reciteLocalVerse() {
   
   const online = await checkVagdhenuServer();
   if (!online) {
-    showToast('⚠️ Vagdhenu server offline hai. Run karein: python vagdhenu/scripts/server.py');
-    if (btn) { btn.disabled = false; btn.innerHTML = '🔊 AI Recite'; }
+    showToast('ℹ️ Vagdhenu server offline. Browser Speech Chanting active...');
+    fallbackRecite(currentLocalVerseText, () => {
+      if (btn) { btn.disabled = false; btn.innerHTML = '🔊 AI Recite'; }
+    });
     return;
   }
   
@@ -4559,7 +4644,9 @@ async function reciteLocalVerse() {
     const encodedText = encodeURIComponent(currentLocalVerseText);
     const url = `${VAGDHENU_SERVER}/recite?text=${encodedText}&meter=anushtubh&seed=42&speed=0.90`;
     
-    const resp = await fetch(url);
+    const resp = await fetch(url, {
+      headers: { 'Bypass-Tunnel-Reminder': 'true' }
+    });
     if (!resp.ok) throw new Error('Server error: ' + resp.status);
     
     const blob = await resp.blob();
