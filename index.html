@@ -591,7 +591,7 @@
   .toolbar{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:22px; align-items:center;}
   .toolbar input[type=text]{
     flex:1; min-width:200px; padding:12px 16px; border-radius:8px; border:1.5px solid var(--line);
-    background:var(--card-solid); font-size:0.95rem; color:var(--ink);
+    background:var(--card-solid); font-size:0.95rem; color:var(--cream);
   }
   .chip{padding:7px 16px; border-radius:16px; border:1.5px solid var(--line); background:var(--card-solid); font-size:0.82rem; color:var(--ink-soft); transition: .2s;}
   .chip:hover{border-color: var(--gold);}
@@ -616,7 +616,7 @@
   .card .sanskrit{font-family:'Noto Serif Devanagari',serif; font-size:1.28rem; color:var(--gold-light); line-height:1.5;}
   body.light-mode .card .sanskrit { color: var(--teal-deep); }
   .card .translit{font-style:italic; color:var(--ink-soft); font-size:0.88rem;}
-  .card .meaning{font-size:0.9rem; color:var(--ink); border-top:1px dashed var(--line); padding-top:10px; margin-top:4px;}
+  .card .meaning{font-size:0.9rem; color:var(--cream); border-top:1px dashed var(--line); padding-top:10px; margin-top:4px;}
   .card .book-title{font-size:1.18rem; font-weight:700; color:var(--gold-light); font-family:'Fraunces',serif;}
   body.light-mode .card .book-title { color: var(--teal-deep); }
   .card .book-meta{font-size:0.78rem; color:var(--copper); font-weight:600;}
@@ -729,7 +729,7 @@
   }
   .admin-form input, .admin-form textarea, .admin-form select {
     width:100%; padding:11px 14px; border-radius:10px; border:1.5px solid var(--line);
-    font-size:0.9rem; font-family:inherit; background:var(--bg-soft); color:var(--ink);
+    font-size:0.9rem; font-family:inherit; background:var(--bg-soft); color:var(--cream);
     transition: border-color 0.2s, box-shadow 0.2s;
   }
   .admin-form input:focus, .admin-form textarea:focus, .admin-form select:focus {
@@ -1434,6 +1434,11 @@
         <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.4"/><path d="M4.5 20.5c1.5-4 4.2-6 7.5-6s6 2 7.5 6"/></svg>
         <span class="tip">About Us</span>
       </div>
+      <div class="dock-item" style="--glow:var(--gold)" data-label="Admin" data-view="admin" onclick="showView('admin')">
+        <div class="fill"></div>
+        <svg viewBox="0 0 24 24"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" fill="currentColor"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z" stroke="currentColor" fill="none" stroke-width="1.6"/></svg>
+        <span class="tip">Admin Panel</span>
+      </div>
     </div>
   </nav>
 
@@ -1533,7 +1538,7 @@
         </div>
 
         <div id="shlokaCustomTabContent" style="display:none; flex-direction: column; gap: 14px; background: var(--card); border: 1px solid var(--line); padding: 24px; border-radius: 16px; backdrop-filter: blur(8px); margin-bottom: 14px;">
-          <textarea id="customShlokaText" rows="3" placeholder="Sanskrit Shloka likhein ya niche text file (.txt) upload karein..." style="width:100%; padding:12px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--ink); font-family:'Noto Serif Devanagari',serif; font-size:1.15rem; outline:none; transition:border-color 0.25s; resize:vertical;"></textarea>
+          <textarea id="customShlokaText" rows="3" placeholder="Sanskrit Shloka likhein ya niche text file (.txt) upload karein..." style="width:100%; padding:12px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-family:'Noto Serif Devanagari',serif; font-size:1.15rem; outline:none; transition:border-color 0.25s; resize:vertical;"></textarea>
           
           <div class="custom-chant-actions">
             <label class="spc-upload-label" style="margin:0; border-style:dashed;">
@@ -1543,7 +1548,7 @@
             
             <div style="display:flex; align-items:center; gap:8px;">
               <label for="customShlokaMeter" style="font-size:0.85rem; color:var(--ink-soft);">Meter (वृत्त):</label>
-              <select id="customShlokaMeter" style="padding:6px 12px; border-radius:6px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--ink); outline:none;">
+              <select id="customShlokaMeter" style="padding:6px 12px; border-radius:6px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); outline:none;">
                 <option value="anushtubh">Anushtubh (अनुष्टुभ्)</option>
                 <option value="gayatri">Gayatri (गायत्री)</option>
                 <option value="trishtubh">Trishtubh (त्रिष्टुभ्)</option>
@@ -1700,7 +1705,7 @@
       </p>
       
       <div class="search-row" style="margin-bottom: 12px;">
-        <input type="text" id="carakaSearchInput" placeholder="e.g. Jvara, Agni, Sutrasthana 1.20, Tika commentary..." style="flex:1; padding:12px 16px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--ink); font-size:0.95rem;">
+        <input type="text" id="carakaSearchInput" placeholder="e.g. Jvara, Agni, Sutrasthana 1.20, Tika commentary..." style="flex:1; padding:12px 16px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-size:0.95rem;">
         <button class="btn-primary" onclick="triggerCarakaSearch()" style="padding:12px 24px; white-space:nowrap;">Search Shloka & Tika</button>
       </div>
       
@@ -1713,7 +1718,7 @@
       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:16px; margin-bottom: 20px;">
         <div>
           <label style="font-size:0.8rem; color:var(--ink-soft); font-weight:600; display:block; margin-bottom:6px;">Sthana (स्थान)</label>
-          <select id="carakaSthana" onchange="updateReferencePreview()" style="width:100%; padding:11px 14px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--ink); font-size:0.95rem; outline:none;">
+          <select id="carakaSthana" onchange="updateReferencePreview()" style="width:100%; padding:11px 14px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-size:0.95rem; outline:none;">
             <option value="Sutrasthana">Sutra Sthana (सूत्रस्थान)</option>
             <option value="Nidanasthana">Nidan Sthana (निदानस्थान)</option>
             <option value="Vimanasthana">Vimana Sthana (विमानस्थान)</option>
@@ -1726,11 +1731,11 @@
         </div>
         <div>
           <label style="font-size:0.8rem; color:var(--ink-soft); font-weight:600; display:block; margin-bottom:6px;">Chapter (अध्याय संख्या)</label>
-          <input type="number" id="carakaChapter" min="1" oninput="updateReferencePreview()" placeholder="e.g. 1" style="width:100%; padding:11px 14px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--ink); font-size:0.95rem; outline:none;">
+          <input type="number" id="carakaChapter" min="1" oninput="updateReferencePreview()" placeholder="e.g. 1" style="width:100%; padding:11px 14px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-size:0.95rem; outline:none;">
         </div>
         <div>
           <label style="font-size:0.8rem; color:var(--ink-soft); font-weight:600; display:block; margin-bottom:6px;">Shloka / Verse (श्लोक संख्या)</label>
-          <input type="number" id="carakaShloka" min="1" oninput="updateReferencePreview()" placeholder="e.g. 20 (Optional)" style="width:100%; padding:11px 14px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--ink); font-size:0.95rem; outline:none;">
+          <input type="number" id="carakaShloka" min="1" oninput="updateReferencePreview()" placeholder="e.g. 20 (Optional)" style="width:100%; padding:11px 14px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-size:0.95rem; outline:none;">
         </div>
       </div>
       
@@ -1751,11 +1756,11 @@
           <table style="width:100%; border-collapse:collapse; margin-bottom:16px; font-size:0.92rem;">
             <tr style="border-bottom:1px solid var(--line);">
               <td style="padding:8px 0; color:var(--ink-soft); font-weight:600; width:35%;">Sthana (स्थान)</td>
-              <td style="padding:8px 0; color:var(--ink);" id="resSthana">Sutrasthana (सूत्रस्थान)</td>
+              <td style="padding:8px 0; color:var(--cream);" id="resSthana">Sutrasthana (सूत्रस्थान)</td>
             </tr>
             <tr style="border-bottom:1px solid var(--line);">
               <td style="padding:8px 0; color:var(--ink-soft); font-weight:600;">Chapter (अध्याय)</td>
-              <td style="padding:8px 0; color:var(--ink);" id="resChapter">Chapter 1</td>
+              <td style="padding:8px 0; color:var(--cream);" id="resChapter">Chapter 1</td>
             </tr>
             <tr style="border-bottom:1px solid var(--line);">
               <td style="padding:8px 0; color:var(--ink-soft); font-weight:600;">Chapter Name (नाम)</td>
@@ -1763,7 +1768,7 @@
             </tr>
             <tr style="border-bottom:1px solid var(--line);">
               <td style="padding:8px 0; color:var(--ink-soft); font-weight:600;">Shloka (श्लोक)</td>
-              <td style="padding:8px 0; color:var(--ink);" id="resShloka">-</td>
+              <td style="padding:8px 0; color:var(--cream);" id="resShloka">-</td>
             </tr>
           </table>
 
@@ -1793,25 +1798,25 @@
               <!-- Translation -->
               <div style="border-left:3px solid var(--copper); padding-left:12px; margin-bottom:18px;">
                 <strong style="font-size:0.82rem; color:var(--ink-soft); display:block; margin-bottom:4px;">📝 Translation (अनुवाद):</strong>
-                <p id="localVerseTranslation" style="font-size:0.92rem; color:var(--ink); margin:0; line-height:1.6;"></p>
+                <p id="localVerseTranslation" style="font-size:0.92rem; color:var(--cream); margin:0; line-height:1.6;"></p>
               </div>
               
               <!-- Tattva Vimarsha (Fundamental Principles) -->
               <div id="tattvaVimarsha" style="display:none; background:rgba(197,152,65,0.04); border:1px solid rgba(197,152,65,0.15); border-radius:8px; padding:16px; margin-bottom:14px;">
                 <strong style="font-size:0.82rem; color:var(--gold); display:block; margin-bottom:8px; font-weight:700;">🔑 Tattva Vimarsha (Fundamental Principle):</strong>
-                <div id="tattvaContent" style="font-size:0.88rem; color:var(--ink); margin:0; line-height:1.6;"></div>
+                <div id="tattvaContent" style="font-size:0.88rem; color:var(--cream); margin:0; line-height:1.6;"></div>
               </div>
               
               <!-- Vidhi Vimarsha (Applied Inferences) -->
               <div id="vidhiVimarsha" style="display:none; background:rgba(206,106,82,0.04); border:1px solid rgba(206,106,82,0.15); border-radius:8px; padding:16px; margin-bottom:14px;">
                 <strong style="font-size:0.82rem; color:var(--copper); display:block; margin-bottom:8px; font-weight:700;">📚 Vidhi Vimarsha (Applied Commentary):</strong>
-                <div id="vidhiContent" style="font-size:0.88rem; color:var(--ink); margin:0; line-height:1.6;"></div>
+                <div id="vidhiContent" style="font-size:0.88rem; color:var(--cream); margin:0; line-height:1.6;"></div>
               </div>
               
               <!-- Humanized Explanation -->
               <div style="background:linear-gradient(135deg, rgba(197,152,65,0.06), rgba(206,106,82,0.04)); border:1px solid rgba(197,152,65,0.12); border-radius:8px; padding:16px;">
                 <strong style="font-size:0.82rem; color:var(--gold-light); display:block; margin-bottom:8px; font-weight:700;">💡 Easy Explanation (सरल व्याख्या):</strong>
-                <p id="localVerseEasy" style="font-size:0.9rem; color:var(--ink); margin:0; line-height:1.7; font-style:italic;"></p>
+                <p id="localVerseEasy" style="font-size:0.9rem; color:var(--cream); margin:0; line-height:1.7; font-style:italic;"></p>
               </div>
               
               <!-- Source Attribution -->
@@ -2179,6 +2184,7 @@ const NAV_ITEMS = [
   {id:'gemini-search', hi:'चरक खोज', en:'Caraka Finder'},
   {id:'favorites', hi:'पसंदीदा', en:'Favorites'},
   {id:'about', hi:'हमारे बारे में', en:'About Us'},
+  {id:'admin', hi:'एडमिन', en:'Admin'},
 ];
 
 let state = {
@@ -2630,7 +2636,6 @@ function handleScroll() {
 function renderNav(){
   const nav = document.getElementById('mainNav');
   let items = [...NAV_ITEMS];
-  if(state.profile && state.profile.isAdmin) items.push({id:'admin', hi:'एडमिन', en:'Admin'});
   nav.innerHTML = items.map(i=>`<button data-view="${i.id}" onclick="showView('${i.id}')">${state.lang==='hi'?i.hi:i.en}</button>`).join('');
 }
 
@@ -2712,7 +2717,7 @@ function searchChantsHome() {
   
   if (matches.length > 0) {
     dropdown.innerHTML = matches.map(c => 
-      `<div onclick="selectChantHome('${c.id}')" style="padding:8px 12px; cursor:pointer; font-size:0.82rem; border-bottom:1px solid var(--line); color:var(--ink);">
+      `<div onclick="selectChantHome('${c.id}')" style="padding:8px 12px; cursor:pointer; font-size:0.82rem; border-bottom:1px solid var(--line); color:var(--cream);">
         <strong>${c.translit.slice(0, 30)}...</strong> <br><span style="font-size:0.7rem;color:var(--ink-soft);">${c.cat}</span>
       </div>`
     ).join('');
