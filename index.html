@@ -5,46 +5,46 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>आयुर्वेद वाणी | Ayurved Vani</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Noto+Serif+Devanagari:wght@500;700&family=Noto+Sans+Devanagari:wght@400;500;600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Yatra+One&family=Marcellus&family=Noto+Serif+Devanagari:wght@500;700&family=Noto+Sans+Devanagari:wght@400;500;600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
   /* ---------- Ambient Design System (Forest Dark Mode Default) ---------- */
   :root{
-    --bg: #0A0F0D; /* Deep forest charcoal black */
-    --bg-soft: #111A16;
-    --card: rgba(20, 32, 27, 0.65); /* Glassmorphic cards */
-    --card-solid: #131E19;
-    --ink: #F3ECE8; /* Soft pearl cream */
-    --ink-soft: #A3B5AC; /* Moss-tinted sage grey */
-    --teal: #367C59; /* Vibrant forest green */
-    --teal-deep: #060A08;
-    --gold: #C59841; /* Rich ambient gold */
-    --gold-light: #F2DEC0;
-    --copper: #CE6A52; /* Terracotta copper */
-    --line: rgba(243,236,232,0.08);
-    --shadow: 0 12px 40px rgba(0,0,0,0.55);
-    --glass-bg: rgba(20, 32, 27, 0.45);
-    --glass-border: rgba(255, 255, 255, 0.05);
-    --accent: #CE6A52;
+    --bg: #050A08; /* Deep forest pine */
+    --bg-soft: #0C1310;
+    --card: rgba(12, 21, 17, 0.72); /* Ayurvedic translucent emerald card */
+    --card-solid: #0F1A15;
+    --ink: #F6EFDD; /* Soft pearl cream sand */
+    --ink-soft: #8BA295; /* sage grey ink soft */
+    --teal: #2D6B4F; /* Emerald forest green */
+    --teal-deep: #030605;
+    --gold: #D4AF37; /* Radiant gold */
+    --gold-light: #F3E5AB;
+    --copper: #D16E53; /* Terracotta copper */
+    --line: rgba(212, 175, 55, 0.15);
+    --shadow: 0 16px 48px rgba(0,0,0,0.65);
+    --glass-bg: rgba(12, 21, 17, 0.5);
+    --glass-border: rgba(212, 175, 55, 0.12);
+    --accent: #D16E53;
   }
 
   /* ---------- Serene Light Sand Mode ---------- */
   body.light-mode{
-    --bg: #F5EFEB; /* Sand cream background */
-    --bg-soft: #E8E1C9;
-    --card: rgba(251, 248, 239, 0.8);
-    --card-solid: #FBF8EF;
-    --ink: #1E2B22; /* Charcoal leaf ink */
-    --ink-soft: #4A5A4E;
-    --teal: #1F4A3D; /* Classic ayurvedic teal */
-    --teal-deep: #14332A;
-    --gold: #B9862E;
-    --gold-light: #E4C170;
-    --copper: #9C4A2E;
-    --line: rgba(30,43,34,0.1);
-    --shadow: 0 12px 45px rgba(20,51,42,0.08);
-    --glass-bg: rgba(251, 248, 239, 0.6);
-    --glass-border: rgba(30,43,34,0.08);
-    --accent: #9C4A2E;
+    --bg: #FAF7EE; /* Warm sand background */
+    --bg-soft: #F1ECD9;
+    --card: rgba(255, 254, 250, 0.88); /* Warm white ivory card */
+    --card-solid: #FFFEFA;
+    --ink: #14241E; /* Deep pine charcoal ink */
+    --ink-soft: #51665D; /* sage grey ink soft */
+    --teal: #1F4E3D; /* Deep ayurvedic pine green */
+    --teal-deep: #0D261E;
+    --gold: #A37827; /* Antique brass gold */
+    --gold-light: #DFCA95;
+    --copper: #AB4E34; /* Rusty terracotta */
+    --line: rgba(163, 120, 39, 0.18);
+    --shadow: 0 16px 45px rgba(20,51,42,0.06);
+    --glass-bg: rgba(255, 254, 250, 0.75);
+    --glass-border: rgba(163, 120, 39, 0.15);
+    --accent: #AB4E34;
   }
 
   *{box-sizing:border-box;}
@@ -55,7 +55,9 @@
   }
   .hin{font-family:'Noto Sans Devanagari',sans-serif;}
   .hin-serif{font-family:'Noto Serif Devanagari',serif;}
-  h1,h2,h3,.display{font-family:'Fraunces',serif; letter-spacing:-0.01em;}
+  .hin-calligraphy{font-family:'Yatra One',cursive; font-weight:normal; letter-spacing:0.02em;}
+  .calligraphy-title{font-family:'Marcellus',serif; letter-spacing:0.04em; text-transform:uppercase;}
+  h1,h2,h3,.display{font-family:'Marcellus',serif; letter-spacing:0.02em;}
   .mono{font-family:'JetBrains Mono',monospace;}
   a{color:inherit; text-decoration:none;}
   button{font-family:inherit; cursor:pointer;}
@@ -195,16 +197,15 @@
   /* ---------- Scroll Track Hero Animation (Home Section Only) ---------- */
   .scroll-track {
     position: relative;
-    height: 280vh; /* 3 screens of scrolling for fine-grained frame scrubbing */
+    height: calc(100vh - 66px);
     margin-bottom: 40px;
     width: calc(100% + 48px);
     margin-left: -24px;
+    overflow: hidden;
   }
   .sticky-container {
-    position: sticky;
-    top: 60px; /* Offset header */
-    height: calc(100vh - 60px);
-    overflow: hidden;
+    position: relative;
+    height: 100%;
     width: 100%;
     display: flex;
     align-items: center;
@@ -290,6 +291,46 @@
   }
   .hero-ctas {
     display:flex; gap:12px;
+  }
+
+  /* ---------- Ayurvedic Calligraphy Intro Card ---------- */
+  .hero-intro-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    z-index: 5;
+  }
+  .hero-intro-card {
+    max-width: 600px;
+    width: 100%;
+    background: var(--glass-bg);
+    border: 1px solid var(--line);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 45px 30px;
+    border-radius: 28px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), inset 0 0 20px rgba(212, 175, 55, 0.08), var(--shadow);
+    color: var(--ink);
+    text-align: center;
+    position: relative;
+  }
+  .hero-intro-card::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border: 1px solid rgba(212, 175, 55, 0.28);
+    border-radius: 22px;
+    pointer-events: none;
+  }
+  .ornament-divider {
+    color: var(--gold);
+    font-size: 1.15rem;
+    margin: 8px 0;
+    letter-spacing: 6px;
+    opacity: 0.85;
   }
   
   /* Right Float Overlay Card for Mala */
@@ -881,7 +922,7 @@
   @media(max-width:760px){
     /* Layout & Main Containers */
     main { padding: 0 12px 90px; }
-    .scroll-track { height: 220vh; width: calc(100% + 24px); margin-left: -12px; }
+    .scroll-track { height: calc(100vh - 60px); width: calc(100% + 24px); margin-left: -12px; }
     .scroll-overlay { padding: 0 12px; justify-content: center; }
     #overlay3 { justify-content: center; }
     
@@ -1066,51 +1107,37 @@
 
   <section id="view-home" class="active">
     
-    <!-- Dynamic Scroll Track Hero Container -->
+    <!-- Dynamic Hero Container -->
     <div class="scroll-track" id="homeScrollTrack">
       <div class="sticky-container">
         <canvas id="heroCanvas"></canvas>
         
-        <!-- Frame Overlay 1 -->
-        <div class="scroll-overlay active" id="overlay1">
-          <div class="overlay-card">
-            <span class="hindi-line">आयुर्वेद वाणी</span>
-            <h1>Sacred sound, timeless healing</h1>
-            <p data-i18n="heroText">Ayurveda ke shlok, mantra aur classical granthon ka collection — ek jagah par. Scroll karein aur anubhav karein.</p>
-            <div class="hero-ctas">
-              <button class="btn-primary" onclick="showView('chants')">Chants dekhein</button>
-              <button class="btn-ghost" onclick="showView('books')">Books explore karein</button>
+        <div class="hero-intro-overlay">
+          <div class="hero-intro-card">
+            <span class="hin-calligraphy" style="font-size: 3rem; color: var(--gold); display: block; margin-bottom: 12px; line-height: 1.2;">आयुर्वेद वाणी</span>
+            <div class="ornament-divider">⚜ · ❖ · ⚜</div>
+            <h1 class="calligraphy-title" style="font-size: 2.1rem; margin: 15px 0 10px; font-weight: normal; color: var(--ink);">Ayurvani</h1>
+            <p style="font-size: 1.15rem; max-width: 520px; margin: 0 auto 28px; color: var(--ink-soft); line-height: 1.6;" data-i18n="heroIntroDesc">
+              Sacred sound, timeless healing. Discover the divine rhythms of classical Sanskrit shlokas, ancient Ayurvedic texts, and meditative chants.
+            </p>
+            <div class="hero-ctas" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+              <button class="btn-primary" onclick="showView('chants')" style="font-size: 1rem; padding: 12px 28px; border-radius: 30px; font-weight: 600;"><span data-i18n="ctaRecite">श्लोक वाचन sunein</span></button>
+              <button class="btn-ghost" onclick="showView('gemini-search')" style="font-size: 1rem; padding: 12px 28px; border-radius: 30px; font-weight: 600; border: 1px solid var(--line);"><span data-i18n="ctaSearch">चरक खोज (Finder)</span></button>
             </div>
           </div>
         </div>
-        
-        <!-- Frame Overlay 2 -->
-        <div class="scroll-overlay" id="overlay2">
-          <div class="overlay-card">
-            <span class="hindi-line" style="font-size: 1.8rem; color: var(--gold);">मंत्र और श्लोक</span>
-            <h2 style="font-size: 2.1rem; margin: 6px 0 12px; font-family:'Fraunces', serif;">Chitt ki shanti aur swasthya</h2>
-            <p>Sound is the first medicine. Sanskrit ke divya shlokon ka uchcharan aur unka arth hamare sharir aur chitt ko sanyamit aur swasthya-labh pradan karta hai.</p>
-          </div>
-        </div>
-        
-        <!-- Frame Overlay 3 -->
-        <div class="scroll-overlay" id="overlay3">
-          <div class="overlay-card">
-            <span class="hindi-line" style="font-size: 1.8rem; color: var(--gold);">स्वाध्याय और अभ्यास</span>
-            <h2 style="font-size: 2.1rem; margin: 6px 0 12px; font-family:'Fraunces', serif;">Shlokon ka swarup sunein</h2>
-            <p>Apne shlokon aur granthon ko naye roop mein khojein. AI recitation aur custom chanting ke sath swadhyaya ko aasan aur prabhavshali banayein.</p>
-          </div>
-        </div>
-        
       </div>
     </div>
 
+  </section>
+
+  <section id="view-chants">
     <!-- Home Bottom Content: Shloka Search & Recitation Player -->
-    <div class="home-bottom-content" id="homeBottomContent">
+    <div class="home-bottom-content" id="homeBottomContent" style="display: block; margin-top: 0; padding-top: 0;">
 
       <!-- Shloka Search Section -->
       <div class="shloka-search-section">
-        <div class="section-eyebrow">🎵 Shloka Recitation</div>
+        <div class="section-eyebrow">🎙️ Shloka Recitation</div>
         <h2>Apna Shloka Dhundein, Sunein</h2>
         <p class="subtitle">Koi bhi shloka search karein — naam, category ya Sanskrit text se. Select karte hi audio recitation automatically chalegi.</p>
 
@@ -1249,19 +1276,19 @@
         <div class="grid" id="featuredChant"></div>
       </div>
     </div>
-    
-  </section>
 
-  <section id="view-chants">
-    <div class="section-head">
-      <h2 class="hin-serif">मंत्र · Chants</h2>
-      <span class="count mono" id="chantCount"></span>
+    <!-- Shloka Library Grid -->
+    <div style="margin-top: 40px; border-top: 1px solid var(--line); padding-top: 40px;">
+      <div class="section-head">
+        <h2 class="hin-serif">श्लोक ग्रंथालय · Shloka Library</h2>
+        <span class="count mono" id="chantCount"></span>
+      </div>
+      <div class="toolbar">
+        <input type="text" id="chantSearch" placeholder="Chant, devta ya keyword search karein...">
+      </div>
+      <div class="toolbar" id="chantChips"></div>
+      <div class="grid" id="chantGrid"></div>
     </div>
-    <div class="toolbar">
-      <input type="text" id="chantSearch" placeholder="Chant, devta ya keyword search karein...">
-    </div>
-    <div class="toolbar" id="chantChips"></div>
-    <div class="grid" id="chantGrid"></div>
   </section>
 
   <section id="view-books">
@@ -1667,7 +1694,7 @@ if (!window.storage) {
 const ADMIN_DEMO_PASSWORD = "ayurved108";
 const NAV_ITEMS = [
   {id:'home', hi:'होम', en:'Home'},
-  {id:'chants', hi:'मंत्र', en:'Chants'},
+  {id:'chants', hi:'श्लोक वाचन', en:'Shloka Recitation'},
   {id:'books', hi:'ग्रंथ', en:'Books'},
   {id:'gemini-search', hi:'चरक खोज', en:'Caraka Finder'},
   {id:'favorites', hi:'पसंदीदा', en:'Favorites'},
@@ -1989,6 +2016,47 @@ function drawFrame(index) {
   lastRenderedFrame = index;
 }
 
+let breathingAnimationId = null;
+let breathingDirection = 1;
+let currentBreathingFrame = 1;
+
+function startBreathingAnimation() {
+  if (breathingAnimationId) return;
+  
+  function tick() {
+    const viewHome = document.getElementById('view-home');
+    if (!viewHome || !viewHome.classList.contains('active')) {
+      breathingAnimationId = null;
+      return;
+    }
+    
+    currentBreathingFrame += breathingDirection * 0.18;
+    if (currentBreathingFrame >= TOTAL_FRAMES) {
+      currentBreathingFrame = TOTAL_FRAMES;
+      breathingDirection = -1;
+    } else if (currentBreathingFrame <= 1) {
+      currentBreathingFrame = 1;
+      breathingDirection = 1;
+    }
+    
+    const frameIndex = Math.floor(currentBreathingFrame);
+    if (frameIndex !== lastRenderedFrame) {
+      drawFrame(frameIndex);
+    }
+    
+    breathingAnimationId = requestAnimationFrame(tick);
+  }
+  
+  breathingAnimationId = requestAnimationFrame(tick);
+}
+
+function stopBreathingAnimation() {
+  if (breathingAnimationId) {
+    cancelAnimationFrame(breathingAnimationId);
+    breathingAnimationId = null;
+  }
+}
+
 function finishPreloading() {
   const preloader = document.getElementById('preloader');
   if (preloader) {
@@ -1996,22 +2064,11 @@ function finishPreloading() {
     setTimeout(() => preloader.style.display = 'none', 800);
   }
   
-  // Render initial scroll overlays
-  handleScroll();
-}
-
-// ---------- Scroll scrubbing controller ----------
-let scrollTicking = false;
-
-window.addEventListener('scroll', () => {
-  if (!scrollTicking) {
-    window.requestAnimationFrame(() => {
-      handleScroll();
-      scrollTicking = false;
-    });
-    scrollTicking = true;
+  const viewHome = document.getElementById('view-home');
+  if (viewHome && viewHome.classList.contains('active')) {
+    startBreathingAnimation();
   }
-});
+}
 
 function getScrollPercent() {
   const scrollTrack = document.getElementById('homeScrollTrack');
@@ -2064,16 +2121,13 @@ function showView(id){
   
   // Router layout switches
   const scrollTrack = document.getElementById('homeScrollTrack');
-  const homeBottom = document.getElementById('homeBottomContent');
   
   if (id === 'home') {
     if (scrollTrack) scrollTrack.style.display = 'block';
-    if (homeBottom) homeBottom.style.display = 'block';
-    // Draw visual instantly
-    setTimeout(() => handleScroll(), 40);
+    startBreathingAnimation();
   } else {
     if (scrollTrack) scrollTrack.style.display = 'none';
-    if (homeBottom) homeBottom.style.display = 'none';
+    stopBreathingAnimation();
   }
   
   document.querySelectorAll('main > section').forEach(s=>s.classList.remove('active'));
@@ -2082,6 +2136,9 @@ function showView(id){
   
   document.querySelectorAll('#mainNav button').forEach(b=>b.classList.toggle('active', b.dataset.view===id));
   
+  if(id==='chants') {
+    renderChants();
+  }
   if(id==='favorites') renderFavorites();
   if(id==='admin') renderAdmin();
   
@@ -2816,7 +2873,7 @@ function chantCard(c){
     <div class="meaning">${c.meaning}</div>
     <div style="display:flex; gap:8px; margin-top:4px; flex-wrap:wrap;">
       <button class="play-btn ${playing?'playing':''}" onclick="playChant('${c.id}')">${playing? '⏸ Sun rahe hain...' : '🔊 Sunein'}</button>
-      <button class="btn-ghost" style="padding:6px 14px; font-size:0.8rem;" onclick="showView('home'); selectChantHome('${c.id}'); setTimeout(()=>document.getElementById('homeScrollTrack').scrollIntoView({ behavior: 'smooth', block: 'end' }), 200);">🎙 Practice Chanting</button>
+      <button class="btn-ghost" style="padding:6px 14px; font-size:0.8rem;" onclick="selectShlokaHome('${c.id}'); window.scrollTo({ top: document.getElementById('homeBottomContent').offsetTop - 20, behavior: 'smooth' });">🎙 Practice Recitation</button>
     </div>
     ${!c.audioUrl ? '<div class="tts-note">Browser voice mein (Audio file upload nahi hui)</div>' : ''}
   </div>`;
