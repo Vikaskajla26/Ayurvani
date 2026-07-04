@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+cso_page_cache.json
+cso_title_cache.json
