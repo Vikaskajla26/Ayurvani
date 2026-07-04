@@ -1,6 +1,16 @@
 let wasmChanterSession = null;
 let wasmChanterLoading = false;
 
+// Configure WebAssembly binary paths for onnxruntime-web 1.18.0
+if (typeof ort !== 'undefined') {
+  ort.env.wasm.wasmPaths = {
+    'ort-wasm.wasm': 'https://cdnjs.cloudflare.com/ajax/libs/onnxruntime-web/1.18.0/ort-wasm.wasm',
+    'ort-wasm-threaded.wasm': 'https://cdnjs.cloudflare.com/ajax/libs/onnxruntime-web/1.18.0/ort-wasm-threaded.wasm',
+    'ort-wasm-simd.wasm': 'https://cdnjs.cloudflare.com/ajax/libs/onnxruntime-web/1.18.0/ort-wasm-simd.wasm',
+    'ort-wasm-simd-threaded.wasm': 'https://cdnjs.cloudflare.com/ajax/libs/onnxruntime-web/1.18.0/ort-wasm-simd-threaded.wasm'
+  };
+}
+
 class VagdhenuWasmChanter {
   static async loadModel() {
     if (wasmChanterSession) return wasmChanterSession;
