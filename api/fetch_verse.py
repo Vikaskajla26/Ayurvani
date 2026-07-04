@@ -53,14 +53,14 @@ CHARAKA_PAGE_TITLES = {
         8: "Apasmara Nidana",
     },
     "Vimanasthana": {
-        1: "Rasa Vimana Adhyaya",
-        2: "Trividhakukshiya Vimana Adhyaya",
-        3: "Janapadodhvansaniya Vimana Adhyaya",
-        4: "Trividha Roga Vishesha Vijnaniya Vimana Adhyaya",
-        5: "Sroto Vimana Adhyaya",
-        6: "Roganika Vimana Adhyaya",
-        7: "Vyadhita Rupiya Vimana Adhyaya",
-        8: "Rogabhishagjitiya Vimana Adhyaya",
+        1: "Rasa Vimana",
+        2: "Trividhakukshiya Vimana",
+        3: "Janapadodhvansaniya Vimana",
+        4: "Trividha Roga Vishesha Vijnaniya Vimana",
+        5: "Sroto Vimana",
+        6: "Roganika Vimana",
+        7: "Vyadhita Rupiya Vimana",
+        8: "Rogabhishagjitiya Vimana",
     },
     "Sharirasthana": {
         1: "Katidhapurusha Sharira Adhyaya",
@@ -372,80 +372,123 @@ def find_unit_for_verse(units, verse_num):
                 return u
     return None
 
+def _normalize_verse_separators(text):
+    """Different chapters on the source wiki sometimes use different characters for the
+    double-pipe verse-end marker (ASCII '||', Unicode double vertical line U+2016 '‖',
+    or the Devanagari double danda U+0965 '॥'). Normalize them all to '||' so a single
+    regex can reliably match verse markers regardless of which convention a given page uses."""
+    return text.replace('\u2016', '||').replace('\u0965', '||')
+
+def _find_marker_positions(content, verse_num):
+    """Find every occurrence of this verse's end-marker (checking Devanagari and
+    English-numeral forms, tolerant of surrounding whitespace), returning a list of
+    (start, end) spans in the order they appear."""
+    dn = re.escape(_to_devanagari_num(verse_num))
+    vn = re.escape(str(verse_num))
+    pattern = re.compile(r'\|\|\s*(?:' + dn + r'|' + vn + r')\s*\|\|')
+    return [(m.start(), m.end()) for m in pattern.finditer(content)]
+
+def _looks_like_english_prose(text):
+    """Heuristic check that a candidate translation snippet is actual English prose,
+    not a leftover Sanskrit transliteration line (which can appear between markers
+    when a chapter interleaves Devanagari/IAST/ASCII reps of consecutive short verses,
+    e.g. the common opening-formula verses 1-2 of many chapters)."""
+    if not text or len(text) < 15:
+        return False
+    words = re.findall(r"[A-Za-z']+", text)
+    if len(words) < 4:
+        return False
+    common = {"the", "and", "is", "of", "to", "in", "this", "which", "should",
+              "chapter", "a", "for", "with", "that", "are", "as", "by", "be"}
+    hits = sum(1 for w in words if w.lower() in common)
+    return hits >= 2
+
 def _extract_verse_fallback(content, verse_num):
-    """Fallback extraction method using walk-backwards regex logic if units are not found."""
-    dn = _to_devanagari_num(verse_num)
-    vn = str(verse_num)
-    marker = '||' + dn + '||'
-    pos = content.find(marker)
-    if pos == -1:
+    """Robust marker-based extraction: locate every repetition of this verse's marker
+    (a verse is typically shown 2-3 times in a row -- Devanagari, IAST, plain ASCII --
+    before the English translation begins), take the text before the first repetition
+    as the Sanskrit, and the text between the last repetition and the *next* verse's
+    marker as the translation. This avoids depending on any specific HTML wrapper
+    structure, which was not consistent across all chapters."""
+    content = _normalize_verse_separators(content)
+    spans = _find_marker_positions(content, verse_num)
+    if not spans:
         return None, None
-    
-    before = content[:pos]
+
+    first_start = spans[0][0]
+    last_end = spans[-1][1]
+
+    # --- Sanskrit: walk backwards from the first marker occurrence, collecting
+    # contiguous non-blank lines (works for Devanagari, IAST, and ASCII transliteration
+    # lines alike, since we just want "the verse text" as shown on the page). ---
+    before = content[:first_start]
     lines_before = before.split('\n')
-    sanskrit_lines = []
+    verse_lines = []
     blank_count = 0
     for line in reversed(lines_before):
         stripped = line.strip()
         if not stripped:
             blank_count += 1
-            if blank_count > 2 and sanskrit_lines:
+            if blank_count > 2 and verse_lines:
                 break
             continue
         if stripped.startswith('<') or stripped.startswith('=') or stripped.startswith('{'):
             break
-        has_devanagari = any(0x0900 <= ord(c) <= 0x097F for c in stripped)
-        if has_devanagari:
-            sanskrit_lines.insert(0, stripped)
-            blank_count = 0
-        else:
-            if sanskrit_lines:
-                break
-    sanskrit_text = '\n'.join(sanskrit_lines)
+        verse_lines.insert(0, stripped)
+        blank_count = 0
+    sanskrit_text = _clean_wiki_text('\n'.join(verse_lines)).strip()
     if sanskrit_text:
-        sanskrit_text += marker
-        
-    after_marker = content[pos + len(marker):]
-    close_pos = after_marker.find('</div></div>')
+        sanskrit_text += f" ||{verse_num}||"
+
+    # --- Translation: everything between the last repetition of this verse's marker
+    # and the start of the NEXT verse's marker (or the next heading, if no next verse
+    # marker exists on the page -- e.g. the last verse of a chapter). Some verses share
+    # one combined translation with the verse(s) immediately after them (e.g. "[1-2]"),
+    # in which case there's no text between this verse and the next -- so if that
+    # happens, extend the search a little further forward to pick up the shared text. ---
     translation = None
-    if close_pos != -1:
-        after_close = after_marker[close_pos + len('</div></div>'):]
-        bracket_patterns = [r'\[' + vn + r'\]', r'\[\d+-' + vn + r'\]']
-        best_match = None
-        for pat in bracket_patterns:
-            m = re.search(pat, after_close)
-            if m and (best_match is None or m.start() < best_match.start()):
-                best_match = m
-        if best_match:
-            raw_trans = after_close[:best_match.start()]
-            raw_trans = _clean_wiki_text(raw_trans).strip()
-            raw_trans = re.sub(r'={2,}[^=]+=+', '', raw_trans).strip()
-            paragraphs = [p.strip() for p in raw_trans.split('\n\n') if p.strip()]
-            if paragraphs:
-                translation = paragraphs[-1]
-    return sanskrit_text, translation
+    for lookahead in range(1, 6):
+        next_spans = _find_marker_positions(content, verse_num + lookahead)
+        if next_spans:
+            boundary = next_spans[0][0]
+        else:
+            heading_match = re.search(r'={2,4}[^=]+={2,4}', content[last_end:])
+            boundary = last_end + heading_match.start() if heading_match else min(last_end + 4000, len(content))
+
+        raw_trans = content[last_end:boundary]
+        raw_trans = _clean_wiki_text(raw_trans).strip()
+        raw_trans = re.sub(r'\[\d+(?:-\d+)?\]', '', raw_trans).strip()  # strip footnote/verse-range citations
+        paragraphs = [p.strip() for p in raw_trans.split('\n\n') if p.strip()]
+        candidate = next((p for p in paragraphs if _looks_like_english_prose(p)), None)
+        if candidate:
+            translation = candidate
+            break
+        if not next_spans:
+            break  # hit a heading/end of page with nothing found; no point extending further
+
+    return sanskrit_text or None, translation
 
 def _extract_verse(content, verse_num):
-    """Extract Sanskrit verse text and English translation from raw wikitext by parsing collapsible units."""
+    """Extract Sanskrit verse text and English translation. Tries the collapsible-unit
+    structure first (works for chapters that use it cleanly), then falls back to
+    direct marker-based extraction, which is more tolerant of formatting differences
+    across chapters."""
     units = parse_page_into_units(content)
     unit = find_unit_for_verse(units, verse_num)
-    if not unit:
-        return _extract_verse_fallback(content, verse_num)
-        
-    # Extract Sanskrit
-    coll = unit["collapsible"]
-    inner_idx = coll.find('<div class="mw-collapsible-content">')
-    if inner_idx != -1:
-        sanskrit_raw = coll[len('<div class="mw-collapsible mw-collapsed">'):inner_idx]
-    else:
-        sanskrit_raw = coll
-        
-    sanskrit = _clean_wiki_text(sanskrit_raw).strip()
-    
-    # Extract Translation
-    translation = _clean_wiki_text(unit["trailing"]).strip()
-    
-    return sanskrit, translation
+    if unit:
+        coll = unit["collapsible"]
+        inner_idx = coll.find('<div class="mw-collapsible-content">')
+        if inner_idx != -1:
+            sanskrit_raw = coll[len('<div class="mw-collapsible mw-collapsed">'):inner_idx]
+        else:
+            sanskrit_raw = coll
+        sanskrit = _clean_wiki_text(sanskrit_raw).strip()
+        translation = _clean_wiki_text(unit["trailing"]).strip()
+        if sanskrit:
+            return sanskrit, translation
+
+    # Primary method found nothing usable -- try the more tolerant marker-based approach.
+    return _extract_verse_fallback(content, verse_num)
 
 def _get_section_heading(content, verse_num):
     """Get the section heading (====heading====) for a given verse."""
