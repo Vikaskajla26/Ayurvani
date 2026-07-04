@@ -1,0 +1,79 @@
+[
+  {
+    "id": "b1",
+    "titleHi": "चरक संहिता",
+    "titleEn": "Charak Samhita",
+    "author": "Acharya Charak · ~400 BCE",
+    "cat": "Foundational text",
+    "proff": "2nd Proff",
+    "subject": "Charak Samhita",
+    "pdfUrl": "",
+    "desc": "Ayurveda ka sabse pramukh grantha, jisme internal medicine (Kaya Chikitsa), rog-nidaan aur chikitsa siddhant vistar se varnit hain."
+  },
+  {
+    "id": "b2",
+    "titleHi": "सुश्रुत संहिता",
+    "titleEn": "Sushruta Samhita",
+    "author": "Acharya Sushruta · ~600 BCE",
+    "cat": "Surgery text",
+    "proff": "3rd Proff",
+    "subject": "",
+    "pdfUrl": "",
+    "desc": "Shalya chikitsa (surgery) par kendrit granth — plastic surgery jaisi ancient techniques ka varnan bhi ismein milta hai."
+  },
+  {
+    "id": "b3",
+    "titleHi": "अष्टांग हृदयम्",
+    "titleEn": "Ashtanga Hridayam",
+    "author": "Vagbhata · ~7th century CE",
+    "cat": "Compilation",
+    "proff": "1st Proff",
+    "subject": "",
+    "pdfUrl": "",
+    "desc": "Charak aur Sushruta dono ke gyaan ko sankshep mein prastut karta hai — Ayurveda ke aath angon ka sarvangeen vivaran."
+  },
+  {
+    "id": "b4",
+    "titleHi": "भावप्रकाश",
+    "titleEn": "Bhavaprakasha",
+    "author": "Bhavamishra · 16th century CE",
+    "cat": "Materia medica",
+    "proff": "2nd Proff",
+    "subject": "Dravyaguna",
+    "pdfUrl": "",
+    "desc": "Aushadhiyon (herbs, minerals) ka vistrit varnan — dravyaguna shastra ka mahatvapurn granth."
+  },
+  {
+    "id": "b5",
+    "titleHi": "माधव निदानम्",
+    "titleEn": "Madhava Nidanam",
+    "author": "Madhavakara · ~7th century CE",
+    "cat": "Diagnosis text",
+    "proff": "2nd Proff",
+    "subject": "Roga Nidan",
+    "pdfUrl": "",
+    "desc": "Rog-nidaan (diagnosis) par kendrit — lakshan aur karan ke aadhar par rogon ka vargikaran."
+  },
+  {
+    "id": "b6",
+    "titleHi": "शारंगधर संहिता",
+    "titleEn": "Sharangdhara Samhita",
+    "author": "Sharangdhara · 13th century CE",
+    "cat": "Pharmacology",
+    "proff": "2nd Proff",
+    "subject": "Rasashastra & Bhaishajya",
+    "pdfUrl": "",
+    "desc": "Aushadhi nirman vidhi (pharmaceutical processes) aur nadi-pariksha (pulse diagnosis) ka vivaran."
+  },
+  {
+    "id": "b7",
+    "titleHi": "भैषज्य रत्नावली",
+    "titleEn": "Bhaishajya Ratnavali",
+    "author": "Govinda Das Sen · 18th century CE",
+    "cat": "Ayurvedic Pharmaceutics",
+    "proff": "2nd Proff",
+    "subject": "Rasashastra & Bhaishajya",
+    "pdfUrl": "",
+    "desc": "Bhaishajya Kalpana ka vistrit granth, jismein vibhinn rogon ke liye aushadhi nirmaan aur yogon ka varnan hai."
+  }
+]

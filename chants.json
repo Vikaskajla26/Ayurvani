@@ -1,0 +1,50 @@
+[
+  {
+    "id": "c1",
+    "cat": "Deity · Healing",
+    "sanskrit": "ॐ धन्वन्तरये नमः",
+    "translit": "Om Dhanvantaraye Namah",
+    "meaning": "Bhagwan Dhanvantari (Ayurveda ke devta) ko naman — rog-nivaran aur swasthya ke liye.",
+    "audioUrl": ""
+  },
+  {
+    "id": "c2",
+    "cat": "Healing",
+    "sanskrit": "ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम् । उर्वारुकमिव बन्धनान् मृत्योर्मुक्षीय मामृतात् ॥",
+    "translit": "Om Tryambakam Yajamahe...",
+    "meaning": "Mahamrityunjaya mantra — dirghayu, swasthya aur bhay se mukti ki prarthana.",
+    "audioUrl": ""
+  },
+  {
+    "id": "c3",
+    "cat": "Wisdom",
+    "sanskrit": "ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यं भर्गो देवस्य धीमहि धियो यो नः प्रचोदयात्",
+    "translit": "Om Bhur Bhuvah Swah...",
+    "meaning": "Gayatri mantra — buddhi aur prakash ke liye prarthana, healing aur clarity dono mein sahayak.",
+    "audioUrl": ""
+  },
+  {
+    "id": "c4",
+    "cat": "Herb · Tulsi",
+    "sanskrit": "महाप्रसाद जननी सर्व सौभाग्यवर्धिनी । आधि व्याधि हरा नित्यं तुलसी त्वं नमोऽस्तु ते ॥",
+    "translit": "Mahaprasada Janani...",
+    "meaning": "Tulsi (holy basil) ki stuti — rog aur mansik peeda ko dur karne wali maani jaati hai.",
+    "audioUrl": ""
+  },
+  {
+    "id": "c5",
+    "cat": "Shanti",
+    "sanskrit": "ॐ सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः । सर्वे भद्राणि पश्यन्तु मा कश्चिद्duःखभाग्भवेत् ॥",
+    "translit": "Om Sarve Bhavantu Sukhinah...",
+    "meaning": "Sabke sukh, swasthya aur mangal ki saamuhik prarthana — Ayurveda ki bhawna ka saar.",
+    "audioUrl": ""
+  },
+  {
+    "id": "c6",
+    "cat": "Wisdom · Subhashita",
+    "sanskrit": "आरोग्यं भास्करादिच्छेत् द्रविणं हुतवाहनात् ।",
+    "translit": "Arogyam Bhaskaradicchhet...",
+    "meaning": "Swasthya Surya se, dhan Agni se maango — ek prachin subhashita jo Ayurveda ke prakriti-sambandh ko darshata hai.",
+    "audioUrl": ""
+  }
+]

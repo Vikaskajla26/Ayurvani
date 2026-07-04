@@ -2338,17 +2338,43 @@ const DEFAULT_BOOKS = [
 
 // ---------- Storage helpers ----------
 async function loadContent(){
-  try{
-    const c = await window.storage.get('ayurved-chants-data', true);
-    state.chants = c ? JSON.parse(c.value) : DEFAULT_CHANTS;
-    if(!c) await window.storage.set('ayurved-chants-data', JSON.stringify(DEFAULT_CHANTS), true);
-  }catch(e){ state.chants = DEFAULT_CHANTS; try{await window.storage.set('ayurved-chants-data', JSON.stringify(DEFAULT_CHANTS), true);}catch(_e){} }
+  // Fetch chants from global backend API
+  try {
+    const resp = await fetch('/api/chants');
+    if (resp.ok) {
+      state.chants = await resp.json();
+      await window.storage.set('ayurved-chants-data', JSON.stringify(state.chants), true);
+    } else {
+      throw new Error('API load fail');
+    }
+  } catch (err) {
+    console.warn("Global load chants failed, fallback to local storage:", err);
+    try {
+      const c = await window.storage.get('ayurved-chants-data', true);
+      state.chants = c ? JSON.parse(c.value) : DEFAULT_CHANTS;
+    } catch (e) {
+      state.chants = DEFAULT_CHANTS;
+    }
+  }
 
-  try{
-    const b = await window.storage.get('ayurved-books-data', true);
-    state.books = b ? JSON.parse(b.value) : DEFAULT_BOOKS;
-    if(!b) await window.storage.set('ayurved-books-data', JSON.stringify(DEFAULT_BOOKS), true);
-  }catch(e){ state.books = DEFAULT_BOOKS; try{await window.storage.set('ayurved-books-data', JSON.stringify(DEFAULT_BOOKS), true);}catch(_e){} }
+  // Fetch books from global backend API
+  try {
+    const resp = await fetch('/api/books');
+    if (resp.ok) {
+      state.books = await resp.json();
+      await window.storage.set('ayurved-books-data', JSON.stringify(state.books), true);
+    } else {
+      throw new Error('API load fail');
+    }
+  } catch (err) {
+    console.warn("Global load books failed, fallback to local storage:", err);
+    try {
+      const b = await window.storage.get('ayurved-books-data', true);
+      state.books = b ? JSON.parse(b.value) : DEFAULT_BOOKS;
+    } catch (e) {
+      state.books = DEFAULT_BOOKS;
+    }
+  }
 
   try{
     const p = await window.storage.get('ayurved-profile', false);
@@ -2365,8 +2391,57 @@ async function loadContent(){
     state.malaCount = m ? JSON.parse(m.value) : 0;
   }catch(e){ state.malaCount = 0; }
 }
-async function saveChants(){ try{ await window.storage.set('ayurved-chants-data', JSON.stringify(state.chants), true); }catch(e){ showToast('Save fail hua, phir try karein'); } }
-async function saveBooks(){ try{ await window.storage.set('ayurved-books-data', JSON.stringify(state.books), true); }catch(e){ showToast('Save fail hua, phir try karein'); } }
+
+async function saveChants(){
+  try {
+    await window.storage.set('ayurved-chants-data', JSON.stringify(state.chants), true);
+  } catch(e) {
+    console.warn('Local save failed:', e);
+  }
+
+  if (state.profile && state.profile.isAdmin) {
+    try {
+      const resp = await fetch('/api/chants', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-admin-token': 'ayurvani_admin_secure_token_session_2026'
+        },
+        body: JSON.stringify(state.chants)
+      });
+      if (!resp.ok) throw new Error('Global sync failed: ' + resp.status);
+    } catch (e) {
+      console.error('Global save fail:', e);
+      showToast('Global sync failed. Local save updated.');
+    }
+  }
+}
+
+async function saveBooks(){
+  try {
+    await window.storage.set('ayurved-books-data', JSON.stringify(state.books), true);
+  } catch(e) {
+    console.warn('Local save failed:', e);
+  }
+
+  if (state.profile && state.profile.isAdmin) {
+    try {
+      const resp = await fetch('/api/books', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-admin-token': 'ayurvani_admin_secure_token_session_2026'
+        },
+        body: JSON.stringify(state.books)
+      });
+      if (!resp.ok) throw new Error('Global sync failed: ' + resp.status);
+    } catch (e) {
+      console.error('Global save fail:', e);
+      showToast('Global sync failed. Local save updated.');
+    }
+  }
+}
+
 async function saveProfile(){ try{ await window.storage.set('ayurved-profile', JSON.stringify(state.profile), false); }catch(e){} }
 async function saveFavorites(){ try{ await window.storage.set('ayurved-favorites', JSON.stringify(state.favorites), false); }catch(e){} }
 async function saveMala(){ try{ await window.storage.set('ayurved-mala', JSON.stringify(state.malaCount), false); }catch(e){} }
@@ -3834,6 +3909,32 @@ let selectedAudioFile = null;
 let selectedCoverFile = null;
 let selectedPdfFile = null;
 
+async function uploadFileToCloud(file) {
+  if (!file) return null;
+  try {
+    const apiEndpoint = '/api/upload';
+    const resp = await fetch(apiEndpoint, {
+      method: 'POST',
+      headers: {
+        'x-filename': file.name,
+        'content-type': file.type,
+        'x-admin-token': 'ayurvani_admin_secure_token_session_2026'
+      },
+      body: file
+    });
+    if (!resp.ok) {
+      const errRes = await resp.json().catch(() => ({}));
+      throw new Error(errRes.error || 'Upload failed');
+    }
+    const res = await resp.json();
+    return res.url;
+  } catch (err) {
+    console.error('File upload failed:', err);
+    showToast('Upload failed: ' + err.message);
+    return null;
+  }
+}
+
 function switchAdminTab(tab) {
   document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
@@ -3939,19 +4040,21 @@ async function addChant() {
   let finalAudioUrl = audioUrl;
 
   if (selectedAudioFile) {
-    showToast('Saving audio file to local database...');
+    showToast('Uploading audio file to cloud...');
     const progressBar = document.getElementById('audioProgressBar');
     const progressContainer = document.getElementById('audioUploadProgress');
     if (progressContainer) progressContainer.style.display = 'block';
     if (progressBar) progressBar.style.width = '50%';
 
-    const saved = await savePDFBlob('audio_' + chantId, selectedAudioFile);
-    if (saved) {
-      finalAudioUrl = 'stored-blob';
+    const cloudUrl = await uploadFileToCloud(selectedAudioFile);
+    if (cloudUrl) {
+      finalAudioUrl = cloudUrl;
       if (progressBar) progressBar.style.width = '100%';
-      showToast('🎵 Audio file saved!');
+      showToast('🎵 Audio file uploaded!');
     } else {
-      showToast('Error saving audio file.');
+      showToast('Error uploading audio file.');
+      if (progressContainer) progressContainer.style.display = 'none';
+      return;
     }
     setTimeout(() => { if (progressContainer) progressContainer.style.display = 'none'; }, 1000);
   }
@@ -3971,10 +4074,12 @@ function editChant(id) {
   document.getElementById('af-translit').value = c.translit || '';
   document.getElementById('af-cat').value = c.cat || '';
   document.getElementById('af-meaning').value = c.meaning || '';
-  document.getElementById('af-audio').value = c.audioUrl === 'stored-blob' ? '' : (c.audioUrl || '');
+  document.getElementById('af-audio').value = c.audioUrl.startsWith('http') ? c.audioUrl : '';
 
-  if (c.audioUrl === 'stored-blob') {
-    document.getElementById('audioDropLabel').textContent = '🎵 Audio already stored in database (upload again to replace)';
+  if (c.audioUrl.startsWith('http')) {
+    document.getElementById('audioDropLabel').textContent = '🎵 Audio stored in cloud (upload again to replace)';
+  } else if (c.audioUrl === 'stored-blob') {
+    document.getElementById('audioDropLabel').textContent = '🎵 Audio stored in local database';
   }
 
   editingChantId = id;
@@ -4028,19 +4133,21 @@ async function updateChant(id) {
   let finalAudioUrl = audioUrl || c.audioUrl;
 
   if (selectedAudioFile) {
-    showToast('Saving audio file...');
+    showToast('Uploading audio file...');
     const progressBar = document.getElementById('audioProgressBar');
     const progressContainer = document.getElementById('audioUploadProgress');
     if (progressContainer) progressContainer.style.display = 'block';
     if (progressBar) progressBar.style.width = '50%';
 
-    const saved = await savePDFBlob('audio_' + id, selectedAudioFile);
-    if (saved) {
-      finalAudioUrl = 'stored-blob';
+    const cloudUrl = await uploadFileToCloud(selectedAudioFile);
+    if (cloudUrl) {
+      finalAudioUrl = cloudUrl;
       if (progressBar) progressBar.style.width = '100%';
-      showToast('🎵 Audio file updated!');
+      showToast('🎵 Audio file updated on cloud!');
     } else {
-      showToast('Error saving audio file.');
+      showToast('Error uploading audio file.');
+      if (progressContainer) progressContainer.style.display = 'none';
+      return;
     }
     setTimeout(() => { if (progressContainer) progressContainer.style.display = 'none'; }, 1000);
   }
@@ -4061,7 +4168,6 @@ async function deleteChant(id) {
   if (!confirm('Are you sure you want to delete this shloka?')) return;
   state.chants = state.chants.filter(c => c.id !== id);
   await saveChants();
-  await deletePDFBlob('audio_' + id);
   showToast('Shloka deleted');
   renderChants(); renderChantChips(); renderAdmin();
 }
@@ -4083,28 +4189,33 @@ async function addBook() {
   let finalCoverUrl = '';
 
   if (selectedPdfFile) {
-    showToast("Saving PDF file...");
+    showToast("Uploading PDF file to cloud...");
     const progressBar = document.getElementById('pdfProgressBar');
     const progressContainer = document.getElementById('pdfUploadProgress');
     if (progressContainer) progressContainer.style.display = 'block';
     if (progressBar) progressBar.style.width = '50%';
 
-    const saved = await savePDFBlob(bookId, selectedPdfFile);
-    if (saved) {
-      finalPdfUrl = 'stored-blob';
+    const cloudUrl = await uploadFileToCloud(selectedPdfFile);
+    if (cloudUrl) {
+      finalPdfUrl = cloudUrl;
       if (progressBar) progressBar.style.width = '100%';
+      showToast('📄 PDF file uploaded!');
     } else {
-      showToast("Database error saving PDF file.");
+      showToast("Error uploading PDF file.");
+      if (progressContainer) progressContainer.style.display = 'none';
       return;
     }
     setTimeout(() => { if (progressContainer) progressContainer.style.display = 'none'; }, 1000);
   }
 
   if (selectedCoverFile) {
-    showToast("Saving cover image...");
-    const saved = await savePDFBlob('cover_' + bookId, selectedCoverFile);
-    if (saved) {
-      finalCoverUrl = 'stored-blob';
+    showToast("Uploading cover image to cloud...");
+    const cloudUrl = await uploadFileToCloud(selectedCoverFile);
+    if (cloudUrl) {
+      finalCoverUrl = cloudUrl;
+      showToast('🖼️ Cover image uploaded!');
+    } else {
+      showToast("Error uploading cover image.");
     }
   }
 
@@ -4124,13 +4235,21 @@ async function editBook(id) {
   document.getElementById('bf-author').value = b.author || '';
   document.getElementById('bf-cat').value = b.cat || '';
   document.getElementById('bf-proff').value = b.proff || '2nd Proff';
-  document.getElementById('bf-pdf').value = b.pdfUrl === 'stored-blob' ? '' : (b.pdfUrl || '');
+  document.getElementById('bf-pdf').value = b.pdfUrl.startsWith('http') ? b.pdfUrl : '';
   document.getElementById('bf-desc').value = b.desc || '';
 
-  if (b.pdfUrl === 'stored-blob') {
-    document.getElementById('pdfDropLabel').textContent = '📄 PDF already stored in database (upload again to replace)';
+  if (b.pdfUrl.startsWith('http')) {
+    document.getElementById('pdfDropLabel').textContent = '📄 PDF stored in cloud (upload again to replace)';
+  } else if (b.pdfUrl === 'stored-blob') {
+    document.getElementById('pdfDropLabel').textContent = '📄 PDF already stored in database';
   }
-  if (b.coverUrl === 'stored-blob') {
+  
+  if (b.coverUrl.startsWith('http')) {
+    document.getElementById('coverDropLabel').textContent = '🖼️ Cover image stored in cloud (upload again to replace)';
+    const img = document.getElementById('coverPreview');
+    img.src = b.coverUrl;
+    img.style.display = 'block';
+  } else if (b.coverUrl === 'stored-blob') {
     document.getElementById('coverDropLabel').textContent = '🖼️ Cover image already stored (upload again to replace)';
     const blob = await getPDFBlob('cover_' + b.id);
     if (blob) {
@@ -4211,28 +4330,33 @@ async function updateBook(id) {
   let finalCoverUrl = b.coverUrl || '';
 
   if (selectedPdfFile) {
-    showToast("Saving PDF file...");
+    showToast("Uploading PDF file to cloud...");
     const progressBar = document.getElementById('pdfProgressBar');
     const progressContainer = document.getElementById('pdfUploadProgress');
     if (progressContainer) progressContainer.style.display = 'block';
     if (progressBar) progressBar.style.width = '50%';
 
-    const saved = await savePDFBlob(id, selectedPdfFile);
-    if (saved) {
-      finalPdfUrl = 'stored-blob';
+    const cloudUrl = await uploadFileToCloud(selectedPdfFile);
+    if (cloudUrl) {
+      finalPdfUrl = cloudUrl;
       if (progressBar) progressBar.style.width = '100%';
+      showToast("📄 PDF file uploaded!");
     } else {
-      showToast("Database error saving PDF file.");
+      showToast("Error uploading PDF file.");
+      if (progressContainer) progressContainer.style.display = 'none';
       return;
     }
     setTimeout(() => { if (progressContainer) progressContainer.style.display = 'none'; }, 1000);
   }
 
   if (selectedCoverFile) {
-    showToast("Saving cover image...");
-    const saved = await savePDFBlob('cover_' + id, selectedCoverFile);
-    if (saved) {
-      finalCoverUrl = 'stored-blob';
+    showToast("Uploading cover image to cloud...");
+    const cloudUrl = await uploadFileToCloud(selectedCoverFile);
+    if (cloudUrl) {
+      finalCoverUrl = cloudUrl;
+      showToast("🖼️ Cover image uploaded!");
+    } else {
+      showToast("Error uploading cover image.");
     }
   }
 
@@ -4256,8 +4380,6 @@ async function deleteBook(id) {
   if (!confirm('Are you sure you want to delete this book?')) return;
   state.books = state.books.filter(b => b.id !== id);
   await saveBooks();
-  await deletePDFBlob(id);
-  await deletePDFBlob('cover_' + id);
   showToast('Book deleted');
   renderBooks(); renderAdmin();
 }
