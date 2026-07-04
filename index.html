@@ -1954,10 +1954,6 @@
           🔓 Unlock Admin Panel
         </button>
       </div>
-      
-      <div style="margin-top:22px; padding-top:14px; border-top: 1px dashed var(--line); font-size:0.78rem; color:var(--ink-soft); line-height:1.45;">
-        💡 Demo Access: Username <code style="color:var(--gold); font-weight:600;">admin</code> & Password <code style="color:var(--gold); font-weight:600;">ayurved108</code>
-      </div>
     </div>
 
     <!-- Admin Content Area (Hidden by default, shown only if verified) -->
@@ -2257,12 +2253,10 @@
     <h3>Sign in karein</h3>
     <label>Aapka naam</label>
     <input type="text" id="loginName" placeholder="e.g. Priya Sharma">
-    <label>Admin password <span style="font-weight:400;color:var(--ink-soft);">(optional — sirf admin ke liye)</span></label>
-    <input type="password" id="loginAdminPass" placeholder="Khaali chhodein agar admin nahi hain">
     <div class="modal-actions">
       <button style="background:var(--teal); color:#F6EFDD;" onclick="doLogin()">Sign in</button>
     </div>
-    <div class="muted-note">Note: yeh ek demo login hai (naam-based), koi password-protected real account system nahi hai. Favorites hamesha browser local storage mein saved rehte hain.</div>
+    <div class="muted-note">Note: yeh ek demo login hai (naam-based), favorites hamesha browser local storage mein saved rehte hain.</div>
   </div>
 </div>
 
@@ -2296,7 +2290,6 @@ if (!window.storage) {
   };
 }
 
-const ADMIN_DEMO_PASSWORD = "ayurved108";
 const NAV_ITEMS = [
   {id:'home', hi:'होम', en:'Home'},
   {id:'chants', hi:'श्लोक वाचन', en:'Shloka Recitation'},
@@ -2794,9 +2787,8 @@ function openModal(){ document.getElementById('loginModal').classList.add('show'
 function closeModal(){ document.getElementById('loginModal').classList.remove('show'); }
 async function doLogin(){
   const name = document.getElementById('loginName').value.trim();
-  const pass = document.getElementById('loginAdminPass').value;
   if(!name){ showToast('Naam daalein'); return; }
-  state.profile = {name, isAdmin: pass === ADMIN_DEMO_PASSWORD};
+  state.profile = {name, isAdmin: false};
   await saveProfile();
   renderAuth(); renderNav(); closeModal();
   showToast(`Namaste, ${name}!`);
@@ -4329,20 +4321,52 @@ async function verifyAdminCredentials() {
   const user = document.getElementById('adminUsernameInput').value.trim();
   const pass = document.getElementById('adminPasswordInput').value;
   
-  if (user === 'admin' && pass === ADMIN_DEMO_PASSWORD) {
-    state.profile = { name: 'Admin', isAdmin: true };
-    await saveProfile();
-    showToast('Admin verify ho gaya!');
+  if (!user || !pass) {
+    showToast('Username aur Password daalein.');
+    return;
+  }
+  
+  const btn = document.querySelector('#adminLockScreen .save-btn');
+  let originalText = '🔓 Unlock Admin Panel';
+  if (btn) {
+    originalText = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '⏳ Verifying...';
+  }
+  
+  try {
+    const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const apiEndpoint = isLocalhost ? '/api/verify_admin' : '/api/verify_admin';
+    const resp = await fetch(apiEndpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: user, password: pass })
+    });
     
-    // Clear inputs
-    document.getElementById('adminUsernameInput').value = '';
-    document.getElementById('adminPasswordInput').value = '';
-    
-    // Refresh views
-    renderAuth();
-    renderAdmin();
-  } else {
-    showToast('Galat Username ya Password!');
+    const res = await resp.json();
+    if (resp.ok && res.success) {
+      state.profile = { name: 'Admin', isAdmin: true };
+      await saveProfile();
+      showToast('Admin verify ho gaya!');
+      
+      // Clear inputs
+      document.getElementById('adminUsernameInput').value = '';
+      document.getElementById('adminPasswordInput').value = '';
+      
+      // Refresh views
+      renderAuth();
+      renderAdmin();
+    } else {
+      showToast(res.error || 'Galat Username ya Password!');
+    }
+  } catch (err) {
+    console.error('Admin verification failed:', err);
+    showToast('Verification request failed. Server offline?');
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = originalText;
+    }
   }
 }
 
