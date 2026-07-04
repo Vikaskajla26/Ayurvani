@@ -6,6 +6,7 @@
 <title>आयुर्वेद वाणी | Ayurved Vani</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Tiro+Devanagari+Hindi&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
 <style>
   /* ---------- Ambient Design System (Forest Dark Mode Default) ---------- */
   :root{
@@ -2179,19 +2180,64 @@
 
 <!-- Server Settings Modal -->
 <div class="modal-overlay" id="serverSettingsModal">
-  <div class="modal">
+  <div class="modal" style="max-height: 90vh; overflow-y: auto;">
     <button class="modal-close" onclick="closeServerSettingsModal()">×</button>
-    <h3>🎙️ Chanting Settings</h3>
-    <label for="inputServerUrl">Vāgdhenu AI Speech Server URL</label>
-    <input type="text" id="inputServerUrl" placeholder="e.g., http://localhost:5001 or https://xxxx.ngrok-free.app">
+    <h3>🎙️ Chanting & Chanting AI Settings</h3>
     
-    <div style="font-size:0.8rem; color:var(--ink-soft); line-height:1.4; margin-top:12px;">
+    <label for="selectReciteMode">Recitation Engine Mode</label>
+    <select id="selectReciteMode" style="width:100%; padding:10px; margin-bottom:12px; background:var(--panel-soft); color:var(--cream); border:1px solid var(--line); border-radius:6px;">
+      <option value="auto">Auto (Use Server if Online, else Local WASM)</option>
+      <option value="wasm">Force Local WASM AI (Offline / Self-contained)</option>
+      <option value="server">Force Remote Vagdhenu Server</option>
+    </select>
+
+    <label for="inputServerUrl">Vāgdhenu AI Speech Server URL</label>
+    <input type="text" id="inputServerUrl" placeholder="e.g., http://localhost:5001 or https://xxxx.ngrok-free.app" style="margin-bottom:12px;">
+    
+    <div style="border-top: 1px solid var(--line); margin: 12px 0; padding-top: 12px;">
+      <h4 style="margin: 0 0 8px 0; color: var(--gold);">Local WASM AI Options</h4>
+      
+      <label for="selectWasmSpeaker">WASM Voice Accent Speaker</label>
+      <select id="selectWasmSpeaker" style="width:100%; padding:10px; margin-bottom:12px; background:var(--panel-soft); color:var(--cream); border:1px solid var(--line); border-radius:6px;">
+        <option value="Male 8 (Kannada)">Male 8 (Kannada - Meditative Vedic Accent)</option>
+        <option value="Male 9 (Kannada)">Male 9 (Kannada - Chant Accent)</option>
+        <option value="Male 10 (Kannada)">Male 10 (Kannada - Clear Accent)</option>
+        <option value="Male 1">Male 1 (Standard Northern Accent)</option>
+        <option value="Male 2">Male 2 (Standard accent)</option>
+        <option value="Male 3">Male 3 (Standard accent)</option>
+        <option value="Male 5">Male 5 (Standard accent)</option>
+        <option value="Male 6">Male 6 (Standard accent)</option>
+        <option value="Male 7">Male 7 (Standard accent)</option>
+        <option value="Male 12">Male 12 (Standard accent)</option>
+        <option value="Male 18 (Hindi)">Male 18 (Hindi Accent)</option>
+        <option value="Male 20 (Hindi)">Male 20 (Hindi Accent)</option>
+        <option value="Female 1 (Tamil)">Female 1 (Tamil Accent)</option>
+        <option value="Male 17 (Tamil)">Male 17 (Tamil Accent)</option>
+        <option value="Female 5 (Telugu)">Female 5 (Telugu Accent)</option>
+        <option value="Female 6 (Telugu)">Female 6 (Telugu Accent)</option>
+        <option value="Male 19 (Telugu)">Male 19 (Telugu Accent)</option>
+        <option value="Male 4 (Malayalam)">Male 4 (Malayalam Accent)</option>
+        <option value="Male 16 (Malayalam)">Male 16 (Malayalam Accent)</option>
+        <option value="Female 2 (Marathi)">Female 2 (Marathi Accent)</option>
+        <option value="Female 3 (Marathi)">Female 3 (Marathi Accent)</option>
+      </select>
+
+      <label for="selectWasmSpeed">WASM Recitation Speed / Rhythm</label>
+      <select id="selectWasmSpeed" style="width:100%; padding:10px; margin-bottom:12px; background:var(--panel-soft); color:var(--cream); border:1px solid var(--line); border-radius:6px;">
+        <option value="0.9">Fast (0.9x)</option>
+        <option value="1.0">Normal (1.0x)</option>
+        <option value="1.12">Slow & Meditative (1.12x - Default)</option>
+        <option value="1.22">Deep Chanting pace (1.22x)</option>
+        <option value="1.3">Slowest Chanting pace (1.3x)</option>
+      </select>
+    </div>
+
+    <div style="font-size:0.75rem; color:var(--ink-soft); line-height:1.4; margin-top:12px;">
       <p style="margin: 0 0 6px 0;"><strong>Kaise connect karein:</strong></p>
-      <ul style="margin:0; padding-left:16px;">
-        <li><strong>Local device:</strong> Agar server isi PC par chal raha hai, toh <code>http://localhost:5001</code> use karein.</li>
-        <li><strong>Other devices (Phone/Safari):</strong> Vercel HTTPS support karta hai, isliye unencrypted HTTP blocking se bachne ke liye <code>ngrok</code> ya <code>localtunnel</code> ka HTTPS URL daalein.</li>
+      <ul style="margin:0; padding-left:16px; margin-bottom:8px;">
+        <li><strong>Local Localhost Server:</strong> URL mein <code>http://localhost:5001</code> use karein.</li>
+        <li><strong>Local WASM AI:</strong> URL ke bina chalega! HF se model secure client-side download karega aur offline support karega.</li>
       </ul>
-      <p style="margin: 8px 0 0 0;"><em>Expose local server command:</em> <code>lt --port 5001</code></p>
     </div>
     
     <div class="modal-actions">
@@ -3060,6 +3106,16 @@ let vagdhenuAvailable = null;  // null=unchecked, true/false
 
 function openServerSettingsModal() {
   document.getElementById('inputServerUrl').value = VAGDHENU_SERVER;
+  
+  const reciteModeSelect = document.getElementById('selectReciteMode');
+  if (reciteModeSelect) reciteModeSelect.value = reciteMode;
+  
+  const wasmSpeakerSelect = document.getElementById('selectWasmSpeaker');
+  if (wasmSpeakerSelect) wasmSpeakerSelect.value = wasmSelectedSpeaker;
+  
+  const wasmSpeedSelect = document.getElementById('selectWasmSpeed');
+  if (wasmSpeedSelect) wasmSpeedSelect.value = wasmSelectedSpeed.toString();
+  
   document.getElementById('serverSettingsModal').classList.add('show');
 }
 
@@ -3072,10 +3128,29 @@ function saveServerSettings() {
   if (url) {
     VAGDHENU_SERVER = url;
     localStorage.setItem(VAGDHENU_SERVER_KEY, url);
-    showToast('⚙️ Chanting server URL saved: ' + url);
-    vagdhenuAvailable = null; // reset check
-    closeServerSettingsModal();
   }
+  
+  const reciteModeSelect = document.getElementById('selectReciteMode');
+  if (reciteModeSelect) {
+    reciteMode = reciteModeSelect.value;
+    localStorage.setItem(RECITE_MODE_KEY, reciteMode);
+  }
+  
+  const wasmSpeakerSelect = document.getElementById('selectWasmSpeaker');
+  if (wasmSpeakerSelect) {
+    wasmSelectedSpeaker = wasmSpeakerSelect.value;
+    localStorage.setItem(WASM_SPEAKER_KEY, wasmSelectedSpeaker);
+  }
+  
+  const wasmSpeedSelect = document.getElementById('selectWasmSpeed');
+  if (wasmSpeedSelect) {
+    wasmSelectedSpeed = parseFloat(wasmSpeedSelect.value);
+    localStorage.setItem(WASM_SPEED_KEY, wasmSelectedSpeed.toString());
+  }
+  
+  showToast('⚙️ Chanting settings saved successfully!');
+  vagdhenuAvailable = null; // reset check
+  closeServerSettingsModal();
 }
 
 function getFetchVerseUrl(sthana, chapter, verse) {
@@ -3085,9 +3160,279 @@ function getFetchVerseUrl(sthana, chapter, verse) {
   return `${base}${endpoint}?sthana=${encodeURIComponent(sthana)}&chapter=${chapter}&verse=${verse}`;
 }
 
+// --- Sanskrit Grapheme to Phoneme Normalizer and ONNX Web Chanter ---
+const SANS_SYMBOLS = ["_", "।", "ँ", "ं", "ः", "अ", "आ", "इ", "ई", "उ", "ऊ", "ऋ", "ए", "ऐ", "ओ", "औ", "क", "ख", "ग", "घ", "ङ", "च", "छ", "ज", "झ", "ञ", "ट", "ठ", "ड", "ढ", "ण", "त", "थ", "द", "ध", "न", "प", "फ", "ब", "भ", "म", "य", "र", "ल", "ळ", "व", "श", "ष", "स", "ह", "ऽ", "ा", "ि", "ी", "ु", "ू", "ृ", "ॄ", "े", "ै", "ो", "ौ", "्", "ॠ", "ॢ", " "];
+const SANS_SPEAKERS = ["Male 1", "Male 2", "Male 3", "Male 4 (Malayalam)", "Male 5", "Male 6", "Male 7", "Male 8 (Kannada)", "Female 1 (Tamil)", "Male 9 (Kannada)", "Female 2 (Marathi)", "Female 3 (Marathi)", "Female 4 (Marathi)", "Female 5 (Telugu)", "Female 6 (Telugu)", "Male 10 (Kannada)", "Male 11 (Kannada)", "Male 12", "Male 13", "Male 14", "Male 15", "Female 7", "Male 16 (Malayalam)", "Male 17 (Tamil)", "Male 18 (Hindi)", "Male 19 (Telugu)", "Male 20 (Hindi)"];
+
+const WASM_SPEAKER_KEY = 'vagdhenu_wasm_speaker';
+const WASM_SPEED_KEY = 'vagdhenu_wasm_speed';
+const RECITE_MODE_KEY = 'vagdhenu_recite_mode';
+
+let wasmSelectedSpeaker = localStorage.getItem(WASM_SPEAKER_KEY) || 'Male 8 (Kannada)';
+let wasmSelectedSpeed = parseFloat(localStorage.getItem(WASM_SPEED_KEY) || '1.12');
+let reciteMode = localStorage.getItem(RECITE_MODE_KEY) || 'auto'; // 'auto', 'wasm', 'server'
+
+let wasmChanterSession = null;
+let wasmChanterLoading = false;
+
+class SanskritChandasPhonemizer {
+  static normalize(text) {
+    if (!text) return "";
+    
+    // 1. Expand Om
+    let normalized = text.replace(/ॐ/g, 'ओम्');
+    
+    // 2. Strip editorial characters (brackets, quotes, ZWNJ/ZWJ)
+    normalized = normalized.replace(/[()""''“”‘’‌‍\-\[\]]/g, '');
+    
+    // 3. Strip numerals (Devanagari & ASCII digits) and trailing verse reference numbers
+    normalized = normalized.replace(/\s*[०-९0-9]+\s*[।॥]+/g, '॥');
+    normalized = normalized.replace(/[०-९0-9]+/g, '');
+    
+    // 4. Sanskrit Sandhi rules for Anusvara (ं)
+    const vargas = {
+      'क': 'ङ्', 'ख': 'ङ्', 'ग': 'ङ्', 'घ': 'ङ्', 'ङ': 'ङ्',
+      'च': 'ञ्', 'छ': 'ञ्', 'ज': 'ञ्', 'झ': 'ञ्', 'ञ': 'ञ्',
+      'ट': 'ण्', 'ठ': 'ण्', 'ड': 'ण्', 'ढ': 'ण्', 'ण': 'ण्',
+      'त': 'न्', 'थ': 'न्', 'द': 'न्', 'ध': 'न्', 'न': 'न्',
+      'प': 'म्', 'फ': 'म्', 'ब': 'म्', 'भ': 'म्', 'म': 'म्'
+    };
+    
+    let temp = "";
+    for (let i = 0; i < normalized.length; i++) {
+      let ch = normalized[i];
+      if (ch === 'ं') {
+        let nextIdx = i + 1;
+        while (nextIdx < normalized.length && normalized[nextIdx] === ' ') {
+          nextIdx++;
+        }
+        let nextCh = nextIdx < normalized.length ? normalized[nextIdx] : '';
+        if (vargas[nextCh]) {
+          temp += vargas[nextCh];
+        } else if (nextCh === 'य') {
+          temp += 'ँ';
+        } else if ('रलवशषसह'.includes(nextCh)) {
+          temp += 'ं';
+        } else if (!nextCh || ' ।॥\n\t'.includes(nextCh)) {
+          temp += 'म्';
+        } else {
+          temp += 'ं';
+        }
+      } else {
+        temp += ch;
+      }
+    }
+    normalized = temp;
+
+    // 5. Sanskrit Visarga (ः) sandhi & assimilation rules
+    const visSib = {
+      'स': 'स्', 'त': 'स्', 'थ': 'स्',
+      'श': 'श्', 'च': 'श्', 'छ': 'श्',
+      'ष': 'ष्', 'ट': 'ष्', 'ठ': 'ष्'
+    };
+    
+    let words = normalized.split(/\s+/);
+    for (let w = 0; w < words.length; w++) {
+      let word = words[w];
+      if (word.endsWith('ः') && w < words.length - 1) {
+        let base = word.slice(0, -1);
+        let nextWord = words[w + 1];
+        if (nextWord && nextWord.length > 0) {
+          let firstCh = nextWord[0];
+          if (visSib[firstCh]) {
+            words[w] = base + visSib[firstCh];
+            continue;
+          }
+          if (base.length > 0) {
+            let lastVowelChar = base[base.length - 1];
+            const vowelSigns = "ािीुूृॄेैोौ्";
+            let hasVowelSign = vowelSigns.includes(lastVowelChar);
+            
+            if (!hasVowelSign) {
+              if (firstCh === 'अ') {
+                words[w] = base + 'ो';
+                words[w + 1] = 'ऽ' + nextWord.slice(1);
+              } else if ("गघङजझञडढणदधनबभमयरलवह".includes(firstCh)) {
+                words[w] = base + 'ो';
+              } else if ("आइईउऊऋएऐओऔ".includes(firstCh)) {
+                words[w] = base;
+              }
+            } else if (lastVowelChar === 'ा') {
+              if ("अआइईउऊऋएऐओऔगघङजझञडढणदधनबभमयरलवह".includes(firstCh)) {
+                words[w] = base;
+              }
+            } else if ("िीुूृेैोौ".includes(lastVowelChar)) {
+              if ("अआइईउऊऋएऐओऔगघङजझञडढणदधनबभमयरलवह".includes(firstCh)) {
+                words[w] = base + 'र्';
+              }
+            }
+          }
+        }
+      }
+    }
+    normalized = words.join(" ");
+
+    normalized = normalized.replace(/\s+/g, ' ');
+    normalized = normalized.replace(/।+/g, '।');
+    normalized = normalized.replace(/॥+/g, '॥');
+    
+    return normalized.trim();
+  }
+
+  static toSequence(text) {
+    const normalized = this.normalize(text);
+    const seq = [];
+    for (let i = 0; i < normalized.length; i++) {
+      let ch = normalized[i];
+      let idx = SANS_SYMBOLS.indexOf(ch);
+      if (idx !== -1) {
+        seq.push(idx);
+      }
+    }
+    if (seq.length > 0 && seq[seq.length - 1] !== SANS_SYMBOLS.indexOf('।') && seq[seq.length - 1] !== SANS_SYMBOLS.indexOf('॥')) {
+      seq.push(SANS_SYMBOLS.indexOf('।'));
+    }
+    return seq;
+  }
+}
+
+class VagdhenuWasmChanter {
+  static async loadModel() {
+    if (wasmChanterSession) return wasmChanterSession;
+    if (wasmChanterLoading) {
+      while (wasmChanterLoading) {
+        await new Promise(r => setTimeout(r, 100));
+      }
+      return wasmChanterSession;
+    }
+
+    wasmChanterLoading = true;
+    try {
+      const url = 'https://huggingface.co/shethjenil/SansTTS/resolve/main/sanskrit_tts.onnx';
+      const buffer = await this.getCachedModel(url);
+      console.log("Initializing ONNX Inference Session (WASM)...");
+      
+      wasmChanterSession = await ort.InferenceSession.create(buffer, {
+        executionProviders: ['wasm'],
+        graphOptimizationLevel: 'all'
+      });
+      console.log("ONNX Session successfully created!");
+    } catch (err) {
+      console.error("Failed to load WASM ONNX chanter:", err);
+      showToast("❌ Local AI model load failed. Using standard speech fallback.");
+    } finally {
+      wasmChanterLoading = false;
+    }
+    return wasmChanterSession;
+  }
+
+  static async getCachedModel(url) {
+    if (!('caches' in window)) {
+      const resp = await fetch(url);
+      return await resp.arrayBuffer();
+    }
+    const cacheName = 'vagdhenu-model-cache';
+    const cache = await caches.open(cacheName);
+    let response = await cache.match(url);
+    if (!response) {
+      console.log(`Downloading model from HF: ${url}...`);
+      showToast('📥 Downloading Sanskrit AI Voice Model (~122MB). This only happens once...', 6000);
+      response = await fetch(url);
+      if (!response.ok) throw new Error('Failed to download model');
+      await cache.put(url, response.clone());
+    } else {
+      console.log('Model loaded from browser Cache Storage.');
+    }
+    return await response.arrayBuffer();
+  }
+
+  static float32ToWavBlob(samples, sampleRate = 22050) {
+    const buffer = new ArrayBuffer(44 + samples.length * 2);
+    const view = new DataView(buffer);
+
+    const writeString = (view, offset, string) => {
+      for (let i = 0; i < string.length; i++) {
+        view.setUint8(offset + i, string.charCodeAt(i));
+      }
+    };
+
+    writeString(view, 0, 'RIFF');
+    view.setUint32(4, 36 + samples.length * 2, true);
+    writeString(view, 8, 'WAVE');
+    writeString(view, 12, 'fmt ');
+    view.setUint32(16, 16, true);
+    view.setUint16(20, 1, true);
+    view.setUint16(22, 1, true);
+    view.setUint32(24, sampleRate, true);
+    view.setUint32(28, sampleRate * 2, true);
+    view.setUint16(32, 2, true);
+    view.setUint16(34, 16, true);
+    writeString(view, 36, 'data');
+    view.setUint32(40, samples.length * 2, true);
+
+    let offset = 44;
+    for (let i = 0; i < samples.length; i++, offset += 2) {
+      let s = Math.max(-1, Math.min(1, samples[i]));
+      view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+    }
+
+    return new Blob([buffer], { type: 'audio/wav' });
+  }
+
+  static async generateChant(text) {
+    const session = await this.loadModel();
+    if (!session) throw new Error("ONNX Session not available");
+
+    const sequence = SanskritChandasPhonemizer.toSequence(text);
+    if (sequence.length === 0) throw new Error("Empty sequence mapping");
+
+    const speakerIdx = SANS_SPEAKERS.indexOf(wasmSelectedSpeaker);
+    const speedVal = wasmSelectedSpeed;
+
+    console.log(`WASM Chanter Reciting: "${text}"`);
+    const feeds = {
+      text_seq: new ort.Tensor('int64', BigInt64Array.from(sequence.map(BigInt)), [sequence.length]),
+      speaker_index: new ort.Tensor('int64', BigInt64Array.from([BigInt(speakerIdx === -1 ? 7 : speakerIdx)]), [1]),
+      length_scale: new ort.Tensor('float32', Float32Array.from([speedVal]), [1])
+    };
+
+    const results = await session.run(feeds);
+    const outName = session.outputNames[0];
+    const outputAudio = results[outName].data;
+
+    return this.float32ToWavBlob(outputAudio, 22050);
+  }
+}
+
 let speechUtterance = null;
 
-function fallbackRecite(text, onFinished) {
+async function fallbackRecite(text, onFinished) {
+  // Try WASM neural recitation first!
+  try {
+    showToast('🌊 In-Browser local AI (WASM) generation in progress...', 4000);
+    const wavBlob = await VagdhenuWasmChanter.generateChant(text);
+    
+    // Stop any existing audio
+    if (shlokaPlayerAudio) {
+      if (typeof shlokaPlayerAudio.pause === 'function') shlokaPlayerAudio.pause();
+      shlokaPlayerAudio = null;
+    }
+    
+    // Play the generated WAV blob!
+    await startShlokaAudio({ id: 'wasm_generation', audioUrl: 'stored-blob' }, wavBlob);
+    
+    // Trigger onFinished when audio ends
+    if (shlokaPlayerAudio) {
+      shlokaPlayerAudio.addEventListener('ended', () => {
+        if (onFinished) onFinished();
+      });
+    }
+    return;
+  } catch (err) {
+    console.warn("WASM AI recitation failed, falling back to Browser SpeechSynthesis:", err);
+    showToast("⚠️ local AI loading failed. falling back to standard Speech Synthesis...");
+  }
+
   if (!('speechSynthesis' in window)) {
     showToast('Browser does not support Speech Synthesis');
     if (onFinished) onFinished();
@@ -3141,6 +3486,10 @@ function fallbackRecite(text, onFinished) {
 }
 
 async function checkVagdhenuServer() {
+  if (reciteMode === 'wasm') {
+    vagdhenuAvailable = false;
+    return false;
+  }
   try {
     const r = await fetch(VAGDHENU_SERVER + '/health', { 
       headers: { 'Bypass-Tunnel-Reminder': 'true' },
