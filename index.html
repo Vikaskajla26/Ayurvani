@@ -9,7 +9,6 @@
 <link rel="apple-touch-icon" href="/icon-192.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Tiro+Devanagari+Hindi&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/onnxruntime-web/1.18.0/ort.min.js"></script>
 <style>
   /* ---------- Ambient Design System (Forest Dark Mode Default) ---------- */
   :root{
@@ -2182,61 +2181,16 @@
 <div class="modal-overlay" id="serverSettingsModal">
   <div class="modal" style="max-height: 90vh; overflow-y: auto;">
     <button class="modal-close" onclick="closeServerSettingsModal()">×</button>
-    <h3>🎙️ Chanting & Chanting AI Settings</h3>
+    <h3>🎙️ Vagdhenu Speech Server Settings</h3>
     
-    <label for="selectReciteMode">Recitation Engine Mode</label>
-    <select id="selectReciteMode" style="width:100%; padding:10px; margin-bottom:12px; background:var(--panel-soft); color:var(--cream); border:1px solid var(--line); border-radius:6px;">
-      <option value="auto">Auto (Use Server if Online, else Local WASM)</option>
-      <option value="wasm">Force Local WASM AI (Offline / Self-contained)</option>
-      <option value="server">Force Remote Vagdhenu Server</option>
-    </select>
-
     <label for="inputServerUrl">Vāgdhenu AI Speech Server URL</label>
-    <input type="text" id="inputServerUrl" placeholder="e.g., http://localhost:5001 or https://xxxx.ngrok-free.app" style="margin-bottom:12px;">
+    <input type="text" id="inputServerUrl" placeholder="e.g., http://localhost:5001 or https://xxxx.loca.lt" style="margin-bottom:12px;">
     
-    <div style="border-top: 1px solid var(--line); margin: 12px 0; padding-top: 12px;">
-      <h4 style="margin: 0 0 8px 0; color: var(--gold);">Local WASM AI Options</h4>
-      
-      <label for="selectWasmSpeaker">WASM Voice Accent Speaker</label>
-      <select id="selectWasmSpeaker" style="width:100%; padding:10px; margin-bottom:12px; background:var(--panel-soft); color:var(--cream); border:1px solid var(--line); border-radius:6px;">
-        <option value="Male 8 (Kannada)">Male 8 (Kannada - Meditative Vedic Accent)</option>
-        <option value="Male 9 (Kannada)">Male 9 (Kannada - Chant Accent)</option>
-        <option value="Male 10 (Kannada)">Male 10 (Kannada - Clear Accent)</option>
-        <option value="Male 1">Male 1 (Standard Northern Accent)</option>
-        <option value="Male 2">Male 2 (Standard accent)</option>
-        <option value="Male 3">Male 3 (Standard accent)</option>
-        <option value="Male 5">Male 5 (Standard accent)</option>
-        <option value="Male 6">Male 6 (Standard accent)</option>
-        <option value="Male 7">Male 7 (Standard accent)</option>
-        <option value="Male 12">Male 12 (Standard accent)</option>
-        <option value="Male 18 (Hindi)">Male 18 (Hindi Accent)</option>
-        <option value="Male 20 (Hindi)">Male 20 (Hindi Accent)</option>
-        <option value="Female 1 (Tamil)">Female 1 (Tamil Accent)</option>
-        <option value="Male 17 (Tamil)">Male 17 (Tamil Accent)</option>
-        <option value="Female 5 (Telugu)">Female 5 (Telugu Accent)</option>
-        <option value="Female 6 (Telugu)">Female 6 (Telugu Accent)</option>
-        <option value="Male 19 (Telugu)">Male 19 (Telugu Accent)</option>
-        <option value="Male 4 (Malayalam)">Male 4 (Malayalam Accent)</option>
-        <option value="Male 16 (Malayalam)">Male 16 (Malayalam Accent)</option>
-        <option value="Female 2 (Marathi)">Female 2 (Marathi Accent)</option>
-        <option value="Female 3 (Marathi)">Female 3 (Marathi Accent)</option>
-      </select>
-
-      <label for="selectWasmSpeed">WASM Recitation Speed / Rhythm</label>
-      <select id="selectWasmSpeed" style="width:100%; padding:10px; margin-bottom:12px; background:var(--panel-soft); color:var(--cream); border:1px solid var(--line); border-radius:6px;">
-        <option value="0.9">Fast (0.9x)</option>
-        <option value="1.0">Normal (1.0x)</option>
-        <option value="1.12">Slow & Meditative (1.12x - Default)</option>
-        <option value="1.22">Deep Chanting pace (1.22x)</option>
-        <option value="1.3">Slowest Chanting pace (1.3x)</option>
-      </select>
-    </div>
-
     <div style="font-size:0.75rem; color:var(--ink-soft); line-height:1.4; margin-top:12px;">
       <p style="margin: 0 0 6px 0;"><strong>Kaise connect karein:</strong></p>
       <ul style="margin:0; padding-left:16px; margin-bottom:8px;">
-        <li><strong>Local Localhost Server:</strong> URL mein <code>http://localhost:5001</code> use karein.</li>
-        <li><strong>Local WASM AI:</strong> URL ke bina chalega! HF se model secure client-side download karega aur offline support karega.</li>
+        <li><strong>Local Server:</strong> Apne local system pe start karein: <code>python vagdhenu/scripts/server.py</code></li>
+        <li><strong>Server URL:</strong> Default URL <code>http://localhost:5001</code> check karein or correct URL specify karein.</li>
       </ul>
     </div>
     
@@ -3177,16 +3131,6 @@ let vagdhenuAvailable = null;  // null=unchecked, true/false
 
 function openServerSettingsModal() {
   document.getElementById('inputServerUrl').value = VAGDHENU_SERVER;
-  
-  const reciteModeSelect = document.getElementById('selectReciteMode');
-  if (reciteModeSelect) reciteModeSelect.value = reciteMode;
-  
-  const wasmSpeakerSelect = document.getElementById('selectWasmSpeaker');
-  if (wasmSpeakerSelect) wasmSpeakerSelect.value = wasmSelectedSpeaker;
-  
-  const wasmSpeedSelect = document.getElementById('selectWasmSpeed');
-  if (wasmSpeedSelect) wasmSpeedSelect.value = wasmSelectedSpeed.toString();
-  
   document.getElementById('serverSettingsModal').classList.add('show');
 }
 
@@ -3200,27 +3144,7 @@ function saveServerSettings() {
     VAGDHENU_SERVER = url;
     localStorage.setItem(VAGDHENU_SERVER_KEY, url);
   }
-  
-  const reciteModeSelect = document.getElementById('selectReciteMode');
-  if (reciteModeSelect) {
-    reciteMode = reciteModeSelect.value;
-    localStorage.setItem(RECITE_MODE_KEY, reciteMode);
-  }
-  
-  const wasmSpeakerSelect = document.getElementById('selectWasmSpeaker');
-  if (wasmSpeakerSelect) {
-    wasmSelectedSpeaker = wasmSpeakerSelect.value;
-    localStorage.setItem(WASM_SPEAKER_KEY, wasmSelectedSpeaker);
-  }
-  
-  const wasmSpeedSelect = document.getElementById('selectWasmSpeed');
-  if (wasmSpeedSelect) {
-    wasmSelectedSpeed = parseFloat(wasmSpeedSelect.value);
-    localStorage.setItem(WASM_SPEED_KEY, wasmSelectedSpeed.toString());
-  }
-  
   showToast('⚙️ Chanting settings saved successfully!');
-  vagdhenuAvailable = null; // reset check
   closeServerSettingsModal();
 }
 
@@ -3231,21 +3155,16 @@ function getFetchVerseUrl(sthana, chapter, verse) {
   return `${base}${endpoint}?sthana=${encodeURIComponent(sthana)}&chapter=${chapter}&verse=${verse}`;
 }
 
-// --- Sanskrit Grapheme to Phoneme Normalizer and ONNX Web Chanter ---
-const SANS_SYMBOLS = ["_", "।", "ँ", "ं", "ः", "अ", "आ", "इ", "ई", "उ", "ऊ", "ऋ", "ए", "ऐ", "ओ", "औ", "क", "ख", "ग", "घ", "ङ", "च", "छ", "ज", "झ", "ञ", "ट", "ठ", "ड", "ढ", "ण", "त", "थ", "द", "ध", "न", "प", "फ", "ब", "भ", "म", "य", "र", "ल", "ळ", "व", "श", "ष", "स", "ह", "ऽ", "ा", "ि", "ी", "ु", "ू", "ृ", "ॄ", "े", "ै", "ो", "ौ", "्", "ॠ", "ॢ", " "];
-const SANS_SPEAKERS = ["Male 1", "Male 2", "Male 3", "Male 4 (Malayalam)", "Male 5", "Male 6", "Male 7", "Male 8 (Kannada)", "Female 1 (Tamil)", "Male 9 (Kannada)", "Female 2 (Marathi)", "Female 3 (Marathi)", "Female 4 (Marathi)", "Female 5 (Telugu)", "Female 6 (Telugu)", "Male 10 (Kannada)", "Male 11 (Kannada)", "Male 12", "Male 13", "Male 14", "Male 15", "Female 7", "Male 16 (Malayalam)", "Male 17 (Tamil)", "Male 18 (Hindi)", "Male 19 (Telugu)", "Male 20 (Hindi)"];
-
-const WASM_SPEAKER_KEY = 'vagdhenu_wasm_speaker';
-const WASM_SPEED_KEY = 'vagdhenu_wasm_speed';
-const RECITE_MODE_KEY = 'vagdhenu_recite_mode';
-
-let wasmSelectedSpeaker = localStorage.getItem(WASM_SPEAKER_KEY) || 'Male 8 (Kannada)';
-let wasmSelectedSpeed = parseFloat(localStorage.getItem(WASM_SPEED_KEY) || '1.12');
-let reciteMode = localStorage.getItem(RECITE_MODE_KEY) || 'wasm'; // 'wasm', 'auto', 'server'
+function getReciteUrl(text, meter) {
+  const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+  const encodedText = encodeURIComponent(text);
+  if (isLocalhost) {
+    return `${VAGDHENU_SERVER}/recite?text=${encodedText}&meter=${meter}&seed=42&speed=0.90`;
+  } else {
+    return `/api/recite?text=${encodedText}&meter=${meter}&server_url=${encodeURIComponent(VAGDHENU_SERVER)}&seed=42&speed=0.90`;
+  }
+}
 </script>
-
-<script src="/js/phonemizer.js"></script>
-<script src="/js/tts-engine.js"></script>
 
 <script>
 // Service Worker Registration for Offline Cache
@@ -3259,136 +3178,32 @@ if ('serviceWorker' in navigator) {
 
 let speechUtterance = null;
 
-async function fallbackRecite(text, onFinished) {
-  // Try WASM neural recitation first!
-  try {
-    showToast('🌊 In-Browser local AI (WASM) generation in progress...', 4000);
-    const wavBlob = await VagdhenuWasmChanter.generateChant(text);
-    
-    // Stop any existing audio
-    if (shlokaPlayerAudio) {
-      if (typeof shlokaPlayerAudio.pause === 'function') shlokaPlayerAudio.pause();
-      shlokaPlayerAudio = null;
-    }
-    
-    // Play the generated WAV blob!
-    await startShlokaAudio({ id: 'wasm_generation', audioUrl: 'stored-blob' }, wavBlob);
-    
-    // Trigger onFinished when audio ends
-    if (shlokaPlayerAudio) {
-      shlokaPlayerAudio.addEventListener('ended', () => {
-        if (onFinished) onFinished();
-      });
-    }
-    return;
-  } catch (err) {
-    console.warn("WASM AI recitation failed, falling back to Browser SpeechSynthesis:", err);
-    showToast("⚠️ local AI loading failed. falling back to standard Speech Synthesis...");
-  }
-
-  if (!('speechSynthesis' in window)) {
-    showToast('Browser does not support Speech Synthesis');
-    if (onFinished) onFinished();
-    return;
-  }
-  
-  window.speechSynthesis.cancel();
-  speechUtterance = new SpeechSynthesisUtterance(text);
-  
-  const voices = window.speechSynthesis.getVoices();
-  const selectedVoice = voices.find(v => v.lang === 'sa-IN' || v.lang === 'sa') || 
-                        voices.find(v => v.lang === 'hi-IN' || v.lang === 'hi') || 
-                        voices.find(v => v.lang.startsWith('hi') || v.lang.startsWith('sa'));
-  if (selectedVoice) speechUtterance.voice = selectedVoice;
-  
-  speechUtterance.rate = 0.76; 
-  speechUtterance.pitch = 0.88; 
-  
-  speechUtterance.onstart = () => {
-    document.getElementById('spcWaveform').classList.add('playing');
-    document.getElementById('spcPlayIcon').textContent = '\u23F8';
-    document.getElementById('spcPlayLabel').textContent = 'Pause';
-    
-    shlokaPlayerAudio = {
-      isSpeech: true,
-      play: async () => { window.speechSynthesis.resume(); return Promise.resolve(); },
-      pause: () => { window.speechSynthesis.pause(); },
-      paused: false,
-      currentTime: 0,
-      duration: text.length * 0.1,
-      addEventListener: () => {},
-      removeEventListener: () => {}
-    };
-  };
-  
-  speechUtterance.onend = () => {
-    document.getElementById('spcWaveform').classList.remove('playing');
-    document.getElementById('spcPlayIcon').textContent = '\u25B6';
-    document.getElementById('spcPlayLabel').textContent = 'Recitation Sunein';
-    shlokaPlayerAudio = null;
-    if (onFinished) onFinished();
-  };
-  
-  speechUtterance.onerror = () => {
-    document.getElementById('spcWaveform').classList.remove('playing');
-    shlokaPlayerAudio = null;
-    if (onFinished) onFinished();
-  };
-  
-  window.speechSynthesis.speak(speechUtterance);
-}
-
-async function checkVagdhenuServer() {
-  if (reciteMode === 'wasm') {
-    vagdhenuAvailable = false;
-    return false;
-  }
-  try {
-    const r = await fetch(VAGDHENU_SERVER + '/health', { 
-      headers: { 'Bypass-Tunnel-Reminder': 'true' },
-      signal: AbortSignal.timeout(3000) 
-    });
-    vagdhenuAvailable = r.ok;
-  } catch {
-    vagdhenuAvailable = false;
-  }
-  return vagdhenuAvailable;
-}
-
 async function generateAIChant() {
   if (!shlokaPlayerChantId) { showToast('Pehle koi shloka select karein.'); return; }
   const c = state.chants.find(x => x.id === shlokaPlayerChantId);
   if (!c) return;
 
   const aiBtn = document.getElementById('spcAiBtn');
-  if (aiBtn) { aiBtn.disabled = true; aiBtn.innerHTML = '\u23F3 Generating...'; }
-  showToast('\uD83C\uDF0A Chanting request process ho rahi hai...');
-
-  // Check server
-  const online = await checkVagdhenuServer();
-  if (!online) {
-    showToast('\u2139\uFE0F Vagdhenu server offline. Browser Speech Chanting active...');
-    fallbackRecite(c.sanskrit, () => {
-      if (aiBtn) { aiBtn.disabled = false; aiBtn.innerHTML = '\uD83E\uDD16 AI Chant Generate'; }
-    });
-    return;
-  }
+  if (aiBtn) { aiBtn.disabled = true; aiBtn.innerHTML = '⏳ Generating...'; }
+  showToast('🌊 Vagdhenu AI se recitation generate ho rahi hai...');
 
   try {
-    const text = encodeURIComponent(c.sanskrit);
-    const meter = encodeURIComponent(c.cat && c.cat.toLowerCase().includes('gayatri') ? 'gayatri' : 'anushtubh');
-    const url = `${VAGDHENU_SERVER}/recite?text=${text}&meter=${meter}&seed=42&speed=0.90`;
+    const meter = c.cat && c.cat.toLowerCase().includes('gayatri') ? 'gayatri' : 'anushtubh';
+    const url = getReciteUrl(c.sanskrit, meter);
 
     const resp = await fetch(url, {
       headers: { 'Bypass-Tunnel-Reminder': 'true' }
     });
-    if (!resp.ok) throw new Error('Server error: ' + resp.status);
+    if (!resp.ok) {
+      const errData = await resp.json().catch(() => ({}));
+      throw new Error(errData.error || ('Server error: ' + resp.status));
+    }
 
     const blob = await resp.blob();
     // Save generated audio to IndexedDB for this shloka
-    const saved = await savePDFBlob('audio_' + shlokaPlayerChantId, blob);
+    await savePDFBlob('audio_' + shlokaPlayerChantId, blob);
 
-    showToast('\uD83C\uDFB5 AI chanting ready! Playing...');
+    showToast('🎵 AI chanting ready! Playing...');
     if (aiBtn) { aiBtn.style.display = 'none'; }
     const badge = document.getElementById('spcAudioBadge');
     if (badge) badge.style.display = 'inline-block';
@@ -3398,8 +3213,9 @@ async function generateAIChant() {
     await startShlokaAudio(c, localBlob);
   } catch (err) {
     console.error('AI generation error:', err);
-    showToast('\u274C Generation failed: ' + err.message);
-    if (aiBtn) { aiBtn.disabled = false; aiBtn.innerHTML = '\uD83E\uDD16 AI Chant Generate'; }
+    showToast('❌ Recitation failed: ' + err.message);
+  } finally {
+    if (aiBtn) { aiBtn.disabled = false; aiBtn.innerHTML = '🤖 AI Chant Generate'; }
   }
 }
 
@@ -3526,40 +3342,16 @@ async function generateCustomAIChant() {
   // Stop existing audio
   if (shlokaPlayerAudio) { shlokaPlayerAudio.pause(); shlokaPlayerAudio = null; }
   
-  const online = await checkVagdhenuServer();
-  if (!online) {
-    showToast('ℹ️ Vagdhenu server offline. Browser Speech Chanting active...');
-    
-    // Display in Player Card
-    document.getElementById('spcCat').textContent = 'Custom Recitation (Browser TTS)';
-    document.getElementById('spcSanskrit').textContent = text;
-    document.getElementById('spcTranslit').textContent = `Meter: ${meter}`;
-    document.getElementById('spcMeaning').textContent = 'Spoken dynamically via client-side Browser Speech synthesis.';
-    document.getElementById('spcTimer').textContent = '0:00 / 0:00';
-    
-    const badge = document.getElementById('spcAudioBadge');
-    if (badge) badge.style.display = 'inline-block';
-    
-    const aiBtn = document.getElementById('spcAiBtn');
-    if (aiBtn) aiBtn.style.display = 'none';
-    
-    const card = document.getElementById('shlokaPlayerCard');
-    card.style.display = 'block';
-    
-    fallbackRecite(text, () => {
-      if (reciteBtn) { reciteBtn.disabled = false; reciteBtn.innerHTML = '🔊 AI Recite Shloka'; }
-    });
-    return;
-  }
-  
   try {
-    const encodedText = encodeURIComponent(text);
-    const url = `${VAGDHENU_SERVER}/recite?text=${encodedText}&meter=${meter}&seed=42&speed=0.90`;
+    const url = getReciteUrl(text, meter);
     
     const resp = await fetch(url, {
       headers: { 'Bypass-Tunnel-Reminder': 'true' }
     });
-    if (!resp.ok) throw new Error('Server error: ' + resp.status);
+    if (!resp.ok) {
+      const errData = await resp.json().catch(() => ({}));
+      throw new Error(errData.error || ('Server error: ' + resp.status));
+    }
     
     const blob = await resp.blob();
     
@@ -3588,7 +3380,8 @@ async function generateCustomAIChant() {
     requestAnimationFrame(() => { card.style.animation = 'fadeSlideUp 0.3s ease'; });
     
     // Play immediately
-    await startShlokaAudio({ id: 'custom_generation', audioUrl: 'stored-blob' }, blob);
+    const localBlob = await getPDFBlob('audio_custom_generation');
+    await startShlokaAudio({ id: 'custom_generation', audioUrl: 'stored-blob' }, localBlob);
     
   } catch (err) {
     console.error('Custom generation error:', err);
@@ -3706,7 +3499,7 @@ function playChant(id){
   if(c.audioUrl){
     currentAudio = new Audio(c.audioUrl);
     currentAudio.playbackRate = playbackRate;
-    currentAudio.play().catch(()=>{ showToast('Audio file load nahi ho payi, browser voice try kar rahe hain'); speakChant(c); });
+    currentAudio.play().catch(()=>{ showToast('Audio file load nahi ho payi, Vagdhenu AI try kar rahe hain'); speakChant(c); });
     currentAudio.onended = ()=>{ stopPlayback(); };
     currentAudio.onerror = ()=>{ speakChant(c); };
   } else {
@@ -3714,18 +3507,43 @@ function playChant(id){
   }
 }
 
-function speakChant(c){
-  if(!window.speechSynthesis){ 
-    showToast('Is browser mein speech synthesis support nahi hai'); 
-    stopPlayback(); 
-    return; 
+async function speakChant(c){
+  showToast('🌊 Vagdhenu AI se recitation generate ho rahi hai...');
+  try {
+    const meter = c.cat && c.cat.toLowerCase().includes('gayatri') ? 'gayatri' : 'anushtubh';
+    const url = getReciteUrl(c.sanskrit, meter);
+    
+    const resp = await fetch(url, {
+      headers: { 'Bypass-Tunnel-Reminder': 'true' }
+    });
+    if (!resp.ok) {
+      const errData = await resp.json().catch(() => ({}));
+      throw new Error(errData.error || ('Server error: ' + resp.status));
+    }
+    
+    const blob = await resp.blob();
+    const audioSrc = URL.createObjectURL(blob);
+    
+    currentAudio = new Audio(audioSrc);
+    currentAudio.playbackRate = playbackRate;
+    currentAudio.play();
+    
+    const wave = document.getElementById('pb-wave');
+    if (wave) wave.classList.add('playing');
+    
+    const playBtn = document.getElementById('pb-play-btn');
+    if (playBtn) playBtn.textContent = '⏸';
+    
+    currentAudio.onended = () => { stopPlayback(); };
+    currentAudio.onerror = () => {
+      showToast('❌ Recitation playback failed');
+      stopPlayback();
+    };
+  } catch (err) {
+    console.error('Vagdhenu recitation error:', err);
+    showToast('❌ Vagdhenu recitation failed: ' + err.message);
+    stopPlayback();
   }
-  const utter = new SpeechSynthesisUtterance(c.sanskrit);
-  utter.lang = 'hi-IN';
-  utter.rate = playbackRate;
-  utter.onend = ()=>{ stopPlayback(); };
-  utter.onerror = ()=>{ stopPlayback(); };
-  window.speechSynthesis.speak(utter);
 }
 
 function chantChipsList(){ return ['Sabhi', ...new Set(state.chants.map(c=>c.cat))]; }
@@ -4942,23 +4760,16 @@ async function reciteLocalVerse() {
   
   if (shlokaPlayerAudio) { shlokaPlayerAudio.pause(); shlokaPlayerAudio = null; }
   
-  const online = await checkVagdhenuServer();
-  if (!online) {
-    showToast('ℹ️ Vagdhenu server offline. Browser Speech Chanting active...');
-    fallbackRecite(currentLocalVerseText, () => {
-      if (btn) { btn.disabled = false; btn.innerHTML = '🔊 AI Recite'; }
-    });
-    return;
-  }
-  
   try {
-    const encodedText = encodeURIComponent(currentLocalVerseText);
-    const url = `${VAGDHENU_SERVER}/recite?text=${encodedText}&meter=anushtubh&seed=42&speed=0.90`;
+    const url = getReciteUrl(currentLocalVerseText, 'anushtubh');
     
     const resp = await fetch(url, {
       headers: { 'Bypass-Tunnel-Reminder': 'true' }
     });
-    if (!resp.ok) throw new Error('Server error: ' + resp.status);
+    if (!resp.ok) {
+      const errData = await resp.json().catch(() => ({}));
+      throw new Error(errData.error || ('Server error: ' + resp.status));
+    }
     
     const blob = await resp.blob();
     shlokaPlayerChantId = 'local_verse_generation';
