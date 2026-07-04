@@ -12,7 +12,7 @@ CSO_API = "http://www.carakasamhitaonline.com/api.php"
 CHARAKA_PAGE_TITLES = {
     "Sutrasthana": {
         1: "Deerghanjiviteeya Adhyaya",
-        2: "Apamarga Tanduliya",
+        2: "Apamarga Tanduliya Adhyaya",
         3: "Aragvadhiya Adhyaya",
         4: "Shadvirechanashatashritiya Adhyaya",
         5: "Matrashiteeya Adhyaya",
@@ -150,6 +150,7 @@ CHARAKA_PAGE_TITLES = {
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 _cache_file = os.path.join(HERE, "cso_page_cache.json")
+_title_cache_file = os.path.join(HERE, "cso_title_cache.json")
 
 # Load persistent cache
 _page_cache = {}
@@ -160,6 +161,23 @@ if os.path.exists(_cache_file):
         print(f"[server] Loaded {len(_page_cache)} cached pages from {_cache_file}")
     except Exception as e:
         print(f"[server] Error loading cache: {e}")
+
+# Load persistent title-resolution cache (maps "Sthana:chapter" -> confirmed real wiki title)
+_title_cache = {}
+if os.path.exists(_title_cache_file):
+    try:
+        with open(_title_cache_file, "r", encoding="utf-8") as f:
+            _title_cache = json.load(f)
+        print(f"[server] Loaded {len(_title_cache)} cached chapter titles from {_title_cache_file}")
+    except Exception as e:
+        print(f"[server] Error loading title cache: {e}")
+
+def _save_title_cache():
+    try:
+        with open(_title_cache_file, "w", encoding="utf-8") as f:
+            json.dump(_title_cache, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        print(f"[fetch_verse] Error writing title cache: {e}")
 
 def _to_devanagari_num(n):
     """Convert integer to Devanagari numeral string."""
@@ -195,6 +213,63 @@ def _fetch_wiki_page(title):
                 return content
     except Exception as e:
         print(f"[fetch_verse] Error fetching wiki page '{title}': {e}")
+    return None
+
+def _search_wiki_page_title(query):
+    """Use the site's own search to find the closest matching page title,
+    used as a fallback when a stored/guessed chapter title is wrong."""
+    safe_q = urllib.parse.quote(query)
+    url = f"{CSO_API}?action=query&list=search&srsearch={safe_q}&format=json&srlimit=3"
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "Ayurvani/1.0"})
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+        results = data.get("query", {}).get("search", [])
+        if results:
+            return results[0].get("title")
+    except Exception as e:
+        print(f"[fetch_verse] Search fallback failed for '{query}': {e}")
+    return None
+
+def _resolve_page_title(sthana, chapter_num, guessed_title):
+    """Resolve the real wiki page title for a chapter, self-correcting if the
+    stored guess is wrong. Order of attempts:
+      1. Previously confirmed title (cached)
+      2. The stored guess as-is
+      3. The guess with "Adhyaya" added or removed (the most common mismatch)
+      4. A live search on the source wiki using the guessed title
+      5. A live search using "<Sthana> Chapter <N>"
+    Whatever works is cached so future requests for this chapter skip straight to it."""
+    cache_key = f"{sthana}:{chapter_num}"
+    if cache_key in _title_cache:
+        cached_title = _title_cache[cache_key]
+        if _fetch_wiki_page(cached_title):
+            return cached_title
+
+    candidates = [guessed_title]
+    if guessed_title.endswith(" Adhyaya"):
+        candidates.append(guessed_title[: -len(" Adhyaya")])
+    else:
+        candidates.append(guessed_title + " Adhyaya")
+
+    for candidate in candidates:
+        if _fetch_wiki_page(candidate):
+            _title_cache[cache_key] = candidate
+            _save_title_cache()
+            return candidate
+
+    found = _search_wiki_page_title(guessed_title)
+    if found and _fetch_wiki_page(found):
+        _title_cache[cache_key] = found
+        _save_title_cache()
+        return found
+
+    found = _search_wiki_page_title(f"{sthana} Chapter {chapter_num}")
+    if found and _fetch_wiki_page(found):
+        _title_cache[cache_key] = found
+        _save_title_cache()
+        return found
+
     return None
 
 def _clean_wiki_text(text):
@@ -484,10 +559,14 @@ def fetch_charaka_verse(sthana, chapter_num, verse_num):
     if not sthana_pages:
         return {"error": f"Unknown sthana: {sthana}"}
     
-    page_title = sthana_pages.get(chapter_num)
-    if not page_title:
+    guessed_title = sthana_pages.get(chapter_num)
+    if not guessed_title:
         return {"error": f"Chapter {chapter_num} not found in {sthana}"}
-    
+
+    page_title = _resolve_page_title(sthana, chapter_num, guessed_title)
+    if not page_title:
+        return {"error": f"Could not locate the wiki page for {sthana} Chapter {chapter_num} ({guessed_title}). The source site may be unreachable right now."}
+
     content = _fetch_wiki_page(page_title)
     if not content:
         return {"error": f"Could not fetch wiki page: {page_title}"}
@@ -497,7 +576,10 @@ def fetch_charaka_verse(sthana, chapter_num, verse_num):
     tattva, vidhi = _extract_vimarsha(content, verse_num, section_heading=heading)
     
     if not sanskrit:
-        return {"error": f"Verse {verse_num} not found in {page_title}"}
+        return {
+            "error": f"Verse {verse_num} not found in Chapter {chapter_num} ({page_title}). This chapter was located correctly -- try a different verse number, or the numbering on the source page may not match a plain sequential count.",
+            "chapter_title": page_title
+        }
     
     result = {
         "sthana": sthana,

@@ -4763,22 +4763,32 @@ function updateReferencePreview() {
 }
 
 function _generateEasyExplanation(data) {
-  // Build a humanized, student-friendly explanation from translation + vimarsha
-  let easy = '';
-  
+  // Build a humanized, student-friendly explanation from translation + vimarsha,
+  // always giving useful context even if some pieces are missing from the source.
+  const parts = [];
+  const chapterCtx = data.section_heading || data.chapter_title || '';
+
   if (data.translation && data.translation !== 'Translation not available for this verse.') {
-    easy = '📌 In simple words: ' + data.translation;
+    parts.push('📌 Saral Bhasha Mein: ' + data.translation);
+  } else {
+    parts.push('📌 Is shloka ka direct translation abhi source se nahi mil paaya, lekin niche diya gaya chapter context aur Sanskrit text padhkar matlab samajhna aasan hoga.');
   }
-  
+
+  if (chapterCtx) {
+    parts.push('📖 Context: Yeh shloka "' + chapterCtx + '" adhyaya ka hissa hai — isi topic se judi baaki jaankari bhi wahin mil jaayegi.');
+  }
+
   if (data.tattva_vimarsha && data.tattva_vimarsha.length > 0) {
-    easy += '\n\n🧠 Key Takeaway: ' + data.tattva_vimarsha[0];
+    parts.push('🧠 Mool Siddhant (Key Principle): ' + data.tattva_vimarsha[0]);
   }
-  
-  if (!easy) {
-    easy = 'This verse is part of the ' + (data.section_heading || data.chapter_title) + ' section of the Charaka Samhita. Please refer to the Sanskrit text and external sources for detailed meaning.';
+
+  if (data.vidhi_vimarsha && data.vidhi_vimarsha.length > 0) {
+    parts.push('📚 Practical Application: ' + data.vidhi_vimarsha[0]);
   }
-  
-  return easy;
+
+  parts.push('💡 Study Tip: Sanskrit text ko dobara padhein aur upar diye gaye translation ke shabd-anuwad (word-by-word) se match karein — is tarah yaad rakhna sabse aasan hota hai.');
+
+  return parts.join('\n\n');
 }
 
 async function findCarakaReference() {
@@ -4839,7 +4849,11 @@ async function findCarakaReference() {
       const data = await resp.json();
       
       if (data.error) {
-        showToast('⚠️ ' + data.error);
+        if (data.chapter_title) {
+          showToast('⚠️ Chapter mil gaya (' + data.chapter_title + '), lekin verse ' + shloka + ' nahi mila. Kripya verse number check karein.');
+        } else {
+          showToast('⚠️ ' + data.error);
+        }
         localVerseCard.style.display = 'none';
         return;
       }
