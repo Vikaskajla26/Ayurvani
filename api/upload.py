@@ -2,6 +2,7 @@ import os
 import json
 import urllib.request
 from http.server import BaseHTTPRequestHandler
+from _auth import verify_token
 
 class handler(BaseHTTPRequestHandler):
     def end_headers(self):
@@ -22,7 +23,7 @@ class handler(BaseHTTPRequestHandler):
 
             # Authenticate admin before uploading files
             auth_token = self.headers.get('x-admin-token', '')
-            if auth_token != "ayurvani_admin_secure_token_session_2026":
+            if not verify_token(auth_token):
                 self.send_response(401)
                 self.send_header("Content-Type", "application/json")
                 self.end_headers()

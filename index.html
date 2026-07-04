@@ -2405,7 +2405,7 @@ async function saveChants(){
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-admin-token': 'ayurvani_admin_secure_token_session_2026'
+          'x-admin-token': (state.profile && state.profile.adminToken) || ''
         },
         body: JSON.stringify(state.chants)
       });
@@ -2430,7 +2430,7 @@ async function saveBooks(){
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-admin-token': 'ayurvani_admin_secure_token_session_2026'
+          'x-admin-token': (state.profile && state.profile.adminToken) || ''
         },
         body: JSON.stringify(state.books)
       });
@@ -3918,7 +3918,7 @@ async function uploadFileToCloud(file) {
       headers: {
         'x-filename': file.name,
         'content-type': file.type,
-        'x-admin-token': 'ayurvani_admin_secure_token_session_2026'
+        'x-admin-token': (state.profile && state.profile.adminToken) || ''
       },
       body: file
     });
@@ -4467,7 +4467,7 @@ async function verifyAdminCredentials() {
     
     const res = await resp.json();
     if (resp.ok && res.success) {
-      state.profile = { name: 'Admin', isAdmin: true };
+      state.profile = { name: 'Admin', isAdmin: true, adminToken: res.token };
       await saveProfile();
       showToast('Admin verify ho gaya!');
       
