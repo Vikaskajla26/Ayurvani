@@ -107,8 +107,8 @@ class VagdhenuWasmChanter {
     console.log(`WASM Chanter Reciting: "${text}"`);
     const feeds = {
       text_seq: new ort.Tensor('int64', BigInt64Array.from(sequence.map(BigInt)), [sequence.length]),
-      speaker_index: new ort.Tensor('int64', BigInt64Array.from([BigInt(speakerIdx === -1 ? 7 : speakerIdx)]), [1]),
-      length_scale: new ort.Tensor('float32', Float32Array.from([speedVal]), [1])
+      speaker_index: new ort.Tensor('int64', BigInt64Array.from([BigInt(speakerIdx === -1 ? 7 : speakerIdx)]), []),
+      length_scale: new ort.Tensor('float32', Float32Array.from([speedVal]), [])
     };
 
     const results = await session.run(feeds);
