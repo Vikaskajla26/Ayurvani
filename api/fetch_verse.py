@@ -213,21 +213,101 @@ def _clean_wiki_text(text):
     text = re.sub(r"'{2,3}", '', text)
     return text.strip()
 
-def _extract_verse(content, verse_num):
-    """Extract Sanskrit verse text and English translation from raw wikitext."""
+def _from_devanagari_num(dn_str):
+    """Convert Devanagari numeral digits to English digits."""
+    res = ""
+    for c in dn_str:
+        val = ord(c) - 0x0966
+        if 0 <= val <= 9:
+            res += str(val)
+        else:
+            res += c
+    return res
+
+def _normalize_num_string(text):
+    """Normalize string by converting all Devanagari digits to English digits."""
+    chars = []
+    for c in text:
+        val = ord(c) - 0x0966
+        if 0 <= val <= 9:
+            chars.append(str(val))
+        else:
+            chars.append(c)
+    return "".join(chars)
+
+def parse_page_into_units(content):
+    """Parse MediaWiki content into units corresponding to each collapsible block."""
+    units = []
+    start_tag = '<div class="mw-collapsible mw-collapsed">'
+    end_tag = '</div></div>'
+    
+    positions = []
+    idx = content.find(start_tag)
+    while idx != -1:
+        positions.append(idx)
+        idx = content.find(start_tag, idx + 1)
+        
+    for i, pos in enumerate(positions):
+        end_idx = content.find(end_tag, pos)
+        if end_idx == -1:
+            continue
+            
+        collapsible_content = content[pos:end_idx + len(end_tag)]
+        
+        next_pos = positions[i+1] if i + 1 < len(positions) else len(content)
+        trailing_content = content[end_idx + len(end_tag):next_pos]
+        
+        heading_match = re.search(r'==+\s*[^=]+==+', trailing_content)
+        if heading_match:
+            trailing_content = trailing_content[:heading_match.start()]
+            
+        units.append({
+            "collapsible": collapsible_content,
+            "trailing": trailing_content,
+            "full_text": collapsible_content + "\n" + trailing_content
+        })
+    return units
+
+def find_unit_for_verse(units, verse_num):
+    """Find the collapsible unit that contains or references this verse number."""
+    vn = str(verse_num)
+    dn = _to_devanagari_num(verse_num)
+    
+    # 1. Search for exact markers
+    for u in units:
+        if f"||{dn}||" in u["full_text"] or f"||{vn}||" in u["full_text"]:
+            return u
+        if f"[{vn}]" in u["full_text"] or f"[{dn}]" in u["full_text"]:
+            return u
+            
+    # 2. Search for ranges like 11-15 or ११-१५
+    for u in units:
+        # Match any range in Devanagari
+        for m in re.finditer(r'([०-९]+)\s*-\s*([०-९]+)', u["full_text"]):
+            start = int(_from_devanagari_num(m.group(1)))
+            end = int(_from_devanagari_num(m.group(2)))
+            if start <= verse_num <= end:
+                return u
+                
+        # Match any range in English digits
+        for m in re.finditer(r'(\d+)\s*-\s*(\d+)', u["full_text"]):
+            start = int(m.group(1))
+            end = int(m.group(2))
+            if start <= verse_num <= end:
+                return u
+    return None
+
+def _extract_verse_fallback(content, verse_num):
+    """Fallback extraction method using walk-backwards regex logic if units are not found."""
     dn = _to_devanagari_num(verse_num)
     vn = str(verse_num)
-    
-    # Find the Devanagari verse marker ||dn||
     marker = '||' + dn + '||'
     pos = content.find(marker)
     if pos == -1:
         return None, None
     
-    # Extract Sanskrit: walk backward from marker to collect Devanagari lines
     before = content[:pos]
     lines_before = before.split('\n')
-    
     sanskrit_lines = []
     blank_count = 0
     for line in reversed(lines_before):
@@ -237,7 +317,6 @@ def _extract_verse(content, verse_num):
             if blank_count > 2 and sanskrit_lines:
                 break
             continue
-        # Stop at HTML, wiki headings, or non-Devanagari content
         if stripped.startswith('<') or stripped.startswith('=') or stripped.startswith('{'):
             break
         has_devanagari = any(0x0900 <= ord(c) <= 0x097F for c in stripped)
@@ -247,31 +326,21 @@ def _extract_verse(content, verse_num):
         else:
             if sanskrit_lines:
                 break
-    
     sanskrit_text = '\n'.join(sanskrit_lines)
     if sanskrit_text:
         sanskrit_text += marker
-    
-    # Extract English translation after the transliteration block
+        
     after_marker = content[pos + len(marker):]
     close_pos = after_marker.find('</div></div>')
     translation = None
-    
     if close_pos != -1:
         after_close = after_marker[close_pos + len('</div></div>'):]
-        # Look for [vn] or [vn-something] or similar patterns
-        # Handle single verse [42] or range ending [40-42]
-        bracket_patterns = [
-            r'\[' + vn + r'\]',                           # [42]
-            r'\[\d+-' + vn + r'\]',                       # [40-42]
-        ]
-        
+        bracket_patterns = [r'\[' + vn + r'\]', r'\[\d+-' + vn + r'\]']
         best_match = None
         for pat in bracket_patterns:
             m = re.search(pat, after_close)
             if m and (best_match is None or m.start() < best_match.start()):
                 best_match = m
-        
         if best_match:
             raw_trans = after_close[:best_match.start()]
             raw_trans = _clean_wiki_text(raw_trans).strip()
@@ -279,22 +348,42 @@ def _extract_verse(content, verse_num):
             paragraphs = [p.strip() for p in raw_trans.split('\n\n') if p.strip()]
             if paragraphs:
                 translation = paragraphs[-1]
-    
     return sanskrit_text, translation
+
+def _extract_verse(content, verse_num):
+    """Extract Sanskrit verse text and English translation from raw wikitext by parsing collapsible units."""
+    units = parse_page_into_units(content)
+    unit = find_unit_for_verse(units, verse_num)
+    if not unit:
+        return _extract_verse_fallback(content, verse_num)
+        
+    # Extract Sanskrit
+    coll = unit["collapsible"]
+    inner_idx = coll.find('<div class="mw-collapsible-content">')
+    if inner_idx != -1:
+        sanskrit_raw = coll[len('<div class="mw-collapsible mw-collapsed">'):inner_idx]
+    else:
+        sanskrit_raw = coll
+        
+    sanskrit = _clean_wiki_text(sanskrit_raw).strip()
+    
+    # Extract Translation
+    translation = _clean_wiki_text(unit["trailing"]).strip()
+    
+    return sanskrit, translation
 
 def _get_section_heading(content, verse_num):
     """Get the section heading (====heading====) for a given verse."""
-    dn = _to_devanagari_num(verse_num)
-    marker = '||' + dn + '||'
-    pos = content.find(marker)
-    if pos == -1:
-        return None
-    
-    before = content[:pos]
-    headings = list(re.finditer(r'={2,4}\s*([^=]+?)\s*={2,4}', before))
-    if headings:
-        heading = headings[-1].group(1).strip()
-        return _clean_wiki_text(heading)
+    units = parse_page_into_units(content)
+    unit = find_unit_for_verse(units, verse_num)
+    if unit:
+        pos = content.find(unit["collapsible"])
+        if pos != -1:
+            before = content[:pos]
+            headings = list(re.finditer(r'={2,4}\s*([^=]+?)\s*={2,4}', before))
+            if headings:
+                heading = headings[-1].group(1).strip()
+                return _clean_wiki_text(heading)
     return None
 
 def _extract_vimarsha(content, verse_num, section_heading=None):
@@ -308,16 +397,30 @@ def _extract_vimarsha(content, verse_num, section_heading=None):
     
     def _verse_ref_matches(text, verse_num_str):
         """Check if text contains a verse reference that includes this verse number."""
+        normalized_text = _normalize_num_string(text)
         vn = verse_num_str
         vi = int(vn)
-        if re.search(r'\[(?:verse|Verse)\s+' + vn + r'\]', text, re.IGNORECASE):
-            return True
-        for m in re.finditer(r'\[(?:verse|Verse)\s+(\d+)-(\d+)\]', text, re.IGNORECASE):
-            if int(m.group(1)) <= vi <= int(m.group(2)):
+        
+        brackets = re.findall(r'\[([^\]]+)\]', normalized_text)
+        for content_in_bracket in brackets:
+            cleaned = re.sub(r'\bverses?\b', '', content_in_bracket, flags=re.IGNORECASE).strip().lower()
+            
+            # Check for range pattern: 11-15 or 11 to 15
+            range_match = re.match(r'^(\d+)\s*(?:-|to)\s*(\d+)$', cleaned)
+            if range_match:
+                start = int(range_match.group(1))
+                end = int(range_match.group(2))
+                if start <= vi <= end:
+                    return True
+                    
+            # Check for list or single match
+            cleaned_nums = re.findall(r'\b\d+\b', cleaned)
+            if vn in cleaned_nums:
                 return True
-        for m in re.finditer(r'\[(?:verse|Verse)\s+([\d,\s]+)\]', text, re.IGNORECASE):
-            nums = [n.strip() for n in m.group(1).split(',')]
-            if vn in nums:
+                
+        # Substring backup in brackets
+        for content_in_bracket in brackets:
+            if vn in content_in_bracket:
                 return True
         return False
     
