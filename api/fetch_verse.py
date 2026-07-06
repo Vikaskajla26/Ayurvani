@@ -6,7 +6,16 @@ import urllib.request
 from http.server import BaseHTTPRequestHandler
 
 # ---- Charaka Samhita Online verse fetcher via MediaWiki API ----
-CSO_API = "http://www.carakasamhitaonline.com/api.php"
+# Try both the "www" and bare-domain hosts, and HTTPS first -- the source wiki
+# has been observed to be flaky/inconsistent across these variants, and a
+# request to a host that times out or is redirected can silently return no
+# usable content, which upstream code was misreading as "verse not found".
+CSO_API_HOSTS = [
+    "https://www.carakasamhitaonline.com/api.php",
+    "https://carakasamhitaonline.com/api.php",
+    "http://www.carakasamhitaonline.com/api.php",
+]
+CSO_API = CSO_API_HOSTS[0]  # kept for backwards compatibility with any other references
 
 # Map chapter wiki page titles for all 120 chapters of Charaka Samhita
 CHARAKA_PAGE_TITLES = {
@@ -148,9 +157,17 @@ CHARAKA_PAGE_TITLES = {
     },
 }
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-_cache_file = os.path.join(HERE, "cso_page_cache.json")
-_title_cache_file = os.path.join(HERE, "cso_title_cache.json")
+# NOTE: Vercel serverless functions ship a READ-ONLY filesystem for the deployed
+# bundle -- only /tmp is writable. Writing the cache next to this script (the old
+# behavior) silently failed on every request in production (the exception was
+# caught and logged, but never surfaced), meaning every cold start re-did full
+# title-resolution work with none of it actually persisting across invocations
+# within the same warm container either, since the write itself threw. Using
+# /tmp fixes this: it's writable, and persists for the lifetime of a warm
+# container, which is exactly the caching behavior this was meant to provide.
+_TMP_DIR = "/tmp"
+_cache_file = os.path.join(_TMP_DIR, "cso_page_cache.json")
+_title_cache_file = os.path.join(_TMP_DIR, "cso_title_cache.json")
 
 # Load persistent cache
 _page_cache = {}
@@ -184,51 +201,62 @@ def _to_devanagari_num(n):
     return ''.join(chr(ord(c) + 0x0966 - 48) for c in str(n))
 
 def _fetch_wiki_page(title):
-    """Fetch raw wikitext for a page from carakasamhitaonline.com MediaWiki API."""
+    """Fetch raw wikitext for a page from carakasamhitaonline.com MediaWiki API.
+    Tries each host in CSO_API_HOSTS in turn -- the source wiki has been observed
+    to fail intermittently on some host/protocol combinations while others work,
+    so a single failed attempt should not be treated as "page doesn't exist"."""
     if title in _page_cache:
         return _page_cache[title]
-    
+
     safe_title = urllib.parse.quote(title.replace(" ", "_"))
-    url = f"{CSO_API}?action=query&prop=revisions&titles={safe_title}&rvslots=*&rvprop=content&format=json"
-    
-    try:
-        req = urllib.request.Request(url, headers={"User-Agent": "Ayurvani/1.0"})
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-        
-        pages = data.get("query", {}).get("pages", {})
-        for page_id, page_data in pages.items():
-            if page_id == "-1":
-                return None
-            revisions = page_data.get("revisions", [])
-            if revisions:
-                content = revisions[0].get("slots", {}).get("main", {}).get("*", "")
-                _page_cache[title] = content
-                # Save persistent cache (fail-safe for read-only environments)
-                try:
-                    with open(_cache_file, "w", encoding="utf-8") as f:
-                        json.dump(_page_cache, f, ensure_ascii=False, indent=2)
-                except Exception as ex:
-                    print(f"[fetch_verse] Error writing cache: {ex}")
-                return content
-    except Exception as e:
-        print(f"[fetch_verse] Error fetching wiki page '{title}': {e}")
+    last_error = None
+    for host in CSO_API_HOSTS:
+        url = f"{host}?action=query&prop=revisions&titles={safe_title}&rvslots=*&rvprop=content&format=json"
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "Ayurvani/1.0"})
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+
+            pages = data.get("query", {}).get("pages", {})
+            for page_id, page_data in pages.items():
+                if page_id == "-1":
+                    # This host confirms the page doesn't exist under this title --
+                    # no point trying the other hosts for the same title.
+                    return None
+                revisions = page_data.get("revisions", [])
+                if revisions:
+                    content = revisions[0].get("slots", {}).get("main", {}).get("*", "")
+                    _page_cache[title] = content
+                    try:
+                        with open(_cache_file, "w", encoding="utf-8") as f:
+                            json.dump(_page_cache, f, ensure_ascii=False, indent=2)
+                    except Exception as ex:
+                        print(f"[fetch_verse] Error writing cache: {ex}")
+                    return content
+        except Exception as e:
+            last_error = e
+            print(f"[fetch_verse] Host '{host}' failed for '{title}': {e}")
+            continue  # try the next host
+
+    print(f"[fetch_verse] All hosts failed fetching '{title}'. Last error: {last_error}")
     return None
 
 def _search_wiki_page_title(query):
     """Use the site's own search to find the closest matching page title,
     used as a fallback when a stored/guessed chapter title is wrong."""
     safe_q = urllib.parse.quote(query)
-    url = f"{CSO_API}?action=query&list=search&srsearch={safe_q}&format=json&srlimit=3"
-    try:
-        req = urllib.request.Request(url, headers={"User-Agent": "Ayurvani/1.0"})
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-        results = data.get("query", {}).get("search", [])
-        if results:
-            return results[0].get("title")
-    except Exception as e:
-        print(f"[fetch_verse] Search fallback failed for '{query}': {e}")
+    for host in CSO_API_HOSTS:
+        url = f"{host}?action=query&list=search&srsearch={safe_q}&format=json&srlimit=3"
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "Ayurvani/1.0"})
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+            results = data.get("query", {}).get("search", [])
+            if results:
+                return results[0].get("title")
+        except Exception as e:
+            print(f"[fetch_verse] Search fallback failed for '{query}' via {host}: {e}")
+            continue
     return None
 
 def _resolve_page_title(sthana, chapter_num, guessed_title):
