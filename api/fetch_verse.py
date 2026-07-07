@@ -214,7 +214,7 @@ def _fetch_wiki_page(title):
         url = f"{host}?action=query&prop=revisions&titles={safe_title}&rvslots=*&rvprop=content&format=json"
         try:
             req = urllib.request.Request(url, headers={"User-Agent": "Ayurvani/1.0"})
-            with urllib.request.urlopen(req, timeout=15) as resp:
+            with urllib.request.urlopen(req, timeout=60) as resp:
                 data = json.loads(resp.read().decode("utf-8"))
 
             pages = data.get("query", {}).get("pages", {})
@@ -249,7 +249,7 @@ def _search_wiki_page_title(query):
         url = f"{host}?action=query&list=search&srsearch={safe_q}&format=json&srlimit=3"
         try:
             req = urllib.request.Request(url, headers={"User-Agent": "Ayurvani/1.0"})
-            with urllib.request.urlopen(req, timeout=15) as resp:
+            with urllib.request.urlopen(req, timeout=60) as resp:
                 data = json.loads(resp.read().decode("utf-8"))
             results = data.get("query", {}).get("search", [])
             if results:
