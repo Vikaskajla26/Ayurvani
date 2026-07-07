@@ -200,11 +200,19 @@ def _to_devanagari_num(n):
     """Convert integer to Devanagari numeral string."""
     return ''.join(chr(ord(c) + 0x0966 - 48) for c in str(n))
 
-def _fetch_wiki_page(title):
+def _fetch_wiki_page(title, timeout=12):
     """Fetch raw wikitext for a page from carakasamhitaonline.com MediaWiki API.
     Tries each host in CSO_API_HOSTS in turn -- the source wiki has been observed
     to fail intermittently on some host/protocol combinations while others work,
-    so a single failed attempt should not be treated as "page doesn't exist"."""
+    so a single failed attempt should not be treated as "page doesn't exist".
+
+    IMPORTANT: default timeout is kept short (12s) because this runs inside a
+    live Vercel serverless function on every visitor request, which has its own
+    hard execution-time limit -- with 3 hosts tried in sequence, a long per-host
+    timeout here can make the whole function get killed by the platform before
+    it ever returns, which looks like a broken feature to the visitor. The
+    offline build_index.py script (which runs on a real machine with no such
+    limit) explicitly passes a longer timeout for its batch run instead."""
     if title in _page_cache:
         return _page_cache[title]
 
@@ -214,7 +222,7 @@ def _fetch_wiki_page(title):
         url = f"{host}?action=query&prop=revisions&titles={safe_title}&rvslots=*&rvprop=content&format=json"
         try:
             req = urllib.request.Request(url, headers={"User-Agent": "Ayurvani/1.0"})
-            with urllib.request.urlopen(req, timeout=60) as resp:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
                 data = json.loads(resp.read().decode("utf-8"))
 
             pages = data.get("query", {}).get("pages", {})
@@ -241,15 +249,16 @@ def _fetch_wiki_page(title):
     print(f"[fetch_verse] All hosts failed fetching '{title}'. Last error: {last_error}")
     return None
 
-def _search_wiki_page_title(query):
+def _search_wiki_page_title(query, timeout=12):
     """Use the site's own search to find the closest matching page title,
-    used as a fallback when a stored/guessed chapter title is wrong."""
+    used as a fallback when a stored/guessed chapter title is wrong.
+    Same short-default-timeout reasoning as _fetch_wiki_page above."""
     safe_q = urllib.parse.quote(query)
     for host in CSO_API_HOSTS:
         url = f"{host}?action=query&list=search&srsearch={safe_q}&format=json&srlimit=3"
         try:
             req = urllib.request.Request(url, headers={"User-Agent": "Ayurvani/1.0"})
-            with urllib.request.urlopen(req, timeout=60) as resp:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
                 data = json.loads(resp.read().decode("utf-8"))
             results = data.get("query", {}).get("search", [])
             if results:
@@ -259,7 +268,7 @@ def _search_wiki_page_title(query):
             continue
     return None
 
-def _resolve_page_title(sthana, chapter_num, guessed_title):
+def _resolve_page_title(sthana, chapter_num, guessed_title, timeout=12):
     """Resolve the real wiki page title for a chapter, self-correcting if the
     stored guess is wrong. Order of attempts:
       1. Previously confirmed title (cached)
@@ -271,7 +280,7 @@ def _resolve_page_title(sthana, chapter_num, guessed_title):
     cache_key = f"{sthana}:{chapter_num}"
     if cache_key in _title_cache:
         cached_title = _title_cache[cache_key]
-        if _fetch_wiki_page(cached_title):
+        if _fetch_wiki_page(cached_title, timeout=timeout):
             return cached_title
 
     candidates = [guessed_title]
@@ -281,19 +290,19 @@ def _resolve_page_title(sthana, chapter_num, guessed_title):
         candidates.append(guessed_title + " Adhyaya")
 
     for candidate in candidates:
-        if _fetch_wiki_page(candidate):
+        if _fetch_wiki_page(candidate, timeout=timeout):
             _title_cache[cache_key] = candidate
             _save_title_cache()
             return candidate
 
-    found = _search_wiki_page_title(guessed_title)
-    if found and _fetch_wiki_page(found):
+    found = _search_wiki_page_title(guessed_title, timeout=timeout)
+    if found and _fetch_wiki_page(found, timeout=timeout):
         _title_cache[cache_key] = found
         _save_title_cache()
         return found
 
-    found = _search_wiki_page_title(f"{sthana} Chapter {chapter_num}")
-    if found and _fetch_wiki_page(found):
+    found = _search_wiki_page_title(f"{sthana} Chapter {chapter_num}", timeout=timeout)
+    if found and _fetch_wiki_page(found, timeout=timeout):
         _title_cache[cache_key] = found
         _save_title_cache()
         return found

@@ -48,7 +48,7 @@ def search_treatise(query, limit=8):
                f"&format=json&srlimit={limit}&srprop=snippet")
         try:
             req = urllib.request.Request(url, headers={"User-Agent": "Ayurvani/1.0"})
-            with urllib.request.urlopen(req, timeout=15) as resp:
+            with urllib.request.urlopen(req, timeout=12) as resp:
                 data = json.loads(resp.read().decode("utf-8"))
 
             raw_results = data.get("query", {}).get("search", [])

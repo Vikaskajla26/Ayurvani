@@ -68,6 +68,10 @@ OUT_FILE = os.path.join(OUT_DIR, "charaka_verse_index.json")
 
 MAX_RETRIES = 3           # per chapter, for transient network failures
 RETRY_DELAY_SECONDS = 5   # wait between retries
+BUILD_TIMEOUT = 60        # generous timeout for this offline script -- unlike the
+                          # live site's serverless functions, this has no platform
+                          # execution-time limit, so it's safe to wait longer for
+                          # slow/large chapters (mostly Chikitsasthana treatment ones)
 
 
 def _discover_verse_numbers(content):
@@ -88,10 +92,10 @@ def _discover_verse_numbers(content):
 
 def _fetch_with_retries(page_title, chapter_label):
     """Wraps _fetch_wiki_page with retries -- longer/heavier chapters (mostly in
-    Chikitsasthana) are more prone to transient timeouts on a single attempt."""
+    Chikitsasthana) are more prone to needing the full BUILD_TIMEOUT window."""
     last_content = None
     for attempt in range(1, MAX_RETRIES + 1):
-        content = _fetch_wiki_page(page_title)
+        content = _fetch_wiki_page(page_title, timeout=BUILD_TIMEOUT)
         if content:
             return content
         if attempt < MAX_RETRIES:
@@ -129,7 +133,7 @@ def build_index(force=False):
                 continue
 
             label = f"{sthana} ch.{chapter_num}"
-            page_title = _resolve_page_title(sthana, chapter_num, guessed_title)
+            page_title = _resolve_page_title(sthana, chapter_num, guessed_title, timeout=BUILD_TIMEOUT)
             if not page_title:
                 print(f"[{done}/{total_chapters}] MISS {label} -- could not resolve page title")
                 continue
