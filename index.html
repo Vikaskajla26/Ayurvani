@@ -354,8 +354,10 @@
   .login-btn:hover{background:var(--gold-light); transform: translateY(-1px);}
 
   main{max-width:1120px; margin:0 auto 0 104px; padding:0 24px 80px; position:relative; transition: margin-left 0.3s ease;}
-  section{display:none;}
+  html{scroll-behavior:smooth;}
+  section{display:none; opacity:0; transform:translateY(10px); transition:opacity 0.28s ease, transform 0.28s ease;}
   section.active{display:block;}
+  section.active.section-visible{opacity:1; transform:translateY(0);}
 
   /* ---------- Fixed Full-Page Background Canvas ---------- */
   #bgCanvas {
@@ -1492,7 +1494,7 @@
 
 <main>
 
-  <section id="view-home" class="active">
+  <section id="view-home" class="active section-visible">
     
     <!-- Dynamic Hero Container (scroll spacer — canvas is global fixed) -->
     <div class="scroll-track" id="homeScrollTrack">
@@ -2803,9 +2805,29 @@ function showView(id){
   }
   bgScrollOverride = false;
   
-  document.querySelectorAll('main > section').forEach(s=>s.classList.remove('active'));
+  const currentActive = document.querySelector('main > section.active');
   const target = document.getElementById('view-'+id);
-  if (target) target.classList.add('active');
+
+  const activateTarget = () => {
+    document.querySelectorAll('main > section').forEach(s=>{
+      s.classList.remove('active');
+      s.classList.remove('section-visible');
+    });
+    if (target) {
+      target.classList.add('active');
+      // Force a reflow so the opacity/transform transition actually plays
+      // rather than the browser coalescing the class changes into one frame.
+      void target.offsetWidth;
+      requestAnimationFrame(() => target.classList.add('section-visible'));
+    }
+  };
+
+  if (currentActive && currentActive !== target) {
+    currentActive.classList.remove('section-visible');
+    setTimeout(activateTarget, 180); // matches the CSS fade-out duration
+  } else {
+    activateTarget();
+  }
   
   document.querySelectorAll('#mainNav button').forEach(b=>b.classList.toggle('active', b.dataset.view===id));
   document.querySelectorAll('#dock .dock-item').forEach(b=>b.classList.toggle('active', b.dataset.view===id));
@@ -2816,8 +2838,9 @@ function showView(id){
   if(id==='favorites') renderFavorites();
   if(id==='admin') renderAdmin();
   
-  // Jump to top instantly on routing
-  window.scrollTo(0,0);
+  // Jump to top instantly on routing -- a smooth scroll here would animate
+  // through mismatched content mid-transition, which looks wrong.
+  window.scrollTo({top: 0, behavior: 'instant'});
 }
 
 // ---------- Auth ----------
