@@ -3,16 +3,16 @@
     "id": "chandan",
     "name": "Chandan",
     "sanskrit_name": "चन्दन",
-    "sloka": "स्वादे तिक्तं कषे पीतं छेदे रक्तं तनौ सितम् | गन्धिक्लोटरसंयुक्तं चन्दनं श्रेष्ठमुच्यते | चन्दनं शीतलं रुक्षं तिक्तमाहृदयं लघु | तृषाशोषविष-ज्वर-दाह-तृष्णा-पित्तास्र-कोत्मुत् ||",
-    "sloka_source": "भा. प्र.",
+    "sloka": "स्वादु तिक्तं कषायं पीतं श्वेतं सुगन्धि तत् | शीतलं पित्तदाहघ्नं चन्दनं प्रोच्यते बुधैः ||",
+    "sloka_source": "शा. सं.",
     "botanical_name": "Santalum album",
     "family": "Santalaceae",
     "synonyms": [
       {"term": "मलयज", "meaning": "Grown in Malaya region"},
-      {"term": "तैलपर्णक", "meaning": "Leaves resemble leaves of Taila"},
+      {"term": "तिलपर्णक", "meaning": "Leaves resembles leaves of Taila"},
       {"term": "गन्धसार", "meaning": "Heartwood has good aroma"},
-      {"term": "शिशिर", "meaning": "Sheeta veerya, cold to touch"},
-      {"term": "श्रीखण्ड", "meaning": "Pieces of heartwood are valuable"}
+      {"term": "शीतस्पर्श", "meaning": "Cold to touch"},
+      {"term": "श्रीखण्डम्", "meaning": "Pieces of heartwood are valuable"}
     ],
     "vernacular_names": [
       {"lang": "English", "name": "Sandalwood"},
@@ -20,14 +20,14 @@
       {"lang": "Marathi", "name": "Pandra Chandan"}
     ],
     "classification_of_gana": [
-      "चरक: वल्हिरजन, तृष्णानिग्रह, कषाय, कण्डूघ्न, विषघ्न",
+      "चरक: दाहप्रशमन, तृष्णानिग्रहण, वर्ण्य, कण्डूघ्न, विषघ्न",
       "सुश्रुत: सारिवादि, पटोलादि"
     ],
     "external_morphology": {
       "habitat": "Forest of Karnataka and Tamil Nadu",
       "details": [
         "Habit: Small evergreen glabrous tree",
-        "Leaves: 4-6 cm long, elliptic lanceolate, subacute, entire margin",
+        "Leaves: 4-6 cm long, elliptic lanceolate subacute, entire margin",
         "Branch: Slender, drooping",
         "Heartwood: Yellowish brown colour",
         "Sapwood: White and odourless",
@@ -40,28 +40,93 @@
     "phytoconstituents": "α-santalol, β-santene, santenol, santalenes",
     "rasa_panchaka": {"rasa": "Tikta, Madhura", "guna": "Laghu, Ruksha", "virya": "Sheeta", "vipaka": "Katu"},
     "karma": {
-      "dosha_karma": "Pittashamak, Kaphashamak (Katu Vipaka, Tikta Rasa)",
-      "karma": "Trishnahar, Raktaprasadak, Jwarahar, Dahahar, Vranahar"
+      "dosha_karma": "पित्तशामक, कफशामक (कटु विपाक, तिक्त रस). Agryakarma: on application removes bad odour, relieves burning sensation, acts as coolant.",
+      "karma": "तृषाहर, त्वक्प्रसादक, श्रमहर, दाहहर, ज्वरहर"
     },
-    "doshaghnata": "Pittahara, Kaphahara",
-    "rogaghnata": "Daha, Trishna, Rakta-pitta, Twak vikara, Kushtha, Visarpa, Jwara",
+    "doshaghnata": "पित्तशामक, कफशामक (Pittashamak, Kaphashamak)",
+    "rogaghnata": "दाह, तृष्णा, रक्तपित्त, त्वकविकार, कुष्ठ, विसर्प, ज्वर, कृमी (Daha, Trishna, Raktapitta, Twak vikara, Kushtha, Visarpa, Jwara, Krumi)",
     "amayika_prayoga": [
-      "Raktatisar - Int. -> Chandan churna + Sugar + Honey + Tandulodaka",
-      "Raktarsha -> Chandan rasa + Shunti",
-      "Pittajwara -> Chandan kwatha + Sugar + Honey",
-      "Shukrameha -> Kwatha of Arjuna + Chandan",
-      "Chardi -> Chandan churna + Dhatri rasa"
+      "रक्तातिसार (Raktatisar) = चंदन चूर्ण + Sugar + Honey + Tandulodaka",
+      "रक्तार्ष (Raktarsha) = चंदन रस + शुंठी",
+      "पित्तजज्वर (Pittaja Jwara) = चंदन कषाय + Sugar + Honey",
+      "बहुमुत्र मेहा (Bahumutra Meha) = क्वाथ की अर्द्धन + चंदन",
+      "छर्दी (Chardi) = चंदन चूर्ण + Dhatri rasa"
     ],
     "matra": [
-      {"form": "Kwatha", "dose": "50-100 ml"},
-      {"form": "Churna", "dose": "3-6 g"},
+      {"form": "क्वाथ (Kwatha)", "dose": "50-100 ml (2 पल)"},
+      {"form": "चूर्ण (Churna)", "dose": "3-6 g (1 कर्ष)"},
       {"form": "Taila", "dose": "5-10 drops"}
     ],
-    "marga": "External application - Lepa, Taila; Internal - Kwatha",
+    "marga": "Ext. application = लेप, तैल | Int. = क्वाथ",
     "pharmacological_actions": ["Antibacterial", "Antioxidant", "Antiviral", "Antipyretic", "Antifungal", "Cooling"],
-    "kalpana": ["Chandanadi Kashayam - Jwara, Trishna, Cough", "Marma Gulika - Cardiac and liver disease", "Dashanga Lepa - Shula, Kushtha, Visarpa", "Chandan Asava / Kwatha"],
-    "varieties": "Bhavaprakasha: Shweta Chandan (White), Rakta Chandan (Red), Pita Chandan (Yellow), Kuchandana",
+    "kalpana": ["Chandanadi Kashayam - ज्वर, दाह, Cough", "Marma Gutika - Cardiac and liver disease", "Dushanga Lepa - शूल, कुष्ठ, वीसर्प", "Chandan Asava / Kwatha"],
+    "varieties": "भावप्रकाश: श्वेत चंदन (Shweta), पीत चंदन (Peeta), रक्त चंदन (Rakta / Kuchandana)",
     "research_updates": ["Anti-ulcer activity"]
+  },
+  {
+    "id": "ela",
+    "name": "Ela",
+    "sanskrit_name": "एला",
+    "sloka": "सूक्ष्मा उपकुञ्चिका कुन्ती कोरङ्गी त्रुटिः | एला सूक्ष्मा कफश्वासकासअर्शोमूत्रकृच्छ्रहृत् | रसे तु कटुका शीता लघ्वी वातहरी मता ||",
+    "sloka_source": "शा. ह.",
+    "botanical_name": "Elettaria cardamomum",
+    "family": "Zingiberaceae",
+    "synonyms": [
+      {"term": "एला", "meaning": "It is stimulant"},
+      {"term": "उपकुञ्चिका", "meaning": "Fruit is contracted and small"},
+      {"term": "द्राविडी / कोरङ्गी", "meaning": "Grows in South India"},
+      {"term": "तुत्थ", "meaning": "Relieves abdominal pain"},
+      {"term": "त्रुटि", "meaning": "Fruit has 3 surfaces"},
+      {"term": "बहुला", "meaning": "Seeds are numerous"},
+      {"term": "सूक्ष्मा", "meaning": "Due to small size"}
+    ],
+    "vernacular_names": [
+      {"lang": "English", "name": "Lesser Cardamom"},
+      {"lang": "Marathi", "name": "Velchi"},
+      {"lang": "Hindi", "name": "Choti Elaichi"}
+    ],
+    "classification_of_gana": [
+      "चरक: श्वासहर, अंगमर्दप्रशमन, शिरोविरेचन",
+      "सुश्रुत: एलादि",
+      "वाग्भट: एलादि, चातुर्जातक"
+    ],
+    "external_morphology": {
+      "habitat": "Mysore, Kung, Travancore, Cochin, Lanka and Burma; cultivated mainly in Western Ghats (South India)",
+      "details": [
+        "Annual herb, root stock thick",
+        "Stem: leafy, 2.5-4 cm long",
+        "Flowers: in panicle (produced directly from the root stock)",
+        "Fruit: sub-globose / oblong capsule",
+        "Seeds: 15-20 dark reddish brown to black hard seeds"
+      ]
+    },
+    "useful_parts": "Beej (Seeds)",
+    "phytoconstituents": "Volatile oil 2-8%, seed oil - cineol, terpineol, limonene, terpinene",
+    "rasa_panchaka": {
+      "rasa": "Sthula Ela: Katu | Laghu Ela: Katu, Madhura",
+      "guna": "Sthula Ela: Laghu, Ruksha | Laghu Ela: Laghu, Sukshma, Snigdha",
+      "virya": "Sthula Ela: Ushna | Laghu Ela: Sheeta",
+      "vipaka": "Sthula Ela: Katu | Laghu Ela: Madhura"
+    },
+    "karma": {
+      "dosha_karma": "Tridoshahara. कफघ्न = Katu Rasa, Laghu Guna. पित्तघ्न = Madhur Vipaka, Sheeta Virya. वातघ्न = Madhur Anupada, Vishravana Guna, Madhur Vipaka.",
+      "karma": "रोचक, पाचक, कण्ठशोधन, हृद्य, वातशमन, छर्दीनिग्रहण, दुर्गन्धिनाशन, दिपन, तृष्णाहर, रक्त आर्शहर, मुत्रकृच्छ्रहर"
+    },
+    "doshaghnata": "Tridoshahara (त्रिदोषहर)",
+    "rogaghnata": "Trishna, अरुची (Aruchi), Agnimandhya, Adhma, Hridaydaubalya, Kasa, Swasa, Mutrakruchra, Daha, Arsha (Rakta)",
+    "amayika_prayoga": [
+      "Ela churna + Aja dugdh (भावना) - अंजन in तिमिर (Timira)",
+      "Ela churna with मद्य (Madya) = Udavata",
+      "Ela churna + पिंपली + शुंठी + Jeevak with Dadim स्वरस = कण्ठगत रोग",
+      "Equal quantity of Ela and Pippali moola churna + Ghee = हृद्य रोग (Hridaya roga)"
+    ],
+    "matra": [
+      {"form": "Churna", "dose": "0.5-1 g"}
+    ],
+    "pharmacological_actions": ["Anti-microbial", "Anti-oxidant", "Anti-inflammatory"],
+    "kalpana": ["Eladi Churna", "Eladyarishta", "Eladi Gutika", "Sitopaladi Churna"],
+    "varieties": "Type: Malabari - Mysori. Sukshma Ela (Elettaria cardamomum), Bruhat Ela (Amomum subulatum)",
+    "research_updates": ["Anti-microbial activity", "Effect on B.P. (lowering) and anti-ulcer activity", "Liver protecting"]
   },
   {
     "id": "bhringraj",
