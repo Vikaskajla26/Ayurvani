@@ -684,5 +684,368 @@
    "Used in chronic stable angina",
    "Antibacterial and antifungal activity"
   ]
+ },
+ {
+  "id": "haridra",
+  "name": "Haridra",
+  "sanskrit_name": "हरिद्रा",
+  "sloka": "हरिद्रा कटुका तिक्ता रूक्षोष्णा कफपित्तनुत् | वर्ण्या त्वग्दोषमेहास्त्रशोथपाण्डुव्रणापहा ||",
+  "sloka_source": "भा. प्र.",
+  "botanical_name": "Curcuma longa",
+  "family": "Zingiberaceae",
+  "synonyms": [
+   {
+    "term": "कंचनी",
+    "meaning": ""
+   },
+   {
+    "term": "निशा",
+    "meaning": ""
+   },
+   {
+    "term": "वरवर्णिनी",
+    "meaning": ""
+   },
+   {
+    "term": "गौरी",
+    "meaning": ""
+   },
+   {
+    "term": "कृमिघ्ना",
+    "meaning": ""
+   },
+   {
+    "term": "योशितप्रिया",
+    "meaning": ""
+   },
+   {
+    "term": "हट्टविलासिनी",
+    "meaning": ""
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Turmeric"
+   },
+   {
+    "lang": "Marathi",
+    "name": "Halad"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Haldi"
+   }
+  ],
+  "classification_of_gana": [
+   "चरक: लेखनीय, कुष्ठघ्न, कण्डूघ्न, विषघ्न, तिक्तस्कन्ध, शिरोविरेचन",
+   "सुश्रुत: हरिद्रादी, मुस्तादी, श्लेष्मसंशमन",
+   "वाग्भट: हरिद्रादी वर्ग"
+  ],
+  "external_morphology": {
+   "habitat": "",
+   "details": [
+    "Rhizome: Yellow",
+    "Flowers: Yellow",
+    "Named निशा / रजनी owing to its yellow coloured rhizome"
+   ]
+  },
+  "useful_parts": "Rhizome (Kanda)",
+  "phytoconstituents": "5% volatile oil, curcuminoids (curcumin). Rhizome volatile oil contains mono and sesquiterpenes such as α-pinene, phellandrene, camphor, camphene, zingiberene, curcumenes",
+  "rasa_panchaka": {
+   "rasa": "Tikta, Katu",
+   "guna": "Ruksha, Laghu",
+   "virya": "Ushna",
+   "vipaka": "Katu"
+  },
+  "karma": {
+   "dosha_karma": "कफपित्तशामक (Kaphapittashamak)",
+   "karma": "वर्ण्य, त्वच्य, प्रमेहहर, शोथहर, व्रणहर, कण्डूघ्न, विषघ्न, कुष्ठघ्न, केशिनी, रुच्य"
+  },
+  "doshaghnata": "कफपित्तशामक (Kaphapittashamak)",
+  "rogaghnata": "शीतपित्त, कण्डू, कामला, श्वास, कुष्ठ, तिमिर, Naktandya, पाण्डु, प्रमेह, Dadru Kustha (ringworm infestation), Shlipada (Filariasis), वातरक्त (Gout), Panduroga (Anaemia), Kaphaja Trishna",
+  "amayika_prayoga": [
+   "प्रमेह (Prameha) = Haridra powder + Honey + Amlaki, mixed in equal quantity",
+   "Dadru Kustha (ringworm infestation) = Haridra powder + cow's urine + jaggery",
+   "वातरक्त (Gout) = Kwatha of Haridra + Amrita taken with honey (kapha-dominant Vatarakta)",
+   "Panduroga (Anaemia) = Haridra + Triphala churna + Ghee and Honey",
+   "Kaphaja Trishna = Water with Haridra mixed with Honey and Sugar"
+  ],
+  "matra": [
+   {
+    "form": "Churna",
+    "dose": "2-4 g"
+   },
+   {
+    "form": "Swarasa",
+    "dose": "10-20 ml"
+   },
+   {
+    "form": "Kashaya",
+    "dose": "50-100 ml"
+   }
+  ],
+  "pharmacological_actions": [
+   "Hepatoprotective",
+   "Antiallergic",
+   "Immunostimulant",
+   "Anticancer",
+   "Antitumor",
+   "Antihyperlipidemic",
+   "Antioxidant",
+   "Antimicrobial (Bacterial, Viral, Fungal)",
+   "Antihyperglycemic",
+   "Antidepressant",
+   "Against acute pancreatitis"
+  ],
+  "kalpana": [
+   "Haridra Khanda - शीतपित्त, कण्डू",
+   "Haridradi Kwatha - कामला",
+   "Haridra Churna - श्वास",
+   "Haridradi Lepa - कुष्ठ",
+   "Haridradi Vati - तिमिर, Naktandya",
+   "Haridradya Ghrita - कामला, पाण्डु"
+  ],
+  "varieties": "आ. प्र.: Haridra, Amrahaidra, Vanaharidra, Daruharidra. डल्हण: Pinda Haridra, Daruharidra",
+  "research_updates": [
+   "Antitumor activity in human colon cancer",
+   "Anticonvulsant activity (epilepsy)",
+   "Strong antioxidant"
+  ]
+ },
+ {
+  "id": "daruharidra",
+  "name": "Daruharidra",
+  "sanskrit_name": "दारुहरिद्रा",
+  "sloka": "दार्वी दारुहरिद्रा स्यात् कटुष्णा व्रणमेहनुत् | कर्णनेत्रमुखोद्भूतां रुजं कण्डूं च नाशयेत् ||",
+  "sloka_source": "ध. नि.",
+  "botanical_name": "Berberis aristata",
+  "family": "Berberidaceae",
+  "synonyms": [
+   {
+    "term": "दार्वी",
+    "meaning": ""
+   },
+   {
+    "term": "निशा",
+    "meaning": ""
+   },
+   {
+    "term": "दारुनिशा",
+    "meaning": ""
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Indian Berberi"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Daru Haldi, काष्ठ हल्दी"
+   },
+   {
+    "lang": "Marathi",
+    "name": "दारुहळद"
+   }
+  ],
+  "classification_of_gana": [
+   "चरक: अर्शोघ्न, कण्डूघ्न, लेखनीय",
+   "सुश्रुत: हरिद्रादि, मुस्तादि",
+   "भावप्रकाश: हरितक्यादि"
+  ],
+  "external_morphology": {
+   "habitat": "",
+   "details": [
+    "Large, erect, deciduous, spiny shrub",
+    "Grows to a height of 2-3 metres",
+    "Twigs whitish to pale yellowish-brown in colour",
+    "Bark pale brown from outside and deep yellow from inside, deeply furrowed, rough",
+    "Leaves obovate or elliptic, entire or spinous toothed"
+   ]
+  },
+  "useful_parts": "Root, Root bark",
+  "phytoconstituents": "Berberine, quaternary ammonium salt of isoquinoline alkaloid",
+  "rasa_panchaka": {
+   "rasa": "Tikta, Kashaya",
+   "guna": "Laghu, Ruksha",
+   "virya": "Ushna",
+   "vipaka": "Katu"
+  },
+  "karma": {
+   "dosha_karma": "Kaphahara",
+   "karma": "Shothahara, Kanda Kushthahara, Visarpahara, Vishahara, Kaphahara, Abhishyandihara"
+  },
+  "doshaghnata": "Kaphahara",
+  "rogaghnata": "Shotha, Kanda Kushtha, Visarpa, Visha, Abhishyanda, Skin diseases (Kustha)",
+  "amayika_prayoga": [
+   "Skin diseases (Kustha) - Rasanjana with Gomutra administered for treatment of Kustha"
+  ],
+  "matra": [
+   {
+    "form": "Decoction",
+    "dose": "15-60 ml"
+   },
+   {
+    "form": "Rasanjana",
+    "dose": "1-3 g"
+   }
+  ],
+  "pharmacological_actions": [
+   "Anti-inflammatory",
+   "Anti-toxic",
+   "Antiperiodic",
+   "Antidiarrheal",
+   "Antipyretic",
+   "Antidiabetic",
+   "Anticancer"
+  ],
+  "kalpana": [
+   "Not mentioned in notes"
+  ],
+  "varieties": "Dalhana: 1) Daruharidra, 2) Kaliyaka. Substitute: Haridra",
+  "research_updates": [
+   "Anti-diarrheal and anti-spasmodic activity",
+   "Anti-microbial activity",
+   "Hypoglycemic activity"
+  ]
+ },
+ {
+  "id": "haritaki",
+  "name": "Haritaki",
+  "sanskrit_name": "हरीतकी",
+  "sloka": "हरितकी पञ्चरसा अलवणा तुवरा परम | रुक्षा उष्ण दीपनी मेध्या स्वादुपाक रसायनी || चर्तिता वर्धयत्यग्निं पेषिता मलाशोधिनी | स्विन्ना संग्राहिणी पथ्या भृष्टा प्रोक्ता त्रिदोषनुत् ||",
+  "sloka_source": "भा. प्र.",
+  "botanical_name": "Terminalia chebula",
+  "family": "Combretaceae",
+  "synonyms": [
+   {
+    "term": "अभया",
+    "meaning": ""
+   },
+   {
+    "term": "पथ्या",
+    "meaning": ""
+   },
+   {
+    "term": "शिवा",
+    "meaning": ""
+   },
+   {
+    "term": "अमृता",
+    "meaning": ""
+   },
+   {
+    "term": "विजया",
+    "meaning": ""
+   },
+   {
+    "term": "नन्दिनी",
+    "meaning": ""
+   },
+   {
+    "term": "कायस्था",
+    "meaning": ""
+   },
+   {
+    "term": "पूतना",
+    "meaning": ""
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Chebulic Myrobalan"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Harad"
+   },
+   {
+    "lang": "Marathi",
+    "name": "हिरडा"
+   }
+  ],
+  "classification_of_gana": [
+   "चरक: प्रजास्थापन, वयस्थापन, कुष्ठघ्न, कासघ्न, अर्शोघ्न",
+   "सुश्रुत: त्रिफला, आमलक्यादि, परुषकादि",
+   "वाग्भट: हरितक्यादि"
+  ],
+  "external_morphology": {
+   "habitat": "",
+   "details": [
+    "Large sized deciduous tree, height up to 80 ft",
+    "Seed: Oblong",
+    "Leaves: Glabrous",
+    "Flower: Dull white, elliptic-oblong"
+   ]
+  },
+  "useful_parts": "Fruit (फल मज्जा)",
+  "phytoconstituents": "Important source of tannin - contains up to 32% tannin; on hydrolysis yields chebulic acid, d-galloyl glucose, sorbitol, chebulic acid, gallic acid",
+  "rasa_panchaka": {
+   "rasa": "पंचरस, लवण वर्जित (कषाय रस प्रधान)",
+   "guna": "Laghu, Ruksha",
+   "virya": "Ushna",
+   "vipaka": "Madhura"
+  },
+  "karma": {
+   "dosha_karma": "त्रिदोषशामक (Tridoshashamak)",
+   "karma": "स्रोतोविशोधनी, रसायन, मेध्या, दीपनी, पाचिनी, लघु, संग्राहिणी, त्रिदोषनुत्"
+  },
+  "doshaghnata": "त्रिदोषशामक (Tridoshashamak)",
+  "rogaghnata": "आनाह, आध्मान, अश्मरी, विबन्ध, श्वास, कास, अरुची, कुष्ठ, मेदरोग, शोथ, केश्य, हृद्य, पाण्डु, अग्निमांद्य; used as a Rasayana",
+  "amayika_prayoga": [
+   "Parinama Shula (duodenal ulcer) - Haritaki taken with jaggery and sugar",
+   "वातव्याधि (Vatavyadhi) = Haritaki + cow's urine",
+   "अतिस्वेद (Atisweda) = Paste of Haritaki",
+   "विबन्ध (Constipation) = Haritaki + Jaggery",
+   "छर्दी (Vomiting) = Haritaki + Honey",
+   "अर्श (Piles) = Haritaki + Cow's urine + Jaggery",
+   "वातरक्त (Vatarakta) = Haritaki churna + Jaggery",
+   "प्रमेह (Prameha) = हरीतकी + हरिद्रा + शर्करा"
+  ],
+  "matra": [
+   {
+    "form": "Churna (Rasayanartha)",
+    "dose": "1 g"
+   },
+   {
+    "form": "Churna (Shodhanartha)",
+    "dose": "6 g"
+   },
+   {
+    "form": "Kwatha",
+    "dose": "30-35 ml"
+   }
+  ],
+  "pharmacological_actions": [
+   "Antimicrobial",
+   "Antifungal",
+   "Antibacterial",
+   "Antistress",
+   "Antispasmodic",
+   "Hypotensive",
+   "Hypolipidemic",
+   "Anthelmintic",
+   "Purgative",
+   "Cytoprotective",
+   "Cardiotonic"
+  ],
+  "kalpana": [
+   "Haritakyadi Churna, Kwatha, Pradarog",
+   "Haritaki Khanda",
+   "Triphala Guggulu",
+   "Vatari Guggulu",
+   "Triphala Ghrita",
+   "Dashamoola Haritaki"
+  ],
+  "varieties": "Types: विजया, रोहिणी, पूतना, अमृता, अभया, जीवन्ती, चेतकी. Ritu Haritaki (seasonal Anupana to achieve Rasayana Karma): Shishira (late winter) - Pippali; Vasanta (spring) - Madhu; Grishma (summer) - Guda; Varsha (rainy season) - Saindhava Lavana; Sharad (Autumn) - Sharkara; Hemanta (early winter) - Shunthi",
+  "research_updates": [
+   "Antidiabetic, renoprotective, antioxidant - α-glucosidase inhibitor",
+   "Anti-inflammatory, immunomodulatory, free radical scavenging and healing properties",
+   "Controls blood glucose and manages Type 2 diabetes",
+   "Anti-hyperglycemic activity",
+   "Antibacterial and angiogenic activity"
+  ]
  }
 ]
