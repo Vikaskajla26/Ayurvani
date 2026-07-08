@@ -2354,5 +2354,398 @@
       "Hepato-protective activity",
       "Anti-diabetic"
     ]
+  },
+  {
+    "id": "chitrak",
+    "name": "Chitrak",
+    "sanskrit_name": "चित्रक",
+    "sloka": "चित्रकः कटुकः पाके वह्निकृत् पाचनो लघुः । रुक्षोष्णो ग्रहणीकुष्ठ शोथ - अर्शः कृमि-कासजित् । वात श्लेष्महरो ग्राही वातार्शः श्लेष्मपित्तहृत् ॥ भा. प्र.",
+    "sloka_source": "भा. प्र.",
+    "botanical_name": "Plumbago zeylanica",
+    "family": "Plumbaginaceae",
+    "synonyms": [
+      {
+        "term": "अग्नि / वह्नि / ज्योति / दहन / ज्वाला / निर्दहन",
+        "meaning": "Agni-related synonyms indicating heating/fire-like property"
+      },
+      {
+        "term": "मुचुर्य्य",
+        "meaning": "Not to touch (irritant property)"
+      },
+      {
+        "term": "चिच्चुक",
+        "meaning": "आनन्द प्रद (gives pleasure/relief)"
+      }
+    ],
+    "vernacular_names": [
+      {
+        "lang": "English",
+        "name": "White leadwort, Ceylon leadwort"
+      },
+      {
+        "lang": "Hindi",
+        "name": "चीता (Chita), चित्रक (Chitraka)"
+      },
+      {
+        "lang": "Marathi",
+        "name": "चित्रक (Chitrak)"
+      }
+    ],
+    "classification_of_gana": [
+      "चरक: लेखनीय, भेदनीय, तृप्तिघ्न, अर्शोघ्न, शूलप्रशमन",
+      "सुश्रुत: पिप्पल्यादि, वचादि, मुस्तादि, आमलक्यादि, वरुणादि",
+      "वाग्भट: मुस्तादि, वरुणादि"
+    ],
+    "external_morphology": {
+      "habitat": "Tropical regions, widely distributed in India, Sri Lanka",
+      "details": [
+        "Habit: Perennial herb or undershrub, climbing or erect",
+        "Stem: Glabrous, woody at base",
+        "Leaves: Simple, alternate, ovate-lanceolate, 5-9 cm long",
+        "Flowers: White, in terminal spikes, heterostylous",
+        "Calyx: Glandular, viscid",
+        "Corolla: White, tubular, 17-33 mm diameter",
+        "Fruit: Capsule, 7.5-8 mm long",
+        "Seeds: Reddish brown to dark brown"
+      ]
+    },
+    "useful_parts": "Root bark (मूलत्वक्)",
+    "phytoconstituents": "Plumbagin (major naphthoquinone), sitosterol, tannins, enzymes invertin & plumbagolic acid",
+    "rasa_panchaka": {
+      "rasa": "Katu (Pungent)",
+      "guna": "Laghu (Light), Ruksha (Dry), Tikshna (Sharp)",
+      "virya": "Ushna (Hot)",
+      "vipaka": "Katu (Pungent)"
+    },
+    "karma": {
+      "dosha_karma": "वात-श्लेष्महर (Vata-Kaphahara). कटुक पाक = Kaphahara. उष्ण वीर्य, रूक्ष गुण = Vatahara.",
+      "karma": "वह्निकृत् (Deepana), पाचन (Pachana), ग्राही (Grahi - absorbent), लेखन (Lekhana), भेदन (Bhedana)"
+    },
+    "doshaghnata": "वातश्लेष्महर, ग्राही वातार्शः श्लेष्मपित्तहृत् (Vata-Shleshmehar, Grahi, Vata-Arshas-Shleshma-Pittahrit)",
+    "rogaghnata": "ग्रहणी (Grahanī), कुष्ठ (Kushtha), शोथ (Shotha), अर्श (Arsha), कृमि (Krumi), कास (Kasa), अतिसार (Atisara)",
+    "amayika_prayoga": [
+      "रसायन (Rasayana) = Chitrak + milk / ghee & honey",
+      "कुष्ठ (Leucoderma) = Chitrak + cow urine churna",
+      "अर्श (Haemorrhoids) = Sudha Chitra root rubbed with cow's ghee - fine paste (External use)",
+      "श्वित्र (Vitiligo) = Chitrak + milk (cooked) - external application of this milk",
+      "अतिसार (Atisara/Diarrhoea) = Chitrak + Buttermilk (तक्र) churna"
+    ],
+    "matra": [
+      {
+        "form": "चूर्ण (Churna)",
+        "dose": "1-2 g"
+      }
+    ],
+    "marga": "Internal (oral) & External (लेप)",
+    "pharmacological_actions": [
+      "Hepato-protective",
+      "Anti-inflammatory",
+      "Antimicrobial",
+      "Antioxidant",
+      "Anticancer (Plumbagin)"
+    ],
+    "kalpana": [
+      "Chitrakadi Vati",
+      "Chitrak Haritaki",
+      "Chitrak Rasayana",
+      "Chitrakadi Kwatha"
+    ],
+    "varieties": "Varieties - श्वेता (Shweta), रक्त (Rakta), नीला (Neela). Shodhana: Red variety cut in small pieces → immersed in 3-4% lime water for 3hrs → taken out & immersed in fresh lime water → repeat 3 times",
+    "research_updates": [
+      "Plumbagin shows potent anticancer activity against various cancer cell lines",
+      "Wound healing activity of Plumbago zeylanica root extract"
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Plumbago_zeylanica_(5188407648).jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Plumbago zeylanica",
+    "usefulPart": "Root bark",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Plumbago_zeylanica_01.JPG",
+    "usefulPartAttribution": "Wikimedia Commons - Plumbago zeylanica"
+  },
+  {
+    "id": "bhallataka",
+    "name": "Bhallataka",
+    "sanskrit_name": "भल्लातक",
+    "sloka": "भल्लातकः कषायोष्णः शुक्रलो मधूरो लघुः । वातश्लेष्मोदरानाह कुष्ठअर्शो गृहणीगदान् । हन्ति तैलफलवत् श्वित्रवह्निमन्दयकृदगदान् ॥ भा. प्र.",
+    "sloka_source": "भा. प्र.",
+    "botanical_name": "Semecarpus anacardium",
+    "family": "Anacardiaceae",
+    "synonyms": [
+      {
+        "term": "वेरुका",
+        "meaning": "Fruit resembles kidney shape"
+      },
+      {
+        "term": "अरुष्कर",
+        "meaning": "Causes blistering on skin"
+      },
+      {
+        "term": "अग्निमुखी",
+        "meaning": "Has fiery/irritant property"
+      },
+      {
+        "term": "भल्लातक",
+        "meaning": "Standard name"
+      },
+      {
+        "term": "सोमवल्द्रु",
+        "meaning": "Divine tree"
+      }
+    ],
+    "vernacular_names": [
+      {
+        "lang": "English",
+        "name": "Marking nut, Oriental cashew nut"
+      },
+      {
+        "lang": "Hindi",
+        "name": "भिलावाँ (Bhilawan), सिब्बा (Sibba)"
+      },
+      {
+        "lang": "Marathi",
+        "name": "बिब्बा (Bibba)"
+      }
+    ],
+    "classification_of_gana": [
+      "चरक: दीपनीय, भेदनीय, कुष्ठघ्न, मूत्रसंग्रहण",
+      "सुश्रुत: न्यग्रोधादि, मुस्तादि",
+      "वाग्भट: न्यग्रोधादि, मुस्तादि"
+    ],
+    "external_morphology": {
+      "habitat": "Sub-Himalayan region, tropical parts of India, Central India",
+      "details": [
+        "Habit: Moderate-sized deciduous tree, exudating dark juice",
+        "Leaves: Oblong-obovate, rounded at apex, 30-60 cm long",
+        "Flowers: Greenish-yellow coloured, fasciculate (in bundles), compound panicles",
+        "Fruits: Drupes, smooth, shining, purplish-black when ripe, cup-orange red",
+        "Seeds: Smooth kernel inside hard shell"
+      ]
+    },
+    "useful_parts": "Fruits, seed, seed kernel & bark",
+    "phytoconstituents": "Nuts = bioflavonoids, tetrahydromentoflavone. Fruits = Nicotinic Acid (B3), riboflavin (B2), thiamine (B1), essential amino acids",
+    "rasa_panchaka": {
+      "rasa": "Katu (Pungent), Tikta (Bitter), Kashaya (Astringent)",
+      "guna": "Laghu (Light), Tikshna (Sharp), Snigdha (Unctuous)",
+      "virya": "Ushna (Hot)",
+      "vipaka": "Madhura (Sweet) [A.N = Katu]"
+    },
+    "karma": {
+      "dosha_karma": "कफ-वात हर (Kapha-Vata hara). उष्ण वीर्य, कटु-तिक्त-कषाय रस → Vata-Kaphahara",
+      "karma": "मेध्य (Medhya), वृष्य (Vrishya), विषम (Vishama), भेदन (Bhedana), दीपन (Deepana), वातश्लेष्मोदरानाहहर"
+    },
+    "doshaghnata": "कफ-वात हर (Kapha-Vata hara)",
+    "rogaghnata": "क्रिमीहारी, उरुस्तम्भ, अर्श (Arsha), कुष्ठ (Kushtha), कृमी, गुल्म (Gulma), शूल (Shoola), वातव्याधी (Vatavyadhi), श्वित्र (Shwitra), आनाह (Anaha), ग्रहणी (Grahanī)",
+    "amayika_prayoga": [
+      "उरुस्तम्भ, गर्भ कुष्ठ = B + Pippali + Pippalimula paste with honey",
+      "सर्व कुष्ठ = B + Abhaya + Vidanga kwatha or only B. oil",
+      "इन्द्रलुप्त (Alopecia) = B. rasa + madhu lep on head",
+      "अर्श (Arsha) = B + taila (equal qty.) consumed well",
+      "कफज गुल्म = B. kalka + kwatha siddha ghrita given with sitka",
+      "प्लीहोदर = B + Abhaya + Jeeraka with sitka orally",
+      "रसायन (Rasayana) = B. oil with milk for 1 month",
+      "B. majjana = Dental Shoola (toothache)",
+      "B. lavana = Agnimandya, Gulma, Adhmana, Yakrita vikara"
+    ],
+    "matra": [
+      {
+        "form": "Seed kernel paste (बीज मज्जा)",
+        "dose": "3-6 g"
+      },
+      {
+        "form": "Oil (तेल)",
+        "dose": "10-20 drops"
+      }
+    ],
+    "marga": "Internal (oral with milk/ghee) & External (oil/lep)",
+    "pharmacological_actions": [
+      "Anti-cancerous",
+      "Anti-bacterial",
+      "Cardio-depressant",
+      "Anti-allergic",
+      "Hypotensive",
+      "Anti-arthritic",
+      "Anti-inflammatory"
+    ],
+    "kalpana": [
+      "Amrita Bhallataki Lehya",
+      "Bhallataka Modaka",
+      "Bhallataka Vati (Pittaj Arshas - Vataja)",
+      "Sanjivani Vati",
+      "Bhallataka Tailam (Nadivrana, Apachi)",
+      "Bhallatakadi Kavana / Bhallatakadya Lavana",
+      "Mahabhallataka Guda (Kushtha, Shwitra, Arshas)"
+    ],
+    "varieties": "Varieties - भल्लातक, Nadi Bhallataka. Purification: Bhallatakas preserved in brick powder for 7-12 days",
+    "research_updates": [
+      "Wound healing - stem bark extract of Semecarpus anacardium"
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Semecarpus_anacardium_(Marking_Nut)_W_IMG_1402.jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Semecarpus anacardium (J.M.Garg)",
+    "usefulPart": "Fruits & Seed kernel",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Semecarpus_anacardium_(Marking_Nut)_W_IMG_1400.jpg",
+    "usefulPartAttribution": "Wikimedia Commons - Semecarpus anacardium (J.M.Garg)"
+  },
+  {
+    "id": "amalaki",
+    "name": "Amalaki",
+    "sanskrit_name": "आमलकी",
+    "sloka": "हन्ति वातं तदम्लत्वात् पित्तं माधुर्यशैत्यतः । कफं रुक्षकषायत्वात् फलं धात्र्यास्त्रिदोषजित् ॥ भा. प्र.",
+    "sloka_source": "भा. प्र.",
+    "botanical_name": "Emblica officinalis (Phyllanthus emblica)",
+    "family": "Euphorbiaceae / Phyllanthaceae",
+    "synonyms": [
+      {
+        "term": "धात्री",
+        "meaning": "Nourisher, supportive like a nurse"
+      },
+      {
+        "term": "श्रीफल",
+        "meaning": "Auspicious fruit"
+      },
+      {
+        "term": "अमृता",
+        "meaning": "Immortal, rich in Vitamin C"
+      },
+      {
+        "term": "शिवा",
+        "meaning": "Auspicious, beneficial"
+      },
+      {
+        "term": "शांता",
+        "meaning": "Calming, pacifying"
+      },
+      {
+        "term": "अमृतफला",
+        "meaning": "Fruit with nectar-like properties"
+      },
+      {
+        "term": "वयःस्था",
+        "meaning": "Prevents ageing"
+      },
+      {
+        "term": "वृष्या",
+        "meaning": "Aphrodisiac, nourishing"
+      },
+      {
+        "term": "रोचनी",
+        "meaning": "Appetizer"
+      },
+      {
+        "term": "दिव्या",
+        "meaning": "Divine"
+      },
+      {
+        "term": "अमृतोद्भवा",
+        "meaning": "Produced from nectar"
+      }
+    ],
+    "vernacular_names": [
+      {
+        "lang": "English",
+        "name": "Emblic myrobalan, Indian Gooseberry"
+      },
+      {
+        "lang": "Hindi",
+        "name": "आँवला (Awala)"
+      },
+      {
+        "lang": "Marathi",
+        "name": "आवळा (Avala)"
+      }
+    ],
+    "classification_of_gana": [
+      "चरक: वयःस्थापन, विरेचनोपग",
+      "सुश्रुत: त्रिफला, परूषकादि"
+    ],
+    "external_morphology": {
+      "habitat": "Tropical parts of India, Nepal, Sri Lanka. Deciduous forests, also cultivated.",
+      "details": [
+        "Habit: Medium-sized tree, growing up to 8-18 m in height",
+        "Leaves: Simple, subsessile, light green, pinnate",
+        "Flowers: Small, greenish-yellow",
+        "Fruit: Spherical, light greenish-yellow, smooth, shining with 6 vertical stripes",
+        "Seeds: Trigonous (three-angled)",
+        "Bark: Light greyish-brown, exfoliating in scales"
+      ]
+    },
+    "useful_parts": "Fruit (फल)",
+    "phytoconstituents": "Fruit juice contains phenolic constituents: gallic acid, l-malic acid, 2-O-gallate, mucic acid 2-O-gallate. Rich in Vitamin C (ascorbic acid), tannins, pectin",
+    "rasa_panchaka": {
+      "rasa": "पंचरस (all 5 tastes except लवण) - आम्ल प्रधान (predominantly sour)",
+      "guna": "Laghu (Light), Ruksha (Dry)",
+      "virya": "Sheeta (Cold)",
+      "vipaka": "Madhura (Sweet)"
+    },
+    "karma": {
+      "dosha_karma": "त्रिदोषघ्न (Tridoshaghna): वातघ्न (amla rasa), पित्तघ्न (madhura vipaka, sheeta virya), कफघ्न (ruksha kashaya)",
+      "karma": "रसायन, चक्षुष्य, वृष्य, दाहहर, वलीपलितनाशन, आमघ्न, कण्ठ्य, मेदहर, भग्नसंधानकृत्, केश्य, कुष्ठघ्न"
+    },
+    "doshaghnata": "त्रिदोषघ्न (Tridoshaghna) - वातघ्न, पित्तघ्न, कफघ्न",
+    "rogaghnata": "रसायन, प्रमेह, ज्वर, रक्तपित्त, पाण्डुरोग, कामला, शुक्रदौर्बल्य, दाह, छर्दी, भ्रम, शोथ, केश्य विकार",
+    "amayika_prayoga": [
+      "प्रमेह (Prameha) = Fresh Amalaki juice mixed with Haridra",
+      "ज्वर (Jwara) = Amalaki juice fried with ghee",
+      "पाण्डु (Pandu) = Amalaki churna mixed with Honey",
+      "कामला (Kamala) = Amalaki juice + grapes",
+      "रक्तपित्त (Raktapitta) = Amalaki churna + more quantity madhu; sharkara given as virechan",
+      "हिक्का (Hikka) = Amalaki juice + Kapittha mixed with Pippali churna + madhu",
+      "कास (Kasa) = Amalaki churna boiled with milk & taken with ghee",
+      "वातरक्त (Vatarakta / Gout Arthritis) = Kashaya of Amalaki + Haridra"
+    ],
+    "matra": [
+      {
+        "form": "फल चूर्ण (Fruit powder)",
+        "dose": "3-10 g"
+      },
+      {
+        "form": "क्वाथ (Decoction)",
+        "dose": "20-100 ml"
+      },
+      {
+        "form": "स्वरस (Fresh juice)",
+        "dose": "10-20 ml"
+      },
+      {
+        "form": "चूर्ण (Churna)",
+        "dose": "1-2 g"
+      }
+    ],
+    "marga": "Internal (oral)",
+    "pharmacological_actions": [
+      "Immunomodulator",
+      "Antioxidant",
+      "Antiulcerogenic",
+      "Anticarcinogenic",
+      "Antihypercholesterolaemic",
+      "Pancreatoprotective",
+      "Antimicrobial",
+      "Anti-depressant"
+    ],
+    "kalpana": [
+      "Chyavanprashavaleha",
+      "Dhatryavaleha",
+      "Brahma Rasayana",
+      "Amalakyadi Churna",
+      "Amalaki Kashaya / Rasayana",
+      "Amalakyavaleha",
+      "Amalakyadi Kwatha",
+      "Bhangamalaki Taila",
+      "Dhataryarishta",
+      "Triphala Ghrita",
+      "Triphala Kwatha"
+    ],
+    "varieties": "Not mentioned separately in classical texts",
+    "research_updates": [
+      "Inhibits UVB-induced photo-aging in human skin fibroblast",
+      "Hypolipidemic efficacy",
+      "Antioxidant activity",
+      "Anti-depressant effect",
+      "Prevention of diabetes-induced myocardial dysfunction",
+      "Antimicrobial activity"
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Amlaki_(Bengali-_আমলকী)_(4937858995).jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Phyllanthus emblica (Dinesh Valke)",
+    "usefulPart": "Fruit (फल)",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Amla_(Gujarati-_આમળા)_(4938449876).jpg",
+    "usefulPartAttribution": "Wikimedia Commons - Phyllanthus emblica fruit (Dinesh Valke)"
   }
 ]
