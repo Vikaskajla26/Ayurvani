@@ -1327,5 +1327,323 @@
       "memory enhancer",
       "Anti-convulsant"
     ]
+  },
+  {
+    "id": "jyotishmati",
+    "name": "Jyotishmati",
+    "sanskrit_name": "ज्योतिष्मती",
+    "sloka": "ज्योतिष्मती कटुतिक्तोष्णा सरा कफसमीरजित् । अत्युष्णा वामनी तीक्ष्णा वह्निबुद्धिविवर्द्धिनी ॥ भा. प्र",
+    "sloka_source": "भा. प्र",
+    "botanical_name": "Celastrus paniculatus",
+    "family": "Celastraceae",
+    "synonyms": [
+      {
+        "term": "कङ्गुनीका",
+        "meaning": "Traditional name"
+      },
+      {
+        "term": "पीततैला",
+        "meaning": "Yellow oil"
+      },
+      {
+        "term": "आलुण्डकी",
+        "meaning": "Alternative name"
+      },
+      {
+        "term": "पारवतपदी",
+        "meaning": "Mountain plant"
+      }
+    ],
+    "vernacular_names": [
+      {
+        "lang": "English",
+        "name": "staff tree"
+      },
+      {
+        "lang": "Hindi",
+        "name": "malakangani"
+      },
+      {
+        "lang": "Marathi",
+        "name": "कङ्गुणी"
+      }
+    ],
+    "classification_of_gana": [
+      "चरक: शिरोविरेचन",
+      "सुश्रुत: अधोभागहर, Arkadi",
+      "भावप्रकाश: Haritakyadi"
+    ],
+    "external_morphology": {
+      "habitat": "Climber found in forests",
+      "details": [
+        "Habit: A large deciduous climber",
+        "Bark: pale brown, rough with shallow cracks",
+        "Flowers: green coloured",
+        "Fruit: capsule, yellow on ripening",
+        "Seeds: completely enclosed in an orange-red aril"
+      ]
+    },
+    "useful_parts": "Fruit, seed",
+    "phytoconstituents": "seed = 52% oil (thick reddish yellow), Tanin, celastin, celapanine, celastrol",
+    "rasa_panchaka": {
+      "rasa": "Tikta, kashaya, madhura",
+      "guna": "laghu, snigdha",
+      "virya": "shita",
+      "vipaka": "katu"
+    },
+    "karma": {
+      "dosha_karma": "वातकफशामक",
+      "karma": "मेध्य, बुद्धिवर्धन, स्रंसिनी, वामक, वर्ण्य, दिपन, श्वेदजनन"
+    },
+    "doshaghnata": "वातकफशामक",
+    "rogaghnata": "manasika vikara, vrana, visarpa, pandu, vairanya, agnimandya",
+    "amayika_prayoga": [
+      "sidhma (white spotted leprosy) = oil processed with water, mixed with jatamansi & decanted 7 times",
+      "udara (Ascitis) = Jyotishmati oil mixed with milk & swarjika alkali with Hingu"
+    ],
+    "matra": [
+      {
+        "form": "Taila",
+        "dose": "5-15 drops"
+      },
+      {
+        "form": "Churna",
+        "dose": "1-2g"
+      }
+    ],
+    "pharmacological_actions": [
+      "Intellect promotor",
+      "Appetizer",
+      "stimulant",
+      "Rubefacient",
+      "Emollient",
+      "Emetic",
+      "Digestive"
+    ],
+    "kalpana": [
+      "Jyotishmati taila - manasika vikara, medhya karma"
+    ],
+    "varieties": "Not mentioned",
+    "research_updates": [
+      "Hypolipidemic effect",
+      "Improve memory performance",
+      "Anti-spermatogenic action",
+      "Neuroprotection"
+    ]
+  },
+  {
+    "id": "kanchanara",
+    "name": "Kanchanara",
+    "sanskrit_name": "कांचनार",
+    "sloka": "काञ्चनारो हिमो ग्राही तुवरः श्लेष्मपित्तहृत् । गण्डगण्डार्बुदग्रन्थिकुष्ठव्रणकफापहः ॥ भा. प्र",
+    "sloka_source": "भा. प्र",
+    "botanical_name": "Bauhinia variegata / Bauhinia purpureer",
+    "family": "leguminaseae, caesalpiniodeae",
+    "synonyms": [
+      {
+        "term": "गण्डारी",
+        "meaning": "Goitre plant"
+      },
+      {
+        "term": "चमरीक",
+        "meaning": "Traditional name"
+      },
+      {
+        "term": "युग्मपत्रक",
+        "meaning": "Twin leaves"
+      },
+      {
+        "term": "केंबदार",
+        "meaning": "Traditional name"
+      }
+    ],
+    "vernacular_names": [
+      {
+        "lang": "English",
+        "name": "mountain ebony, camel's foot"
+      },
+      {
+        "lang": "Hindi",
+        "name": "champakati"
+      },
+      {
+        "lang": "Marathi",
+        "name": "kanchana"
+      }
+    ],
+    "classification_of_gana": [
+      "चरक: वमनोपग",
+      "सुश्रुत: ऊर्ध्वभागत्वर, उभयतोभागहर",
+      "भावप्रकाश: Guduchyadi"
+    ],
+    "external_morphology": {
+      "habitat": "Tropical regions",
+      "details": [
+        "Habit: Shrub / small tree",
+        "stem: woody",
+        "leaf: Alternate, simple",
+        "Flower: complete, Bisexual",
+        "Fruit: legume / pod"
+      ]
+    },
+    "useful_parts": "stembark",
+    "phytoconstituents": "stem bark = β-sitosterol, stigmasterol",
+    "rasa_panchaka": {
+      "rasa": "kashaya",
+      "guna": "Ruksha, Laghu",
+      "virya": "shita",
+      "vipaka": "katu"
+    },
+    "karma": {
+      "dosha_karma": "कफपित्तशामक",
+      "bark": "kanthi, krimighn, kusthagn, dipan",
+      "flowers": "rachi, rochak, Raktapittahar"
+    },
+    "doshaghnata": "कफपित्तशामक",
+    "rogaghnata": "vranavikara, Atisara, Apachi, gandamala, krimi, kushtha, shwasa",
+    "amayika_prayoga": [
+      "Gandamala (Goitre) = kwatha of kanchanara with shunthi powder",
+      "masurika (pox) = decoction with swarna makshika powder"
+    ],
+    "matra": [
+      {
+        "form": "kwath",
+        "dose": "40-80ml"
+      },
+      {
+        "form": "churna",
+        "dose": "3-6g"
+      },
+      {
+        "form": "pushpa rasa",
+        "dose": "10-20ml"
+      }
+    ],
+    "pharmacological_actions": [
+      "Astringent",
+      "Anthelminthic",
+      "haemostatic",
+      "Anti-inflammatory"
+    ],
+    "kalpana": [
+      "kanch. Guggula - galaganda, Apachi, Arbuda",
+      "kanch. gutika - galaganda, Apachi, Nadivrana"
+    ],
+    "varieties": "kanchanara, kovidara",
+    "research_updates": [
+      "nephro-protective activity",
+      "Antioxidant",
+      "Anti-hyperlipidemic activity",
+      "Anti-carcinogenicity",
+      "Hepato-protective activity"
+    ]
+  },
+  {
+    "id": "kantakari",
+    "name": "Kantakari",
+    "sanskrit_name": "कण्टकारी",
+    "sloka": "कण्टकारी रसा तिक्ता कटुका दीपिनी लघुः । केशापथ्या चानिलामकासश्वासज्वरापहा ॥ भा. प्र.",
+    "sloka_source": "भा. प्र",
+    "botanical_name": "Solanum xanthocarpum",
+    "family": "Solaneceae",
+    "synonyms": [
+      {
+        "term": "दुःस्पर्शा",
+        "meaning": "Unpleasant to touch"
+      },
+      {
+        "term": "व्याघ्री",
+        "meaning": "Tiger plant"
+      },
+      {
+        "term": "क्षुद्रकण्टिका",
+        "meaning": "Small spines"
+      },
+      {
+        "term": "क्षुद्रफला",
+        "meaning": "Small fruit"
+      }
+    ],
+    "vernacular_names": [
+      {
+        "lang": "English",
+        "name": "wild eggs plant"
+      },
+      {
+        "lang": "Hindi",
+        "name": "bhoya ringani, kateli"
+      },
+      {
+        "lang": "Marathi",
+        "name": "kantakari, Bhuringani"
+      }
+    ],
+    "classification_of_gana": [
+      "चरक: कासहर, कण्ठ्य, हिक्काविग्रहण, शीतप्रशमन",
+      "सुश्रुत: बृहत्यादि, वरुणदि, लघुपंचमुल"
+    ],
+    "external_morphology": {
+      "habitat": "Wild herb in tropical regions",
+      "details": [
+        "Habit: Perennial herb",
+        "leaves: alternate, simple reticulate unicostate venation",
+        "Flowers: bluish purple / violet",
+        "Fruit: Berry with endospermic seed"
+      ]
+    },
+    "useful_parts": "whole plant, Berry",
+    "phytoconstituents": "alkaloid solasoline, scopolin, esculin",
+    "rasa_panchaka": {
+      "rasa": "Tikta, katu",
+      "guna": "laghu, Ruksha",
+      "virya": "ushna",
+      "vipaka": "katu"
+    },
+    "karma": {
+      "dosha_karma": "कफवातशामक",
+      "mula": "kanthya, kashahar, shwasahar, jwaraghna",
+      "fruit": "Shrechana, bhedan, dipan, laghushya",
+      "hrudya": "kaphagna, kusthagna, svedan, kasahara"
+    },
+    "doshaghnata": "कफवातशामक",
+    "rogaghnata": "शोष, श्वास, कास, ज्वर, कण्ठरोग, अग्निमांध्य, अजीर्ण, हिक्का, हृद्रोग, कुष्ठ, अश्मरी, पीनस, पार्श्वशूल",
+    "amayika_prayoga": [],
+    "matra": [
+      {
+        "form": "kwatha",
+        "dose": "50-100ml"
+      },
+      {
+        "form": "churna",
+        "dose": "1-2g"
+      }
+    ],
+    "pharmacological_actions": [
+      "Anti-inflammatory",
+      "antibacterial",
+      "Analgesic",
+      "stimulant",
+      "Appetizer",
+      "carminative",
+      "cardio-stimulant",
+      "Expectorant",
+      "demulcent",
+      "Aphrodisiac"
+    ],
+    "kalpana": [
+      "kantakari kwath - kasa",
+      "kantakari ghruta - kasa",
+      "kantakaryavaleha - kasa, Hikka, swas",
+      "dashmula haritaki - Archi, odar"
+    ],
+    "varieties": "shwetapushpha kantakari, nilapushpha kantakari",
+    "research_updates": [
+      "free radical scavenging & antioxidant activity",
+      "Anti-urolithiatric activity",
+      "Nephroprotective",
+      "wound healing potency, antifungal activity",
+      "Bronchodilator & expectorant",
+      "immunomodulatory effect"
+    ]
   }
 ]
