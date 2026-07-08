@@ -355,9 +355,9 @@
 
   main{max-width:1120px; margin:0 auto 0 104px; padding:0 24px 80px; position:relative; transition: margin-left 0.3s ease;}
   html{scroll-behavior:smooth;}
-  section{display:none; opacity:0; transform:translateY(10px); transition:opacity 0.28s ease, transform 0.28s ease;}
-  section.active{display:block;}
-  section.active.section-visible{opacity:1; transform:translateY(0);}
+  main > section{display:none; opacity:0; transform:translateY(10px); transition:opacity 0.28s ease, transform 0.28s ease;}
+  main > section.active{display:block;}
+  main > section.active.section-visible{opacity:1; transform:translateY(0);}
 
   /* ---------- Fixed Full-Page Background Canvas ---------- */
   #bgCanvas {
