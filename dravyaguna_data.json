@@ -1,0 +1,130 @@
+[
+  {
+    "id": "chandan",
+    "name": "Chandan",
+    "sanskrit_name": "चन्दन",
+    "sloka": "स्वादे तिक्तं कषे पीतं छेदे रक्तं तनौ सितम् | गन्धिक्लोटरसंयुक्तं चन्दनं श्रेष्ठमुच्यते | चन्दनं शीतलं रुक्षं तिक्तमाहृदयं लघु | तृषाशोषविष-ज्वर-दाह-तृष्णा-पित्तास्र-कोत्मुत् ||",
+    "sloka_source": "भा. प्र.",
+    "botanical_name": "Santalum album",
+    "family": "Santalaceae",
+    "synonyms": [
+      {"term": "मलयज", "meaning": "Grown in Malaya region"},
+      {"term": "तैलपर्णक", "meaning": "Leaves resemble leaves of Taila"},
+      {"term": "गन्धसार", "meaning": "Heartwood has good aroma"},
+      {"term": "शिशिर", "meaning": "Sheeta veerya, cold to touch"},
+      {"term": "श्रीखण्ड", "meaning": "Pieces of heartwood are valuable"}
+    ],
+    "vernacular_names": [
+      {"lang": "English", "name": "Sandalwood"},
+      {"lang": "Hindi", "name": "Safed Chandan"},
+      {"lang": "Marathi", "name": "Pandra Chandan"}
+    ],
+    "classification_of_gana": [
+      "चरक: वल्हिरजन, तृष्णानिग्रह, कषाय, कण्डूघ्न, विषघ्न",
+      "सुश्रुत: सारिवादि, पटोलादि"
+    ],
+    "external_morphology": {
+      "habitat": "Forest of Karnataka and Tamil Nadu",
+      "details": [
+        "Habit: Small evergreen glabrous tree",
+        "Leaves: 4-6 cm long, elliptic lanceolate, subacute, entire margin",
+        "Branch: Slender, drooping",
+        "Heartwood: Yellowish brown colour",
+        "Sapwood: White and odourless",
+        "Inflorescence: Terminal axillary paniculate cyme",
+        "Flower: Brownish purple, perianth is companulate",
+        "Fruit: Drupe"
+      ]
+    },
+    "useful_parts": "Heartwood",
+    "phytoconstituents": "α-santalol, β-santene, santenol, santalenes",
+    "rasa_panchaka": {"rasa": "Tikta, Madhura", "guna": "Laghu, Ruksha", "virya": "Sheeta", "vipaka": "Katu"},
+    "karma": {
+      "dosha_karma": "Pittashamak, Kaphashamak (Katu Vipaka, Tikta Rasa)",
+      "karma": "Trishnahar, Raktaprasadak, Jwarahar, Dahahar, Vranahar"
+    },
+    "doshaghnata": "Pittahara, Kaphahara",
+    "rogaghnata": "Daha, Trishna, Rakta-pitta, Twak vikara, Kushtha, Visarpa, Jwara",
+    "amayika_prayoga": [
+      "Raktatisar - Int. -> Chandan churna + Sugar + Honey + Tandulodaka",
+      "Raktarsha -> Chandan rasa + Shunti",
+      "Pittajwara -> Chandan kwatha + Sugar + Honey",
+      "Shukrameha -> Kwatha of Arjuna + Chandan",
+      "Chardi -> Chandan churna + Dhatri rasa"
+    ],
+    "matra": [
+      {"form": "Kwatha", "dose": "50-100 ml"},
+      {"form": "Churna", "dose": "3-6 g"},
+      {"form": "Taila", "dose": "5-10 drops"}
+    ],
+    "marga": "External application - Lepa, Taila; Internal - Kwatha",
+    "pharmacological_actions": ["Antibacterial", "Antioxidant", "Antiviral", "Antipyretic", "Antifungal", "Cooling"],
+    "kalpana": ["Chandanadi Kashayam - Jwara, Trishna, Cough", "Marma Gulika - Cardiac and liver disease", "Dashanga Lepa - Shula, Kushtha, Visarpa", "Chandan Asava / Kwatha"],
+    "varieties": "Bhavaprakasha: Shweta Chandan (White), Rakta Chandan (Red), Pita Chandan (Yellow), Kuchandana",
+    "research_updates": ["Anti-ulcer activity"]
+  },
+  {
+    "id": "bhringraj",
+    "name": "Bhringraj",
+    "sanskrit_name": "भृङ्गराज",
+    "sloka": "भृङ्गराजः कटुस्तिक्ष्णो रूक्षोष्णः कफवातनुत् | केश्यस्त्वच्यः कृमिश्वासकासशोथआमपाण्डुनुत् || त्वच्या रसायनी बाल्याः कुष्ठनेत्र शिरो अतिनुत् ||",
+    "sloka_source": "शा. ह.",
+    "botanical_name": "Eclipta alba",
+    "family": "Asteraceae",
+    "synonyms": [
+      {"term": "केशरञ्जन", "meaning": "Prevent premature greying"},
+      {"term": "केशाग्रज", "meaning": "Good for hair"},
+      {"term": "भृगाह्व", "meaning": "Plant attracts honey bee"},
+      {"term": "सूर्यवर्त", "meaning": "Used in Suryavarta disease"},
+      {"term": "पितृप्रिय", "meaning": "Used in Shraddha"},
+      {"term": "रविप्रिय", "meaning": "Ushna veerya"}
+    ],
+    "vernacular_names": [
+      {"lang": "English", "name": "False Daisy"},
+      {"lang": "Marathi", "name": "माका, Bhangarajya"},
+      {"lang": "Hindi", "name": "भांगरा"}
+    ],
+    "classification_of_gana": [
+      "भावप्रकाश निघण्टु: Guduchyadi varga"
+    ],
+    "external_morphology": {
+      "habitat": "India, marshy places, grows rapidly in rainy season",
+      "details": [
+        "Root: Branched",
+        "Stem: Herbaceous, aerial, erect, cylindrical",
+        "Leaf: Ramal, cauline, simple opposite elliptic-lanceolate, reticulate venation",
+        "Inflorescence: Capitulum",
+        "Fruits: Cypsela"
+      ]
+    },
+    "useful_parts": "Panchanga",
+    "phytoconstituents": "Wedololactone, demethylwedololactone, ecliptal, β-amyrin, stigmasterol",
+    "rasa_panchaka": {"rasa": "Katu, Tikta", "guna": "Ruksha, Laghu", "virya": "Ushna", "vipaka": "Katu"},
+    "karma": {
+      "dosha_karma": "Kaphahara = Katu, Tikta Rasa; Vataghna = Ushna Veerya, Laghu, Ruksha Guna",
+      "karma": "केश्य, त्वच्य, केशरञ्जन, यकृतोत्तेजक, नेत्र्य, रसायन, बल्य, शिरःशूलहर, विषघ्न"
+    },
+    "doshaghnata": "Kaphahara, Vataghna",
+    "rogaghnata": "Kasa, Swasa, Ama, Pandu, Kustha, Shirogata, Chakshuroga, Yakrutroga, Pliha vruddhi",
+    "amayika_prayoga": [
+      "Kansis bhasma + Bhringaraj swaras = Kesharanjan",
+      "Goat milk + Bhringaraj swaras (Nasya) = Headache (Suryavarta)",
+      "Castor oil + Bhringaraj swaras (internally) = Intestinal worm infection",
+      "Bhringaraj kalka (external application) = Swollen area, abscess, throat infection, asthma, cough, cold, elephantiasis",
+      "Bhringaraj churna + Honey = Throat infection, asthma, cough, cold"
+    ],
+    "matra": [
+      {"form": "Swaras", "dose": "5-10 ml"},
+      {"form": "Churna", "dose": "250mg-2g / day"}
+    ],
+    "pharmacological_actions": ["Hepatoprotective", "Antiviral", "Analgesic", "Hypotensive", "Raktashodhak", "Rakta vruddhi", "Raktaprasadaka"],
+    "kalpana": ["Bhringamalakadi Tailam", "Bhringarajswarasam", "Bhringarajadi kwatha", "Bhringaraj Tail", "Bhringaraj churna", "Bhringaraja ghrit", "Shaddabindu Taila"],
+    "varieties": "Raja Nighantu: Shweta (white), Pitta (yellow), Nila (blue)",
+    "research_updates": [
+      "Hepatoprotective activity of Eclipta alba",
+      "Phyto-chemical standardization",
+      "Hair growth promotion activity",
+      "Alcoholic extract of Eclipta alba shows in-vitro antioxidant and anticancer activity without exhibiting toxicological effects"
+    ]
+  }
+]
