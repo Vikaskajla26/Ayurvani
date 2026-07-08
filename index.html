@@ -3250,10 +3250,6 @@ let dravyagunaData = [];
 let dravyagunaLoaded = false;
 
 async function loadDravyagunaData() {
-  if (typeof initDravyagunaView === 'function') {
-    await initDravyagunaView();
-    return;
-  }
   if (dravyagunaLoaded) return;
   try {
     const resp = await fetch('/dravyaguna_data.json');

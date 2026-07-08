@@ -1,14 +1,12 @@
 // ========== DRAVYA GUNA ENHANCED IMAGE DISPLAY ==========
-
-let dravyagunaData = [];
-let dravyagunaLoaded = false;
+// NOTE: dravyagunaData and dravyagunaLoaded are defined in index.html
 
 // Update results info bar
 function updateResultsInfo(filteredCount, totalCount) {
   const resultsInfo = document.getElementById('dravyagunaResultsInfo');
   if (!resultsInfo) return;
 
-  const hasFilters = Object.values(activeFilters).some(arr => arr.length > 0);
+  const hasFilters = typeof activeFilters !== 'undefined' && Object.values(activeFilters).some(arr => arr.length > 0);
   const searchInput = document.getElementById('dravyagunaSearchInput');
   const hasSearch = searchInput?.value?.trim()?.length > 0;
 
@@ -30,28 +28,19 @@ function updateResultsInfo(filteredCount, totalCount) {
 }
 
 // Initialize Dravya Guna view with filters
-function initDravyagunaView() {
-  loadDravyagunaData().then(() => {
-    if (typeof initializeDravyagunaFilters === 'function') {
-      initializeDravyagunaFilters();
-    }
-    renderDravyagunaList_enhanced('');
-  });
-}
+async function initDravyagunaView() {
+  await loadDravyagunaData();
 
-async function loadDravyagunaData() {
-  if (dravyagunaLoaded) return;
-  try {
-    const resp = await fetch('/dravyaguna_data.json');
-    dravyagunaData = await resp.json();
-    dravyagunaLoaded = true;
-    // Update plant count display
-    const countEl = document.getElementById('dravyaCount');
-    if (countEl) countEl.textContent = dravyagunaData.length + ' plants';
-  } catch (err) {
-    console.error('Error loading dravya guna data:', err);
-    dravyagunaData = [];
+  // Update plant count display
+  const countEl = document.getElementById('dravyaCount');
+  if (countEl && dravyagunaData.length > 0) {
+    countEl.textContent = dravyagunaData.length + ' plants';
   }
+
+  if (typeof initializeDravyagunaFilters === 'function') {
+    initializeDravyagunaFilters();
+  }
+  renderDravyagunaList_enhanced('');
 }
 
 function renderDravyagunaList_enhanced(q = '') {
@@ -279,9 +268,8 @@ function closeDravyaImageLightbox() {
   if (lightbox) lightbox.classList.remove('active');
 }
 
-// Pre-load data silently when page loads, but don't init UI yet
+// Pre-load data silently when page loads
 document.addEventListener('DOMContentLoaded', function() {
-  // Silently pre-load data for faster rendering when navigated to
   if (!dravyagunaLoaded) {
     fetch('/dravyaguna_data.json')
       .then(resp => resp.json())
