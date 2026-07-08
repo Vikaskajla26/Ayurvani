@@ -113,7 +113,12 @@
     "varieties": "भावप्रकाश: श्वेत चंदन (Shweta), पीत चंदन (Peeta), रक्त चंदन (Rakta / Kuchandana)",
     "research_updates": [
       "Anti-ulcer activity"
-    ]
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Santalum_album_tree.jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Santalum album",
+    "usefulPart": "Heartwood",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Sandalwood_chips.jpg",
+    "usefulPartAttribution": "Wikimedia Commons - Santalum album"
   },
   {
     "id": "ela",
@@ -224,7 +229,12 @@
       "Anti-microbial activity",
       "Effect on B.P. (lowering) and anti-ulcer activity",
       "Liver protecting"
-    ]
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Elettaria_cardamomum.jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Elettaria cardamomum",
+    "usefulPart": "Seeds",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Green_cardamom_pods.jpg",
+    "usefulPartAttribution": "Wikimedia Commons - Elettaria cardamomum"
   },
   {
     "id": "bhringraj",
@@ -342,7 +352,12 @@
       "Phyto-chemical standardization",
       "Hair growth promotion activity",
       "Alcoholic extract of Eclipta alba shows in-vitro antioxidant and anticancer activity without exhibiting toxicological effects"
-    ]
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Eclipta_alba.jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Eclipta alba",
+    "usefulPart": "Whole plant",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Eclipta_alba_leaves.jpg",
+    "usefulPartAttribution": "Wikimedia Commons - Eclipta alba"
   },
   {
     "id": "bilwa",
@@ -453,7 +468,12 @@
       "Antitumor, antidiabetic",
       "Immuno-modulatory",
       "Anti-inflammatory activity"
-    ]
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Aegle_marmelos_tree.jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Aegle marmelos",
+    "usefulPart": "Fruit",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Bael_fruit.jpg",
+    "usefulPartAttribution": "Wikimedia Commons - Aegle marmelos"
   },
   {
     "id": "gambhari",
@@ -567,7 +587,12 @@
     "varieties": "Substitute: Gambhari fruit used as substitute for Grapes / Raisins (भावप्रकाश)",
     "research_updates": [
       "Immune modulating effect (experimental)"
-    ]
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Gmelina_arborea.jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Gmelina arborea",
+    "usefulPart": "Bark, Root",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Gmelina_arborea_bark.jpg",
+    "usefulPartAttribution": "Wikimedia Commons - Gmelina arborea"
   },
   {
     "id": "arjuna",
@@ -683,7 +708,12 @@
       "Cardio-depressant activity",
       "Used in chronic stable angina",
       "Antibacterial and antifungal activity"
-    ]
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Terminalia_arjuna_tree.jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Terminalia arjuna",
+    "usefulPart": "Bark",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Arjuna_bark.jpg",
+    "usefulPartAttribution": "Wikimedia Commons - Terminalia arjuna"
   },
   {
     "id": "haridra",
@@ -811,7 +841,12 @@
       "Antitumor activity in human colon cancer",
       "Anticonvulsant activity (epilepsy)",
       "Strong antioxidant"
-    ]
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Curcuma_longa_plant.jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Curcuma longa",
+    "usefulPart": "Rhizome",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Turmeric_rhizome.jpg",
+    "usefulPartAttribution": "Wikimedia Commons - Curcuma longa"
   },
   {
     "id": "daruharidra",
@@ -908,7 +943,12 @@
       "Anti-diarrheal and anti-spasmodic activity",
       "Anti-microbial activity",
       "Hypoglycemic activity"
-    ]
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Berberis_aristata.jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Berberis aristata",
+    "usefulPart": "Stem, Root",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Berberis_aristata_bark.jpg",
+    "usefulPartAttribution": "Wikimedia Commons - Berberis aristata"
   },
   {
     "id": "haritaki",
@@ -1046,7 +1086,12 @@
       "Controls blood glucose and manages Type 2 diabetes",
       "Anti-hyperglycemic activity",
       "Antibacterial and angiogenic activity"
-    ]
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Terminalia_chebula_tree.jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Terminalia chebula",
+    "usefulPart": "Fruit",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Haritaki_fruit.jpg",
+    "usefulPartAttribution": "Wikimedia Commons - Terminalia chebula"
   },
   {
     "id": "hingu",
@@ -1140,7 +1185,12 @@
       "Antioxidant",
       "Antimicrobial",
       "Antispasmodic"
-    ]
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Ferula_foetida.jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Ferula narthex",
+    "usefulPart": "Gumresin",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Asafoetida_resin.jpg",
+    "usefulPartAttribution": "Wikimedia Commons - Ferula narthex"
   },
   {
     "id": "jambu",
@@ -1233,7 +1283,12 @@
       "Antidiabetic effect",
       "Hepatoprotective",
       "Antihyperglycemic"
-    ]
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Syzygium_cumini_tree.jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Syzygium cumini",
+    "usefulPart": "Fruit, Seed, Bark",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Black_plum_fruit.jpg",
+    "usefulPartAttribution": "Wikimedia Commons - Syzygium cumini"
   },
   {
     "id": "jatamansi",
@@ -1326,7 +1381,12 @@
       "Anti-stress effect",
       "memory enhancer",
       "Anti-convulsant"
-    ]
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Nardostachys_jatamansi.jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Nardostachys jatamansi",
+    "usefulPart": "Rhizome",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Jatamansi_rhizome.jpg",
+    "usefulPartAttribution": "Wikimedia Commons - Nardostachys jatamansi"
   },
   {
     "id": "jyotishmati",
@@ -1429,7 +1489,12 @@
       "Improve memory performance",
       "Anti-spermatogenic action",
       "Neuroprotection"
-    ]
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Celastrus_paniculatus.jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Celastrus paniculatus",
+    "usefulPart": "Seed, Fruit",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Celastrus_paniculatus_seed.jpg",
+    "usefulPartAttribution": "Wikimedia Commons - Celastrus paniculatus"
   },
   {
     "id": "kanchanara",
@@ -1536,7 +1601,12 @@
       "Anti-hyperlipidemic activity",
       "Anti-carcinogenicity",
       "Hepato-protective activity"
-    ]
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Bauhinia_variegata_tree.jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Bauhinia variegata",
+    "usefulPart": "Bark",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Bauhinia_variegata_bark.jpg",
+    "usefulPartAttribution": "Wikimedia Commons - Bauhinia variegata"
   },
   {
     "id": "kantakari",
@@ -1644,7 +1714,12 @@
       "wound healing potency, antifungal activity",
       "Bronchodilator & expectorant",
       "immunomodulatory effect"
-    ]
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Solanum_xanthocarpum.jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Solanum xanthocarpum",
+    "usefulPart": "Whole plant, Fruit",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Solanum_xanthocarpum_fruit.jpg",
+    "usefulPartAttribution": "Wikimedia Commons - Solanum xanthocarpum"
   },
   {
     "id": "kapikacchu",
@@ -1748,7 +1823,12 @@
       "improves sperm count, motility, quality",
       "management of male infertility",
       "cardiovascular benefit, hypertension management"
-    ]
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Mucuna_pruriens.jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Mucuna pruriens",
+    "usefulPart": "Seed",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Mucuna_pruriens_seed.jpg",
+    "usefulPartAttribution": "Wikimedia Commons - Mucuna pruriens"
   },
   {
     "id": "karkatashringi",
@@ -1842,7 +1922,12 @@
     "research_updates": [
       "Analgesic & Anti-inflammatory",
       "Leishmanicidal activity"
-    ]
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Rhus_succedanea.jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Rhus succedanea",
+    "usefulPart": "Galls",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Rhus_galls.jpg",
+    "usefulPartAttribution": "Wikimedia Commons - Rhus succedanea"
   },
   {
     "id": "kutaki",
@@ -1942,6 +2027,11 @@
       "Anti-neoplastic activity",
       "Anti-diabetic",
       "Anti-proliferative & hepatic antioxidant"
-    ]
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Picrorhiza_kurroa.jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Picrorhiza kurroa",
+    "usefulPart": "Rhizome",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Picrorhiza_kurroa_rhizome.jpg",
+    "usefulPartAttribution": "Wikimedia Commons - Picrorhiza kurroa"
   }
 ]

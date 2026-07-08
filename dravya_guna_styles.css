@@ -1,0 +1,473 @@
+/* ========== DRAVYA GUNA IMAGE GALLERY STYLES ========== */
+
+/* Plant Card Styles */
+.dravya-card {
+  background: var(--card-solid);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.dravya-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+  border-color: var(--gold);
+}
+
+.dravya-card-image-wrapper {
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(169, 194, 160, 0.1), rgba(228, 201, 124, 0.1));
+}
+
+.dravya-card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.dravya-card:hover .dravya-card-image {
+  transform: scale(1.05);
+}
+
+.dravya-card-image-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  background: var(--panel-soft);
+}
+
+.dravya-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.dravya-card:hover .dravya-card-overlay {
+  opacity: 1;
+}
+
+.dravya-view-btn {
+  background: var(--gold);
+  color: var(--ink);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.dravya-card-content {
+  padding: 12px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.dravya-card-content h3 {
+  margin: 0 0 4px;
+  font-size: 1.1rem;
+  color: var(--cream);
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.dravya-sanskrit {
+  margin: 0 0 2px;
+  font-size: 0.9rem;
+  color: var(--gold);
+  font-family: 'Tiro Devanagari Hindi', sans-serif;
+}
+
+.dravya-botanical {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--sage);
+  font-style: italic;
+}
+
+/* Detail View Styles */
+.dravya-detail-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.dravya-back-btn {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--gold);
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-bottom: 24px;
+  transition: all 0.3s ease;
+}
+
+.dravya-back-btn:hover {
+  background: var(--panel-soft);
+  border-color: var(--gold);
+}
+
+.dravya-detail-header {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.dravya-detail-title h1 {
+  margin: 0 0 8px;
+  font-size: 2.2rem;
+  color: var(--cream);
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.dravya-detail-sanskrit {
+  margin: 0 0 4px;
+  font-size: 1.3rem;
+  color: var(--gold);
+  font-family: 'Tiro Devanagari Hindi', sans-serif;
+}
+
+.dravya-detail-botanical {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--sage);
+  font-style: italic;
+}
+
+/* Image Gallery Styles */
+.dravya-image-gallery {
+  background: var(--panel-soft);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.dravya-gallery-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-soft);
+}
+
+.dravya-tab-btn {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--sage);
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+}
+
+.dravya-tab-btn:hover {
+  background: rgba(228, 201, 124, 0.05);
+  color: var(--gold);
+}
+
+.dravya-tab-btn.active {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+.dravya-gallery-content {
+  position: relative;
+}
+
+.dravya-image-tab {
+  display: none;
+  padding: 24px;
+}
+
+.dravya-image-tab.active {
+  display: block;
+}
+
+.dravya-image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--bg);
+  cursor: zoom-in;
+  max-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dravya-detail-image {
+  max-width: 100%;
+  max-height: 500px;
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+}
+
+.dravya-zoom-indicator {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.7);
+  color: var(--cream);
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.dravya-image-container:hover .dravya-zoom-indicator {
+  opacity: 1;
+}
+
+.dravya-image-credit {
+  margin: 12px 0 0;
+  font-size: 0.8rem;
+  color: var(--sage);
+  font-style: italic;
+}
+
+/* Lightbox Styles */
+.dravya-lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.dravya-lightbox.active {
+  display: flex;
+}
+
+.dravya-lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dravya-lightbox-image {
+  max-width: 100%;
+  max-height: calc(90vh - 80px);
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 0 30px rgba(228, 201, 124, 0.2);
+}
+
+.dravya-lightbox-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: none;
+  border: none;
+  color: var(--cream);
+  font-size: 2rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  z-index: 1001;
+}
+
+.dravya-lightbox-close:hover {
+  color: var(--gold);
+}
+
+.dravya-lightbox-title {
+  color: var(--cream);
+  margin-top: 16px;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+/* Detail Content Sections */
+.dravya-section {
+  margin-bottom: 28px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.dravya-section:last-child {
+  border-bottom: none;
+}
+
+.dravya-section h2 {
+  font-size: 1.4rem;
+  color: var(--gold);
+  margin: 0 0 12px;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.dravya-sloka {
+  font-style: italic;
+  color: var(--sage);
+  line-height: 1.8;
+  margin: 0 0 8px;
+  padding: 12px;
+  background: var(--panel-soft);
+  border-left: 3px solid var(--gold);
+  border-radius: 4px;
+  font-family: 'Tiro Devanagari Hindi', sans-serif;
+}
+
+.dravya-sloka-source {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--sage);
+  font-style: italic;
+}
+
+.dravya-synonyms {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 12px;
+}
+
+.dravya-synonym-item {
+  padding: 12px;
+  background: var(--panel-soft);
+  border-radius: 6px;
+  border-left: 3px solid var(--gold);
+}
+
+.dravya-synonym-item strong {
+  color: var(--gold);
+  font-family: 'Tiro Devanagari Hindi', sans-serif;
+}
+
+.dravya-synonym-item {
+  color: var(--cream);
+}
+
+.dravya-rasa-panchaka {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.dravya-property {
+  padding: 12px;
+  background: var(--panel-soft);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.dravya-property strong {
+  color: var(--gold);
+}
+
+.dravya-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.dravya-action-badge {
+  display: inline-block;
+  background: var(--panel-soft);
+  color: var(--cream);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  border: 1px solid var(--line);
+}
+
+/* Light mode adjustments */
+body.light-mode .dravya-card {
+  background: #FFFEFA;
+  border-color: rgba(163, 120, 39, 0.2);
+}
+
+body.light-mode .dravya-card:hover {
+  box-shadow: 0 12px 28px rgba(31, 74, 61, 0.15);
+  border-color: #A37827;
+}
+
+body.light-mode .dravya-card-content h3 {
+  color: #14241E;
+}
+
+body.light-mode .dravya-detail-title h1 {
+  color: #14241E;
+}
+
+body.light-mode .dravya-section h2 {
+  color: #A37827;
+}
+
+body.light-mode .dravya-sloka {
+  background: #F1ECD9;
+  color: #51665D;
+  border-left-color: #A37827;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .dravya-detail-container {
+    padding: 12px;
+  }
+
+  .dravya-detail-title h1 {
+    font-size: 1.6rem;
+  }
+
+  .dravya-detail-image {
+    max-height: 300px;
+  }
+
+  .dravya-synonyms,
+  .dravya-rasa-panchaka {
+    grid-template-columns: 1fr;
+  }
+
+  .dravya-lightbox {
+    padding: 10px;
+  }
+
+  .dravya-lightbox-image {
+    max-height: calc(90vh - 60px);
+  }
+
+  .dravya-lightbox-close {
+    top: -30px;
+    font-size: 1.5rem;
+  }
+}

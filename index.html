@@ -1413,6 +1413,7 @@
     }
   }
 </style>
+<link rel="stylesheet" href="/dravya_guna_styles.css">
 </head>
 <body>
 
@@ -1937,20 +1938,19 @@
   </section>
 
   <section id="view-dravyaguna">
-    <div class="section-head"><h2>Dravya Guna (द्रव्यगुण)</h2></div>
+    <div class="section-head"><h2>Dravya Guna (द्रव्यगुण)</h2><span class="count" id="dravyaCount">18 plants</span></div>
     <p style="font-size:0.92rem; color:var(--ink-soft); margin-bottom:20px;">
-      Materia medica encyclopedia — Botanical name, classification, morphology, properties (Rasa Panchak), therapeutic uses and more, sourced from handwritten Dravyaguna study notes.
+      Materia medica encyclopedia with plant identification photos. Browse 18 medicinal plants with botanical names, traditional properties (Rasa Panchak), therapeutic uses, and more — sourced from handwritten Dravyaguna study notes.
     </p>
 
     <div id="dravyagunaListView">
       <div class="search-row" style="margin-bottom:18px;">
-        <input type="text" id="dravyagunaSearchInput" placeholder="Search plant name... e.g. Chandan, Bhringraj" style="flex:1; padding:12px 16px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-size:0.95rem;" oninput="renderDravyagunaList(this.value)">
+        <input type="text" id="dravyagunaSearchInput" placeholder="🔍 Search by plant name, Sanskrit, or botanical name... e.g. Chandan, चन्दन, Santalum" style="flex:1; padding:12px 16px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-size:0.95rem;" oninput="renderDravyagunaList(this.value)">
       </div>
-      <div id="dravyagunaGrid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(170px,1fr)); gap:14px;"></div>
+      <div id="dravyagunaGrid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px,1fr)); gap:16px; padding:8px 0;"></div>
     </div>
 
     <div id="dravyagunaDetailView" style="display:none;">
-      <button class="btn-primary" onclick="closeDravyagunaDetail()" style="margin-bottom:18px; padding:8px 18px;">← Back to plant list</button>
       <div id="dravyagunaDetailContent"></div>
     </div>
   </section>
@@ -3245,6 +3245,9 @@ async function loadDravyagunaData() {
     const resp = await fetch('/dravyaguna_data.json');
     dravyagunaData = await resp.json();
     dravyagunaLoaded = true;
+    // Update plant count display
+    const countEl = document.getElementById('dravyaCount');
+    if (countEl) countEl.textContent = dravyagunaData.length + ' plants';
   } catch (err) {
     console.error('Failed to load Dravya Guna data:', err);
     dravyagunaData = [];
@@ -3253,117 +3256,56 @@ async function loadDravyagunaData() {
 }
 
 function renderDravyagunaList(query) {
-  const grid = document.getElementById('dravyagunaGrid');
-  if (!grid) return;
-  const q = (query || '').trim().toLowerCase();
-  const filtered = !q ? dravyagunaData : dravyagunaData.filter(p =>
-    p.name.toLowerCase().includes(q) ||
-    (p.sanskrit_name || '').includes(q) ||
-    (p.botanical_name || '').toLowerCase().includes(q)
-  );
+  // Delegate to enhanced image gallery rendering
+  if (typeof renderDravyagunaList_enhanced === 'function') {
+    renderDravyagunaList_enhanced(query);
+  } else {
+    // Fallback to basic rendering if enhanced version not loaded yet
+    const grid = document.getElementById('dravyagunaGrid');
+    if (!grid) return;
+    const q = (query || '').trim().toLowerCase();
+    const filtered = !q ? dravyagunaData : dravyagunaData.filter(p =>
+      p.name.toLowerCase().includes(q) ||
+      (p.sanskrit_name || '').toLowerCase().includes(q) ||
+      (p.botanical_name || '').toLowerCase().includes(q)
+    );
 
-  if (dravyagunaData.length === 0) {
-    grid.innerHTML = '<p style="color:var(--ink-soft); grid-column:1/-1;">Loading plant data...</p>';
-    return;
-  }
-  if (filtered.length === 0) {
-    grid.innerHTML = `<p style="color:var(--ink-soft); grid-column:1/-1;">No plants found matching "${query}".</p>`;
-    return;
-  }
+    if (dravyagunaData.length === 0) {
+      grid.innerHTML = '<p style="color:var(--ink-soft); grid-column:1/-1;">Loading plant data...</p>';
+      return;
+    }
+    if (filtered.length === 0) {
+      grid.innerHTML = `<p style="color:var(--ink-soft); grid-column:1/-1;">No plants found matching "${query}".</p>`;
+      return;
+    }
 
-  grid.innerHTML = filtered.map(p => `
-    <div class="card clickable-topic" onclick="openDravyagunaDetail('${p.id}')" style="cursor:pointer; padding:16px; text-align:center;">
-      <h4 style="margin:0 0 4px; color:var(--gold-light); font-family:'Fraunces',serif;">${p.name}</h4>
-      <div style="font-size:0.85rem; color:var(--cream); margin-bottom:2px;">${p.sanskrit_name || ''}</div>
-      <div style="font-size:0.75rem; color:var(--ink-soft); font-style:italic;">${p.botanical_name || ''}</div>
-    </div>
-  `).join('');
+    grid.innerHTML = filtered.map(p => `
+      <div class="dravya-card" onclick="showDravyagunaDetail('${p.id}')" style="cursor:pointer;">
+        <div style="padding:16px; text-align:center; height:100%; display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <h4 style="margin:0 0 4px; color:var(--gold-light); font-family:'Cormorant Garamond',serif;">${p.name}</h4>
+            <div style="font-size:0.85rem; color:var(--cream); margin-bottom:2px; font-family:'Tiro Devanagari Hindi',sans-serif;">${p.sanskrit_name || ''}</div>
+            <div style="font-size:0.75rem; color:var(--ink-soft); font-style:italic;">${p.botanical_name || ''}</div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
 }
 
-function openDravyagunaDetail(id) {
-  const plant = dravyagunaData.find(p => p.id === id);
-  if (!plant) return;
-
-  document.getElementById('dravyagunaListView').style.display = 'none';
-  document.getElementById('dravyagunaDetailView').style.display = 'block';
-
-  const sec = (title, content) => content ? `
-    <div class="card" style="margin-bottom:14px; padding:18px 22px;">
-      <h4 style="margin:0 0 8px; color:var(--gold);">${title}</h4>
-      ${content}
-    </div>` : '';
-
-  const listHtml = (arr) => `<ul style="margin:0; padding-left:20px; color:var(--ink-soft); font-size:0.9rem; line-height:1.7;">${(arr||[]).map(x=>`<li>${x}</li>`).join('')}</ul>`;
-
-  let html = `
-    <div style="margin-bottom:18px;">
-      <h2 style="margin:0 0 4px; font-family:'Fraunces',serif; color:var(--gold-light);">${plant.name} <span style="font-size:0.6em; color:var(--cream); font-weight:400;">${plant.sanskrit_name||''}</span></h2>
-      <div style="font-size:0.95rem; font-style:italic; color:var(--ink-soft);">${plant.botanical_name||''} · ${plant.family||''}</div>
-    </div>`;
-
-  if (plant.sloka) {
-    html += sec('श्लोक (Shloka)', `<div style="font-family:'Noto Sans Devanagari',sans-serif; font-size:1.05rem; line-height:2; color:var(--cream);">${plant.sloka}</div>${plant.sloka_source ? `<div style="text-align:right; font-size:0.8rem; color:var(--gold); margin-top:6px;">— ${plant.sloka_source}</div>` : ''}`);
-  }
-
-  if (plant.synonyms && plant.synonyms.length) {
-    html += sec('Synonyms', `<ul style="margin:0; padding-left:20px; color:var(--ink-soft); font-size:0.9rem; line-height:1.8;">${plant.synonyms.map(s=>`<li><span style="color:var(--cream); font-family:'Noto Sans Devanagari',sans-serif;">${s.term}</span>${s.meaning ? ' — ' + s.meaning : ''}</li>`).join('')}</ul>`);
-  }
-
-  if (plant.vernacular_names && plant.vernacular_names.length) {
-    html += sec('Vernacular Names', `<div style="display:flex; gap:18px; flex-wrap:wrap; font-size:0.9rem; color:var(--ink-soft);">${plant.vernacular_names.map(v=>`<div><b style="color:var(--cream);">${v.lang}:</b> ${v.name}</div>`).join('')}</div>`);
-  }
-
-  html += sec('Classification of Gana', listHtml(plant.classification_of_gana));
-
-  if (plant.external_morphology) {
-    html += sec('External Morphology', `
-      ${plant.external_morphology.habitat ? `<div style="margin-bottom:8px; color:var(--ink-soft); font-size:0.9rem;"><b style="color:var(--cream);">Habitat:</b> ${plant.external_morphology.habitat}</div>` : ''}
-      ${listHtml(plant.external_morphology.details)}`);
-  }
-
-  if (plant.useful_parts) html += sec('Useful Parts', `<p style="margin:0; color:var(--ink-soft); font-size:0.9rem;">${plant.useful_parts}</p>`);
-  if (plant.phytoconstituents) html += sec('Important Phytoconstituents', `<p style="margin:0; color:var(--ink-soft); font-size:0.9rem;">${plant.phytoconstituents}</p>`);
-
-  if (plant.rasa_panchaka) {
-    const rp = plant.rasa_panchaka;
-    html += sec('Rasa Panchaka', `<div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px; font-size:0.9rem;">
-      ${rp.rasa?`<div><b style="color:var(--gold);">Rasa:</b> <span style="color:var(--ink-soft);">${rp.rasa}</span></div>`:''}
-      ${rp.guna?`<div><b style="color:var(--gold);">Guna:</b> <span style="color:var(--ink-soft);">${rp.guna}</span></div>`:''}
-      ${rp.virya?`<div><b style="color:var(--gold);">Virya:</b> <span style="color:var(--ink-soft);">${rp.virya}</span></div>`:''}
-      ${rp.vipaka?`<div><b style="color:var(--gold);">Vipaka:</b> <span style="color:var(--ink-soft);">${rp.vipaka}</span></div>`:''}
-    </div>`);
-  }
-
-  if (plant.karma) {
-    html += sec('Karma', `
-      ${plant.karma.dosha_karma?`<div style="margin-bottom:6px; color:var(--ink-soft); font-size:0.9rem;"><b style="color:var(--cream);">Dosha Karma:</b> ${plant.karma.dosha_karma}</div>`:''}
-      ${plant.karma.karma?`<div style="color:var(--ink-soft); font-size:0.9rem; font-family:'Noto Sans Devanagari',sans-serif;"><b style="color:var(--cream); font-family:inherit;">Karma:</b> ${plant.karma.karma}</div>`:''}`);
-  }
-
-  if (plant.doshaghnata) html += sec('Doshaghnata', `<p style="margin:0; color:var(--ink-soft); font-size:0.9rem;">${plant.doshaghnata}</p>`);
-  if (plant.rogaghnata) html += sec('Rogaghnata', `<p style="margin:0; color:var(--ink-soft); font-size:0.9rem;">${plant.rogaghnata}</p>`);
-  if (plant.amayika_prayoga && plant.amayika_prayoga.length) html += sec('Amayika Prayoga (Therapeutic Uses)', listHtml(plant.amayika_prayoga));
-
-  if (plant.matra && plant.matra.length) {
-    html += sec('Matra (Dosage)', `<div style="display:flex; gap:18px; flex-wrap:wrap; font-size:0.9rem; color:var(--ink-soft);">${plant.matra.map(m=>`<div><b style="color:var(--cream);">${m.form}:</b> ${m.dose}</div>`).join('')}</div>`);
-  }
-
-  if (plant.marga) html += sec('Marga', `<p style="margin:0; color:var(--ink-soft); font-size:0.9rem;">${plant.marga}</p>`);
-  if (plant.pharmacological_actions && plant.pharmacological_actions.length) {
-    html += sec('Pharmacological Actions', `<div style="display:flex; gap:8px; flex-wrap:wrap;">${plant.pharmacological_actions.map(a=>`<span style="background:rgba(212,175,55,0.12); color:var(--gold-light); padding:4px 12px; border-radius:14px; font-size:0.8rem;">${a}</span>`).join('')}</div>`);
-  }
-  if (plant.kalpana && plant.kalpana.length) html += sec('Kalpana (Formulations)', listHtml(plant.kalpana));
-  if (plant.varieties) html += sec('Varieties', `<p style="margin:0; color:var(--ink-soft); font-size:0.9rem;">${plant.varieties}</p>`);
-  if (plant.research_updates && plant.research_updates.length) html += sec('Research Updates', listHtml(plant.research_updates));
-
-  document.getElementById('dravyagunaDetailContent').innerHTML = html;
-  window.scrollTo({top: 0, behavior: 'instant'});
+function showDravyagunaDetail(id) {
+  // Delegate to enhanced image gallery detail view
+  showDravyagunaDetail_enhanced(id);
 }
 
-function closeDravyagunaDetail() {
-  document.getElementById('dravyagunaDetailView').style.display = 'none';
-  document.getElementById('dravyagunaListView').style.display = 'block';
+function hideDravyagunaDetail() {
+  // Delegate to enhanced image gallery detail view
+  hideDravyagunaDetail_enhanced();
 }
+
+// Aliases for backwards compatibility
+const openDravyagunaDetail = showDravyagunaDetail;
+const closeDravyagunaDetail = hideDravyagunaDetail;
 
 function getReciteUrl(text, meter) {
   const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
@@ -5453,5 +5395,6 @@ function createMagicParticle(x, y) {
 
 init();
 </script>
+<script src="/dravya_guna_images.js"></script>
 </body>
 </html>
