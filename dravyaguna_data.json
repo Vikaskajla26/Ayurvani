@@ -1645,5 +1645,303 @@
       "Bronchodilator & expectorant",
       "immunomodulatory effect"
     ]
+  },
+  {
+    "id": "kapikacchu",
+    "name": "Kapikacchu",
+    "sanskrit_name": "कपिकच्छु",
+    "sloka": "कपिकच्छूर्वृष्या स्वगुप्ता बृंहणी गुरुः । तिक्ता वातहरी बल्या स्निग्धा पित्तलास्त्रकृत् ॥ भा. प्र.",
+    "sloka_source": "भा. प्र.",
+    "botanical_name": "Mucuna pruriens",
+    "family": "Leguminosae, Papilionaceae",
+    "synonyms": [
+      {
+        "term": "आत्मगुप्ता",
+        "meaning": "Self-protecting"
+      },
+      {
+        "term": "मर्कटी",
+        "meaning": "Monkey plant"
+      },
+      {
+        "term": "कण्डूरा",
+        "meaning": "Itching inducer"
+      },
+      {
+        "term": "शुकशिम्बी",
+        "meaning": "Parrot bean"
+      }
+    ],
+    "vernacular_names": [
+      {
+        "lang": "English",
+        "name": "cowhage"
+      },
+      {
+        "lang": "Hindi",
+        "name": "kavach"
+      },
+      {
+        "lang": "Marathi",
+        "name": "aalkushi"
+      }
+    ],
+    "classification_of_gana": [
+      "चरक: बल्य, मधुरस्कन्ध",
+      "सुश्रुत: विरेचनोपग, वातसंशमन",
+      "भावप्रकाश: Guduchyadi varga"
+    ],
+    "external_morphology": {
+      "habitat": "Tropical regions",
+      "details": [
+        "Habit: Annual twiner",
+        "Leaves: Trifoliate, compound",
+        "Flower: purple coloured",
+        "Fruit: pale brown"
+      ]
+    },
+    "useful_parts": "seed",
+    "phytoconstituents": "mucuadine, mucuadinine, l-dopa, serotonin",
+    "rasa_panchaka": {
+      "rasa": "madhura, Tikta",
+      "guna": "Guru, snigdha",
+      "virya": "ushna",
+      "vipaka": "madhura"
+    },
+    "karma": {
+      "dosha_karma": "त्रिदोषशामक",
+      "karma": "वृष्य, बृंहण, बल्य, व्रणनाशक, वातशामक"
+    },
+    "doshaghnata": "त्रिदोषशामक",
+    "rogaghnata": "klaibya, Daurbalya, Dushtavrana, krisha",
+    "amayika_prayoga": [
+      "vajikarana (Aphrodisiac) = powder mixed with godhuma & processed with milk",
+      "vatavyadhi-Apabahuka (paralysis) = seed juice gives more strength"
+    ],
+    "matra": [
+      {
+        "form": "churna",
+        "dose": "3-6g"
+      }
+    ],
+    "pharmacological_actions": [
+      "Aphrodisiac",
+      "Anthelminthic",
+      "Nervine tonic",
+      "Astringent",
+      "Diuretic"
+    ],
+    "kalpana": [
+      "Vanari vatika - dhwajabhanga",
+      "Gokshuadi modaka - vajikaranartha",
+      "Brihat Shatavari modaka - Daurbalya",
+      "arjakadi vati - vrashyartha"
+    ],
+    "varieties": "Not mentioned",
+    "research_updates": [
+      "enhanced production of L-dopa in cell-cultures",
+      "Antidiabetic properties",
+      "Anti-cataleptic & antiepileptic activity",
+      "Anti-oxidant",
+      "neuroprotective, management of Parkinson's disease",
+      "enhances motor function",
+      "improves sperm count, motility, quality",
+      "management of male infertility",
+      "cardiovascular benefit, hypertension management"
+    ]
+  },
+  {
+    "id": "karkatashringi",
+    "name": "Karkatashringi",
+    "sanskrit_name": "कर्कटशृंगी",
+    "sloka": "शृंगी कषायतिक्तोष्णा कफवातज्वरप्रणूत । श्वासकासकफोत्क्लेशहिक्काक्षयविनाशिनी ॥",
+    "sloka_source": "भा. प्र.",
+    "botanical_name": "Rhus succedanea",
+    "family": "Anacardiaceae",
+    "synonyms": [
+      {
+        "term": "कुलीरविषाणिका",
+        "meaning": "Crab's tusk"
+      },
+      {
+        "term": "वक्रा",
+        "meaning": "Curved"
+      },
+      {
+        "term": "अजशृंगी",
+        "meaning": "Goat horn"
+      },
+      {
+        "term": "मेषशृंगी",
+        "meaning": "Sheep horn"
+      }
+    ],
+    "vernacular_names": [
+      {
+        "lang": "English",
+        "name": "crabs claw"
+      },
+      {
+        "lang": "Hindi",
+        "name": "kakda sengi"
+      },
+      {
+        "lang": "Marathi",
+        "name": "kankatashrungi"
+      }
+    ],
+    "classification_of_gana": [
+      "चरक: कासहर, हिक्कानिग्रहण",
+      "सुश्रुत: काकोल्यादी",
+      "भावप्रकाश: Haritakyadi"
+    ],
+    "external_morphology": {
+      "habitat": "Trees in forests",
+      "details": [
+        "Habit: tree, glabrous in nature"
+      ]
+    },
+    "useful_parts": "galls",
+    "phytoconstituents": "tannin, resin, essential oil - camphene, α-pinene, α-terpineol",
+    "rasa_panchaka": {
+      "rasa": "kashaya, Tikta",
+      "guna": "Laghu, Ruksha, ushna",
+      "virya": "ushna",
+      "vipaka": "katu"
+    },
+    "karma": {
+      "dosha_karma": "कफवातशामक",
+      "karma": "cheyan, grahi, chardighni"
+    },
+    "doshaghnata": "कफवातशामक",
+    "rogaghnata": "Karkatashrungi = shwasa, kasa, Hikka, Aruchi, Trishna, chardi, jwaraghna, Atisara. Ajashrungi = shopha, Trishna, chardi, chakshu vikar, swasa, Hridrog, visha, kushtha",
+    "amayika_prayoga": [
+      "shwasa & Hikka = gruel prepared with Karkatashrungi",
+      "kasa = powder licked with taila",
+      "kapha chardi = Karkat. churna mixed with musta churna given with honey",
+      "vajikarana = kalika preparation from milk"
+    ],
+    "matra": [
+      {
+        "form": "churna",
+        "dose": "1-3g"
+      }
+    ],
+    "pharmacological_actions": [
+      "Astringent",
+      "Tonic",
+      "Expectorant",
+      "stimulant"
+    ],
+    "kalpana": [
+      "shrangyadi churna - Hikka, shwasa",
+      "shringi Guda - shwasa",
+      "Balachaturhadra churna - Balatisara"
+    ],
+    "varieties": "Not mentioned",
+    "research_updates": [
+      "Analgesic & Anti-inflammatory",
+      "Leishmanicidal activity"
+    ]
+  },
+  {
+    "id": "kutaki",
+    "name": "Kutaki",
+    "sanskrit_name": "कुटकी / कटुका",
+    "sloka": "कट्वी तु कटुका पाके तिक्ता रूक्षा हिमा लघुः । भेदनी दीपनी हृद्या कफपित्तज्वरापहा ॥ प्रसूतस्तन्यश्वासकासदाहकृच्छ्रविनाशिनी ॥",
+    "sloka_source": "शा. प्र.",
+    "botanical_name": "Picrorhiza kurroa",
+    "family": "Scrophulariaceae",
+    "synonyms": [
+      {
+        "term": "कटुका",
+        "meaning": "Bitter"
+      },
+      {
+        "term": "तिक्ता",
+        "meaning": "Pungent"
+      },
+      {
+        "term": "रोहिणी",
+        "meaning": "Red"
+      },
+      {
+        "term": "कटुरोहिणी",
+        "meaning": "Bitter red"
+      },
+      {
+        "term": "चक्रांगी",
+        "meaning": "Wheel limbed"
+      }
+    ],
+    "vernacular_names": [
+      {
+        "lang": "English",
+        "name": "Hellebore"
+      },
+      {
+        "lang": "Hindi",
+        "name": "kadu"
+      },
+      {
+        "lang": "Marathi",
+        "name": "कुटकी"
+      }
+    ],
+    "classification_of_gana": [
+      "चरक: भेदनीय, लेखनीय, स्तन्यशोधन, तिक्तस्कन्ध",
+      "सुश्रुत: पटोलादी, पिप्पल्यादी, आरग्वधादी",
+      "भावप्रकाश: Haritakyadi"
+    ],
+    "external_morphology": {
+      "habitat": "Himalayan regions",
+      "details": [
+        "Habit: creeping herb",
+        "Flower: white or pale purple"
+      ]
+    },
+    "useful_parts": "rhizome",
+    "phytoconstituents": "Picroside-I, II, kutkin, kutkoside, kurrin, kuttiol",
+    "rasa_panchaka": {
+      "rasa": "Tikta",
+      "guna": "Ruksha, Laghu",
+      "virya": "shita",
+      "vipaka": "katu"
+    },
+    "karma": {
+      "dosha_karma": "कफपित्तशामक",
+      "karma": "Rechan, bhedan, Hrudya, jwaraghna, pramehahar, swasahar, kasahar, dahahar, kushthaghna, स्तन्यशोधन"
+    },
+    "doshaghnata": "कफपित्तशामक",
+    "rogaghnata": "kamala, mehavikara, vibandha, Hridroga, agnimandya, jwara, vishajwara, prameha, swasa, kasa, daha, kushtha, krimi, arsha, raktavikara",
+    "amayika_prayoga": [
+      "stanya shuddhi = decoction prepared from katuki",
+      "Hridroga = kalka from katuki with madhuka given with sugar-water"
+    ],
+    "matra": [
+      {
+        "form": "virechanartha",
+        "dose": "3-6g"
+      }
+    ],
+    "pharmacological_actions": [
+      "liver stimulant",
+      "cholagogue",
+      "purgative",
+      "Anthelmintic",
+      "Expectorant"
+    ],
+    "kalpana": [
+      "Arogyavardhini gutika - kustha, yakrutvikar",
+      "katurohini churna - कफपित्तज्वर",
+      "katukadi kashaya - कफपित्तज्वर"
+    ],
+    "varieties": "Not mentioned",
+    "research_updates": [
+      "Anti-oxidant",
+      "Anti-neoplastic activity",
+      "Anti-diabetic",
+      "Anti-proliferative & hepatic antioxidant"
+    ]
   }
 ]
