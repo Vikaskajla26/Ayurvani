@@ -2871,7 +2871,7 @@ function showView(id){
   if(id==='chants') {
     renderChants();
   }
-  if(id==='dravyaguna') {/* handled by dravyaguna.js */}
+  if(id==='dravyaguna') { if(typeof dgInit==='function') dgInit(); }
   if(id==='favorites') renderFavorites();
   if(id==='admin') renderAdmin();
   
@@ -3263,19 +3263,15 @@ async function loadDravyagunaData() {
 }
 
 function renderDravyagunaList(query) {
-  // Handled by dravyaguna.js
+  if (typeof dgRender === 'function') dgRender();
 }
 
 function showDravyagunaDetail(id) {
-  if (typeof showPlantDetail === 'function') {
-    showPlantDetail(id);
-  }
+  if (typeof dgShowDetail === 'function') dgShowDetail(id);
 }
 
 function hideDravyagunaDetail() {
-  if (typeof hidePlantDetail === 'function') {
-    hidePlantDetail();
-  }
+  if (typeof dgHideDetail === 'function') dgHideDetail();
 }
 
 const openDravyagunaDetail = showDravyagunaDetail;
