@@ -2033,5 +2033,326 @@
     "usefulPart": "Rhizome",
     "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Picrorhiza_kurroa_rhizome.jpg",
     "usefulPartAttribution": "Wikimedia Commons - Picrorhiza kurroa"
+  },
+  {
+    "id": "khadira",
+    "name": "Khadira",
+    "sanskrit_name": "खदिर",
+    "sloka": "खदिरः शीतलो दन्त्यः कषायः कण्डूकासकृमिप्रणूत । तिक्तः कषायो मेदोघ्नः पित्तश्लेष्महरः लघुः । श्वित्रशोथविषारुचिपाण्डुकुष्ठव्रणान् हरेत् ॥ भा. प्र",
+    "sloka_source": "भा. प्र",
+    "botanical_name": "Acacia catechu",
+    "family": "Leguminosae, mimosoideae",
+    "synonyms": [
+      {
+        "term": "बालपत्र",
+        "meaning": "Young leaves"
+      },
+      {
+        "term": "अरोंग",
+        "meaning": "Traditional name"
+      },
+      {
+        "term": "गायित्री",
+        "meaning": "Traditional name"
+      },
+      {
+        "term": "कण्टकी",
+        "meaning": "Thorny"
+      },
+      {
+        "term": "दन्तधावन",
+        "meaning": "Tooth cleanser"
+      },
+      {
+        "term": "रक्तसार",
+        "meaning": "Red heartwood"
+      }
+    ],
+    "vernacular_names": [
+      {
+        "lang": "English",
+        "name": "Cutch tree"
+      },
+      {
+        "lang": "Hindi",
+        "name": "khera, khair"
+      },
+      {
+        "lang": "Marathi",
+        "name": "khayer"
+      }
+    ],
+    "classification_of_gana": [
+      "चरक: कुष्ठघ्न, कषायस्कन्ध",
+      "सुश्रुत: सालसारादी",
+      "भावप्रकाश: वटादी"
+    ],
+    "external_morphology": {
+      "habit": "moderate sized trees"
+    },
+    "useful_parts": "Heartwood (सार)",
+    "phytoconstituents": "10% acacatechin, quercitin, gum quercitrin",
+    "rasa_panchaka": {
+      "rasa": "Tikta, kashaya",
+      "guna": "Laghu, Ruksha",
+      "virya": "shita",
+      "vipaka": "katu"
+    },
+    "prabhava": "kushthaghna",
+    "karma": {
+      "dosha_karma": "कफपित्तशामक",
+      "general": "कुष्ठघ्न, कण्डूघ्न, दन्त्य, केश्य, रक्तशोधन, मेदोहर, ज्वरघ्न, शोथहर, पाचन"
+    },
+    "doshaghnata": "कफपित्तशामक",
+    "rogaghnata": "कुष्ठ, दन्तरोग, कण्डू, कास, ज्वर, अरुचि, कृमि, शोथ, श्वित्र, प्रमेह, मेदरोग",
+    "amayika_prayoga": [
+      "Kushtha = Khadira for drinking, bathing",
+      "shwitra (vitiligo) = haridra decoction",
+      "kasa = powder of heartwood mixed with wine or water"
+    ],
+    "matra": [
+      {
+        "form": "kwatha",
+        "dose": "40-60ml"
+      }
+    ],
+    "pharmacological_actions": [
+      "Astringent",
+      "cooling",
+      "digestant",
+      "Haemostatic"
+    ],
+    "kalpana": [
+      "khadirarishta - kushtha, pandu, kasa",
+      "khadiravadika - mukharoga",
+      "khadiradi kwatha - bhagandara",
+      "khadirashtaka - kushtha, visarpa"
+    ],
+    "varieties": "shwetakhadira, Goma valka, Raktakhadira",
+    "research_updates": [
+      "chemo-preventive potential activity",
+      "Antioxidant",
+      "Anti-inflammatory, Analgesic activity",
+      "Anti-tumor activity",
+      "Free-radical scavenging activity"
+    ]
+  },
+  {
+    "id": "dhanyaka",
+    "name": "Dhanyaka",
+    "sanskrit_name": "धान्यक",
+    "sloka": "धान्यकं तुवरं स्निग्धं मूत्रलं दीपनं लघु | तिक्तं कटूष्णवीर्यं च तृष्णादाहवमिप्रणुत || ज्वरघ्नं शूलहृद्ग्राहि स्वादुपाकि त्रिदोषनुत् | आर्द्रन्तु तद्गुणं स्वादु विशेषाच्छीतलनाशि तत् ||",
+    "sloka_source": "भा. प्र",
+    "botanical_name": "Coriandrum sativum linn.",
+    "family": "umbellifereae/Apiaceae",
+    "synonyms": [
+      {
+        "term": "sulshmaptra",
+        "meaning": "Fine leaves"
+      },
+      {
+        "term": "dhenuka",
+        "meaning": "Traditional name"
+      },
+      {
+        "term": "sugandhi",
+        "meaning": "Fragrant"
+      },
+      {
+        "term": "Allaka",
+        "meaning": "Traditional name"
+      },
+      {
+        "term": "kunti",
+        "meaning": "Traditional name"
+      },
+      {
+        "term": "kustumburu",
+        "meaning": "Traditional name"
+      }
+    ],
+    "vernacular_names": [
+      {
+        "lang": "English",
+        "name": "coriander"
+      },
+      {
+        "lang": "Marathi",
+        "name": "कोथिंबीर"
+      },
+      {
+        "lang": "Hindi",
+        "name": "Dhaniya"
+      }
+    ],
+    "classification_of_gana": [
+      "चरक: तृष्णानिग्रहण, शीतप्रशमन",
+      "वाग्भट: Guduchyadi"
+    ],
+    "external_morphology": {
+      "habit": "Annual Herb with glabrous, aromatic white Flowers",
+      "leaves": "small, Fragrant & bipinnate"
+    },
+    "useful_parts": "Whole plants, Fruits, panchanga",
+    "phytoconstituents": "coriandrinol, citronellol, coriandrin, carotene eugenol",
+    "rasa_panchaka": {
+      "rasa": "kashaya, Tikta, madhura, katu",
+      "guna": "laghu, snigdha",
+      "virya": "ushna",
+      "vipaka": "madhur"
+    },
+    "karma": {
+      "dosha_karma": "त्रिदोषहर",
+      "general": "अग्रुष्य, मुत्रलमागं, अग्नीदीपक, आमपाचक, रोचक, ग्राही"
+    },
+    "doshaghnata": "त्रिदोषहर",
+    "rogaghnata": "तृष्णा, दाह, छर्दी, शिरःशूल, कास, श्वास, हिक्का, ज्वर, कुष्ठघ्न, मूत्रकृच्छ्र",
+    "amayika_prayoga": [
+      "Headache & burning = paste of raw coriander fruit",
+      "दाह & तृष्णा from fever = dhanyaka हिम with mishri & madhu",
+      "Jirna pratishyaya = Dhanyaka Fant with mishri",
+      "shotha, shula = dhanyaka लेप",
+      "नासागत रक्तस्त्राव (Epistaxis) = Nasya of dhanyaka leaves juice",
+      "हिक्का = धान्यक चूर्ण with शर्करा"
+    ],
+    "matra": [
+      {
+        "form": "churna",
+        "dose": "1-3gm"
+      },
+      {
+        "form": "हिम",
+        "dose": "20-24ml"
+      },
+      {
+        "form": "tail",
+        "dose": "1-3 drops"
+      }
+    ],
+    "pharmacological_actions": [
+      "cholesterol lowering",
+      "Anti-oxidant",
+      "Anti-microbial"
+    ],
+    "kalpana": [
+      "Dhanyakadi Him",
+      "Dhanyapanchak kashaya"
+    ],
+    "varieties": "Not mentioned",
+    "research_updates": [
+      "cholesterol lowering properties in coriander seeds",
+      "Anti-oxidant",
+      "Anti-microbial"
+    ]
+  },
+  {
+    "id": "japa",
+    "name": "Japa",
+    "sanskrit_name": "जपा",
+    "sloka": "जपा संग्राहिणी केश्या त्रिसन्ध्या कफवातजित् ॥ भा. प्र.",
+    "sloka_source": "भा. प्र",
+    "botanical_name": "Hibiscus rosasinensis",
+    "family": "malvaceae",
+    "synonyms": [
+      {
+        "term": "Aundrapushpa",
+        "meaning": "Red flower"
+      },
+      {
+        "term": "hemapushpa",
+        "meaning": "Golden flower"
+      },
+      {
+        "term": "Trisandhya",
+        "meaning": "Three time flower"
+      },
+      {
+        "term": "Praatika",
+        "meaning": "Traditional name"
+      },
+      {
+        "term": "Arktapriya",
+        "meaning": "Loved by bears"
+      },
+      {
+        "term": "Harivallabh",
+        "meaning": "Lord's beloved"
+      },
+      {
+        "term": "pindapushpa",
+        "meaning": "Ball flower"
+      }
+    ],
+    "vernacular_names": [
+      {
+        "lang": "English",
+        "name": "chinese Hibiscus, Shoe Flower"
+      },
+      {
+        "lang": "Hindi",
+        "name": "Gudahala"
+      },
+      {
+        "lang": "Marathi",
+        "name": "जास्वंद"
+      }
+    ],
+    "external_morphology": {
+      "bark": "light Grey, easy to peel & smooth",
+      "leaves": "ovate, simple, spirally arranged (8-10.5 cm long) margin - lobed/toothed",
+      "flowers": "Bisexual, large, Bellshaped, stalked, petals joined at base",
+      "origin": "china, found all over india"
+    },
+    "useful_parts": "leaf, Flower",
+    "phytoconstituents": "malvate, cyclopropanids, β-sistosterol, Amino acid - aspartic acid & asparagin",
+    "rasa_panchaka": {
+      "rasa": "Tikta, kashaya",
+      "guna": "laghu, Ruksha",
+      "virya": "sheeta",
+      "vipaka": "katu"
+    },
+    "karma": {
+      "dosha_karma": "kaphapitta shamak",
+      "general": "केशरञ्जन (hair coloring), केशवर्धन (hair growth), sthambhan, mutrasangrahan"
+    },
+    "doshaghnata": "kaphapitta shamak",
+    "rogaghnata": "पालिथ्य (premature greying), खालित्य (hair fall), Raktapradara, Phirang vran, mutrasangrahan",
+    "amayika_prayoga": [
+      "केशरंजन = Japa Flowers + सुराशन Flowers in sheep milk",
+      "Alopecia = Japa Flowers with गोमूत्र on scalp",
+      "Raktapradara = Tender Flower paste with cow's milk",
+      "Phirang vran = wash with kwatha of Japa leaves",
+      "contraceptives = Flowers & Tender buds",
+      "Nourishment of womb = kwath of root & leaf"
+    ],
+    "matra": [
+      {
+        "form": "leaf paste",
+        "dose": "10-12gm"
+      },
+      {
+        "form": "Flower powder",
+        "dose": "10gm"
+      }
+    ],
+    "pharmacological_actions": [
+      "Antifertility",
+      "Analgesic",
+      "Hypotensive",
+      "Anti-viral"
+    ],
+    "kalpana": [
+      "keshrich oil",
+      "cutinol Hair oil",
+      "patrangasava"
+    ],
+    "varieties": "Not mentioned",
+    "research_updates": [
+      "wound-healing activity",
+      "Anti-microbial activity",
+      "Anti-tussive effect",
+      "Hepato-protective activity",
+      "Anti-diabetic"
+    ]
   }
 ]
