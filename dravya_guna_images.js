@@ -3,12 +3,51 @@
 let dravyagunaData = [];
 let dravyagunaLoaded = false;
 
+// Update results info bar
+function updateResultsInfo(filteredCount, totalCount) {
+  const resultsInfo = document.getElementById('dravyagunaResultsInfo');
+  if (!resultsInfo) return;
+
+  const hasFilters = Object.values(activeFilters).some(arr => arr.length > 0);
+  const searchInput = document.getElementById('dravyagunaSearchInput');
+  const hasSearch = searchInput?.value?.trim()?.length > 0;
+
+  if (filteredCount === totalCount && !hasFilters && !hasSearch) {
+    resultsInfo.innerHTML = '';
+    return;
+  }
+
+  resultsInfo.innerHTML = `
+    <div class="dravya-results-info">
+      <span class="dravya-results-info-left">
+        Showing <strong class="dravya-results-count">${filteredCount}</strong>
+        of <strong>${totalCount}</strong> plants
+        ${hasFilters ? 'with filters applied' : ''}
+      </span>
+      ${hasFilters ? `<button onclick="clearAllFilters()" class="dravya-clear-filters-btn">Clear All Filters</button>` : ''}
+    </div>
+  `;
+}
+
+// Initialize Dravya Guna view with filters
+function initDravyagunaView() {
+  loadDravyagunaData().then(() => {
+    if (typeof initializeDravyagunaFilters === 'function') {
+      initializeDravyagunaFilters();
+    }
+    renderDravyagunaList_enhanced('');
+  });
+}
+
 async function loadDravyagunaData() {
   if (dravyagunaLoaded) return;
   try {
     const resp = await fetch('/dravyaguna_data.json');
     dravyagunaData = await resp.json();
     dravyagunaLoaded = true;
+    // Update plant count display
+    const countEl = document.getElementById('dravyaCount');
+    if (countEl) countEl.textContent = dravyagunaData.length + ' plants';
   } catch (err) {
     console.error('Error loading dravya guna data:', err);
     dravyagunaData = [];
@@ -19,11 +58,34 @@ function renderDravyagunaList_enhanced(q = '') {
   const grid = document.getElementById('dravyagunaGrid');
   if (!grid || dravyagunaData.length === 0) return;
 
-  const filtered = !q ? dravyagunaData : dravyagunaData.filter(p =>
-    (p.name?.toLowerCase().includes(q.toLowerCase())) ||
-    (p.sanskrit_name?.toLowerCase().includes(q.toLowerCase())) ||
-    (p.botanical_name?.toLowerCase().includes(q.toLowerCase()))
-  );
+  // Apply filters if filter system exists
+  let filtered = dravyagunaData;
+  if (typeof filterPlants === 'function') {
+    filtered = filterPlants(dravyagunaData, q || '');
+  } else {
+    // Fallback to basic search
+    const query = (q || '').trim().toLowerCase();
+    filtered = !query ? dravyagunaData : dravyagunaData.filter(p =>
+      (p.name?.toLowerCase().includes(query)) ||
+      (p.sanskrit_name?.toLowerCase().includes(query)) ||
+      (p.botanical_name?.toLowerCase().includes(query))
+    );
+  }
+
+  // Update results info
+  updateResultsInfo(filtered.length, dravyagunaData.length);
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `
+      <div class="dravya-results-empty" style="grid-column:1/-1;">
+        <div class="dravya-results-empty-icon">🔍</div>
+        <div class="dravya-results-empty-text">No plants match your filters</div>
+        <div class="dravya-results-empty-suggestion">Try adjusting your filter selections or search query</div>
+        <button onclick="clearAllFilters()" class="dravya-clear-filters-btn" style="margin-top:16px;">Clear All Filters</button>
+      </div>
+    `;
+    return;
+  }
 
   grid.innerHTML = filtered.map(p => `
     <div class="dravya-card" onclick="showDravyagunaDetail_enhanced('${p.id}')">
@@ -217,10 +279,19 @@ function closeDravyaImageLightbox() {
   if (lightbox) lightbox.classList.remove('active');
 }
 
-// Initialize when script loads
+// Pre-load data silently when page loads, but don't init UI yet
 document.addEventListener('DOMContentLoaded', function() {
-  loadDravyagunaData().then(() => {
-    renderDravyagunaList_enhanced('');
-  });
+  // Silently pre-load data for faster rendering when navigated to
+  if (!dravyagunaLoaded) {
+    fetch('/dravyaguna_data.json')
+      .then(resp => resp.json())
+      .then(data => {
+        dravyagunaData = data;
+        dravyagunaLoaded = true;
+        const countEl = document.getElementById('dravyaCount');
+        if (countEl) countEl.textContent = data.length + ' plants';
+      })
+      .catch(err => console.error('Error pre-loading dravya guna data:', err));
+  }
 });
 

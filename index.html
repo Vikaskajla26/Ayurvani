@@ -1414,6 +1414,7 @@
   }
 </style>
 <link rel="stylesheet" href="/dravya_guna_styles.css">
+<link rel="stylesheet" href="/dravya_guna_filters_styles.css">
 </head>
 <body>
 
@@ -1938,15 +1939,24 @@
   </section>
 
   <section id="view-dravyaguna">
-    <div class="section-head"><h2>Dravya Guna (द्रव्यगुण)</h2><span class="count" id="dravyaCount">18 plants</span></div>
+    <div class="section-head"><h2>Dravya Guna (द्रव्यगुण)</h2><span class="count" id="dravyaCount">21 plants</span></div>
     <p style="font-size:0.92rem; color:var(--ink-soft); margin-bottom:20px;">
-      Materia medica encyclopedia with plant identification photos. Browse 18 medicinal plants with botanical names, traditional properties (Rasa Panchak), therapeutic uses, and more — sourced from handwritten Dravyaguna study notes.
+      Materia medica encyclopedia with plant identification photos. Browse 21 medicinal plants with advanced filtering by Dosha, Rasa, Virya, and Plant Family — sourced from handwritten Dravyaguna study notes.
     </p>
 
     <div id="dravyagunaListView">
+      <!-- Search Box -->
       <div class="search-row" style="margin-bottom:18px;">
-        <input type="text" id="dravyagunaSearchInput" placeholder="🔍 Search by plant name, Sanskrit, or botanical name... e.g. Chandan, चन्दन, Santalum" style="flex:1; padding:12px 16px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-size:0.95rem;" oninput="renderDravyagunaList(this.value)">
+        <input type="text" id="dravyagunaSearchInput" placeholder="🔍 Search by plant name, Sanskrit, or botanical name... e.g. Chandan, चन्दन, Santalum" style="flex:1; padding:12px 16px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-size:0.95rem;" oninput="renderDravyagunaList_enhanced(this.value)">
       </div>
+
+      <!-- Advanced Filters -->
+      <div id="dravyagunaFiltersContainer"></div>
+
+      <!-- Results Info -->
+      <div id="dravyagunaResultsInfo"></div>
+
+      <!-- Plant Grid -->
       <div id="dravyagunaGrid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px,1fr)); gap:16px; padding:8px 0;"></div>
     </div>
 
@@ -2860,7 +2870,7 @@ function showView(id){
   if(id==='chants') {
     renderChants();
   }
-  if(id==='dravyaguna') loadDravyagunaData();
+  if(id==='dravyaguna') initDravyagunaView();
   if(id==='favorites') renderFavorites();
   if(id==='admin') renderAdmin();
   
@@ -3240,70 +3250,35 @@ let dravyagunaData = [];
 let dravyagunaLoaded = false;
 
 async function loadDravyagunaData() {
+  if (typeof initDravyagunaView === 'function') {
+    await initDravyagunaView();
+    return;
+  }
   if (dravyagunaLoaded) return;
   try {
     const resp = await fetch('/dravyaguna_data.json');
     dravyagunaData = await resp.json();
     dravyagunaLoaded = true;
-    // Update plant count display
-    const countEl = document.getElementById('dravyaCount');
-    if (countEl) countEl.textContent = dravyagunaData.length + ' plants';
   } catch (err) {
     console.error('Failed to load Dravya Guna data:', err);
     dravyagunaData = [];
   }
-  renderDravyagunaList('');
 }
 
 function renderDravyagunaList(query) {
-  // Delegate to enhanced image gallery rendering
   if (typeof renderDravyagunaList_enhanced === 'function') {
     renderDravyagunaList_enhanced(query);
-  } else {
-    // Fallback to basic rendering if enhanced version not loaded yet
-    const grid = document.getElementById('dravyagunaGrid');
-    if (!grid) return;
-    const q = (query || '').trim().toLowerCase();
-    const filtered = !q ? dravyagunaData : dravyagunaData.filter(p =>
-      p.name.toLowerCase().includes(q) ||
-      (p.sanskrit_name || '').toLowerCase().includes(q) ||
-      (p.botanical_name || '').toLowerCase().includes(q)
-    );
-
-    if (dravyagunaData.length === 0) {
-      grid.innerHTML = '<p style="color:var(--ink-soft); grid-column:1/-1;">Loading plant data...</p>';
-      return;
-    }
-    if (filtered.length === 0) {
-      grid.innerHTML = `<p style="color:var(--ink-soft); grid-column:1/-1;">No plants found matching "${query}".</p>`;
-      return;
-    }
-
-    grid.innerHTML = filtered.map(p => `
-      <div class="dravya-card" onclick="showDravyagunaDetail('${p.id}')" style="cursor:pointer;">
-        <div style="padding:16px; text-align:center; height:100%; display:flex; flex-direction:column; justify-content:space-between;">
-          <div>
-            <h4 style="margin:0 0 4px; color:var(--gold-light); font-family:'Cormorant Garamond',serif;">${p.name}</h4>
-            <div style="font-size:0.85rem; color:var(--cream); margin-bottom:2px; font-family:'Tiro Devanagari Hindi',sans-serif;">${p.sanskrit_name || ''}</div>
-            <div style="font-size:0.75rem; color:var(--ink-soft); font-style:italic;">${p.botanical_name || ''}</div>
-          </div>
-        </div>
-      </div>
-    `).join('');
   }
 }
 
 function showDravyagunaDetail(id) {
-  // Delegate to enhanced image gallery detail view
   showDravyagunaDetail_enhanced(id);
 }
 
 function hideDravyagunaDetail() {
-  // Delegate to enhanced image gallery detail view
   hideDravyagunaDetail_enhanced();
 }
 
-// Aliases for backwards compatibility
 const openDravyagunaDetail = showDravyagunaDetail;
 const closeDravyagunaDetail = hideDravyagunaDetail;
 
@@ -5395,6 +5370,7 @@ function createMagicParticle(x, y) {
 
 init();
 </script>
+<script src="/dravya_guna_filters.js"></script>
 <script src="/dravya_guna_images.js"></script>
 </body>
 </html>
