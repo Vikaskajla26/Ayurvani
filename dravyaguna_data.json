@@ -2762,5 +2762,390 @@
     "usefulPart": "Fruit (फल)",
     "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Amla_(Gujarati-_આમળા)_(4938449876).jpg",
     "usefulPartAttribution": "Wikimedia Commons - Phyllanthus emblica fruit (Dinesh Valke)"
+  },
+  {
+    "id": "jatiphala",
+    "name": "Jatiphala",
+    "sanskrit_name": "जातीफल",
+    "sloka": "जातीफलं रसे तिक्तं तीक्ष्णोष्णं रोचनं लघु । कटुकं दीपनं ग्राहि स्वर्यं श्लेष्मानिलापहम् । निहन्ति मुखवैशद्यं मलमूत्रविबद्धताः ॥ भा. प्र",
+    "sloka_source": "भा. प्र.",
+    "botanical_name": "Myristica fragrans",
+    "family": "Myristicaceae",
+    "synonyms": [
+      {
+        "term": "जातीकोश",
+        "meaning": "Nutmeg fruit"
+      },
+      {
+        "term": "शालूका",
+        "meaning": "Aromatic"
+      },
+      {
+        "term": "मज्जसार",
+        "meaning": "Essence of pith"
+      },
+      {
+        "term": "जातिसार",
+        "meaning": "Essence of nutmeg"
+      },
+      {
+        "term": "कुसुमामोदा",
+        "meaning": "Fragrant flower"
+      },
+      {
+        "term": "सुवासमालं",
+        "meaning": "Good fragrance"
+      },
+      {
+        "term": "मदिरामोद",
+        "meaning": "Intoxicating fragrance"
+      },
+      {
+        "term": "सौमनस्यमन",
+        "meaning": "Pleasing mind"
+      },
+      {
+        "term": "सुगन्धा",
+        "meaning": "Sweet-smelling"
+      }
+    ],
+    "vernacular_names": [
+      {
+        "lang": "English",
+        "name": "Nutmeg"
+      },
+      {
+        "lang": "Hindi",
+        "name": "जायफल (Jayphal)"
+      },
+      {
+        "lang": "Marathi",
+        "name": "जायफळ (Jayphal)"
+      }
+    ],
+    "classification_of_gana": [
+      "चरक: —",
+      "भावप्रकाश: कर्पूरादि वर्ग"
+    ],
+    "external_morphology": {
+      "habitat": "Native to Maluku Islands (Indonesia), cultivated in tropical regions including Kerala, India",
+      "details": [
+        "Habit: Tree with slender branches, evergreen, up to 10-15 m",
+        "Leaves: Coriaceous, elliptic-oblong / lanceolate, aromatic",
+        "Flowers: 6 mm long, pale yellow, fragrant",
+        "Fruit: Ovoid, pendulous, yellow when ripe",
+        "Seed: Nutmeg (Jatiphala), surrounded by aril (Jatipatri / Mace)",
+        "Aromatic: Whole plant fragrant"
+      ]
+    },
+    "useful_parts": "Seed (Jatiphala), Aril (Jatipatri), Seed coat (Kosha)",
+    "phytoconstituents": "Volatile oil containing myristicin, myristic acid, d-pinene, d-camphene, safrole, elemicin",
+    "rasa_panchaka": {
+      "rasa": "Tikta, Katu",
+      "guna": "Laghu, Tikshna, Snigdha",
+      "virya": "Ushna",
+      "vipaka": "Katu"
+    },
+    "karma": {
+      "dosha_karma": "कफवातशामक (Kapha-Vata shamaka)",
+      "general": "जातीफल: ग्राहि, दीपन, रोचन, स्वर्य, कासहर, श्वासहर, वृष्य, हृद्य, कृमिघ्न, शूलहर, चक्षुष्य | जातीपत्री: रुचिकर, वृष्य, कासहर, कासदीपन, श्वासहर, तृष्णानिग्रह, कृमिघ्न, विषहर"
+    },
+    "doshaghnata": "कफवातशामक (Kapha-Vata shamaka)",
+    "rogaghnata": "अतिसार (Atisara), क्लैब्य (Klaibya), अग्निमांद्य (Agnimandya), अरुचि (Aruchi), कृमि (Krumi), कास (Kasa), श्वास (Shwasa), पिपासा (Pipasa), शोष (Shosha), प्रमेह (Prameha), केशरोग (Kesharoga). जातीपत्री: अरुचि, वैवर्ण्य, श्वास, तृष्णा, कृमि, विषम रोग, कण्डू, शोष",
+    "amayika_prayoga": [
+      "अतिसार (Atisara) = Paste of Jatiphala applied over umbilicus",
+      "व्यङ्ग (Vyanga) = Aril of Jatiphala triturated with sheeta water, applied over face",
+      "विपादिका (Vipadika / Cracked feet) = Paste of Jatiphala filled in cracks",
+      "अजीर्ण, तृष्णा, सर्दी = Jatiphala Hima",
+      "शिरःशूल (Headache) = Local application of Jatiphala paste",
+      "सर्दी (Cold) = Jatiphala + Tandulodaka",
+      "विपादिका (Crack-heels) = Filled paste of Jatiphala",
+      "अनिद्रा (Insomnia) = Jatiphala + Ghrita applied in eyes"
+    ],
+    "matra": [
+      {
+        "form": "चूर्ण (Churna)",
+        "dose": "250 mg - 1 g"
+      },
+      {
+        "form": "तेल (Taila)",
+        "dose": "7-15 drops"
+      }
+    ],
+    "marga": "Internal (oral) & External (लेप)",
+    "pharmacological_actions": [
+      "Aphrodisiac",
+      "Stimulant",
+      "Analgesic",
+      "Appetizer",
+      "Digestant",
+      "Anthelmintic",
+      "Astringent",
+      "Anti-inflammatory"
+    ],
+    "kalpana": [
+      "Jatiphaladi Vati",
+      "Jatiphaladi Churna",
+      "Jatiphala Praleepa",
+      "Jatiphala Taila",
+      "Jatilavangadi Churna"
+    ],
+    "varieties": "Not mentioned in classical texts",
+    "research_updates": [
+      "Antioxidant activity",
+      "Anti-inflammatory activity",
+      "Anti-bacterial activity",
+      "Anti-cancer activity"
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Nutmeg_on_Tree.jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Myristica fragrans (Nutmeg on Tree)",
+    "usefulPart": "Seed (Nutmeg)",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Nutmeg-spice.jpg",
+    "usefulPartAttribution": "Wikimedia Commons - Nutmeg spice"
+  },
+  {
+    "id": "brahmi",
+    "name": "Brahmi",
+    "sanskrit_name": "ब्राह्मी",
+    "sloka": "ब्राह्मी हिमा सरा तिक्ता लघुर्मेध्या च शीतला | कषाया मधुरा स्वर्या स्मृत्युक्ता कुष्ठनाशिनी | स्वर्या वयस्या कुष्ठोत्थ पाण्डुमेहास्त्रकासजित् | विषशोथ ज्वरहरी || भा. प्र.",
+    "sloka_source": "भा. प्र.",
+    "botanical_name": "Bacopa monnieri",
+    "family": "Scrophulariaceae / Plantaginaceae",
+    "synonyms": [
+      {
+        "term": "ऐन्द्री",
+        "meaning": "Divine, belonging to Indra"
+      },
+      {
+        "term": "ब्रह्मकोष्म्य",
+        "meaning": "Related to Brahman"
+      },
+      {
+        "term": "गूरदा",
+        "meaning": "Sweet"
+      },
+      {
+        "term": "मत्स्याक्षी",
+        "meaning": "Fish-eyed leaf shape"
+      },
+      {
+        "term": "सरस्वती",
+        "meaning": "Goddess of knowledge"
+      },
+      {
+        "term": "सोमवल्ली",
+        "meaning": "Moon creeper"
+      }
+    ],
+    "vernacular_names": [
+      {
+        "lang": "English",
+        "name": "Indian pennywort, Water hyssop"
+      },
+      {
+        "lang": "Hindi",
+        "name": "ब्राह्मी (Brahmi)"
+      },
+      {
+        "lang": "Marathi",
+        "name": "नीरब्राह्मी (Nirbrahmi)"
+      }
+    ],
+    "classification_of_gana": [
+      "चरक: वयःस्थापन, प्रजास्थापन"
+    ],
+    "external_morphology": {
+      "habitat": "Wetlands, muddy shores, marshy areas throughout India and tropics",
+      "details": [
+        "Habit: Perennial, creeping succulent herb",
+        "Stem: Fleshy, rooting at nodes, glabrous",
+        "Leaves: Oblanceolate, arranged oppositely, sessile, fleshy",
+        "Flowers: Blue, purple, or white, axillary, solitary",
+        "Seeds: Yellow brown, ellipsoid",
+        "Propagation: Vegetative through stem cuttings"
+      ]
+    },
+    "useful_parts": "Leaves (Patra), Whole plant (Panchanga)",
+    "phytoconstituents": "Alkaloid brahmine (resembles strychnine but less toxic), bacoside A & B, bacopaside, sterols, B-oxalate, B-chloroplatinate",
+    "rasa_panchaka": {
+      "rasa": "Tikta, Kashaya, Madhura",
+      "guna": "Laghu, Snigdha, Sara",
+      "virya": "Sheeta",
+      "vipaka": "Madhura"
+    },
+    "prabhava": "Apasmara nashak, Unmad nashak, Vishaghni. Best drug for loss of memory (Agrya karma).",
+    "karma": {
+      "dosha_karma": "त्रिदोषनाशक (Tridosha nashaka). Dhatu = Meda, Sarvadhatu Balya. Mala = Mutra, Sreshaya.",
+      "karma": "दीपन, पाचन, रसायन, स्वर्य, आयुवर्धक, मेध्य, कुष्ठघ्न, कण्डूघ्न, विषघ्न, मेहघ्न, शोथहर, ज्वरघ्न"
+    },
+    "doshaghnata": "त्रिदोषनाशक (Tridoshanashaka)",
+    "rogaghnata": "उन्माद (Unmada), अपस्मार (Apasmara), कुष्ठ (Kushtha), पाण्डु (Pandu), शोथ (Shotha), प्रमेह (Prameha), श्वास (Shwasa), कास (Kasa), ज्वर (Jwara), स्वरभेद (Swarabheda), अनार्तव (Anartava)",
+    "amayika_prayoga": [
+      "अपस्मार (Apasmara/Epilepsy) = Purana ghrita processed with Brahmi rasa, Vacha + Kushtha + Shankhapushpi",
+      "उन्माद (Unmada/Insanity) = Juice of Brahmi, Kushmandi phala, Shadgandha, Shankhapushpi mixed with Kushtha churna + Honey"
+    ],
+    "matra": [
+      {
+        "form": "स्वरस (Swarasa/Fresh juice)",
+        "dose": "10-20 ml"
+      },
+      {
+        "form": "चूर्ण (Churna/Powder)",
+        "dose": "5-10 g"
+      },
+      {
+        "form": "क्वाथ (Kwatha/Decoction)",
+        "dose": "50-100 ml"
+      }
+    ],
+    "marga": "Internal (oral) & External (Nasya)",
+    "pharmacological_actions": [
+      "Nervine tonic",
+      "Diuretic",
+      "Anti-inflammatory",
+      "Anti-convulsant",
+      "Immunagogue",
+      "Blood purifier",
+      "Rejuvenative",
+      "Cardiotonic",
+      "Memory enhancer"
+    ],
+    "kalpana": [
+      "Brahmi Ghrita - Apasmara, Unmada",
+      "Kumar Kalyanka Ghrita - Medhya",
+      "Brahmi Vati - Jwara, Mansika Roga",
+      "Brahmi Arka - Pandu, Shosha"
+    ],
+    "varieties": "Brahmi (Bacopa monnieri), Kshudra Patra Brahmi (Centella asiatica - Mandukaparni)",
+    "research_updates": [
+      "Neuroprotective activity",
+      "Antidopaminergic / serotonergic effect",
+      "Antihyperglycemic activity",
+      "Antioxidant activity"
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Brahmi_(Hindi-_%E0%A4%AC%E0%A5%8D%E0%A4%B0%E0%A4%BE%E0%A4%B9%E0%A5%8D%E0%A4%AE%E0%A5%80)_(5508302160).jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Bacopa monnieri (Dinesh Valke)",
+    "usefulPart": "Whole plant (Panchanga)",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Water_Hyssop_(Bacopa_monnieri)_(5944008054).jpg",
+    "usefulPartAttribution": "Wikimedia Commons - Bacopa monnieri flowers"
+  },
+  {
+    "id": "kalamegha",
+    "name": "Kalamegha",
+    "sanskrit_name": "कालमेघ",
+    "sloka": "श्रुतिकतः लघुष्णशोषः कफावरविनाशनः | दीपनः स्वेदतो ज्ञेयः कृमिघ्नः पित्तसारकः || ध्र. नि",
+    "sloka_source": "ध्र. नि.",
+    "botanical_name": "Andrographis paniculata",
+    "family": "Acanthaceae",
+    "synonyms": [
+      {
+        "term": "यवतिका",
+        "meaning": "Small herb"
+      },
+      {
+        "term": "यवतिखफल",
+        "meaning": "Bitter fruit"
+      },
+      {
+        "term": "भूनिम्ब",
+        "meaning": "Ground neem (resembles neem in bitterness)"
+      },
+      {
+        "term": "महातिक्त",
+        "meaning": "Extremely bitter"
+      },
+      {
+        "term": "कालमेघ",
+        "meaning": "Standard name"
+      }
+    ],
+    "vernacular_names": [
+      {
+        "lang": "English",
+        "name": "Kalmegh, Green chiretta, King of bitters"
+      },
+      {
+        "lang": "Hindi",
+        "name": "कालमेघ (Kalmegh)"
+      },
+      {
+        "lang": "Marathi",
+        "name": "ओली किरायत (Oli Kiriyat)"
+      }
+    ],
+    "classification_of_gana": [],
+    "external_morphology": {
+      "habitat": "India, especially West Bengal, also throughout tropical Asia",
+      "details": [
+        "Habit: Annual erect herb, 30-110 cm height",
+        "Stem: Upper part quadrangular, lower part nearly rounded",
+        "Leaves: Glabrous, pinnate, acute apex, entire margin",
+        "Flowers: White with rose-purple spots on petals",
+        "Fruit: Capsules linear-oblong, acute at both ends",
+        "Seeds: Numerous, yellowish-brown"
+      ]
+    },
+    "useful_parts": "Panchanga (Whole plant)",
+    "phytoconstituents": "Lactones - andrographolide, andrograpnin, panicolin, andrograpolide, neoandrographolide",
+    "rasa_panchaka": {
+      "rasa": "Tikta",
+      "guna": "Laghu, Ruksha",
+      "virya": "Ushna",
+      "vipaka": "Katu"
+    },
+    "karma": {
+      "dosha_karma": "कफपित्तहर (Kapha-Pitta hara). Ushna virya → Deepan (Agnimandya). Yakruttejgan → Yakrut vruddhi. Rechan → Vibandha. Krumighna → Krimi.",
+      "karma": "दीपन, पाचन, कृमिघ्न, रेचन, यकृतोत्तेजक, रक्तशोधक, शोथहर, ज्वरहर, कटुपौष्टिक"
+    },
+    "doshaghnata": "कफपित्तहर (Kapha-Pitta hara)",
+    "rogaghnata": "अग्निमांद्य (Agnimandya), यकृतवृद्धि (Yakrut vruddhi), विबन्ध (Vibandha), कृमि (Krimi), जीर्णज्वर (Jirna Jwara), दौर्बल्य (Weakness), रक्तदोष (Raktadosha), शोथ (Shotha)",
+    "amayika_prayoga": [
+      "ज्वर (Jwara) = Kalmegh swarasa + Maricha churna",
+      "जीर्णज्वर (Chronic fever) = Kalmegh swarasa + Draksha Asava for chronic mucus discharge with stool & excessive tiredness",
+      "छर्दी (Chardi/Vomiting) = Paste of Bhunimba mixed with equal quantity of sugar/honey"
+    ],
+    "matra": [
+      {
+        "form": "चूर्ण (Churna)",
+        "dose": "1-3 g"
+      },
+      {
+        "form": "स्वरस (Swarasa/Fresh juice)",
+        "dose": "5-10 ml"
+      },
+      {
+        "form": "क्वाथ (Kwatha/Decoction)",
+        "dose": "20-40 ml"
+      },
+      {
+        "form": "घृत (Ghrita)",
+        "dose": "0.5-1 ml"
+      }
+    ],
+    "marga": "Internal (oral)",
+    "pharmacological_actions": [
+      "Antibacterial",
+      "Hepatoprotective",
+      "Antioxidant",
+      "Antimicrobial",
+      "Antipyretic",
+      "Immunostimulant"
+    ],
+    "kalpana": [
+      "Kalmegh Liquid Extract",
+      "Bhunimbadi Churna / Kashaya"
+    ],
+    "varieties": "Adulterants: Used as substitute & adulterant for Chirayata (Swertia chirayita)",
+    "research_updates": [
+      "Antibacterial activity: significant against E. coli, S. Typhi, Staphylococcus & Pseudomonas",
+      "Hepatoprotective action",
+      "Anti-oxidant activity",
+      "Anti-microbial against S. aureus, S. Pyogenes"
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Andrographis_paniculata_Wikipedia_Takes_Kolkata_V_DSC_5875_01.jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Andrographis paniculata (Atudu)",
+    "usefulPart": "Whole plant (Panchanga)",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Andrographis_paniculata_Plant.JPG",
+    "usefulPartAttribution": "Wikimedia Commons - Andrographis paniculata"
   }
 ]
