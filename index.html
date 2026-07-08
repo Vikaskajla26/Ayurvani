@@ -1415,7 +1415,7 @@
 </style>
 <link rel="stylesheet" href="/dravya_guna_styles.css">
 <link rel="stylesheet" href="/dravya_guna_filters_styles.css">
-<script async src="/dravyaguna.js"></script>
+<script defer src="/dravyaguna.js"></script>
 </head>
 <body>
 
@@ -2871,7 +2871,7 @@ function showView(id){
   if(id==='chants') {
     renderChants();
   }
-  if(id==='dravyaguna') { if(typeof dgInit==='function') dgInit(); }
+  if(id==='dravyaguna') { setTimeout(function(){ if(typeof dgInit==='function') dgInit(); }, currentActive && currentActive !== target ? 250 : 50); }
   if(id==='favorites') renderFavorites();
   if(id==='admin') renderAdmin();
   
