@@ -1,10 +1,55 @@
-// ========== DRAVYA GUNA - All functions in global scope ==========
+// ========== DRAVYA GUNA - Smart Filters + Images + Detail View ==========
 
-// Variables
 var dgData = [];
 var dgLoaded = false;
+var dgActiveFilters = { dosha: {}, rasa: {}, virya: {}, family: {} };
 
-// Load plant data
+// ---- Helpers ----
+function dgExtractDosha(p) {
+  var d = (p.doshaghnata || '').toLowerCase();
+  if (d.indexOf('त्रिदोष') !== -1 || d.indexOf('tridosha') !== -1 || d.indexOf('tridos') !== -1) return ['Vata','Pitta','Kapha'];
+  var r = [];
+  if (d.indexOf('वात') !== -1 || d.indexOf('vata') !== -1) r.push('Vata');
+  if (d.indexOf('पित्त') !== -1 || d.indexOf('pitta') !== -1) r.push('Pitta');
+  if (d.indexOf('कफ') !== -1 || d.indexOf('kapha') !== -1 || d.indexOf('shlesh') !== -1) r.push('Kapha');
+  var k = (p.karma && p.karma.dosha_karma || '').toLowerCase();
+  if (k.indexOf('त्रिदोष') !== -1 || k.indexOf('tridosha') !== -1 || k.indexOf('tridos') !== -1) {
+    if (r.indexOf('Vata')===-1) r.push('Vata');
+    if (r.indexOf('Pitta')===-1) r.push('Pitta');
+    if (r.indexOf('Kapha')===-1) r.push('Kapha');
+  }
+  if (k.indexOf('vata') !== -1 && r.indexOf('Vata')===-1) r.push('Vata');
+  if (k.indexOf('pitta') !== -1 && r.indexOf('Pitta')===-1) r.push('Pitta');
+  if (k.indexOf('kapha') !== -1 && r.indexOf('Kapha')===-1) r.push('Kapha');
+  return r.length ? r : [];
+}
+
+function dgExtractRasa(p) {
+  var rp = p.rasa_panchaka || {};
+  var r = (rp.rasa || '').toLowerCase();
+  var result = [];
+  if (r.indexOf('katu') !== -1 || r.indexOf('कटु') !== -1) result.push('Katu');
+  if (r.indexOf('tikta') !== -1 || r.indexOf('तिक्त') !== -1) result.push('Tikta');
+  if (r.indexOf('kashaya') !== -1 || r.indexOf('कषाय') !== -1) result.push('Kashaya');
+  if (r.indexOf('madhura') !== -1 || r.indexOf('मधुर') !== -1 || r.indexOf('madhu') !== -1) result.push('Madhura');
+  if (r.indexOf('amla') !== -1 || r.indexOf('आम्ल') !== -1) result.push('Amla');
+  if (r.indexOf('lavana') !== -1 || r.indexOf('लवण') !== -1) result.push('Lavana');
+  if (r.indexOf('पंचरस') !== -1) { result=['Katu','Tikta','Kashaya','Madhura','Amla']; }
+  return result;
+}
+
+function dgExtractVirya(p) {
+  var v = ((p.rasa_panchaka || {}).virya || '').toLowerCase();
+  if (v.indexOf('ushna') !== -1 || v.indexOf('उष्ण') !== -1) return 'Ushna';
+  if (v.indexOf('sheeta') !== -1 || v.indexOf('शीत') !== -1 || v.indexOf('shita') !== -1) return 'Sheeta';
+  return '';
+}
+
+function dgExtractFamily(p) {
+  return (p.family || '').trim() || 'Unknown';
+}
+
+// ---- Load ----
 async function dgLoadData() {
   if (dgLoaded) return;
   try {
@@ -13,26 +58,167 @@ async function dgLoadData() {
     dgLoaded = true;
     var el = document.getElementById('dravyaCount');
     if (el) el.textContent = dgData.length + ' plants';
-  } catch(e) {
-    console.error('DG load error:', e);
-  }
+  } catch(e) { console.error('DG load error:', e); }
 }
 
-// Render plant grid
+// ---- Filters ----
+function dgBuildFilters() {
+  var container = document.getElementById('dravyagunaFiltersContainer');
+  if (!container) return;
+
+  // Collect all unique values
+  var doshas = {}; var rasas = {}; var viryas = {}; var families = {};
+  for (var i = 0; i < dgData.length; i++) {
+    var p = dgData[i];
+    dgExtractDosha(p).forEach(function(d) { doshas[d] = (doshas[d]||0)+1; });
+    dgExtractRasa(p).forEach(function(r) { rasas[r] = (rasas[r]||0)+1; });
+    var v = dgExtractVirya(p);
+    if (v) viryas[v] = (viryas[v]||0)+1;
+    var f = dgExtractFamily(p);
+    families[f] = (families[f]||0)+1;
+  }
+
+  var doshaSorted = ['Vata','Pitta','Kapha'];
+  var rasaSorted = ['Madhura','Amla','Lavana','Katu','Tikta','Kashaya'];
+  var viryaSorted = ['Ushna','Sheeta'];
+  var familySorted = Object.keys(families).sort(function(a,b) { return families[b]-families[a]; }).slice(0,12);
+
+  var html = '<div class="dravya-filters-container">';
+  html += '<div class="dravya-filters-header"><h3>🔬 Advanced Filters</h3><button class="dravya-clear-filters-btn" onclick="dgClearFilters()">Clear All</button></div>';
+  html += '<div class="dravya-filters-grid">';
+
+  // Dosha filter
+  html += '<div class="dravya-filter-group"><h4>Dosha</h4><div class="dravya-filter-options">';
+  doshaSorted.forEach(function(d) {
+    var count = doshas[d] || 0;
+    if (!count) return;
+    var checked = dgActiveFilters.dosha[d] ? 'checked' : '';
+    html += '<label class="dravya-filter-label"><input type="checkbox" data-filter-type="dosha" data-filter-value="' + d + '" ' + checked + ' onchange="dgToggleFilter(\'dosha\',\'' + d + '\')"><span>' + d + ' (' + count + ')</span></label>';
+  });
+  html += '</div></div>';
+
+  // Rasa filter
+  html += '<div class="dravya-filter-group"><h4>Rasa (Taste)</h4><div class="dravya-filter-options">';
+  rasaSorted.forEach(function(r) {
+    var count = rasas[r] || 0;
+    if (!count) return;
+    var checked = dgActiveFilters.rasa[r] ? 'checked' : '';
+    html += '<label class="dravya-filter-label"><input type="checkbox" data-filter-type="rasa" data-filter-value="' + r + '" ' + checked + ' onchange="dgToggleFilter(\'rasa\',\'' + r + '\')"><span>' + r + ' (' + count + ')</span></label>';
+  });
+  html += '</div></div>';
+
+  // Virya filter
+  html += '<div class="dravya-filter-group"><h4>Virya (Potency)</h4><div class="dravya-filter-options">';
+  viryaSorted.forEach(function(v) {
+    var count = viryas[v] || 0;
+    if (!count) return;
+    var checked = dgActiveFilters.virya[v] ? 'checked' : '';
+    html += '<label class="dravya-filter-label"><input type="checkbox" data-filter-type="virya" data-filter-value="' + v + '" ' + checked + ' onchange="dgToggleFilter(\'virya\',\'' + v + '\')"><span>' + v + ' (' + count + ')</span></label>';
+  });
+  html += '</div></div>';
+
+  // Family filter
+  html += '<div class="dravya-filter-group"><h4>Family</h4><div class="dravya-filter-options">';
+  familySorted.forEach(function(f) {
+    var count = families[f] || 0;
+    if (!count) return;
+    var checked = dgActiveFilters.family[f] ? 'checked' : '';
+    html += '<label class="dravya-filter-label"><input type="checkbox" data-filter-type="family" data-filter-value="' + f.replace(/'/g,"&#39;") + '" ' + checked + ' onchange="dgToggleFilter(\'family\',\'' + f.replace(/'/g,"\\'") + '\')"><span>' + f + ' (' + count + ')</span></label>';
+  });
+  html += '</div></div>';
+
+  html += '</div></div>';
+
+  container.innerHTML = html;
+}
+
+function dgToggleFilter(type, value) {
+  if (dgActiveFilters[type][value]) {
+    delete dgActiveFilters[type][value];
+  } else {
+    dgActiveFilters[type][value] = true;
+  }
+  dgRender();
+}
+
+function dgClearFilters() {
+  dgActiveFilters = { dosha: {}, rasa: {}, virya: {}, family: {} };
+  // Update checkboxes
+  var checks = document.querySelectorAll('#dravyagunaFiltersContainer input[type="checkbox"]');
+  for (var i = 0; i < checks.length; i++) { checks[i].checked = false; }
+  dgRender();
+}
+
+function dgFilterMatches(p) {
+  // If no active filters, everything matches
+  var hasActive = false;
+  for (var t in dgActiveFilters) { for (var k in dgActiveFilters[t]) { hasActive = true; break; } if (hasActive) break; }
+  if (!hasActive) return true;
+
+  // Dosha
+  var doshaKeys = Object.keys(dgActiveFilters.dosha);
+  if (doshaKeys.length) {
+    var pDosha = dgExtractDosha(p);
+    var match = false;
+    for (var di = 0; di < pDosha.length; di++) { if (doshaKeys.indexOf(pDosha[di]) !== -1) { match = true; break; } }
+    if (!match) return false;
+  }
+
+  // Rasa
+  var rasaKeys = Object.keys(dgActiveFilters.rasa);
+  if (rasaKeys.length) {
+    var pRasa = dgExtractRasa(p);
+    var match = false;
+    for (var ri = 0; ri < pRasa.length; ri++) { if (rasaKeys.indexOf(pRasa[ri]) !== -1) { match = true; break; } }
+    if (!match) return false;
+  }
+
+  // Virya
+  var viryaKeys = Object.keys(dgActiveFilters.virya);
+  if (viryaKeys.length) {
+    var pVirya = dgExtractVirya(p);
+    if (viryaKeys.indexOf(pVirya) === -1) return false;
+  }
+
+  // Family
+  var familyKeys = Object.keys(dgActiveFilters.family);
+  if (familyKeys.length) {
+    var pFamily = dgExtractFamily(p);
+    if (familyKeys.indexOf(pFamily) === -1) return false;
+  }
+
+  return true;
+}
+
+// ---- Render ----
 function dgRender() {
   var grid = document.getElementById('dravyagunaGrid');
   var searchInput = document.getElementById('dravyagunaSearchInput');
+  var resultsInfo = document.getElementById('dravyagunaResultsInfo');
   if (!grid || !dgData.length) return;
 
   var q = (searchInput && searchInput.value || '').trim().toLowerCase();
-  var filtered = q ? dgData.filter(function(p) {
-    return (p.name || '').toLowerCase().indexOf(q) !== -1 ||
-           (p.sanskrit_name || '').toLowerCase().indexOf(q) !== -1 ||
-           (p.botanical_name || '').toLowerCase().indexOf(q) !== -1;
-  }) : dgData;
+
+  var filtered = dgData.filter(function(p) {
+    // Search filter
+    if (q) {
+      var inName = (p.name || '').toLowerCase().indexOf(q) !== -1;
+      var inSans = (p.sanskrit_name || '').toLowerCase().indexOf(q) !== -1;
+      var inBot = (p.botanical_name || '').toLowerCase().indexOf(q) !== -1;
+      if (!inName && !inSans && !inBot) return false;
+    }
+    // Advanced filters
+    return dgFilterMatches(p);
+  });
+
+  // Results info
+  if (resultsInfo) {
+    var totalText = 'Showing ' + filtered.length + ' of ' + dgData.length + ' plants';
+    resultsInfo.innerHTML = '<div class="dravya-results-info"><span class="dravya-results-info-left"><span class="dravya-results-count">' + filtered.length + '</span> / ' + dgData.length + ' plants</span></div>';
+  }
 
   if (!filtered.length) {
-    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--sage);">No plants found</div>';
+    grid.innerHTML = '<div class="dravya-results-empty"><div class="dravya-results-empty-icon">🔍</div><div class="dravya-results-empty-text">No plants match your filters</div><div class="dravya-results-empty-suggestion">Try adjusting your search or clearing filters</div></div>';
     return;
   }
 
@@ -40,17 +226,24 @@ function dgRender() {
   for (var i = 0; i < filtered.length; i++) {
     var p = filtered[i];
     var safeId = p.id.replace(/'/g, "\\'");
-    html += '<div class="dravya-card" onclick="dgShowDetail(\'' + safeId + '\')" style="cursor:pointer;">' +
-      '<div class="dravya-card-content" style="padding:16px;text-align:center;display:flex;flex-direction:column;justify-content:center;height:100%;">' +
-      '<h3 style="margin:0 0 4px;color:var(--gold-light);font-family:\'Cormorant Garamond\',serif;">' + (p.name || '') + '</h3>' +
-      '<p style="margin:0 0 2px;font-size:0.9rem;color:var(--cream);font-family:\'Tiro Devanagari Hindi\',sans-serif;">' + (p.sanskrit_name || '') + '</p>' +
-      '<p style="margin:0;font-size:0.75rem;color:var(--sage);font-style:italic;">' + (p.botanical_name || '') + '</p>' +
-      '</div></div>';
+    var thumb = p.plantPhotoUrl || '';
+    var thumbStyle = thumb ? 'background-image:url(' + thumb + ');background-size:cover;background-position:center;min-height:120px;' : 'min-height:80px;';
+
+    html += '<div class="dravya-card" onclick="dgShowDetail(\'' + safeId + '\')" style="cursor:pointer;">';
+    // Thumbnail
+    if (thumb) {
+      html += '<div class="dravya-card-thumb" style="' + thumbStyle + 'border-radius:8px 8px 0 0;position:relative;overflow:hidden;"></div>';
+    }
+    html += '<div class="dravya-card-content" style="padding:12px 16px;text-align:center;">';
+    html += '<h3 style="margin:0 0 4px;color:var(--gold-light);font-family:\'Cormorant Garamond\',serif;">' + (p.name || '') + '</h3>';
+    html += '<p style="margin:0 0 2px;font-size:0.9rem;color:var(--cream);font-family:\'Tiro Devanagari Hindi\',sans-serif;">' + (p.sanskrit_name || '') + '</p>';
+    html += '<p style="margin:0;font-size:0.75rem;color:var(--sage);font-style:italic;">' + (p.botanical_name || '') + '</p>';
+    html += '</div></div>';
   }
   grid.innerHTML = html;
 }
 
-// Build detail HTML for a plant
+// ---- Detail View ----
 function dgBuildDetailHtml(plant) {
   function sec(title, content) {
     return content ? '<section class="dravya-section"><h2>' + title + '</h2>' + content + '</section>' : '';
@@ -73,6 +266,34 @@ function dgBuildDetailHtml(plant) {
   if (plant.family) h += '<p class="dravya-detail-family">Family: ' + plant.family + '</p>';
   h += '</div></div>';
   h += '<div class="dravya-detail-content">';
+
+  // ---- Image Gallery ----
+  var galHtml = '<div class="dravya-image-gallery"><div class="dravya-gallery-tabs">';
+  var plantImg = plant.plantPhotoUrl || '';
+  var usefulImg = plant.usefulPartPhotoUrl || '';
+  if (plantImg) galHtml += '<button class="dravya-tab-btn active" onclick="dgSwitchTab(\'plantTab\',event)">🌿 Plant</button>';
+  if (usefulImg) galHtml += '<button class="dravya-tab-btn" onclick="dgSwitchTab(\'usefulTab\',event)">🔬 ' + (plant.usefulPart || 'Useful Part') + '</button>';
+  galHtml += '</div><div class="dravya-gallery-content">';
+  if (plantImg) {
+    galHtml += '<div id="dgPlantTab" class="dravya-image-tab active">';
+    galHtml += '<div class="dravya-image-container" onclick="dgOpenLightbox(\'' + plantImg + '\')">';
+    galHtml += '<img class="dravya-detail-image" src="' + plantImg + '" alt="' + plant.name + '" loading="lazy" onerror="this.parentElement.innerHTML=\'<p style=padding:40px;color:var(--sage)>Image unavailable</p>\'">';
+    galHtml += '<span class="dravya-zoom-indicator">🔍 Click to enlarge</span>';
+    galHtml += '</div>';
+    if (plant.plantPhotoAttribution) galHtml += '<p class="dravya-image-credit">📷 ' + plant.plantPhotoAttribution + '</p>';
+    galHtml += '</div>';
+  }
+  if (usefulImg) {
+    galHtml += '<div id="dgUsefulTab" class="dravya-image-tab">';
+    galHtml += '<div class="dravya-image-container" onclick="dgOpenLightbox(\'' + usefulImg + '\')">';
+    galHtml += '<img class="dravya-detail-image" src="' + usefulImg + '" alt="' + (plant.usefulPart || 'Useful part') + '" loading="lazy" onerror="this.parentElement.innerHTML=\'<p style=padding:40px;color:var(--sage)>Image unavailable</p>\'">';
+    galHtml += '<span class="dravya-zoom-indicator">🔍 Click to enlarge</span>';
+    galHtml += '</div>';
+    if (plant.usefulPartAttribution) galHtml += '<p class="dravya-image-credit">📷 ' + plant.usefulPartAttribution + '</p>';
+    galHtml += '</div>';
+  }
+  galHtml += '</div></div>';
+  h += sec('Plant Images', galHtml);
 
   // श्लोक
   if (plant.sloka) {
@@ -186,7 +407,35 @@ function dgBuildDetailHtml(plant) {
   return h;
 }
 
-// Show plant detail
+// ---- Image tab switching ----
+window.dgSwitchTab = function(tabId, event) {
+  var tabs = document.querySelectorAll('.dravya-image-tab');
+  for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
+  var btns = document.querySelectorAll('.dravya-tab-btn');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('active');
+
+  document.getElementById(tabId).classList.add('active');
+  if (event && event.target) event.target.classList.add('active');
+  else {
+    var idx = tabId === 'dgPlantTab' ? 0 : 1;
+    var allBtns = document.querySelectorAll('.dravya-tab-btn');
+    if (allBtns[idx]) allBtns[idx].classList.add('active');
+  }
+};
+
+// ---- Lightbox ----
+window.dgOpenLightbox = function(src) {
+  var overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.92);z-index:9999;display:flex;align-items:center;justify-content:center;cursor:zoom-out;';
+  var img = document.createElement('img');
+  img.src = src;
+  img.style.cssText = 'max-width:90vw;max-height:90vh;border-radius:8px;box-shadow:0 8px 48px rgba(0,0,0,0.5);';
+  overlay.appendChild(img);
+  overlay.onclick = function() { document.body.removeChild(overlay); };
+  document.body.appendChild(overlay);
+};
+
+// ---- Show/Hide Detail ----
 function dgShowDetail(id) {
   var plant = null;
   for (var i = 0; i < dgData.length; i++) {
@@ -202,28 +451,28 @@ function dgShowDetail(id) {
   contentDiv.innerHTML = dgBuildDetailHtml(plant);
   listView.style.display = 'none';
   detailView.style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Hide detail view
 function dgHideDetail() {
   document.getElementById('dravyagunaDetailView').style.display = 'none';
   document.getElementById('dravyagunaListView').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Initialize
+// ---- Init ----
 async function dgInit() {
   await dgLoadData();
   var countEl = document.getElementById('dravyaCount');
   if (countEl && dgData.length) countEl.textContent = dgData.length + ' plants';
+  dgBuildFilters();
   dgRender();
 
-  // Wire up search
   var searchInput = document.getElementById('dravyagunaSearchInput');
   if (searchInput) {
     searchInput.addEventListener('input', function() { dgRender(); });
   }
 
-  // Wire up wrappers
   window.renderDravyagunaList = function(q) { dgRender(); };
   window.showDravyagunaDetail = function(id) { dgShowDetail(id); };
   window.hideDravyagunaDetail = function() { dgHideDetail(); };
@@ -231,7 +480,6 @@ async function dgInit() {
   window.dgHideDetail = dgHideDetail;
 }
 
-// Auto-init if grid is already on page
 (function() {
   if (document.readyState === 'complete' || document.readyState === 'interactive') {
     setTimeout(dgInit, 100);

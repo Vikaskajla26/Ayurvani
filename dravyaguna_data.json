@@ -2135,7 +2135,12 @@
       "Anti-inflammatory, Analgesic activity",
       "Anti-tumor activity",
       "Free-radical scavenging activity"
-    ]
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Khair_(Acacia_catechu)_leaves_&_fruits_at_Hyderabad,_AP_W_IMG_7263.jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Acacia catechu (J.M.Garg)",
+    "usefulPart": "Heartwood (Khadira Sara)",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Acacia_catechu_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-003.jpg",
+    "usefulPartAttribution": "Wikimedia Commons - Acacia catechu (Köhler)"
   },
   {
     "id": "dhanyaka",
@@ -2243,7 +2248,12 @@
       "cholesterol lowering properties in coriander seeds",
       "Anti-oxidant",
       "Anti-microbial"
-    ]
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Coriandrum_sativum_L._(4171522832).jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Coriandrum sativum (Dinesh Valke)",
+    "usefulPart": "Fruit (Seeds)",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Coriander_whole.jpg",
+    "usefulPartAttribution": "Wikimedia Commons - Coriandrum sativum seeds"
   },
   {
     "id": "japa",
@@ -2353,7 +2363,12 @@
       "Anti-tussive effect",
       "Hepato-protective activity",
       "Anti-diabetic"
-    ]
+    ],
+    "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Hibiscus_rosa-sinensis_(Jaswand)_flower_02.jpg",
+    "plantPhotoAttribution": "Wikimedia Commons - Hibiscus rosa-sinensis (ABHIJEET)",
+    "usefulPart": "Leaf, Flower",
+    "usefulPartPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Hibiscus_rosa-sinensis_flowers.jpg",
+    "usefulPartAttribution": "Wikimedia Commons - Hibiscus flowers (Zeynel Cebeci)"
   },
   {
     "id": "chitrak",
