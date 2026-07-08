@@ -113,10 +113,6 @@ function showDravyagunaDetail_enhanced(id) {
 
   if (!detailView || !contentDiv) return;
 
-  // Build detail HTML with image gallery and ALL notes
-  const hasPlantPhoto = plant.plantPhotoUrl;
-  const hasUsefulPartPhoto = plant.usefulPartPhotoUrl;
-
   contentDiv.innerHTML = `
     <div class="dravya-detail-container">
       <button class="dravya-back-btn" onclick="hideDravyagunaDetail_enhanced()">← Back to Plants</button>
@@ -129,37 +125,6 @@ function showDravyagunaDetail_enhanced(id) {
           ${plant.family ? `<p class="dravya-detail-family">Family: ${plant.family}</p>` : ''}
         </div>
       </div>
-
-      ${(hasPlantPhoto || hasUsefulPartPhoto) ? `
-        <div class="dravya-image-gallery">
-          <div class="dravya-gallery-tabs">
-            ${hasPlantPhoto ? `<button class="dravya-tab-btn active" onclick="switchDravyaImageTab(event, 'plant')">🌿 Plant</button>` : ''}
-            ${hasUsefulPartPhoto ? `<button class="dravya-tab-btn" onclick="switchDravyaImageTab(event, 'useful')">🌱 ${plant.usefulPart || 'Useful Part'}</button>` : ''}
-          </div>
-
-          <div class="dravya-gallery-content">
-            ${hasPlantPhoto ? `
-              <div class="dravya-image-tab active" id="dravya-tab-plant">
-                <div class="dravya-image-container" onclick="openDravyaImageLightbox('${plant.plantPhotoUrl}', '${plant.name}')">
-                  <img src="${plant.plantPhotoUrl}" alt="${plant.name} plant" class="dravya-detail-image" loading="lazy" />
-                  <div class="dravya-zoom-indicator">🔍 Click to zoom</div>
-                </div>
-                ${plant.plantPhotoAttribution ? `<p class="dravya-image-credit">Photo: ${plant.plantPhotoAttribution}</p>` : ''}
-              </div>
-            ` : ''}
-
-            ${hasUsefulPartPhoto ? `
-              <div class="dravya-image-tab" id="dravya-tab-useful">
-                <div class="dravya-image-container" onclick="openDravyaImageLightbox('${plant.usefulPartPhotoUrl}', '${plant.usefulPart || 'Useful part'}')">
-                  <img src="${plant.usefulPartPhotoUrl}" alt="${plant.usefulPart || 'Useful part'}" class="dravya-detail-image" loading="lazy" />
-                  <div class="dravya-zoom-indicator">🔍 Click to zoom</div>
-                </div>
-                ${plant.usefulPartAttribution ? `<p class="dravya-image-credit">Photo: ${plant.usefulPartAttribution}</p>` : ''}
-              </div>
-            ` : ''}
-          </div>
-        </div>
-      ` : ''}
 
       <div class="dravya-detail-content">
         ${plant.sloka ? `
