@@ -4,10 +4,8 @@
 (function() {
   'use strict';
 
-  // Wait for window load to ensure everything is ready
-  window.addEventListener('load', function() {
-
-    // Hook into showView when dravyaguna is called
+  // Run on load or immediately if already loaded
+  function init() {
     const originalShowView = window.showView;
     if (typeof originalShowView !== 'function') return;
 
@@ -312,5 +310,12 @@
     }
 
     console.log('Dravya Guna module initialized');
-  });
+  }
+
+  // Run immediately if page already loaded, otherwise wait
+  if (document.readyState === 'complete') {
+    init();
+  } else {
+    window.addEventListener('load', init);
+  }
 })();
