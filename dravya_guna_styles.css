@@ -439,6 +439,83 @@ body.light-mode .dravya-sloka {
   border-left-color: #A37827;
 }
 
+/* Additional Detail View Elements */
+.dravya-detail-family {
+  margin: 8px 0 0;
+  font-size: 0.9rem;
+  color: var(--clay);
+  font-weight: 500;
+}
+
+.dravya-vernacular {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.dravya-vernacular-item {
+  padding: 12px;
+  background: var(--panel-soft);
+  border-radius: 6px;
+  border-left: 3px solid var(--copper);
+  color: var(--cream);
+  font-size: 0.95rem;
+}
+
+.dravya-vernacular-item strong {
+  color: var(--gold);
+}
+
+.dravya-matra {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.dravya-matra-item {
+  padding: 12px;
+  background: var(--panel-soft);
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  color: var(--cream);
+  font-size: 0.9rem;
+}
+
+.dravya-matra-item strong {
+  color: var(--gold);
+}
+
+.dravya-list {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+.dravya-list li {
+  margin-bottom: 4px;
+}
+
+.dravya-list li::marker {
+  color: var(--gold);
+}
+
+/* Light mode overrides for new elements */
+body.light-mode .dravya-vernacular-item,
+body.light-mode .dravya-matra-item {
+  background: #F1ECD9;
+  color: #14241E;
+}
+
+body.light-mode .dravya-list {
+  color: #51665D;
+}
+
+body.light-mode .dravya-detail-family {
+  color: #AB4E34;
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .dravya-detail-container {

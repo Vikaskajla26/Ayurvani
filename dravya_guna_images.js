@@ -113,7 +113,7 @@ function showDravyagunaDetail_enhanced(id) {
 
   if (!detailView || !contentDiv) return;
 
-  // Build detail HTML with image gallery
+  // Build detail HTML with image gallery and ALL notes
   const hasPlantPhoto = plant.plantPhotoUrl;
   const hasUsefulPartPhoto = plant.usefulPartPhotoUrl;
 
@@ -124,8 +124,9 @@ function showDravyagunaDetail_enhanced(id) {
       <div class="dravya-detail-header">
         <div class="dravya-detail-title">
           <h1>${plant.name}</h1>
-          <p class="dravya-detail-sanskrit">${plant.sanskrit_name}</p>
-          <p class="dravya-detail-botanical">${plant.botanical_name}</p>
+          <p class="dravya-detail-sanskrit">${plant.sanskrit_name || ''}</p>
+          <p class="dravya-detail-botanical">${plant.botanical_name || ''}</p>
+          ${plant.family ? `<p class="dravya-detail-family">Family: ${plant.family}</p>` : ''}
         </div>
       </div>
 
@@ -163,7 +164,7 @@ function showDravyagunaDetail_enhanced(id) {
       <div class="dravya-detail-content">
         ${plant.sloka ? `
           <section class="dravya-section">
-            <h2>Traditional Verse</h2>
+            <h2>श्लोक (Traditional Verse)</h2>
             <p class="dravya-sloka">${plant.sloka}</p>
             ${plant.sloka_source ? `<p class="dravya-sloka-source">— ${plant.sloka_source}</p>` : ''}
           </section>
@@ -175,10 +176,58 @@ function showDravyagunaDetail_enhanced(id) {
             <div class="dravya-synonyms">
               ${plant.synonyms.map(s => `
                 <div class="dravya-synonym-item">
-                  <strong>${s.term}</strong> — ${s.meaning}
+                  <strong>${s.term}</strong>${s.meaning ? ` — ${s.meaning}` : ''}
                 </div>
               `).join('')}
             </div>
+          </section>
+        ` : ''}
+
+        ${plant.vernacular_names && plant.vernacular_names.length > 0 ? `
+          <section class="dravya-section">
+            <h2>Vernacular Names</h2>
+            <div class="dravya-vernacular">
+              ${plant.vernacular_names.map(v => `
+                <div class="dravya-vernacular-item">
+                  <strong>${v.lang}:</strong> ${v.name}
+                </div>
+              `).join('')}
+            </div>
+          </section>
+        ` : ''}
+
+        ${plant.classification_of_gana && plant.classification_of_gana.length > 0 ? `
+          <section class="dravya-section">
+            <h2>Classification of Gana</h2>
+            <ul class="dravya-list">
+              ${plant.classification_of_gana.map(c => `<li>${c}</li>`).join('')}
+            </ul>
+          </section>
+        ` : ''}
+
+        ${plant.external_morphology ? `
+          <section class="dravya-section">
+            <h2>External Morphology</h2>
+            ${plant.external_morphology.habitat ? `<p><strong>Habitat:</strong> ${plant.external_morphology.habitat}</p>` : ''}
+            ${plant.external_morphology.details && plant.external_morphology.details.length > 0 ? `
+              <ul class="dravya-list">
+                ${plant.external_morphology.details.map(d => `<li>${d}</li>`).join('')}
+              </ul>
+            ` : ''}
+          </section>
+        ` : ''}
+
+        ${plant.useful_parts ? `
+          <section class="dravya-section">
+            <h2>Useful Parts</h2>
+            <p>${plant.useful_parts}</p>
+          </section>
+        ` : ''}
+
+        ${plant.phytoconstituents ? `
+          <section class="dravya-section">
+            <h2>Important Phytoconstituents</h2>
+            <p>${plant.phytoconstituents}</p>
           </section>
         ` : ''}
 
@@ -186,18 +235,71 @@ function showDravyagunaDetail_enhanced(id) {
           <section class="dravya-section">
             <h2>Rasa Panchaka (Properties)</h2>
             <div class="dravya-rasa-panchaka">
-              ${plant.rasa_panchaka.rasa ? `<div class="dravya-property"><strong>Rasa:</strong> ${plant.rasa_panchaka.rasa}</div>` : ''}
-              ${plant.rasa_panchaka.guna ? `<div class="dravya-property"><strong>Guna:</strong> ${plant.rasa_panchaka.guna}</div>` : ''}
-              ${plant.rasa_panchaka.virya ? `<div class="dravya-property"><strong>Virya:</strong> ${plant.rasa_panchaka.virya}</div>` : ''}
-              ${plant.rasa_panchaka.vipaka ? `<div class="dravya-property"><strong>Vipaka:</strong> ${plant.rasa_panchaka.vipaka}</div>` : ''}
+              ${plant.rasa_panchaka.rasa ? `<div class="dravya-property"><strong>Rasa (Taste):</strong> ${plant.rasa_panchaka.rasa}</div>` : ''}
+              ${plant.rasa_panchaka.guna ? `<div class="dravya-property"><strong>Guna (Qualities):</strong> ${plant.rasa_panchaka.guna}</div>` : ''}
+              ${plant.rasa_panchaka.virya ? `<div class="dravya-property"><strong>Virya (Potency):</strong> ${plant.rasa_panchaka.virya}</div>` : ''}
+              ${plant.rasa_panchaka.vipaka ? `<div class="dravya-property"><strong>Vipaka (Post-digestive):</strong> ${plant.rasa_panchaka.vipaka}</div>` : ''}
             </div>
+          </section>
+        ` : ''}
+
+        ${plant.prabhava ? `
+          <section class="dravya-section">
+            <h2>Prabhava (Special Action)</h2>
+            <p>${plant.prabhava}</p>
+          </section>
+        ` : ''}
+
+        ${plant.karma ? `
+          <section class="dravya-section">
+            <h2>Karma (Actions)</h2>
+            ${plant.karma.dosha_karma ? `<p><strong>Dosha Karma:</strong> ${plant.karma.dosha_karma}</p>` : ''}
+            ${plant.karma.karma ? `<p><strong>Karma:</strong> ${plant.karma.karma}</p>` : ''}
+            ${plant.karma.general ? `<p><strong>General:</strong> ${plant.karma.general}</p>` : ''}
+            ${plant.karma.agrya ? `<p><strong>Agrya Karma:</strong> ${plant.karma.agrya}</p>` : ''}
+          </section>
+        ` : ''}
+
+        ${plant.doshaghnata ? `
+          <section class="dravya-section">
+            <h2>Doshaghnata (Dosha Effect)</h2>
+            <p>${plant.doshaghnata}</p>
           </section>
         ` : ''}
 
         ${plant.rogaghnata ? `
           <section class="dravya-section">
-            <h2>Therapeutic Uses</h2>
+            <h2>Rogaghnata (Therapeutic Uses)</h2>
             <p>${plant.rogaghnata}</p>
+          </section>
+        ` : ''}
+
+        ${plant.amayika_prayoga && plant.amayika_prayoga.length > 0 ? `
+          <section class="dravya-section">
+            <h2>Amayika Prayoga (Clinical Applications)</h2>
+            <ul class="dravya-list">
+              ${plant.amayika_prayoga.map(a => `<li>${a}</li>`).join('')}
+            </ul>
+          </section>
+        ` : ''}
+
+        ${plant.matra && plant.matra.length > 0 ? `
+          <section class="dravya-section">
+            <h2>Matra (Dosage)</h2>
+            <div class="dravya-matra">
+              ${plant.matra.map(m => `
+                <div class="dravya-matra-item">
+                  <strong>${m.form}:</strong> ${m.dose}
+                </div>
+              `).join('')}
+            </div>
+          </section>
+        ` : ''}
+
+        ${plant.marga ? `
+          <section class="dravya-section">
+            <h2>Marga (Route of Administration)</h2>
+            <p>${plant.marga}</p>
           </section>
         ` : ''}
 
@@ -207,6 +309,31 @@ function showDravyagunaDetail_enhanced(id) {
             <div class="dravya-actions">
               ${plant.pharmacological_actions.map(a => `<span class="dravya-action-badge">${a}</span>`).join('')}
             </div>
+          </section>
+        ` : ''}
+
+        ${plant.kalpana && plant.kalpana.length > 0 ? `
+          <section class="dravya-section">
+            <h2>Kalpana (Formulations)</h2>
+            <ul class="dravya-list">
+              ${plant.kalpana.map(k => `<li>${k}</li>`).join('')}
+            </ul>
+          </section>
+        ` : ''}
+
+        ${plant.varieties ? `
+          <section class="dravya-section">
+            <h2>Varieties</h2>
+            <p>${typeof plant.varieties === 'string' ? plant.varieties : plant.varieties.join(', ')}</p>
+          </section>
+        ` : ''}
+
+        ${plant.research_updates && plant.research_updates.length > 0 ? `
+          <section class="dravya-section">
+            <h2>Research Updates</h2>
+            <ul class="dravya-list">
+              ${plant.research_updates.map(r => `<li>${r}</li>`).join('')}
+            </ul>
           </section>
         ` : ''}
       </div>
@@ -282,4 +409,3 @@ document.addEventListener('DOMContentLoaded', function() {
       .catch(err => console.error('Error pre-loading dravya guna data:', err));
   }
 });
-
