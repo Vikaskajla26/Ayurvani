@@ -1,5 +1,5 @@
 // sw.js
-const CACHE = 'ayurvani-v2';
+const CACHE = 'ayurvani-v3';
 const ASSETS = [
   '/',
   '/index.html',

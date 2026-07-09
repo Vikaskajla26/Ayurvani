@@ -3296,6 +3296,20 @@ if ('serviceWorker' in navigator) {
       .then(reg => console.log('Service Worker registered:', reg.scope))
       .catch(err => console.error('Service Worker registration failed:', err));
   });
+
+  // Auto-reload once when a new Service Worker version takes control.
+  // Without this, an already-open tab (or a visitor who last loaded the site
+  // before a deploy) keeps being served by whichever SW controlled its initial
+  // page load -- a normal reload doesn't guarantee the new SW is in control
+  // yet, only a hard refresh reliably bypasses this. This makes every visitor
+  // automatically get the latest deployed version on their very next reload,
+  // with no manual hard-refresh needed.
+  let dgSwRefreshed = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (dgSwRefreshed) return;
+    dgSwRefreshed = true;
+    window.location.reload();
+  });
 }
 
 let speechUtterance = null;
