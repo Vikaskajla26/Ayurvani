@@ -1,24 +1,53 @@
 /* ========== DRAVYA GUNA: DEDICATED BACKGROUND & TYPOGRAPHY ========== */
 /* A warm botanical photo background (tulsi, amla, herb roots) sets this section
-   apart visually from the rest of the site, with a dark gradient overlay so text
-   stays readable against the busy image. Fraunces (serif, elegant) is used for
-   headings/plant names to give this section its own distinct typographic voice,
-   separate from Inter used in the main site chrome. */
+   apart visually from the rest of the site. Fraunces (serif, elegant) is used
+   for headings/plant names to give this section its own distinct typographic
+   voice, separate from Inter used in the main site chrome.
+
+   The background itself slowly pans and zooms (Ken Burns effect) via a
+   pseudo-element -- animating the image on ::before, not the section itself,
+   means the zoom/pan never nudges any real content or triggers layout shift.
+   This gives the same "living, moving" feeling as a looping background video,
+   without needing to host or serve one. */
 #view-dravyaguna {
   position: relative;
   border-radius: 20px;
   padding: 28px 20px 40px;
   margin: 0 -4px;
+  overflow: hidden;
   font-family: 'Cormorant Garamond', 'Inter', serif;
-  background:
-    linear-gradient(180deg, rgba(11,15,25,0.88) 0%, rgba(11,15,25,0.80) 30%, rgba(11,15,25,0.92) 100%),
-    url('/dravyaguna-bg.jpg') center 30% / cover no-repeat;
-  background-attachment: local, scroll;
 }
-body.light-mode #view-dravyaguna {
-  background:
-    linear-gradient(180deg, rgba(250,248,240,0.90) 0%, rgba(250,248,240,0.82) 30%, rgba(250,248,240,0.94) 100%),
-    url('/dravyaguna-bg.jpg') center 30% / cover no-repeat;
+#view-dravyaguna::before {
+  content: '';
+  position: absolute;
+  inset: -6%;
+  z-index: 0;
+  background: url('/dravyaguna-bg.jpg') center 30% / cover no-repeat;
+  animation: dgBgKenBurns 26s ease-in-out infinite alternate;
+  will-change: transform;
+}
+#view-dravyaguna::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(11,15,25,0.88) 0%, rgba(11,15,25,0.80) 30%, rgba(11,15,25,0.92) 100%);
+  pointer-events: none;
+}
+body.light-mode #view-dravyaguna::after {
+  background: linear-gradient(180deg, rgba(250,248,240,0.90) 0%, rgba(250,248,240,0.82) 30%, rgba(250,248,240,0.94) 100%);
+}
+#view-dravyaguna > * {
+  position: relative;
+  z-index: 2;
+}
+@keyframes dgBgKenBurns {
+  0%   { transform: scale(1)     translate(0%, 0%); }
+  50%  { transform: scale(1.09)  translate(-1.5%, -1%); }
+  100% { transform: scale(1.15)  translate(1%, 0.5%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #view-dravyaguna::before { animation: none; }
 }
 #view-dravyaguna .section-head h2,
 #view-dravyaguna h1, #view-dravyaguna h2, #view-dravyaguna h3, #view-dravyaguna h4,
