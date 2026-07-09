@@ -1,11 +1,12 @@
 // sw.js
-const CACHE = 'ayurvani-v3';
+const CACHE = 'ayurvani-v4';
 const ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/icon-192.jpg',
-  '/icon-512.jpg'
+  '/icon-192.png',
+  '/icon-512.png',
+  '/icon-512-maskable.png'
 ];
 
 self.addEventListener('install', e => {

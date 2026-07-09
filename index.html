@@ -6,7 +6,8 @@
 <title>आयुर्वेद वाणी | Ayurved Vani</title>
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#0b0f19">
-<link rel="apple-touch-icon" href="/icon-192.jpg">
+<link rel="apple-touch-icon" href="/icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Tiro+Devanagari+Hindi&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&display=swap" rel="stylesheet">
 <style>
@@ -1486,6 +1487,9 @@
   </div>
   <nav id="mainNav"></nav>
   <div class="header-right">
+    <button class="theme-btn" id="pwaInstallBtn" onclick="triggerPwaInstall()" aria-label="Install App" style="display:none; margin-right: 4px; background:var(--gold); color:var(--teal-deep);" title="Install Ayurvani as an app">
+      <span style="font-size:0.85rem; font-weight:600; padding:0 4px;">⬇ Install App</span>
+    </button>
     <div class="lang-toggle" id="langToggle">
       <button data-lang="hi">हिं</button>
       <button data-lang="en" class="active">EN</button>
@@ -3286,6 +3290,60 @@ function getReciteUrl(text, meter) {
     return `/api/recite?text=${encodedText}&meter=${meter}&server_url=${encodeURIComponent(VAGDHENU_SERVER)}&seed=42&speed=0.90`;
   }
 }
+</script>
+
+<script>
+// ---------- PWA Install Prompt ----------
+// Chrome/Edge/Android fire 'beforeinstallprompt' when the site meets install
+// criteria (valid manifest, service worker, HTTPS, icons). We intercept it
+// to show our own styled button instead of relying on visitors noticing the
+// browser's own (easy-to-miss) install icon in the address bar.
+let dgDeferredInstallPrompt = null;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  dgDeferredInstallPrompt = e;
+  const btn = document.getElementById('pwaInstallBtn');
+  if (btn) btn.style.display = 'inline-flex';
+});
+
+window.addEventListener('appinstalled', () => {
+  const btn = document.getElementById('pwaInstallBtn');
+  if (btn) btn.style.display = 'none';
+  dgDeferredInstallPrompt = null;
+});
+
+async function triggerPwaInstall() {
+  if (dgDeferredInstallPrompt) {
+    dgDeferredInstallPrompt.prompt();
+    const { outcome } = await dgDeferredInstallPrompt.userChoice;
+    dgDeferredInstallPrompt = null;
+    document.getElementById('pwaInstallBtn').style.display = 'none';
+    return;
+  }
+  // iOS Safari (and some other browsers) never fire beforeinstallprompt --
+  // there's no programmatic install API there, so show manual steps instead.
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  if (isIOS) {
+    showToast('iPhone/iPad par: neeche Share button dabayein, phir "Add to Home Screen" चुनें');
+  } else {
+    showToast('Aapka browser abhi install support nahi karta yahan se — Chrome ya Edge try karein');
+  }
+}
+
+// Already running as an installed app (standalone display mode) -- no need
+// to show an install button at all.
+const dgIsStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('pwaInstallBtn');
+  if (!btn) return;
+  if (dgIsStandalone) {
+    btn.style.display = 'none';
+    return;
+  }
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  if (isIOS) btn.style.display = 'inline-flex'; // iOS never fires beforeinstallprompt, so show proactively
+});
 </script>
 
 <script>
