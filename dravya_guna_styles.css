@@ -1,4 +1,37 @@
-/* ========== DRAVYA GUNA IMAGE GALLERY STYLES ========== */
+/* ========== DRAVYA GUNA: DEDICATED BACKGROUND & TYPOGRAPHY ========== */
+/* A warm botanical photo background (tulsi, amla, herb roots) sets this section
+   apart visually from the rest of the site, with a dark gradient overlay so text
+   stays readable against the busy image. Fraunces (serif, elegant) is used for
+   headings/plant names to give this section its own distinct typographic voice,
+   separate from Inter used in the main site chrome. */
+#view-dravyaguna {
+  position: relative;
+  border-radius: 20px;
+  padding: 28px 20px 40px;
+  margin: 0 -4px;
+  font-family: 'Cormorant Garamond', 'Inter', serif;
+  background:
+    linear-gradient(180deg, rgba(11,15,25,0.88) 0%, rgba(11,15,25,0.80) 30%, rgba(11,15,25,0.92) 100%),
+    url('/dravyaguna-bg.jpg') center 30% / cover no-repeat;
+  background-attachment: local, scroll;
+}
+body.light-mode #view-dravyaguna {
+  background:
+    linear-gradient(180deg, rgba(250,248,240,0.90) 0%, rgba(250,248,240,0.82) 30%, rgba(250,248,240,0.94) 100%),
+    url('/dravyaguna-bg.jpg') center 30% / cover no-repeat;
+}
+#view-dravyaguna .section-head h2,
+#view-dravyaguna h1, #view-dravyaguna h2, #view-dravyaguna h3, #view-dravyaguna h4,
+.dravya-detail-title h1,
+.dravya-card h3, .dravya-card-name {
+  font-family: 'Fraunces', 'Cormorant Garamond', serif !important;
+  letter-spacing: -0.01em;
+}
+@media (max-width: 640px) {
+  #view-dravyaguna { padding: 20px 12px 28px; border-radius: 14px; }
+}
+
+
 
 /* Plant Card Styles */
 .dravya-card {
