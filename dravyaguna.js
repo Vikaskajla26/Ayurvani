@@ -484,5 +484,4 @@ async function dgInit() {
   }
 }
 
-// Auto-init on page load (defer ensures DOM is ready)
-dgInit();
+// Pre-load data on page load so first Dravya click shows content
