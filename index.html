@@ -2871,7 +2871,7 @@ function showView(id){
   if(id==='chants') {
     renderChants();
   }
-  if(id==='dravyaguna') { setTimeout(function(){ if(typeof dgInit==='function') dgInit(); }, currentActive && currentActive !== target ? 250 : 50); }
+  if(id==='dravyaguna') { if(typeof dgInit==='function') dgInit(); }
   if(id==='favorites') renderFavorites();
   if(id==='admin') renderAdmin();
   

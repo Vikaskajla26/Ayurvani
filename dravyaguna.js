@@ -461,29 +461,28 @@ function dgHideDetail() {
 }
 
 // ---- Init ----
+var dgInited = false;
 async function dgInit() {
   await dgLoadData();
   var countEl = document.getElementById('dravyaCount');
   if (countEl && dgData.length) countEl.textContent = dgData.length + ' plants';
+  // Rebuild filters + grid each call (section transitions cause re-render gaps)
   dgBuildFilters();
   dgRender();
 
-  var searchInput = document.getElementById('dravyagunaSearchInput');
-  if (searchInput) {
-    searchInput.addEventListener('input', function() { dgRender(); });
+  if (!dgInited) {
+    var searchInput = document.getElementById('dravyagunaSearchInput');
+    if (searchInput) {
+      searchInput.addEventListener('input', function() { dgRender(); });
+    }
+    window.renderDravyagunaList = function(q) { dgRender(); };
+    window.showDravyagunaDetail = function(id) { dgShowDetail(id); };
+    window.hideDravyagunaDetail = function() { dgHideDetail(); };
+    window.dgShowDetail = dgShowDetail;
+    window.dgHideDetail = dgHideDetail;
+    dgInited = true;
   }
-
-  window.renderDravyagunaList = function(q) { dgRender(); };
-  window.showDravyagunaDetail = function(id) { dgShowDetail(id); };
-  window.hideDravyagunaDetail = function() { dgHideDetail(); };
-  window.dgShowDetail = dgShowDetail;
-  window.dgHideDetail = dgHideDetail;
 }
 
-(function() {
-  if (document.readyState === 'complete' || document.readyState === 'interactive') {
-    setTimeout(dgInit, 100);
-  } else {
-    document.addEventListener('DOMContentLoaded', function() { setTimeout(dgInit, 100); });
-  }
-})();
+// Auto-init on page load (defer ensures DOM is ready)
+dgInit();
