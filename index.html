@@ -822,15 +822,10 @@
   }
   .cancel-btn:hover { border-color: var(--copper); color: var(--copper); }
   .tag-role { font-size:0.7rem; background:var(--gold); color:var(--teal-deep); padding:3px 10px; border-radius:10px; font-weight:700; margin-left:8px; }
-  /* Scroll nav advance indicator */
-  .scroll-next-hint {
-    position: fixed; bottom: 90px; right: 28px;
-    display: flex; flex-direction: column; align-items: center; gap: 5px;
-    opacity: 0; pointer-events: none;
-    transition: opacity 0.4s ease;
-    z-index: 80;
-  }
-  .scroll-next-hint.visible { opacity: 1; }
+  /* Scroll nav advance indicator -- inert now (auto-advance-to-next-page on
+     scroll was disabled), forced hidden rather than deleted to avoid touching
+     unrelated markup/JS that references these ids. */
+  .scroll-next-hint { display: none !important; }
   .scroll-next-hint .hint-label {
     font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
     color: rgba(243,238,223,0.55);
@@ -841,6 +836,21 @@
     display: flex; align-items: center; justify-content: center;
     color: var(--gold); font-size: 0.9rem;
     animation: scrollBounce 1.4s ease-in-out infinite;
+  }
+  /* Scroll-reveal motion: replaces the old forced next-page scroll. Cards and
+     content gently fade + rise into place as they enter the viewport while
+     scrolling down the same page. Respects prefers-reduced-motion. */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+  }
+  .scroll-reveal-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-reveal { opacity: 1; transform: none; transition: none; }
   }
   @keyframes scrollBounce {
     0%, 100% { transform: translateY(0); }
@@ -5195,39 +5205,54 @@ function closePdfViewerModal() {
 let lastScrollAdvanceTime = 0;
 
 function initScrollNavAdvance() {
-  window.addEventListener('scroll', () => {
-    updateScrollAdvanceIndicator();
+  // NOTE: auto-advancing to the next nav section when scrolling past the
+  // bottom (and the matching touch-swipe / wheel gestures) has been turned
+  // off per request -- it was jarring for visitors. The scroll-next-hint
+  // element and helper functions are left in place but inert, in case this
+  // is ever wanted back; initScrollReveal() below replaces it with an
+  // in-page motion effect instead (content gently animates in as you scroll
+  // down the same page, rather than being pushed to a different page).
+  initScrollReveal();
+}
+
+// ---------- Scroll-reveal motion (replaces forced next-page scroll) ----------
+function initScrollReveal() {
+  const selector = '.card, .dravya-card, .book-card, .chant-card, .quick-cat, .clickable-topic';
+  if (!('IntersectionObserver' in window)) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('scroll-reveal-in');
+        observer.unobserve(entry.target); // animate in once, don't repeat on scroll-back
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  function applyTo(el) {
+    if (el.dataset.revealBound) return;
+    el.dataset.revealBound = '1';
+    el.classList.add('scroll-reveal');
+    observer.observe(el);
+  }
+
+  document.querySelectorAll(selector).forEach(applyTo);
+
+  // Catch cards added later by dynamic renders (search results, view
+  // switches, newly opened lists, etc.) without needing to hook every
+  // individual render function -- this observes the whole app content area
+  // for new matching elements as they're inserted.
+  const appRoot = document.querySelector('main') || document.body;
+  const mo = new MutationObserver((mutations) => {
+    for (const m of mutations) {
+      m.addedNodes.forEach(node => {
+        if (node.nodeType !== 1) return;
+        if (node.matches && node.matches(selector)) applyTo(node);
+        node.querySelectorAll && node.querySelectorAll(selector).forEach(applyTo);
+      });
+    }
   });
-
-  // Track swipe gestures on mobile
-  let touchStartY = 0;
-  window.addEventListener('touchstart', (e) => {
-    touchStartY = e.touches[0].clientY;
-  }, { passive: true });
-
-  window.addEventListener('touchmove', (e) => {
-    const touchY = e.touches[0].clientY;
-    const diff = touchStartY - touchY; // positive means swipe up / scroll down
-    if (Math.abs(diff) > 75) {
-      if (diff > 0) {
-        checkScrollAdvanceGesture(1);
-      } else {
-        checkScrollAdvanceGesture(-1);
-      }
-      touchStartY = touchY; // Reset to prevent double trigger
-    }
-  }, { passive: true });
-
-  // Track mouse wheel scroll past ends
-  window.addEventListener('wheel', (e) => {
-    if (Math.abs(e.deltaY) > 40) {
-      if (e.deltaY > 0) {
-        checkScrollAdvanceGesture(1); // Down
-      } else {
-        checkScrollAdvanceGesture(-1); // Up
-      }
-    }
-  }, { passive: true });
+  mo.observe(appRoot, { childList: true, subtree: true });
 }
 
 function getCurrentActiveNavIndex() {
