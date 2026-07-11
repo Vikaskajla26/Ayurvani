@@ -3532,5 +3532,407 @@
    "Antidiabetic activity",
    "Anti-inflammatory activity"
   ]
+ },
+ {
+  "id": "eranda",
+  "name": "Eranda",
+  "sanskrit_name": "एरण्ड",
+  "sloka": "एरण्डमूलादुष्णं गुरु विनाशयेत् | शूलशोथकटीबस्तीशिरः पीडोदकज्वरान् || द्विविधस्यामवातस्य कण्डूकुष्ठविनाशनम् | तन्मज्जा च विडभेदी वातश्लेष्मदोषहरः ||",
+  "sloka_source": "भा. प्र.",
+  "botanical_name": "Ricinus communis",
+  "family": "Euphorbiaceae",
+  "synonyms": [
+   {
+    "term": "वर्धमान",
+    "meaning": ""
+   },
+   {
+    "term": "उरुबूक",
+    "meaning": ""
+   },
+   {
+    "term": "गन्धर्वहस्त",
+    "meaning": ""
+   },
+   {
+    "term": "पञ्चाङ्गुल",
+    "meaning": ""
+   },
+   {
+    "term": "वातारि",
+    "meaning": ""
+   },
+   {
+    "term": "हरितपर्णक",
+    "meaning": ""
+   },
+   {
+    "term": "दीर्घदण्ड",
+    "meaning": ""
+   },
+   {
+    "term": "आमण्ड",
+    "meaning": ""
+   },
+   {
+    "term": "चित्रबीज",
+    "meaning": ""
+   },
+   {
+    "term": "स्थूलशत्रु",
+    "meaning": ""
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Castor Plant"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Endi / Arand"
+   },
+   {
+    "lang": "Marathi",
+    "name": "Erendi"
+   }
+  ],
+  "classification_of_gana": [
+   "चरक: भेदनीय वर्ग, स्वेदोपग वर्ग, अंगमर्दप्रशमन वर्ग",
+   "सुश्रुत: वातसंशमन वर्ग",
+   "भावप्रकाश: गुडुच्यादि वर्ग"
+  ],
+  "external_morphology": {
+   "habitat": "",
+   "details": [
+    "Habit: A tall glabrous annual shrub",
+    "Stem: Erect",
+    "Leaf: Alternate, broad palmately lobed and veined, lobes (7-8), simple, serrate, reticulate venation",
+    "Inflorescence: A terminal raceme",
+    "Flower: Monoecious",
+    "Fruit: 3-seeded capsule",
+    "Seed: Carunculate, oblong"
+   ]
+  },
+  "useful_parts": "Root, Seed, Leaf",
+  "phytoconstituents": "Seed: fixed oil (45-52%), proteids 20%, starch, albumin, ricin (toxic), uric acid. Root and root bark: potassium, sodium, magnesium, chloride. Leaves: lysine, leucine, valine, ricinine, rutin",
+  "rasa_panchaka": {
+   "rasa": "Madhura, Katu, Kashaya",
+   "guna": "Tikshna, Guru, Snigdha",
+   "virya": "Ushna",
+   "vipaka": "Madhura"
+  },
+  "karma": {
+   "dosha_karma": "त्रिदोषशामक (Tridoshashamak). Agryakarma: Root of Eranda is best Aphrodisiac and pacifies Vata.",
+   "karma": "Eranda Mula: Vrishya, Shulahara, Shothahara, Shirapidahara, Jwarahara, Anahahara, Kasanashaka, Kushthaghna | Eranda Beeja: Bhedana, Shulahara, Deepan, Ushna, Udarshoolahara, Krimighna, Mutrakruchrahara | Eranda Patra: Krimighna, Kushthahara, Bastishoolahara"
+  },
+  "doshaghnata": "त्रिदोषशामक (Tridoshashamak)",
+  "rogaghnata": "Eranda Mula: Shula, Katishula, Bastishula, Amavata, Vatavyadhi, Pakshaghata, Shotha, Shirahshula, Jwara, Gulma, Anaha, Kushtha | Eranda Beeja: Vatavyadhi, Agnimandya, Udara, Mutrakruchra | Eranda Patra: Krimi, Mutrakruchra, Bastishula | Eranda Pushpa: Mutradosha",
+  "amayika_prayoga": [
+   "आमवात (Rheumatoid Arthritis) = Eranda Taila",
+   "पार्श्वशूल (pain in flanks) = Kwatha of 80g Eranda mula with 8x water, administered with Yavakshara and double quantity Triphala kwatha with milk",
+   "विबन्ध (Constipation) = Eranda Taila mixed with double quantity Triphala kwatha with milk",
+   "उदर रोग (Ascites) = Eranda Taila",
+   "शूल (Abdominal pain) = Kwatha of Shunthi and Erandmula mixed with Hingu and Saindhava lavana",
+   "अर्शस् (Piles) = Kwatha of Ashta (?) and Eranda"
+  ],
+  "matra": [
+   {
+    "form": "Mula Kwatha",
+    "dose": "50-100 ml"
+   },
+   {
+    "form": "Mula Kalka",
+    "dose": "5-6 g"
+   },
+   {
+    "form": "Patra Kalka",
+    "dose": "10-20 g"
+   },
+   {
+    "form": "Bija Churna",
+    "dose": "3-6 g"
+   }
+  ],
+  "pharmacological_actions": [
+   "Purgative",
+   "Stimulant"
+  ],
+  "kalpana": [
+   "Eranda Taila - Katishula, Udarshula",
+   "Eranda Saptika Kwatha - Katishula, Stanashula",
+   "Eranda Phala Payasa - Vibandha, Katishula",
+   "Erandadi Kwatha - Vibandha, Shula, Medoroga",
+   "Eranda Kshira"
+  ],
+  "varieties": "भावप्रकाश: 1) श्वेत (White) 2) रक्त (Red). राजनिघण्टु: 1) श्वेत 2) रक्त 3) स्थूल. Note on toxicity: seed fatal dose is 5-10 crushed seeds, fatal period 2 to several days.",
+  "research_updates": [
+   "Ricin used in cancer chemotherapy as immunotoxins",
+   "Antioxidant, antibacterial, antimicrobial",
+   "Anticarcinogenic properties",
+   "Antidiabetic activity"
+  ]
+ },
+ {
+  "id": "shigru",
+  "name": "Shigru",
+  "sanskrit_name": "शिग्रु / शेवगा",
+  "sloka": "शिग्रुः कटुः कटुः पाके तीक्ष्णोष्णो मधूरो लघुः | दीपनो रोचनो जन्तुः क्षारस्तिक्तो विदाहकृत् || संग्राही शुकोलो हृद्यः पित्तरक्तप्रकोपणः | चक्षुष्यः कफवातनः हन्ति शोथप्लीहग्रन्थ्यव्रणार्बुदम् ||",
+  "sloka_source": "भा. प्र.",
+  "botanical_name": "Moringa oleifera",
+  "family": "Moringaceae",
+  "synonyms": [
+   {
+    "term": "शोभाञ्जन",
+    "meaning": ""
+   },
+   {
+    "term": "बहुमूल",
+    "meaning": ""
+   },
+   {
+    "term": "मेचक",
+    "meaning": ""
+   },
+   {
+    "term": "दन्तशठ",
+    "meaning": ""
+   },
+   {
+    "term": "तीक्ष्णगन्ध",
+    "meaning": ""
+   },
+   {
+    "term": "कुळकतपत्री",
+    "meaning": ""
+   },
+   {
+    "term": "कृष्णगन्धा",
+    "meaning": ""
+   },
+   {
+    "term": "हरितशाक",
+    "meaning": ""
+   },
+   {
+    "term": "मोचकशाक",
+    "meaning": ""
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Drumstick, Horse Radish Tree, Moringa"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Sahijan, Munaga"
+   },
+   {
+    "lang": "Marathi",
+    "name": "Shegat, Shevga"
+   }
+  ],
+  "classification_of_gana": [
+   "चरक: स्वेदोपग वर्ग, शिरोविरेचनोपग वर्ग, कटुकस्कन्ध",
+   "सुश्रुत: वरुणादि गण",
+   "भावप्रकाश: गुडुच्यादि वर्ग"
+  ],
+  "external_morphology": {
+   "habitat": "Cultivated in India",
+   "details": [
+    "Habit: Small to middle sized tree",
+    "Bark: Corky; wood soft; root tomentose",
+    "Leaves: Usually tripinnate",
+    "Inflorescence: Large puberculous panicles",
+    "Flowers: White colour",
+    "Fruit: Pod",
+    "Seed: 3-angled, angles winged"
+   ]
+  },
+  "useful_parts": "Twak (bark), Fruit, Leaf, Seed",
+  "phytoconstituents": "Whole plant: amino acids like leucine, aspartic acid, glutamic acid, glycine, valine. Organic acids: citric, malic, malonic, oxalic. Leaves: high iron, potassium, vitamin C. Pods: protein, calcium, copper, iodine, oxalic acid",
+  "rasa_panchaka": {
+   "rasa": "Katu, Tikta",
+   "guna": "Ruksha, Tikshna, Sara, Laghu",
+   "virya": "Ushna",
+   "vipaka": "Katu"
+  },
+  "karma": {
+   "dosha_karma": "शोतकफशामक / Kaphavatashamak",
+   "karma": "Deepan, Bhedani, Shukrala, Hrudya, Chakshushya, Krimighna, Vishaghna, Shwayathuhara, Vranahara, Medohara, Kandughna, Shoolahara, Shwasahara, Mukharujahara, Vatashoolanashana"
+  },
+  "doshaghnata": "शोतकफशामक (Kaphavatashamak)",
+  "rogaghnata": "Shigru: Netraroga, Vishavikara, Shotha, Krimi, Kushthahara, Medoroga, Shwasa, Pakshaghata, Ardhangavata, Kasa, Udararoga | Shweta Shigru: Shopha, Aruchi, Agnimandya | Rakta Shigru: Shopha; used as a Rasayana",
+  "amayika_prayoga": [
+   "नेत्ररोग (eye disease) = Juice of leaves alleviates diseases of the eye caused by vitiation of Vata, Pitta, Kapha, or all three doshas",
+   "शिरःशूल (Headache) = Nasya with juice of Shigru leaves mixed with Jaggery",
+   "कृमी रोग (worm infestation) = Decoction of Shigru and Vidanga mixed with Honey"
+  ],
+  "matra": [
+   {
+    "form": "Swarasa",
+    "dose": "10-30 ml"
+   },
+   {
+    "form": "Kwatha",
+    "dose": "30-50 ml"
+   }
+  ],
+  "pharmacological_actions": [
+   "Antioxidant",
+   "Anti-inflammatory",
+   "Antispasmodic",
+   "Stimulant",
+   "Expectorant",
+   "Diuretic",
+   "Emmenagogue"
+  ],
+  "kalpana": [
+   "Shigru Kwatha - Pittodara",
+   "Shobhanjanadi Lepa - Apachi",
+   "Asuvadi Taila - Sheeta Jwara",
+   "Kanakshiri Taila - Mandala Kushtha",
+   "Shyamadi Churna - Krimi"
+  ],
+  "varieties": "भावप्रकाश: 1) Shigru 2) Shweta 3) Rakta 4) Nila. Madhu Shigru: white flower (Moringa concanensis). Kata Shigru: red flower (Moringa oleifera). Other uses: leaf juice externally for muscle spasm; root bark Lepa for Vranashodhana; seed powder with Vidanga for Krimi",
+  "research_updates": [
+   "Anti-inflammatory activity comparable to diclofenac",
+   "Antioxidant",
+   "Effect on diabetes-induced oxidative stress",
+   "Antibacterial",
+   "Antitumor activity",
+   "Antimicrobial"
+  ]
+ },
+ {
+  "id": "bala",
+  "name": "Bala",
+  "sanskrit_name": "बला",
+  "sloka": "बला स्निग्धा हिमा स्वादुर्वृष्या बल्या त्रिदोषनुत् | रक्तपित्तं क्षयं हन्ति बलौजो वर्धयत्यपि ||",
+  "sloka_source": "शा. नि.",
+  "botanical_name": "Sida cordifolia",
+  "family": "Malvaceae",
+  "synonyms": [
+   {
+    "term": "वाट्यालका",
+    "meaning": ""
+   },
+   {
+    "term": "शीतपुष्पी",
+    "meaning": ""
+   },
+   {
+    "term": "वाट्या",
+    "meaning": ""
+   },
+   {
+    "term": "शीतपाकी",
+    "meaning": ""
+   },
+   {
+    "term": "भद्रोदनी",
+    "meaning": ""
+   },
+   {
+    "term": "ओदनोद्वया",
+    "meaning": ""
+   },
+   {
+    "term": "बलाह्वया",
+    "meaning": ""
+   },
+   {
+    "term": "विनाश्या",
+    "meaning": ""
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Country Yellow"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Baniyar"
+   },
+   {
+    "lang": "Marathi",
+    "name": "Chikana"
+   }
+  ],
+  "classification_of_gana": [
+   "चरक: बृंहणीय वर्ग, बल्य, प्रजास्थापन वर्ग",
+   "सुश्रुत: वातसंशमन वर्ग",
+   "भावप्रकाश: गुडुच्यादि वर्ग"
+  ],
+  "external_morphology": {
+   "habitat": "",
+   "details": [
+    "Habit: Wild undershrub (heart-shaped leaves)",
+    "Stem: Herbaceous, aerial",
+    "Leaf: Alternate",
+    "Inflorescence: Solitary, axillary",
+    "Flower: Bracteate, pedicellate"
+   ]
+  },
+  "useful_parts": "Root",
+  "phytoconstituents": "Seed: ephedrine, fatty oil, steroids, resin, resin acids. Root: vasicine, vasicinol, betaine",
+  "rasa_panchaka": {
+   "rasa": "Madhura",
+   "guna": "Snigdha, Guru",
+   "virya": "Sheeta",
+   "vipaka": "Madhura"
+  },
+  "karma": {
+   "dosha_karma": "वातपित्तशामक (Vatapittashamak). Agryakarma: Bala is astringent, an energy promoter, and pacifies Vata.",
+   "karma": "Balya, Kantikara, Grahi, Vrishya, Ojovardhaka, Ayurvardhaka, Stambhana, Brumhana, Shothahara, Rasayana, Hrudya"
+  },
+  "doshaghnata": "वातपित्तशामक (Vatapittashamak)",
+  "rogaghnata": "Vatavyadhi, Daurbalya, Kshaya, Raktapitta, Vatarakta, Arsha, Mutratisara, Mutrakruchra | Balaphala: Adhmana, Jwara",
+  "amayika_prayoga": [
+   "वातव्याधी (Vatavyadhi) = Bala Taila",
+   "वातरक्त (Gout) = Bala Taila used for bath, enema and diet in Vatarakta",
+   "मदात्ययजन्य तृष्णा (thirst caused by alcoholism) = Water processed with Bala given to drink",
+   "श्लीपद (Filariasis) = Milk processed with two types of Bala taken in the morning"
+  ],
+  "matra": [
+   {
+    "form": "Kwatha",
+    "dose": "50-100 ml"
+   },
+   {
+    "form": "Churna",
+    "dose": "3-6 g"
+   },
+   {
+    "form": "Swarasa",
+    "dose": "10-20 ml"
+   }
+  ],
+  "pharmacological_actions": [
+   "Aphrodisiac",
+   "Diuretic",
+   "Deflatulent",
+   "Analgesic",
+   "Anti-inflammatory",
+   "Tonic",
+   "Cardiotonic"
+  ],
+  "kalpana": [
+   "Bala Taila - Vata vikara, Bhagna",
+   "Kshirabala Taila - Vata vikara",
+   "Baladya Ghrita - Kshayakasa, Kasa",
+   "Balarishta - Vatavyadhi, Krusha"
+  ],
+  "varieties": "4 types of Bala (per भावप्रकाश and Kaiyadeva Nighantu): Bala, Atibala, Nagabala, Mahabala",
+  "research_updates": [
+   "Anti-nociceptive activity on orofacial nociception",
+   "Anti-peroxidative and anti-inflammatory",
+   "Anti-stress, adaptogenic activity",
+   "Antipyretic and anti-ulcerogenic",
+   "Analgesic and anti-inflammatory",
+   "Hypoglycemic activities"
+  ]
  }
 ]
