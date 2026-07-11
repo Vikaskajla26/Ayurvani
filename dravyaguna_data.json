@@ -3934,5 +3934,339 @@
    "Analgesic and anti-inflammatory",
    "Hypoglycemic activities"
   ]
+ },
+ {
+  "id": "ashwagandha",
+  "name": "Ashwagandha",
+  "sanskrit_name": "अश्वगंधा",
+  "sloka": "अश्वगन्धाऽनिलश्लेष्मश्वित्रशोथक्षयापहा | बल्या रसायनी तिक्ता कषायोष्णातिशुक्रला ||",
+  "sloka_source": "भा. प्र.",
+  "botanical_name": "Withania somnifera",
+  "family": "Solanaceae",
+  "synonyms": [
+   {
+    "term": "गन्धपत्री",
+    "meaning": ""
+   },
+   {
+    "term": "वराहकर्णी",
+    "meaning": ""
+   },
+   {
+    "term": "अश्वकन्द",
+    "meaning": ""
+   },
+   {
+    "term": "वाजिदा",
+    "meaning": ""
+   },
+   {
+    "term": "वाजिगन्धी",
+    "meaning": ""
+   },
+   {
+    "term": "वृषा",
+    "meaning": ""
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Winter Cherry"
+   },
+   {
+    "lang": "Marathi",
+    "name": "Askandha"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Asagandh"
+   }
+  ],
+  "classification_of_gana": [
+   "चरक: बल्य, बृंहणीय",
+   "सुश्रुत: —",
+   "भावप्रकाश: गुडुच्यादि वर्ग"
+  ],
+  "external_morphology": {
+   "habitat": "",
+   "details": [
+    "Habit: Much branched perennial herb",
+    "Root: Tap-root, branched",
+    "Stem: Aerial, erect",
+    "Leaf: Alternate",
+    "Flower: Greenish yellow",
+    "Fruit: Small berry, red when ripe",
+    "Seed: Endospermic"
+   ]
+  },
+  "useful_parts": "Root",
+  "phytoconstituents": "Somniferine, somniferinine, withanine, nicotine, withaniol",
+  "rasa_panchaka": {
+   "rasa": "Tikta, Kashaya",
+   "guna": "Laghu, Snigdha",
+   "virya": "Ushna",
+   "vipaka": "Madhura"
+  },
+  "karma": {
+   "dosha_karma": "कफवातहर (Kaphavatahara)",
+   "karma": "Balya, Kantivardhaka, Shwasahara, Shothahara, Rasayana, Kasahara, Kandughna, Vibandhahara, Shukrala, Nadibalya, Keshya, Vranahara"
+  },
+  "doshaghnata": "कफवातहर (Kaphavatahara)",
+  "rogaghnata": "वातव्याधि, शोष, विषम ज्वर, व्रण, कास, शोथ, कण्डू, केश्य समस्याएँ, श्वास",
+  "amayika_prayoga": [
+   "रसायन (Rejuvenation) = Ashwagandha taken with milk/ghee/oil or warm water for 15 days acts as Rasayana",
+   "कृशता (Emaciation) = Ghrita prepared from Ashwagandha taken every morning",
+   "श्वास (Dyspnoea) = Kshara of Ashwagandha taken with Honey and Ghee",
+   "निद्रानाश (Insomnia) = Ashwagandha churna mixed with sugar and ghee",
+   "गर्भधारणार्थ (For conception) = Ghrita prepared from Ashwagandha kwatha and milk consumed at the right time to aid conception"
+  ],
+  "matra": [
+   {
+    "form": "Churna",
+    "dose": "3-5 g"
+   }
+  ],
+  "pharmacological_actions": [
+   "Sedative",
+   "Antimitotic",
+   "Hypnotic",
+   "Antitumor",
+   "Antiseptic"
+  ],
+  "kalpana": [
+   "Ashwagandha Ghrita",
+   "Ashwagandha Kwatha",
+   "Ashwagandha Rasayana",
+   "Ashwagandha Taila",
+   "Ashwagandha Lepa"
+  ],
+  "varieties": "Not mentioned in notes",
+  "research_updates": [
+   "May help reverse Alzheimer's disease",
+   "Protective against radiation-induced hepatotoxicity",
+   "Antioxidant",
+   "Relevance to neurodegenerative disease",
+   "Substitution: काकोली, क्षीरकाकोली"
+  ]
+ },
+ {
+  "id": "bhumyamalaki",
+  "name": "Bhumyamalaki",
+  "sanskrit_name": "भूम्यामलकी",
+  "sloka": "भूम्यामलकी हिमा तिक्ता कषाया मधुरा हिमा | नेत्री पाण्डुप्रणीला हिक्का श्वासकफास्त्रहा ||",
+  "sloka_source": "क. नि.",
+  "botanical_name": "Phyllanthus urinaria / Phyllanthus amarus",
+  "family": "Euphorbiaceae / Phyllanthaceae",
+  "synonyms": [
+   {
+    "term": "तमलाकी",
+    "meaning": ""
+   },
+   {
+    "term": "बहुपत्रा",
+    "meaning": ""
+   },
+   {
+    "term": "बहुयशा",
+    "meaning": ""
+   },
+   {
+    "term": "अमला",
+    "meaning": ""
+   },
+   {
+    "term": "शिवा",
+    "meaning": ""
+   },
+   {
+    "term": "भूधात्री",
+    "meaning": ""
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Stone Breaker"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Bhuianla"
+   },
+   {
+    "lang": "Marathi",
+    "name": "Bhuiaoli"
+   }
+  ],
+  "classification_of_gana": [
+   "चरक: —",
+   "सुश्रुत: —",
+   "भावप्रकाश: गुडुच्यादि वर्ग"
+  ],
+  "external_morphology": {
+   "habitat": "",
+   "details": [
+    "Habit: An annual herb, grows 30-60 cm in height",
+    "Stem: Erect and branched",
+    "Leaf: Simple, closely placed, sessile",
+    "Flower: Solitary, axillary",
+    "Fruit: Capsule"
+   ]
+  },
+  "useful_parts": "Panchanga (whole plant)",
+  "phytoconstituents": "Bitter substances and alkaloids; whole plant contains phyllanthin, phyllinim, phyllantheol",
+  "rasa_panchaka": {
+   "rasa": "Tikta, Kashaya, Madhura",
+   "guna": "Laghu, Ruksha",
+   "virya": "Sheeta",
+   "vipaka": "Madhura"
+  },
+  "karma": {
+   "dosha_karma": "पित्तकफशामक (Pittakaphashamak)",
+   "karma": "Kasahara, Kandughna, Dahahara, Rochaka, Kushthaghna, Shwasahara, Trishnahara, Shothahara, Balahara, Mutraroga-hara"
+  },
+  "doshaghnata": "पित्तकफशामक (Pittakaphashamak)",
+  "rogaghnata": "श्वास, कास, कामला, पाण्डु, शोथ, प्रमेह, मूत्रविकार, कुष्ठ, कण्डू, तृष्णा, दाह",
+  "amayika_prayoga": [
+   "प्रदर (Menorrhagia) = 20g Bhumyamalaki + 20 Maricha, powder of Bhumyamalaki root taken with rice water cures Pradara quickly"
+  ],
+  "matra": [
+   {
+    "form": "Swarasa",
+    "dose": "10-20 ml"
+   },
+   {
+    "form": "Churna",
+    "dose": "3-6 g"
+   }
+  ],
+  "pharmacological_actions": [
+   "Antibacterial",
+   "Demulcent",
+   "Hepatoprotective",
+   "Antifungal",
+   "Anticancer",
+   "Antiviral",
+   "Hypoglycemic"
+  ],
+  "kalpana": [
+   "Chyavanaprasha - Medhyatha, Karshya",
+   "Kantakari Ghrita - श्वास",
+   "Bhumyamalakyadi Kashaya - कास"
+  ],
+  "varieties": "Not mentioned in notes",
+  "research_updates": [
+   "Hepatoprotective",
+   "Antioxidant"
+  ]
+ },
+ {
+  "id": "ashoka",
+  "name": "Ashoka",
+  "sanskrit_name": "अशोक",
+  "sloka": "अशोकः शीतलस्तिक्तो ग्राही वर्ण्यः कषायकः | दोषापचीतुषाहार्त्तिशोथशूलविषापहृत् ||",
+  "sloka_source": "भा. प्र.",
+  "botanical_name": "Saraca indica / Saraca asoca",
+  "family": "Leguminosae",
+  "synonyms": [
+   {
+    "term": "गन्धपुष्प",
+    "meaning": ""
+   },
+   {
+    "term": "ताम्रपल्लव",
+    "meaning": ""
+   },
+   {
+    "term": "पिण्डपुष्प",
+    "meaning": ""
+   },
+   {
+    "term": "मधुपुष्प",
+    "meaning": ""
+   },
+   {
+    "term": "हेमपुष्प",
+    "meaning": ""
+   },
+   {
+    "term": "कङ्केलि",
+    "meaning": ""
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Ashoka Tree"
+   },
+   {
+    "lang": "Marathi",
+    "name": "Ashoka"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Ashok"
+   }
+  ],
+  "classification_of_gana": [
+   "चरक: वेदनास्थापन, कषायस्कन्ध",
+   "सुश्रुत: लोध्रादि",
+   "भावप्रकाश: पुष्पवर्ग"
+  ],
+  "external_morphology": {
+   "habitat": "",
+   "details": [
+    "Habit: A tree, grows 6-9 m high, branches are glabrous"
+   ]
+  },
+  "useful_parts": "Bark, Seed, Flowers",
+  "phytoconstituents": "Bark: tannin (6%), catechol. Pods: catechol. Seeds: palmitic and stearic acid. Flowers: γ-sitosterol, gallic acid",
+  "rasa_panchaka": {
+   "rasa": "Kashaya, Tikta",
+   "guna": "Laghu, Ruksha",
+   "virya": "Sheeta",
+   "vipaka": "Katu"
+  },
+  "karma": {
+   "dosha_karma": "कफपित्तशामक (Kaphapittashamak)",
+   "karma": "Grahi, Varnya, Trishnahara, Dahashamak, Krimighna, Vranaropaka, Raktya, Sandhaniya, Vishaghna, Shleshmanashana, Jwaraghna"
+  },
+  "doshaghnata": "कफपित्तशामक (Kaphapittashamak)",
+  "rogaghnata": "प्रदर, योनिव्यापत्, तृष्णा, दाह, कृमी, व्रण, विषरोग, शोथ, अपची, अर्श, गुल्म, उदरशूल",
+  "amayika_prayoga": [
+   "वातव्याधि (Vata disorders) = Ashoka Ghrita",
+   "प्रदर (Menorrhagia) = Ashoka Twak Kwatha with cold milk in the morning checks severe bleeding per vaginam",
+   "अश्मरी (Urinary calculi) = Ashoka Bija Churna with water relieves Mutraghata and Ashmari",
+   "Ashoka Kashaya = Swasada"
+  ],
+  "matra": [
+   {
+    "form": "Kwatha",
+    "dose": "40-80 ml"
+   },
+   {
+    "form": "Bija Churna",
+    "dose": "1-3 g"
+   },
+   {
+    "form": "Pushpa Churna",
+    "dose": "1-3 g"
+   }
+  ],
+  "pharmacological_actions": [
+   "Astringent",
+   "Uterine sedative"
+  ],
+  "kalpana": [
+   "Ashokarishta - रक्तपित्त",
+   "Ashoka Ghrita - प्रदर, योनिशूल, कटिशूल",
+   "Vandani Taila"
+  ],
+  "varieties": "Not mentioned in notes",
+  "research_updates": [
+   "Chemopreventive activity on 2-stage skin carcinogenesis",
+   "Antibacterial activity",
+   "Antimicrobial"
+  ]
  }
 ]
