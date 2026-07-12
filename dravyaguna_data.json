@@ -5602,5 +5602,325 @@
    "Hepatoprotective activity",
    "Anti-implantation activity"
   ]
+ },
+ {
+  "id": "mandookaparni",
+  "name": "Mandookaparni",
+  "sanskrit_name": "मण्डूकपर्णी",
+  "sloka": "सुवर्चलाधरा हारी दृश्यानि सुलोचनि च | कुष्ठमेहज्वरश्वासकासशोथारुचीर्जयेत् || लघ्वी मण्डूकपर्णी तु ...",
+  "sloka_source": "सु. चि. ४६०",
+  "botanical_name": "Centella asiatica",
+  "family": "Apiaceae",
+  "synonyms": [
+   {
+    "term": "मण्डूकी",
+    "meaning": "Runner/growth pattern resembles how a frog jumps"
+   },
+   {
+    "term": "ब्राह्मोपम",
+    "meaning": "Best medicinal plant"
+   },
+   {
+    "term": "दिव्या",
+    "meaning": "Best qualities, great importance"
+   },
+   {
+    "term": "सरस्वती",
+    "meaning": "Imparts good knowledge by enhancing memory"
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Indian Pennywort"
+   },
+   {
+    "lang": "Marathi",
+    "name": "Karivana"
+   }
+  ],
+  "classification_of_gana": [
+   "चरक: वयःस्थापन वर्ग",
+   "सुश्रुत: गुडुच्यादि वर्ग"
+  ],
+  "external_morphology": {
+   "habitat": "Grows in moist regions",
+   "details": [
+    "Habit: Annual prostrate herb",
+    "Root: Tap root, branched",
+    "Stem: Prostrate, herbaceous",
+    "Leaf: Simple, arising in groups from nodes",
+    "Inflorescence: Racemose, simple umbels",
+    "Flower: Pedicellate, bracteate",
+    "Fruit: Cremocarp, laterally compressed"
+   ]
+  },
+  "useful_parts": "Leaf, Whole herb",
+  "phytoconstituents": "Centelloside, centic acid, centellic acid, centoic acid",
+  "rasa_panchaka": {
+   "rasa": "Tikta, Kashaya, Madhura",
+   "guna": "Laghu",
+   "virya": "Sheeta",
+   "vipaka": "Madhura",
+   "prabhava": "मेध्य (Medhya)"
+  },
+  "karma": {
+   "dosha_karma": "विशेष शामक (Vishesha Shamak)",
+   "karma": "मेध्य, रसायन, स्वर्य, कान्तिवर्धक, कुष्ठघ्न, कासहर, विषहर, शोथहर, ज्वरहर, हृद्य, आयुष्यकर, कण्डूघ्न, बस्तिरोगहर, श्वासहर"
+  },
+  "doshaghnata": "विशेष शामक (Vishesha Shamak)",
+  "rogaghnata": "स्मृतिदौर्बल्य, उन्माद, अपस्मार, स्वरभेद, स्वरदौर्बल्य, शोथ, कण्डू, पाण्डु, प्रमेह, कास, विषविकार, शोष, ज्वर, अरुची, श्वास",
+  "amayika_prayoga": [
+   "मेध्य (intellect promoter) = Regular use of Mandookaparni fried with ghee for a month promotes intellect",
+   "कास (cough) and शोष (wasting) = Combination of Mandookaparni, Yashti, Vishwabheshaja taken starting at 5g, gradually increased to 10g over a month",
+   "स्वरविकार (voice disorders) = For clear voice, Mandookaparni, Madhuka mula, Ameya, Shankhapushpi mixed with honey"
+  ],
+  "matra": [
+   {
+    "form": "Churna",
+    "dose": "3-5 g"
+   },
+   {
+    "form": "Swarasa",
+    "dose": "10-20 ml"
+   }
+  ],
+  "pharmacological_actions": [
+   "Memory enhancer",
+   "Anti-inflammatory",
+   "CNS depressant",
+   "Sedative",
+   "Hypotensive",
+   "Hepatoprotective"
+  ],
+  "kalpana": [
+   "Saraswata Churna - मेधावर्धक",
+   "Saraswata Ghrita - मानसिक विकार, अर्श",
+   "Saraswatarishta - मानसिक विकार"
+  ],
+  "varieties": "Not mentioned in notes",
+  "research_updates": [
+   "Anti-inflammatory",
+   "Analgesic",
+   "Neuroprotective effect",
+   "Antioxidant"
+  ]
+ },
+ {
+  "id": "manjishtha",
+  "name": "Manjishtha",
+  "sanskrit_name": "मञ्जिष्ठा",
+  "sloka": "मञ्जिष्ठा मधुरा तिक्ता कषाया स्वरवर्णकृत् | गुरुरुष्णा विरेचनी शूलयोनिरोगप्रमेहहृत् ||",
+  "sloka_source": "भा. प्र.",
+  "botanical_name": "Rubia cordifolia",
+  "family": "Rubiaceae",
+  "synonyms": [
+   {
+    "term": "विकसा",
+    "meaning": "Spreads on the ground"
+   },
+   {
+    "term": "योजनावल्ली",
+    "meaning": "Climber spreads on the ground"
+   },
+   {
+    "term": "भण्डी",
+    "meaning": "Spreads extensively on the ground"
+   },
+   {
+    "term": "रक्ताङ्गी",
+    "meaning": "Root/stem is red coloured"
+   },
+   {
+    "term": "काला",
+    "meaning": "Dyeing root is black"
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Indian Madder"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Manjitha"
+   },
+   {
+    "lang": "Marathi",
+    "name": "Manjistha"
+   }
+  ],
+  "classification_of_gana": [
+   "चरक: वर्ण्य, विषघ्न, ज्वरहर वर्ग",
+   "सुश्रुत: प्रियङ्ग्वादि, पित्तशामन",
+   "भावप्रकाश: हरितक्यादि वर्ग"
+  ],
+  "external_morphology": {
+   "habitat": "Hilly areas",
+   "details": [
+    "Habit: Perennial, herbaceous climber, roots very long, cylindrical with thin red bark",
+    "Stem: Rough, grooved, slightly woody",
+    "Leaves: In one whorl",
+    "Inflorescence: Terminal panicle cymes with trichomatous branches",
+    "Flowers: Small, pedicels articulated with calyx, petals greenish",
+    "Fruits: Purplish black when ripe"
+   ]
+  },
+  "useful_parts": "Root",
+  "phytoconstituents": "Manjishthin, purpurin, pseudopurpurin, rubiadin",
+  "rasa_panchaka": {
+   "rasa": "Kashaya, Tikta, Madhura",
+   "guna": "Guru, Ruksha",
+   "virya": "Ushna",
+   "vipaka": "Katu"
+  },
+  "karma": {
+   "dosha_karma": "पित्तकफशामक (Pittakaphashamak)",
+   "karma": "वर्ण्य, रसशोधक, वृष्य, विषघ्न, शोषहर, नेत्र्य, कुष्ठघ्न, प्रमेहहर, व्रणहर, योनीरोगहर, ज्वरहर"
+  },
+  "doshaghnata": "पित्तकफशामक (Pittakaphashamak)",
+  "rogaghnata": "शूल, त्वचारोग, विसर्प, वैवर्ण्य, यकृद्विकार, प्रमेह, योनीरोग, शोथ, अरुची, नेत्ररोग, अपची, अतिसार, व्रण, ज्वर",
+  "amayika_prayoga": [
+   "व्यंग (Freckles) = Manjishtha root triturated with honey to prepare a paste, applied on Vyanga",
+   "प्रमेह (Prameha) = Decoction of Manjishtha and Chandana",
+   "भग्न (Fracture) = Paste of Manjishtha and Madhuka triturated with sour gruel applied to heal fracture"
+  ],
+  "matra": [
+   {
+    "form": "Kwatha",
+    "dose": "60-100 ml"
+   },
+   {
+    "form": "Churna",
+    "dose": "1-3 g"
+   }
+  ],
+  "pharmacological_actions": [
+   "Blood purifier",
+   "Astringent",
+   "Diuretic",
+   "Anthelmintic",
+   "Haemostatic",
+   "Uterine stimulant",
+   "Antidiabetic"
+  ],
+  "kalpana": [
+   "Mahamanjishthadi Kashaya - कुष्ठ, वातरक्त",
+   "Manjishthadi Taila - नेत्ररोग, शिरोरोग",
+   "Manjishthadi Lepa - शोथ",
+   "Pinda Taila - दाह, वातरक्त"
+  ],
+  "varieties": "1) Chola 2) Kroshtavi 3) Yojani 4) Simhali",
+  "research_updates": [
+   "Ameliorative effect",
+   "Antioxidant",
+   "Neuroprotective",
+   "Antitumor"
+  ]
+ },
+ {
+  "id": "maricha",
+  "name": "Maricha",
+  "sanskrit_name": "मरीच",
+  "sloka": "मरीचं कटुकं तीक्ष्णं दीपनं कफवातनुत् | उष्णं पित्तकरं रूक्षं श्वासशूलकृमीन्हरेत् ||",
+  "sloka_source": "भा. प्र.",
+  "botanical_name": "Piper nigrum",
+  "family": "Piperaceae",
+  "synonyms": [
+   {
+    "term": "उष्णम्",
+    "meaning": "Causes burning sensation"
+   },
+   {
+    "term": "तीक्ष्णम्",
+    "meaning": "Sharp qualities"
+   },
+   {
+    "term": "कृष्णम्",
+    "meaning": "Fruits are black in colour"
+   },
+   {
+    "term": "वृत्तफलम्",
+    "meaning": "Fruits are round in shape"
+   },
+   {
+    "term": "कटुकम्",
+    "meaning": "Pungent taste"
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Black Pepper"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Kali Mirch"
+   },
+   {
+    "lang": "Marathi",
+    "name": "Kalimire/Mire"
+   }
+  ],
+  "classification_of_gana": [
+   "चरक: कृमिघ्न, शूलप्रशमन, दीपनीय, शिरोविरेचन",
+   "सुश्रुत: पिप्पल्यादि गण, त्र्यूषण",
+   "भावप्रकाश: हरितक्यादि वर्ग"
+  ],
+  "external_morphology": {
+   "habitat": "Indigenous to the western coast of India, grown all over South India",
+   "details": [
+    "Stout glabrous climber",
+    "Stem: Terete, sparingly rooting",
+    "Leaves: Coriaceous, heart shaped",
+    "Flowers: Dioecious",
+    "Fruits: Globose, green turning to red colour when fully ripe"
+   ]
+  },
+  "useful_parts": "Fruit",
+  "phytoconstituents": "Alkaloid (5-9%), volatile oil (1-2.5%), starch (volatile oil contains β-phellandrene, camphene, caryophyllene)",
+  "rasa_panchaka": {
+   "rasa": "Shushka (dry): Katu | Ardra (fresh): Katu",
+   "guna": "Shushka: Tikshna, Laghu | Ardra: Guru, Tikshna",
+   "virya": "Shushka: Ushna | Ardra: Anatyushna",
+   "vipaka": "Shushka: Katu | Ardra: Madhura"
+  },
+  "karma": {
+   "dosha_karma": "कफवातशामक, पित्तवर्धक (Kaphavatashamak, Pittavardhak)",
+   "karma": "दीपन, श्वासहर, हिक्कानिग्रह, शूलहर, रोचन, हृद्रोगहर, लेखन, चक्षुष्य, प्रमेहहर, कृमिहर, विषहर, शिरोविरेचन"
+  },
+  "doshaghnata": "कफवातशामक, पित्तवर्धक (Kaphavatashamak, Pittavardhak)",
+  "rogaghnata": "अग्निमांद्य, शूल, कृमी, कास, श्वास, हृद्रोग, वातव्याधि, मूत्रकृच्छ्र, नेत्ररोग, विषरोग | Sheeta Maricha: विषघ्न, चक्षुष्य, रसायन, नेत्रशूलहर",
+  "amayika_prayoga": [
+   "प्रवाहिका (Dysentery) = Fine powder of Pippali + Maricha",
+   "ग्रहणी (Sprue) = Powder of Maricha, Chitrak, Sauvarchala Lavana taken with buttermilk",
+   "कास (Cough) = Fine powder of Maricha mixed with ghee, honey and sugar cures all kinds of cough"
+  ],
+  "matra": [
+   {
+    "form": "Churna",
+    "dose": "500 mg - 1 g"
+   }
+  ],
+  "pharmacological_actions": [
+   "Stimulant",
+   "Carminative",
+   "Stomachic",
+   "Appetizer",
+   "Vermifuge"
+  ],
+  "kalpana": [
+   "Marichadya Churna - कास",
+   "Marichadya Taila - कुष्ठ",
+   "Marichadya Ghrita - ग्रहणी, कास",
+   "Marichanjana - उन्माद"
+  ],
+  "varieties": "1) Maricha 2) Shweta Maricha",
+  "research_updates": [
+   "Anti-hyperglycemic activity",
+   "Antitumor activity",
+   "Insecticidal activity",
+   "Antispasmodic"
+  ]
  }
 ]
