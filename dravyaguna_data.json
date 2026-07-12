@@ -4917,5 +4917,336 @@
   "research_updates": [
    "Antioxidant and radical scavenging activities"
   ]
+ },
+ {
+  "id": "gokshura",
+  "name": "Gokshura",
+  "sanskrit_name": "गोक्षुर",
+  "sloka": "गोक्षुरः शीतलः स्वादुर्बलकृद्बस्तिशोधनः | मधुरो दीपनो वृष्यः पुष्टिश्चाश्मरीहा ||",
+  "sloka_source": "भा. प्र.",
+  "botanical_name": "Tribulus terrestris",
+  "family": "Zygophyllaceae",
+  "synonyms": [
+   {
+    "term": "त्रिकण्टक",
+    "meaning": ""
+   },
+   {
+    "term": "स्वादुकण्टक",
+    "meaning": ""
+   },
+   {
+    "term": "षडङ्गुल",
+    "meaning": ""
+   },
+   {
+    "term": "क्षुरक",
+    "meaning": ""
+   },
+   {
+    "term": "गोक्षुर",
+    "meaning": ""
+   },
+   {
+    "term": "शतावरीक",
+    "meaning": ""
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Small Caltrops"
+   },
+   {
+    "lang": "Marathi",
+    "name": "Gokhru"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Chota Gokharu"
+   }
+  ],
+  "classification_of_gana": [
+   "चरक: मूत्रविरेचनीय वर्ग, स्नेह्य, शोथहर",
+   "सुश्रुत: वीरतर्वादि गण, विरेचनादि गण, लघुपंचमूल",
+   "भावप्रकाश: गुडुच्यादि वर्ग"
+  ],
+  "external_morphology": {
+   "habitat": "",
+   "details": [
+    "Habit: Glabrous annual herb",
+    "Root and fruits are the parts used"
+   ]
+  },
+  "useful_parts": "Root and Fruits",
+  "phytoconstituents": "Harogenin, harmine, rutin",
+  "rasa_panchaka": {
+   "rasa": "Phala: Madhura | Mula: Madhura",
+   "guna": "Phala: Guru, Snigdha | Mula: Guru, Snigdha",
+   "virya": "Phala: Sheeta | Mula: Ushna",
+   "vipaka": "Phala: Madhura | Mula: Madhura"
+  },
+  "karma": {
+   "dosha_karma": "त्रिदोषशामक (Tridoshashamak)",
+   "karma": "शोथहर, मूत्रल, बस्तिशोधक, बल्य, वृष्य, अश्मरीहर, प्रमेहहर, श्वासहर, कासहर"
+  },
+  "doshaghnata": "त्रिदोषशामक (Tridoshashamak)",
+  "rogaghnata": "मूत्रकृच्छ्र, अश्मरी, शोथ, प्रमेह, श्वास, कास, हृद्रोग, क्लैब्य",
+  "amayika_prayoga": [
+   "मूत्रकृच्छ्र (Dysuria) = Gokshura Kwatha taken with sugar",
+   "अश्मरी (Urinary calculi) = Churna mixed with honey and goat's milk given for 7 days to break Ashmari",
+   "केशवर्धनार्थ (to promote hair growth) = Flowers of Gokshura and Tila mixed with equal quantity of honey and ghee, applied on scalp",
+   "आमवात (RA) + कटिशूल (Lumbago) = Kwatha of Shunthi and Gokshura taken regularly in the morning acts as a digestant and relieves pain"
+  ],
+  "matra": [
+   {
+    "form": "Phala Churna",
+    "dose": "3-6 g"
+   },
+   {
+    "form": "Kwatha",
+    "dose": "50-100 ml"
+   }
+  ],
+  "pharmacological_actions": [
+   "Diuretic",
+   "Tonic",
+   "Aphrodisiac",
+   "Demulcent"
+  ],
+  "kalpana": [
+   "Gokshuradi Ghrita",
+   "Gokshuradyavaleha",
+   "Gokshuradi Kashaya",
+   "Gokshuradi Guggulu"
+  ],
+  "varieties": "Gokshura (small), Brihat Gokshura",
+  "research_updates": [
+   "Anti-lithiatic potency",
+   "Cytoprotective",
+   "Management of sexual dysfunction in males",
+   "Hepatoprotective activity"
+  ]
+ },
+ {
+  "id": "kulatha",
+  "name": "Kulatha",
+  "sanskrit_name": "कुलत्थ",
+  "sloka": "कुलत्थः कटुकः पाके कषायः पित्तरक्तकृत् | लघुर्विदाही वीर्योष्णः श्वासकासकफानिलान् || श्लेष्माश्मरीमेदोहरो हिक्कामेदोज्वरान् ||",
+  "sloka_source": "भा. प्र.",
+  "botanical_name": "Dolichos biflorus",
+  "family": "Fabaceae",
+  "synonyms": [
+   {
+    "term": "ताम्रबीज",
+    "meaning": "Seeds have a copper colour"
+   },
+   {
+    "term": "कुलविका",
+    "meaning": "The creeper spreads on the ground"
+   },
+   {
+    "term": "कर्षणा",
+    "meaning": "Kwatha has Lekhana Karma, reduces weight"
+   },
+   {
+    "term": "चक्षुष्या",
+    "meaning": "Kwatha is beneficial for eyes"
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Horsegram"
+   },
+   {
+    "lang": "Marathi",
+    "name": "Kulthi"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Kulthi"
+   }
+  ],
+  "classification_of_gana": [
+   "चरक: स्वेदोपग वर्ग, वातशमन, धान्य वर्ग",
+   "सुश्रुत: —",
+   "भावप्रकाश: धान्य वर्ग"
+  ],
+  "external_morphology": {
+   "habitat": "",
+   "details": [
+    "Habit: Annual, branches suberect and twining",
+    "Leaves: Compound, leaflets 2.5-5 cm long",
+    "Flowers: Papilionaceous",
+    "Fruit: Pod"
+   ]
+  },
+  "useful_parts": "Bija (seed)",
+  "phytoconstituents": "Strepogenin, γ-sitosterol, genistein, D-glucose, D-galactose",
+  "rasa_panchaka": {
+   "rasa": "Kashaya",
+   "guna": "Laghu, Ruksha, Tikshna",
+   "virya": "Ushna",
+   "vipaka": "Katu"
+  },
+  "karma": {
+   "dosha_karma": "वातकफशामक (Vatakaphashamak)",
+   "karma": "अश्मरीहर, श्वासहर, कासहर, लेखन, मूत्रल, स्वेदजनन, मेदोज्वरहर, ज्वरघ्न, कृमिघ्न, केशीकर, अंजन, त्वचीकर, शूलहर"
+  },
+  "doshaghnata": "वातकफशामक (Vatakaphashamak)",
+  "rogaghnata": "अश्मरी, श्वास, कास, मेदरोग, ज्वर, अरुची, अर्श, शूल, व्रण",
+  "amayika_prayoga": [
+   "अतिस्वेद (excessive sweating) = Kulatha powder rubbed over the body to reduce Atisweda",
+   "कास व श्वास = Ghee cooked with decoction of Kulatha, Pippali, Pippali root, Chavya and Shringavera is very useful in Kasa, Shwasa, Hikka"
+  ],
+  "matra": [
+   {
+    "form": "Kwatha",
+    "dose": "50-100 ml"
+   },
+   {
+    "form": "Churna",
+    "dose": "3-5 g"
+   }
+  ],
+  "pharmacological_actions": [
+   "Diuretic",
+   "Hypotensive",
+   "Antispasmodic",
+   "Abortifacient",
+   "Anti-stress",
+   "Hypoglycemic",
+   "Hypocholesterolemic"
+  ],
+  "kalpana": [
+   "Not mentioned in notes"
+  ],
+  "varieties": "राजनिघण्टु: 1) Tamrabija 2) Shweta Bija",
+  "research_updates": [
+   "Antioxidant activity",
+   "Nephrolithiatic activity"
+  ]
+ },
+ {
+  "id": "lavanga",
+  "name": "Lavanga",
+  "sanskrit_name": "लवङ्ग",
+  "sloka": "लवङ्गं देवकुसुमं तीक्ष्णं श्रीसृष्टिनुत्तमम् | लवङ्गं कटुकं तिक्तं लघु नेत्रहितं हिमम् || दीपनं पाचनं रुच्यं कफातिरुजानाशनकृत् || तृष्णां छर्दि तथानाहं शूलमाशु विनाशयेत् || कासं श्वासञ्च हिक्काञ्च क्षयञ्चाशु विनाशयेत् ||",
+  "sloka_source": "भा. प्र.",
+  "botanical_name": "Syzygium aromaticum",
+  "family": "Myrtaceae",
+  "synonyms": [
+   {
+    "term": "देवकुसुम",
+    "meaning": "Flowers used to worship God"
+   },
+   {
+    "term": "शृङ्गाङ्ग",
+    "meaning": "Having beautiful flowers"
+   },
+   {
+    "term": "सीथर",
+    "meaning": "Having beautiful flowers"
+   },
+   {
+    "term": "श्रीप्रसून",
+    "meaning": "Having beautiful flowers"
+   },
+   {
+    "term": "चन्दनपुष्पिका",
+    "meaning": "Flowers have fragrance like sandalwood"
+   },
+   {
+    "term": "वारिज",
+    "meaning": "Found on islands"
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Clove"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Laung"
+   },
+   {
+    "lang": "Marathi",
+    "name": "Lavang"
+   }
+  ],
+  "classification_of_gana": [
+   "भावप्रकाश निघण्टु: कर्पूरादि वर्ग"
+  ],
+  "external_morphology": {
+   "habitat": "Cultivated mainly in Tamil Nadu and Kerala; abundantly found in Sri Lanka, Mauritius, Tanzania and Singapore",
+   "details": [
+    "Evergreen tree, growing 8-20 m tall",
+    "Leaves: Simple, bright green and glossy, lower surface has aromatic oil glands",
+    "Flowers: Small clusters, bright red colour",
+    "Fruit: Long red ovary of flower gradually turns reddish-purple",
+    "Seed: Fruit contains 1 seed, rarely 2 seeds"
+   ]
+  },
+  "useful_parts": "Pushpakulika (flower bud)",
+  "phytoconstituents": "Eugenol, eugenine, eugenone, vanillin",
+  "rasa_panchaka": {
+   "rasa": "Tikta, Katu",
+   "guna": "Laghu, Snigdha",
+   "virya": "Sheeta",
+   "vipaka": "Katu"
+  },
+  "karma": {
+   "dosha_karma": "विशेष शमन (Vishesha Shamana)",
+   "karma": "मुखशोधन, दुर्गन्धहर, कृमिदन्त (relieves dental ache), वातानुलोमन, शूलप्रशमन, ग्रहणीरोगहर, सृष्टिज (auspicious)"
+  },
+  "doshaghnata": "विशेष शमन (Vishesha Shamana)",
+  "rogaghnata": "अग्निमांद्य, शूल, छर्दी, तृष्णा, कास, श्वास, हिक्का, क्षयग्रह, ज्वर, नेत्ररोग, कुष्ठ, संन्यास",
+  "amayika_prayoga": [
+   "वमन (Vomiting) = Lavanga pounded and applied with warm water externally",
+   "शिरशूल, प्रतिश्याय = Local application of paste",
+   "दन्तशूल (Toothache) = Clove oil paste",
+   "विसूचिका (Cholera) = Water boiled with clove, filtered and given",
+   "तृष्णा (Thirst) = Fresh juice",
+   "आनाह, आध्मान = Powder of 1 g roasted clove with honey",
+   "छर्दी (Vomiting) = Clove powder with honey",
+   "आमज छर्दी = Lavanga Phanta",
+   "तालुशोष श्वास = Lavanga Phanta with honey",
+   "ज्वर (Fever) = Churna"
+  ],
+  "matra": [
+   {
+    "form": "Churna",
+    "dose": "1-2 g"
+   },
+   {
+    "form": "Oil",
+    "dose": "1-3 drops"
+   }
+  ],
+  "pharmacological_actions": [
+   "Antimicrobial",
+   "Stimulant",
+   "Carminative",
+   "Digestive",
+   "Antispasmodic",
+   "Aphrodisiac"
+  ],
+  "kalpana": [
+   "Avipattikar Churna",
+   "Lavangadi Vati",
+   "Lavangadi Churna",
+   "Lavangadya Modaka",
+   "Lavangasava",
+   "Lavanga Chatusama"
+  ],
+  "varieties": "Adulterants: Mother cloves, blown cloves, clove stalks, exhausted cloves",
+  "research_updates": [
+   "Antiviral activity against Herpes simplex virus",
+   "Anti-inflammatory activity",
+   "Clove oil: analgesic",
+   "Antioxidant"
+  ]
  }
 ]
