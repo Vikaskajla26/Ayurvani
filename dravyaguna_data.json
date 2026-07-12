@@ -4597,5 +4597,325 @@
    "Antibacterial activity",
    "Immunobiological activity"
   ]
+ },
+ {
+  "id": "jiraka",
+  "name": "Jiraka (Shweta)",
+  "sanskrit_name": "जिरक / जीरक",
+  "sloka": "जीरकद्वयं कटु पाके पाचनं दीपनं लघु | गर्भाशयविशुद्धिकरं बल्यं च सुगन्धिकम् || तिक्तं विशेषाद् नयनं वात कुष्ठ विसर्प ज्वरघ्नं ||",
+  "sloka_source": "",
+  "botanical_name": "Cuminum cyminum",
+  "family": "Umbelliferae",
+  "synonyms": [
+   {
+    "term": "दीपक",
+    "meaning": ""
+   },
+   {
+    "term": "अजाजी",
+    "meaning": ""
+   },
+   {
+    "term": "जरण",
+    "meaning": ""
+   },
+   {
+    "term": "दीर्घक",
+    "meaning": ""
+   },
+   {
+    "term": "मेधाव्य",
+    "meaning": ""
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Cumin Seed"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Safed Jeera"
+   },
+   {
+    "lang": "Marathi",
+    "name": "Jeera / Jire"
+   }
+  ],
+  "classification_of_gana": [
+   "चरक: —",
+   "सुश्रुत: पिप्पल्यादि गण",
+   "भावप्रकाश: हरितक्यादि वर्ग"
+  ],
+  "external_morphology": {
+   "habitat": "",
+   "details": [
+    "Not mentioned in notes"
+   ]
+  },
+  "useful_parts": "Fruit",
+  "phytoconstituents": "Fruit: 2.5-4% volatile oil and proteins; cuminic alcohol, cuminaldehyde, thymol",
+  "rasa_panchaka": {
+   "rasa": "Katu",
+   "guna": "Ruksha, Laghu",
+   "virya": "Ushna",
+   "vipaka": "Katu"
+  },
+  "karma": {
+   "dosha_karma": "वातकफशामक (Vatakaphashamak)",
+   "karma": "दीपन, संग्राही, मेध्य, गर्भाशय शोधक, ज्वरघ्न, पाचन, वृष्य, बल्य, वेद्य, चक्षुष्य, हृद्य, हिक्कानिग्रह, छेदन, लेखन, व्रणशोधन"
+  },
+  "doshaghnata": "वातकफशामक (Vatakaphashamak)",
+  "rogaghnata": "अग्निमांद्य, अजीर्ण, अतिसार, विषमज्वर, छर्दी, अम्लपित्त, कण्डू, कृमी, नेत्ररोग, आध्मान, गुल्म, हृद्रोग, गर्भाशय विकार, उदरशूल",
+  "amayika_prayoga": [
+   "ज्वर (Fever) = Paste of Jiraka with Jaggery",
+   "अम्लपित्त (Hyperacidity) = Jeeraka, Dhanyaka - siddha shrota",
+   "छर्दी (Vomiting) = Sauvarchala salt, Ajaji, sugar, maricha mixed with honey stops vomiting"
+  ],
+  "matra": [
+   {
+    "form": "Churna",
+    "dose": "3-6 g"
+   }
+  ],
+  "pharmacological_actions": [
+   "Appetizer",
+   "Digestant",
+   "Carminative",
+   "Astringent",
+   "Analgesic",
+   "Blood purifier",
+   "Diuretic",
+   "Antipyretic",
+   "Antispasmodic",
+   "Antimicrobial",
+   "Antiseptic",
+   "Anti-inflammatory"
+  ],
+  "kalpana": [
+   "Jiraka Ghrita - Agnidagdha Vrana",
+   "Jirakadi Modaka - Grahani, Atisara",
+   "Jirakadya Churna - Grahani",
+   "Jirakadya Taila - Pamakushtha"
+  ],
+  "varieties": "Jeeraka, Krishna Jeeraka, Kalajaji (Shweta)",
+  "research_updates": [
+   "Evaluated for contraceptive efficacy",
+   "Antibacterial activity",
+   "Antifungal",
+   "Jeeraka Phanta used for cleaning wounds",
+   "Jeeraka Lepa used for scorpion bite",
+   "Jaggery + Jeeraka churna used for Stanya Vriddhi",
+   "Anticancer activity relevant to colon cancer",
+   "Contains vitamin E, improves skin tone and texture",
+   "Anti-hyperlipidemic activity"
+  ]
+ },
+ {
+  "id": "dhataki",
+  "name": "Dhataki",
+  "sanskrit_name": "धातकी",
+  "sloka": "धातकी कटुका शीता मदकृत्कुष्ठनाशिनी | तृष्णातिसारपित्तास्त्रकृमिकासविषप्रणुत् ||",
+  "sloka_source": "भा. प्र.",
+  "botanical_name": "Woodfordia fruticosa",
+  "family": "Lythraceae",
+  "synonyms": [
+   {
+    "term": "पार्वतीय",
+    "meaning": ""
+   },
+   {
+    "term": "धातुपुष्पी",
+    "meaning": ""
+   },
+   {
+    "term": "वह्निपुष्पी",
+    "meaning": ""
+   },
+   {
+    "term": "गुच्छपुष्पी",
+    "meaning": ""
+   },
+   {
+    "term": "बहुपुष्पिका",
+    "meaning": ""
+   },
+   {
+    "term": "स्त्रीपुष्पी",
+    "meaning": ""
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Fire Flame Bush"
+   },
+   {
+    "lang": "Marathi",
+    "name": "Dhaiti"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Dhai"
+   }
+  ],
+  "classification_of_gana": [
+   "चरक: संधानीय, मूत्रविरजनीय, पुरीषसंग्रहणीय",
+   "सुश्रुत: अम्बष्ठादि, प्रियङ्ग्वादि गण",
+   "भावप्रकाश: हरितक्यादि वर्ग"
+  ],
+  "external_morphology": {
+   "habitat": "",
+   "details": [
+    "A straggling leafy shrub"
+   ]
+  },
+  "useful_parts": "Flowers",
+  "phytoconstituents": "Flower: gallic acid, β-sitosterol, tannins. Leaves: betulin, ursolic acid",
+  "rasa_panchaka": {
+   "rasa": "Kashaya, Katu",
+   "guna": "Laghu, Ruksha",
+   "virya": "Katu",
+   "vipaka": "Sheeta"
+  },
+  "karma": {
+   "dosha_karma": "कफपित्तशामक (Kaphapittashamak)",
+   "karma": "तृषाहर, वमनघ्न, विबन्ध, कृमिघ्न, विसर्पहर, गर्भस्थापन, मदकर, व्रणहर, संधानीय"
+  },
+  "doshaghnata": "कफपित्तशामक (Kaphapittashamak)",
+  "rogaghnata": "अतिसार, तृष्णा, कृमी, विसर्प, रक्तातिसार, रक्तार्शस्, रक्तपित्त, विषविकार, प्रवाहिका, व्रण",
+  "amayika_prayoga": [
+   "बालातिसार (diarrhoea in children) = Combination of Dhataki Pushpa, sugar and Laja mixed together",
+   "प्रवाहिका (Dysentery) = Juice of Dhataki flower, Badari leaf, Kapittha mixed with Lodhra churna, honey and buttermilk",
+   "पित्ताभिष्यन्द (conjunctivitis due to Pitta) = Churna of Dhataki and Chandana mixed with breast milk applied as Anjana"
+  ],
+  "matra": [
+   {
+    "form": "Churna",
+    "dose": "1-3 g"
+   }
+  ],
+  "pharmacological_actions": [
+   "Astringent",
+   "Tonic",
+   "Stimulant",
+   "Haemostatic",
+   "Wound healer"
+  ],
+  "kalpana": [
+   "Dhatakyadi Churna - Swarasa Atisara (in children)",
+   "Dhatakyadi Taila - Gutika vikara",
+   "Dhatakyadi Kalka - Pravahika"
+  ],
+  "varieties": "Not mentioned in notes",
+  "research_updates": [
+   "Antihyperglycemic activity",
+   "Hepatoprotective activity",
+   "Immunostimulatory activity"
+  ]
+ },
+ {
+  "id": "dhanvayasa",
+  "name": "Dhanvayasa",
+  "sanskrit_name": "धन्वयास",
+  "sloka": "धन्वयासो मधूरस्तिक्तस्तुवरः शीतलो लघुः | तृष्णादाहकफभ्रान्तिपित्तज्वरविनाशकृत् ||",
+  "sloka_source": "",
+  "botanical_name": "Fagonia cretica",
+  "family": "Zygophyllaceae",
+  "synonyms": [
+   {
+    "term": "संकर्षण",
+    "meaning": "Grows in dry regions"
+   },
+   {
+    "term": "गांधारी",
+    "meaning": "Common in Gandhara desha (Afghanistan)"
+   },
+   {
+    "term": "अनन्ता",
+    "meaning": "Spreads extensively on the ground"
+   },
+   {
+    "term": "ताम्रमूली",
+    "meaning": "Root is coppery in colour"
+   },
+   {
+    "term": "दुरालभा",
+    "meaning": "Thorny, so difficult to hold"
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Khorasan Thorn"
+   },
+   {
+    "lang": "Marathi",
+    "name": "Dhamasa"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Usturgar"
+   }
+  ],
+  "classification_of_gana": [
+   "चरक: तृष्णानिग्रहण, अर्शोघ्न वर्ग",
+   "सुश्रुत: —",
+   "भावप्रकाश: गुडुच्यादि वर्ग"
+  ],
+  "external_morphology": {
+   "habitat": "Mainly grows in dry regions of North-western India, Rajasthan and Andhra Pradesh",
+   "details": [
+    "Habit: Small erect undershrub, spinous",
+    "Leaves: Opposite, 1-3 foliate",
+    "Flowers: Light pink colour",
+    "Fruit: Glandular, rounded"
+   ]
+  },
+  "useful_parts": "Panchanga",
+  "phytoconstituents": "Chinovic acid, harmine, alanine, glycine, lysine",
+  "rasa_panchaka": {
+   "rasa": "Kashaya, Tikta, Madhura, Katu",
+   "guna": "Laghu, Snigdha",
+   "virya": "Sheeta",
+   "vipaka": "Madhura"
+  },
+  "karma": {
+   "dosha_karma": "वातपित्तशामक (Vatapittashamak). Agryakarma: Pacifies Pitta and Kapha",
+   "karma": "तृषाहर, कुष्ठघ्न, वीर्यनाशक, ज्वरहर, छर्दीहर, भ्रमजित्, बालग्रहादिनाशक"
+  },
+  "doshaghnata": "वातपित्तशामक (Vatapittashamak)",
+  "rogaghnata": "कुष्ठ, विसर्प, ज्वर, तृष्णा, दाह, छर्दी, रक्तपित्त, वातरक्त, मद, भ्रम",
+  "amayika_prayoga": [
+   "रक्तपित्त (Raktapitta) = Roots of Yavasa"
+  ],
+  "matra": [
+   {
+    "form": "Churna",
+    "dose": "3-6 g"
+   },
+   {
+    "form": "Kwatha",
+    "dose": "50-100 ml"
+   }
+  ],
+  "pharmacological_actions": [
+   "Antipyretic",
+   "Antiviral",
+   "Anti-inflammatory",
+   "CNS stimulant",
+   "Analgesic",
+   "Anticancer",
+   "Antimicrobial"
+  ],
+  "kalpana": [
+   "Duralabha Kwatha - Bhagna",
+   "Sudarshana Churna - ज्वर, यकृत्वृद्धि",
+   "Haritakyadi Kwatha - मूत्राघात, विबन्ध"
+  ],
+  "varieties": "राजनिघण्टु: 1) Duralabha 2) Kshudra Duralabha",
+  "research_updates": [
+   "Antioxidant and radical scavenging activities"
+  ]
  }
 ]
