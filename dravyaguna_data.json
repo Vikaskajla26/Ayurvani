@@ -5248,5 +5248,359 @@
    "Clove oil: analgesic",
    "Antioxidant"
   ]
+ },
+ {
+  "id": "nirgundi",
+  "name": "Nirgundi",
+  "sanskrit_name": "निर्गुण्डी",
+  "sloka": "सिन्दुवारः सुगन्धोऽथ तिक्तोष्णः कफवातहा | केश्यो नेत्रहितो हन्ति शूलशोथाममारुतान् || सिन्दुवारदलं जन्तुवातप्रशमनं लघु ||",
+  "sloka_source": "भा. प्र.",
+  "botanical_name": "Vitex negundo",
+  "family": "Verbenaceae",
+  "synonyms": [
+   {
+    "term": "सुगन्धिका",
+    "meaning": "Leaves/other parts have aromatic odour"
+   },
+   {
+    "term": "शेफालिका",
+    "meaning": "Aroma of Nirgundi spreads all around"
+   },
+   {
+    "term": "इन्द्रसुरसा",
+    "meaning": "Juice extracted from leaves is an efficacious medicine"
+   },
+   {
+    "term": "श्वेतकेशी",
+    "meaning": "Nirgundi alleviates evil spirits"
+   },
+   {
+    "term": "शीतसह",
+    "meaning": "Has Ushna Virya, hence can alleviate Sheetatva"
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "5-Leaved Chaste Tree"
+   },
+   {
+    "lang": "Marathi",
+    "name": "Nirgudi"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Nirgundee"
+   }
+  ],
+  "classification_of_gana": [
+   "चरक: विषघ्न, कृमिघ्न",
+   "सुश्रुत: सुरसादि",
+   "भावप्रकाश: गुडुच्यादि वर्ग"
+  ],
+  "external_morphology": {
+   "habitat": "All over India",
+   "details": [
+    "Habit: Shrub, grows up to 12 ft",
+    "Root: Branched, cylindrical",
+    "Stem: Pinnately compound",
+    "Inflorescence: Dichasial cyme",
+    "Flower: Bracteate, pentamerous, bisexual",
+    "Fruit: Small, globose, drupe"
+   ]
+  },
+  "useful_parts": "Leaf, Seed, Root",
+  "phytoconstituents": "Bark: vanillic acid, luteolin, β-sitosterol. Seed oil: vanillin, d-α-pinene, alanine, valine, camphene",
+  "rasa_panchaka": {
+   "rasa": "Tikta, Katu, Kashaya",
+   "guna": "Laghu, Ruksha",
+   "virya": "Ushna",
+   "vipaka": "Katu"
+  },
+  "karma": {
+   "dosha_karma": "वातकफशामक (Vatakaphashamak)",
+   "karma": "Cures many diseases and protects the body"
+  },
+  "doshaghnata": "वातकफशामक (Vatakaphashamak)",
+  "rogaghnata": "शूल, शोथ, कृमी, वातव्याधि, कुष्ठ, कण्डू, केश्य विकार, प्रदर, संघातवात, गलगण्ड, आनाह",
+  "amayika_prayoga": [
+   "वातव्याधि = 1 Karsha (12g) powder of Nirgundi taken with oil, useful in Sandhivata, Katiwata, Kampavata (Amavata, trembling)",
+   "कास (Cough) = Ghee processed with juice of Nirgundi leaves is efficacious in Kasa",
+   "अपस्मार (Epilepsy) = Powder of Nirgundi taken internally"
+  ],
+  "matra": [
+   {
+    "form": "Mula Churna",
+    "dose": "1-3 g"
+   },
+   {
+    "form": "Swarasa",
+    "dose": "10-20 ml"
+   },
+   {
+    "form": "Kwatha",
+    "dose": "40-50 ml"
+   }
+  ],
+  "pharmacological_actions": [
+   "Leaf: Antiparasitic, vermifuge",
+   "Root: Tonic, febrifuge, expectorant, diuretic",
+   "Fruit: Emmenagogue"
+  ],
+  "kalpana": [
+   "Nirgundi Taila - गलगण्ड, नाडीव्रण",
+   "Nirgundi Ghrita - क्षयरोग",
+   "Nirgundyadi Kashaya - कृमी, वातव्याधि",
+   "Nirgundyadi Taila - कर्ण रोग"
+  ],
+  "varieties": "Types: 1) Sindhuvara 2) Nila Nirgundi 3) Shephali",
+  "research_updates": [
+   "Anti-filarial effect",
+   "Hepatoprotective activity",
+   "Antitussive effect"
+  ]
+ },
+ {
+  "id": "nimba",
+  "name": "Nimba",
+  "sanskrit_name": "निम्ब",
+  "sloka": "निम्बः शीतो लघुग्राही कटुकोऽग्नीवातकृत | हृल्लासकुष्ठपित्तकफज्वरकृमीप्रणूत ||",
+  "sloka_source": "",
+  "botanical_name": "Azadirachta indica",
+  "family": "Meliaceae",
+  "synonyms": [
+   {
+    "term": "अरिष्ट",
+    "meaning": "Cures many diseases"
+   },
+   {
+    "term": "हिंगुनिर्यास",
+    "meaning": "Always does well"
+   },
+   {
+    "term": "नियमान",
+    "meaning": "Alleviates many diseases"
+   },
+   {
+    "term": "पारिभद्र",
+    "meaning": "Always does well"
+   },
+   {
+    "term": "सुनिम्बक",
+    "meaning": "Bitter taste"
+   },
+   {
+    "term": "वरत्वक्",
+    "meaning": "Bark is useful"
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Neem / Margosa Tree"
+   },
+   {
+    "lang": "Marathi",
+    "name": "Kadunimb"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Neem"
+   }
+  ],
+  "classification_of_gana": [
+   "चरक: कण्डूघ्न, स्तन्यशोधन",
+   "सुश्रुत: आरग्वधादि गण, गुडुच्यादि, लाक्षादि गण",
+   "भावप्रकाश: गुडुच्यादि"
+  ],
+  "external_morphology": {
+   "habitat": "All over India",
+   "details": [
+    "Habit: A large tree",
+    "Root: Tap root, branched",
+    "Stem: Woody, branched, erect",
+    "Leaf: Compound, alternate",
+    "Inflorescence: Axillary panicle",
+    "Flower: Actinomorphic, bisexual",
+    "Fruit: Drupaceous with 1 seed"
+   ]
+  },
+  "useful_parts": "Leaf, Bark, Seed, Fruit, Flower, Resin",
+  "phytoconstituents": "Leaves: nimbin, nimbinene, nimbandiol, azadirone. Bark: nimbin, nimbinin, nimbidin. Flower: nimbosterols, myricetin",
+  "rasa_panchaka": {
+   "rasa": "Tikta, Kashaya",
+   "guna": "Laghu (also has Pitta-like sharpness)",
+   "virya": "Sheeta",
+   "vipaka": "Katu"
+  },
+  "karma": {
+   "dosha_karma": "पित्तकफशामक (Pittakaphashamak)",
+   "karma": "Leaf: कृमिघ्न, नेत्र्य, विषघ्न, कुष्ठघ्न, कण्डूघ्न, कासहर, श्वासहर | Bark: कुष्ठघ्न, कृमिघ्न, श्रमहर, तृष्णाहर, ज्वरघ्न, प्रदरहर, कण्ठ्य, स्तन्यशोधक | Fruit: कुष्ठघ्न, कृमिघ्न, प्रमेह, गुल्म, भेदक | Seed: कृमिघ्न, कुष्ठहर | Flower: कृमिघ्न, विषघ्न"
+  },
+  "doshaghnata": "पित्तकफशामक (Pittakaphashamak)",
+  "rogaghnata": "कुष्ठ, कृमी, नेत्ररोग, अरुची, कास, श्वास, ज्वर, प्रदर, स्तन्यशोधन, प्रमेह, गुल्म, भेदक, अर्श, रक्तदुष्टि, त्वचारोग",
+  "amayika_prayoga": [
+   "कुष्ठ (Psoriasis) = Nimba + Vidanga powder mixed with cow's urine, applied; also used internally",
+   "सुरामेह (Acetonuria) = Decoction of Nimba used internally",
+   "त्वग्रोग (skin disease) = Nimba + Aragwadha applied on skin",
+   "अरुंषिका (head boils) = Blood letting first, then decoction of Nimba sprinkled over head boils"
+  ],
+  "matra": [
+   {
+    "form": "Swarasa",
+    "dose": "10-20 ml"
+   },
+   {
+    "form": "Bark",
+    "dose": "10-20 g"
+   },
+   {
+    "form": "Kwatha",
+    "dose": "50-100 ml"
+   },
+   {
+    "form": "Churna",
+    "dose": "2-4 g"
+   },
+   {
+    "form": "Taila",
+    "dose": "5-10 drops"
+   }
+  ],
+  "pharmacological_actions": [
+   "Leaves: insect repellent, blood purifier",
+   "Seed: antiviral",
+   "Bark: antiviral and antibacterial",
+   "Flower: insecticidal"
+  ],
+  "kalpana": [
+   "Nimbadi Churna - कुष्ठ, वातरक्त",
+   "Nimbadi Kwatha - कफज्वर, पित्तशोध",
+   "Nimbamritadi Kashaya - विसर्प",
+   "Panchanimba Churna - सर्वकुष्ठ, विसर्प",
+   "Tiktaka Ghrita - कुष्ठ, विसर्प",
+   "Panchatikta Ghrita Guggulu - कुष्ठ, प्रमेह"
+  ],
+  "varieties": "1) Nimba 2) Mahanimba 3) Parvatanimba 4) Akash Nimba",
+  "research_updates": [
+   "Antimicrobial effect",
+   "Antioxidant",
+   "Antiviral effect"
+  ]
+ },
+ {
+  "id": "madanaphala",
+  "name": "Madanaphala",
+  "sanskrit_name": "मदनफल",
+  "sloka": "मदनो मधुरस्तिक्तस्तिक्ष्णोष्णो लेखनो लघुः | वमनो विद्रधीहरः कफकुष्ठानिलापहः ||",
+  "sloka_source": "",
+  "botanical_name": "Randia spinosa",
+  "family": "Rubiaceae",
+  "synonyms": [
+   {
+    "term": "वमन",
+    "meaning": "Madana is the best Vamaka Dravya"
+   },
+   {
+    "term": "विषनाशन",
+    "meaning": "Alleviates poison from the body"
+   },
+   {
+    "term": "बस्तिशोधन",
+    "meaning": "Useful drug for Basti Karma"
+   },
+   {
+    "term": "गोपालमदन",
+    "meaning": "Fruits are round shaped"
+   },
+   {
+    "term": "व्याधिघात",
+    "meaning": "Has streaks on its surface"
+   },
+   {
+    "term": "विषपुष्पक",
+    "meaning": "Flowers are toxic in nature"
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Emetic Nut"
+   },
+   {
+    "lang": "Marathi",
+    "name": "Gelphal"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Mainphal"
+   }
+  ],
+  "classification_of_gana": [
+   "चरक: आस्थापनोपग वर्ग, अनुवासनोपग वर्ग, वमनोपग वर्ग",
+   "सुश्रुत: आरग्वधादि गण, मुष्ककादि गण",
+   "भावप्रकाश: हरितक्यादि वर्ग"
+  ],
+  "external_morphology": {
+   "habitat": "Grows throughout India, very common in hilly regions",
+   "details": [
+    "Habit: Large shrub / small tree",
+    "Leaves: Opposite but appear fascicled on suppressed branches",
+    "Inflorescence: Solitary and terminal",
+    "Flowers: White, turning yellowish",
+    "Fruit: Berry, ovoid"
+   ]
+  },
+  "useful_parts": "Fruit and Seed",
+  "phytoconstituents": "Fruit: saponins, ursosaponin, essential oil, Randialic acid-A, Randialic acid-B. Pulp: citric acid, tartaric acid, tannins, pectin, mucilage",
+  "rasa_panchaka": {
+   "rasa": "Madhura, Tikta, Kashaya, Katu",
+   "guna": "Laghu, Ruksha",
+   "virya": "Ushna",
+   "vipaka": "Katu",
+   "prabhava": "वमक (Vamaka)"
+  },
+  "karma": {
+   "dosha_karma": "कफवातशामक (Kaphavatashamak)",
+   "karma": "Agryakarma: Madanaphala is suitable for Vamana Karma, Asthapana, Anuvasana"
+  },
+  "doshaghnata": "कफवातशामक (Kaphavatashamak)",
+  "rogaghnata": "कुष्ठ, श्वास, शोथ, आनाह, गुल्म, प्रतिश्याय, विद्रधि, व्रण, and many other diseases",
+  "amayika_prayoga": [
+   "वमनार्थ (to induce emesis) = Madana is the best drug for inducing emesis",
+   "ज्वर (Fever) = Madana mixed with Pippali and Madhuka, administered with hot water to induce vomiting and alleviate fever",
+   "पार्श्वशूल (pain in flanks) = Madana Kalka prepared from sour gruel applied over navel relieves various pains including flank pain"
+  ],
+  "matra": [
+   {
+    "form": "Chikitsartha",
+    "dose": "500 mg - 2 g"
+   },
+   {
+    "form": "Vamanartha",
+    "dose": "3-6 g"
+   }
+  ],
+  "pharmacological_actions": [
+   "Emetic",
+   "Diaphoretic",
+   "Antispasmodic",
+   "Antihistaminic",
+   "Antibacterial",
+   "Antifungal",
+   "Antiviral"
+  ],
+  "kalpana": [
+   "Madanadi Lepa - शूल",
+   "Madanadi Tailam"
+  ],
+  "varieties": "राजनिघण्टु: 1) Madana 2) Varaha",
+  "research_updates": [
+   "Anti-asthmatic property",
+   "Antioxidant",
+   "Anti-inflammatory",
+   "Hepatoprotective activity",
+   "Anti-implantation activity"
+  ]
  }
 ]
