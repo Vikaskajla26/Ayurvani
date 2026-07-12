@@ -4268,5 +4268,334 @@
    "Antibacterial activity",
    "Antimicrobial"
   ]
+ },
+ {
+  "id": "nagakesar",
+  "name": "Nagakesar",
+  "sanskrit_name": "नागकेशर",
+  "sloka": "नागपुष्पं कषायोष्णं रूक्षं लघु च पाचकम् | ज्वरकण्डूतृषास्वेदछर्दिहृल्लासनाशनम् || रोगिणोऽप्यनुकूलवीर्यं कफवातविनाशनम् ||",
+  "sloka_source": "भा. प्र.",
+  "botanical_name": "Mesua ferrea",
+  "family": "Guttiferae",
+  "synonyms": [
+   {
+    "term": "नागपुष्प",
+    "meaning": "Petals resemble the hood of a cobra"
+   },
+   {
+    "term": "काञ्चनाह्वय",
+    "meaning": "Stamens are yellow in colour"
+   },
+   {
+    "term": "चाम्पेय",
+    "meaning": "Stamens have a yellow colour like Champaka flower"
+   },
+   {
+    "term": "हेमपुष्प",
+    "meaning": "Has yellow coloured stamens"
+   },
+   {
+    "term": "कुञ्जरमल",
+    "meaning": "Fruits are pitcher shaped"
+   },
+   {
+    "term": "केशर",
+    "meaning": "Stamens are very useful as medicine"
+   },
+   {
+    "term": "प्रिय",
+    "meaning": "Liked by elephants"
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Cobra Saffron, Iron Wood Tree"
+   },
+   {
+    "lang": "Marathi",
+    "name": "Nagachampe"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Nagakeshara"
+   }
+  ],
+  "classification_of_gana": [
+   "चरक: —",
+   "सुश्रुत: एलादि गण, प्रियङ्ग्वादि, अंजनादि गण",
+   "भावप्रकाश: कर्पूरादि वर्ग"
+  ],
+  "external_morphology": {
+   "habitat": "Grows commonly in Western Ghats, Eastern Ghats, Bengal and Assam",
+   "details": [
+    "Habit: Medium sized glabrous tree",
+    "Bark: Smooth, ash-coloured",
+    "Leaves: Simple, opposite, oblong-lanceolate",
+    "Flowers: Solitary, subsessile",
+    "Fruit: Ovoid shaped with a conical point",
+    "Seeds: 1-4, angular, smooth"
+   ]
+  },
+  "useful_parts": "Kesharas (Stamens)",
+  "phytoconstituents": "Flower bud: mesuol, mammeisin, mammeigin. Stamens: β-sitosterol, β-amyrine",
+  "rasa_panchaka": {
+   "rasa": "Kashaya, Tikta",
+   "guna": "Ruksha, Laghu",
+   "virya": "Ushna",
+   "vipaka": "Katu"
+  },
+  "karma": {
+   "dosha_karma": "कफपित्तशामक (Kaphapittashamak)",
+   "karma": "Pachana, Jwaraghna, Kandughna, Trishnahara, Keshya, Dourgandhyahara, Shamaka, Chhedana, Swedopaha, Vidahaka"
+  },
+  "doshaghnata": "कफपित्तशामक (Kaphapittashamak)",
+  "rogaghnata": "अरुची, ज्वर, कण्डू, त्वक् रोग, अतिस्वेद, छर्दी, हृल्लास, दौर्गन्ध्य, कुष्ठ, विसर्प, विषरोग, बस्तिरुजा, वातरक्त, तृष्णा, अधोग रक्तपित्त (रक्तदोष)",
+  "amayika_prayoga": [
+   "रक्तार्शस् (bleeding piles) = Nagakesar mixed with butter and sugar",
+   "हिक्का (Hiccough) = Nagakesar mixed with sugar, honey, sugarcane juice and Madhuka",
+   "रक्तातिसार (blood-mixed diarrhoea) = Use of Nagakesar powder"
+  ],
+  "matra": [
+   {
+    "form": "Churna",
+    "dose": "0.5-2 g"
+   }
+  ],
+  "pharmacological_actions": [
+   "Astringent",
+   "Stomachic",
+   "Aromatic",
+   "Stimulant",
+   "Carminative",
+   "Appetizer",
+   "Antiemetic",
+   "Tonic",
+   "Digestant",
+   "Cardiotonic"
+  ],
+  "kalpana": [
+   "Bhaskara Lavana - Agnimandya, Shula",
+   "Chandanadi Taila - Daha, Raktapitta",
+   "Eladi Churna - Aruchi, Chardi",
+   "Haridra Khanda - Sheetapitta, Kandu"
+  ],
+  "varieties": "Substitutes: 1) Rakta Nagakeshara 2) Krishna Nagakeshara 3) Malabar Nagakeshara",
+  "research_updates": [
+   "Antibacterial activity",
+   "Anti-arthritic activity",
+   "Immunomodulatory activity",
+   "Antispasmodic activity"
+  ]
+ },
+ {
+  "id": "karpura",
+  "name": "Karpura",
+  "sanskrit_name": "कपूर / कर्पूर",
+  "sloka": "कर्पूरः शीतलो वृष्यः चक्षुष्यो लेखनो लघुः | सुरभितिर्वरस्तिक्तः कफपित्तविनाशनः ||",
+  "sloka_source": "भा. प्र.",
+  "botanical_name": "Cinnamomum camphora",
+  "family": "Lauraceae",
+  "synonyms": [
+   {
+    "term": "घनसार",
+    "meaning": ""
+   },
+   {
+    "term": "शीतकर",
+    "meaning": ""
+   },
+   {
+    "term": "चन्द्र",
+    "meaning": ""
+   },
+   {
+    "term": "गौर",
+    "meaning": ""
+   },
+   {
+    "term": "हिमाह्वय",
+    "meaning": ""
+   },
+   {
+    "term": "शुभाङ्ग",
+    "meaning": ""
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Camphor Tree"
+   },
+   {
+    "lang": "Marathi",
+    "name": "Kapur"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Kapur"
+   }
+  ],
+  "classification_of_gana": [
+   "Not mentioned in notes"
+  ],
+  "external_morphology": {
+   "habitat": "Native of China, Japan and Taiwan",
+   "details": [
+    "Tree, glabrous in nature",
+    "Leaves: Alternate, coriaceous, long petiolate",
+    "Inflorescence: Panicle",
+    "Flower: Calyx is yellow",
+    "Fruit: Round, fleshy"
+   ]
+  },
+  "useful_parts": "Niryasa (extract)",
+  "phytoconstituents": "Camphor, campherol, cineol, camphene, terpineol, safrole, reticuline",
+  "rasa_panchaka": {
+   "rasa": "Tikta, Katu, Madhura",
+   "guna": "Laghu, Ruksha",
+   "virya": "Sheeta",
+   "vipaka": "Katu"
+  },
+  "karma": {
+   "dosha_karma": "कफपित्तशामक (Kaphapittashamak)",
+   "karma": "Kantadoshahara, Vishahara, Chakshushya, Dahahara, Vrishya, Medhya, Krimihanashana, Sugandhodbhava, Mukhavairasyahara"
+  },
+  "doshaghnata": "कफपित्तशामक (Kaphapittashamak)",
+  "rogaghnata": "Not mentioned in notes",
+  "amayika_prayoga": [
+   "Chest congestion = Camphor dissolved in oil (5 g camphor in 100 ml warm sesame oil), applied over chest",
+   "Cough/cold = Camphor mixed with honey for cough and throat irritation (500 mg-1 g camphor powder with a spoon of honey)",
+   "Flatulence/Indigestion/Headache/Anorexia = Equal parts camphor, rock salt, cumin seeds, cardamom and clove made into a fine paste and rolled into pills"
+  ],
+  "matra": [
+   {
+    "form": "Churna",
+    "dose": "125-375 mg"
+   }
+  ],
+  "pharmacological_actions": [
+   "Anticonvulsant",
+   "Antispasmodic",
+   "Carminative",
+   "Aphrodisiac",
+   "Sedative",
+   "Disinfectant",
+   "Insecticide",
+   "Germicide"
+  ],
+  "kalpana": [
+   "Vayu Gutika - cough, cold",
+   "Karpooradi Gutika - fever, cough, cold",
+   "Gandhaka Malahara - ointment for itching skin",
+   "Karpoorasava - vomiting and diarrhoea",
+   "Manasamitra Vatakam - psychiatric conditions"
+  ],
+  "varieties": "द्रव्यगुण निघण्टु: Pakwa (artificial/Chinaka) and Apakwa (natural)",
+  "research_updates": [
+   "Camphor poisoning: overdose may lead to seizures, confusion, restlessness, nausea"
+  ]
+ },
+ {
+  "id": "ativisha",
+  "name": "Ativisha",
+  "sanskrit_name": "अतिविषा",
+  "sloka": "विषा सोष्णकषायोक्ता दीपिनी पाचनी हरेत् | कफपित्तातिसारघ्नी वयःस्था शूलहरी कटुः ||",
+  "sloka_source": "",
+  "botanical_name": "Aconitum heterophyllum",
+  "family": "Ranunculaceae",
+  "synonyms": [
+   {
+    "term": "काश्मीरा",
+    "meaning": ""
+   },
+   {
+    "term": "माद्री",
+    "meaning": ""
+   },
+   {
+    "term": "शुकवल्लभा",
+    "meaning": ""
+   },
+   {
+    "term": "शृङ्गी",
+    "meaning": ""
+   },
+   {
+    "term": "पित्तवल्लभा",
+    "meaning": ""
+   },
+   {
+    "term": "जातिसारघ्नी",
+    "meaning": ""
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Indian Atis"
+   },
+   {
+    "lang": "Marathi",
+    "name": "Ativisha"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Atis"
+   }
+  ],
+  "classification_of_gana": [
+   "चरक: लेखनीय, अर्शोघ्न वर्ग",
+   "सुश्रुत: पिप्पल्यादि गण, वचादि, मुस्तादि गण",
+   "भावप्रकाश: हरितक्यादि वर्ग"
+  ],
+  "external_morphology": {
+   "habitat": "",
+   "details": [
+    "Habit: Herbaceous perennial plant"
+   ]
+  },
+  "useful_parts": "Tuberous root (Kanda)",
+  "phytoconstituents": "Root: atisine, atidine, atodine, aconitic acid",
+  "rasa_panchaka": {
+   "rasa": "Katu, Tikta",
+   "guna": "Laghu, Ruksha",
+   "virya": "Ushna",
+   "vipaka": "Katu",
+   "prabhava": "विषहर (Vishahara)"
+  },
+  "karma": {
+   "dosha_karma": "कफपित्तशामक (Kaphapittashamak). Agryakarma: Appetizer, Digestant, Astringent, pacifies all three Doshas",
+   "karma": "Deepan, Pachan, Kasahara, Jwarahara, Krimighna, Vishahara, Chardihara"
+  },
+  "doshaghnata": "कफपित्तशामक (Kaphapittashamak)",
+  "rogaghnata": "Atisara, Agnimandya, Ajirna, Jwara, Kasa, Chardi, Krimi, Baladaurbalya, Visharoga",
+  "amayika_prayoga": [
+   "कास (Cough) = Ativisha Kanda Churna administered with honey",
+   "आमातिसार (diarrhoea with undigested food) = Peya processed with Ativisha, Nagara and sour substances",
+   "ग्रहणी (Sprue) = Kwatha of Ativisha, Shunthi and Musta, useful in digesting Ama"
+  ],
+  "matra": [
+   {
+    "form": "Root powder",
+    "dose": "1-3 g"
+   }
+  ],
+  "pharmacological_actions": [
+   "Antibacterial",
+   "Aphrodisiac",
+   "Tonic"
+  ],
+  "kalpana": [
+   "Ativishadi Churna - कास, ज्वर",
+   "Mahatiktaka Ghrita - पित्तज कुष्ठ",
+   "Madhukadi Ghrita - अर्श, अतिसार",
+   "Lodhrasava - प्रमेह"
+  ],
+  "varieties": "मदनपाल निघण्टु: 1) Rakta 2) Shweta 3) Krishna 4) Pita",
+  "research_updates": [
+   "Antibacterial activity",
+   "Immunobiological activity"
+  ]
  }
 ]
