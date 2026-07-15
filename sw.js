@@ -21,5 +21,18 @@ self.addEventListener('install', e => {
 });
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
-  e.respondWith(caches.match(e.request).then(r => r || fetch(e.request)));
+  
+  const url = new URL(e.request.url);
+  // Completely bypass Service Worker cache for Vercel API and Hugging Face routes
+  if (url.pathname.startsWith('/api/') || url.hostname.includes('hf.space') || url.hostname.includes('huggingface')) {
+    return;
+  }
+  
+  e.respondWith(
+    caches.match(e.request).then(response => {
+      return response || fetch(e.request).catch(() => null);
+    }).catch(() => {
+      return fetch(e.request);
+    })
+  );
 });
