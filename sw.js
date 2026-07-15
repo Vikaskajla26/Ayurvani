@@ -1,5 +1,5 @@
 // sw.js
-const CACHE = 'ayurvani-v5';
+const CACHE = 'ayurvani-v6';
 const ASSETS = [
   '/',
   '/index.html',
@@ -17,8 +17,36 @@ const ASSETS = [
 ];
 
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));
+  self.skipWaiting(); // Force active immediately
+  e.waitUntil(
+    caches.open(CACHE).then(c => {
+      // Add assets one-by-one or fallback to prevent failure if one is missing
+      return Promise.all(
+        ASSETS.map(url => {
+          return c.add(url).catch(err => {
+            console.warn(`SW: Failed to cache asset ${url}`, err);
+          });
+        })
+      );
+    })
+  );
 });
+
+self.addEventListener('activate', e => {
+  e.waitUntil(
+    caches.keys().then(keys => {
+      return Promise.all(
+        keys.map(key => {
+          if (key !== CACHE) {
+            console.log('SW: Removing old cache', key);
+            return caches.delete(key);
+          }
+        })
+      );
+    }).then(() => self.clients.claim()) // Claim control of active pages immediately
+  );
+});
+
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
   
