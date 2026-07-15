@@ -1,32 +1,23 @@
 // sw.js
-const CACHE = 'ayurvani-v6';
-const ASSETS = [
-  '/',
-  '/index.html',
+// Bump this string on every deploy where cached files changed.
+const CACHE = 'ayurvani-v7';
+
+// Only long-lived, rarely-changing assets go here — safe to cache-first.
+const STATIC_ASSETS = [
   '/manifest.json',
   '/icon-192.png',
   '/icon-512.png',
-  '/icon-512-maskable.png',
-  '/js/vagdhenu-ui.js',
-  '/dravyaguna.js',
-  '/dravyaguna_data.json',
-  '/books.json',
-  '/chants.json',
-  '/charaka_verse_index.json',
-  '/dravyaguna-bg.jpg'
+  '/icon-512-maskable.png'
 ];
 
 self.addEventListener('install', e => {
   self.skipWaiting(); // Force active immediately
   e.waitUntil(
     caches.open(CACHE).then(c => {
-      // Add assets one-by-one or fallback to prevent failure if one is missing
       return Promise.all(
-        ASSETS.map(url => {
-          return c.add(url).catch(err => {
-            console.warn(`SW: Failed to cache asset ${url}`, err);
-          });
-        })
+        STATIC_ASSETS.map(url =>
+          c.add(url).catch(err => console.warn(`SW: Failed to cache asset ${url}`, err))
+        )
       );
     })
   );
@@ -47,20 +38,53 @@ self.addEventListener('activate', e => {
   );
 });
 
+// Anything that represents "the app" (markup, scripts, data) must always be
+// checked against the network first. Cache is only a fallback for offline use.
+// This is what actually changes on every deploy — treating it cache-first was
+// the reason updates (and hard refreshes) weren't reliably showing up.
+function isNetworkFirst(pathname) {
+  return (
+    pathname === '/' ||
+    pathname === '/index.html' ||
+    pathname.endsWith('.js') ||
+    pathname.endsWith('.json') ||
+    pathname.endsWith('.css')
+  );
+}
+
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
-  
+
   const url = new URL(e.request.url);
+
   // Completely bypass Service Worker cache for Vercel API and Hugging Face routes
   if (url.pathname.startsWith('/api/') || url.hostname.includes('hf.space') || url.hostname.includes('huggingface')) {
     return;
   }
-  
+
+  if (isNetworkFirst(url.pathname)) {
+    e.respondWith(
+      fetch(e.request)
+        .then(res => {
+          const resClone = res.clone();
+          caches.open(CACHE).then(c => c.put(e.request, resClone));
+          return res;
+        })
+        .catch(() => caches.match(e.request)) // offline fallback only
+    );
+    return;
+  }
+
+  // Cache-first for large binary assets (images, audio, fonts) that don't
+  // change once uploaded — safe and keeps the site fast/offline-capable.
   e.respondWith(
-    caches.match(e.request).then(response => {
-      return response || fetch(e.request).catch(() => null);
-    }).catch(() => {
-      return fetch(e.request);
-    })
+    caches.match(e.request).then(cached => {
+      if (cached) return cached;
+      return fetch(e.request).then(res => {
+        const resClone = res.clone();
+        caches.open(CACHE).then(c => c.put(e.request, resClone));
+        return res;
+      });
+    }).catch(() => fetch(e.request))
   );
 });
