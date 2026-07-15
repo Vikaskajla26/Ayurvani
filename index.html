@@ -1504,6 +1504,12 @@
       <button data-lang="hi">हिं</button>
       <button data-lang="en" class="active">EN</button>
     </div>
+    <!-- Recitation Studio quick-launch in header -->
+    <button class="theme-btn" id="vagStudioHeaderBtn" onclick="openRecitationStudio()" aria-label="Sanskrit Recitation Studio"
+      title="Sanskrit Recitation Studio"
+      style="margin-right:4px; background:linear-gradient(135deg,rgba(193,99,59,0.25),rgba(193,99,59,0.12)); border-color:rgba(193,99,59,0.4); font-size:1.05rem;">
+      🕉
+    </button>
     <button class="theme-btn" id="serverSettingsBtn" onclick="openServerSettingsModal()" aria-label="Audio Server Settings" style="margin-right: 4px;">
       <span class="theme-icon">⚙️</span>
     </button>
@@ -1589,29 +1595,77 @@
         </div>
 
         <div id="shlokaCustomTabContent" style="display:none; flex-direction: column; gap: 14px; background: var(--card); border: 1px solid var(--line); padding: 24px; border-radius: 16px; backdrop-filter: blur(8px); margin-bottom: 14px;">
-          <textarea id="customShlokaText" rows="3" placeholder="Sanskrit Shloka likhein ya niche text file (.txt) upload karein..." style="width:100%; padding:12px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-family:'Noto Serif Devanagari',serif; font-size:1.15rem; outline:none; transition:border-color 0.25s; resize:vertical;"></textarea>
+          <!-- Open full studio button -->
+          <div style="text-align:right; margin-bottom:-4px;">
+            <button onclick="openRecitationStudio(document.getElementById('customShlokaText').value, document.getElementById('customShlokaMeter').value)" 
+              style="background:linear-gradient(135deg,rgba(193,99,59,0.2),rgba(193,99,59,0.08));border:1.5px solid rgba(193,99,59,0.35);color:var(--copper);padding:5px 14px;border-radius:20px;font-size:0.78rem;font-weight:600;cursor:pointer;transition:background 0.2s;" 
+              onmouseover="this.style.background='rgba(193,99,59,0.3)'" 
+              onmouseout="this.style.background='linear-gradient(135deg,rgba(193,99,59,0.2),rgba(193,99,59,0.08))'">
+              🕉 Open Full Recitation Studio
+            </button>
+          </div>
+
+          <textarea id="customShlokaText" rows="3" placeholder="Sanskrit Shloka likhein ya niche text file (.txt) upload karein..." style="width:100%; padding:12px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-family:'Noto Serif Devanagari',serif; font-size:1.15rem; outline:none; transition:border-color 0.25s; resize:vertical;" oninput="updateCustomShlokaPreview()"></textarea>
           
-          <div class="custom-chant-actions">
+          <div class="custom-chant-actions" style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; justify-content:space-between;">
             <label class="spc-upload-label" style="margin:0; border-style:dashed;">
               📂 Upload Shloka Text File (.txt)
               <input type="file" id="customShlokaFile" accept=".txt" onchange="uploadCustomShlokaTextFile()">
             </label>
             
+            <!-- Meter -->
             <div style="display:flex; align-items:center; gap:8px;">
-              <label for="customShlokaMeter" style="font-size:0.85rem; color:var(--ink-soft);">Meter (वृत्त):</label>
+              <label for="customShlokaMeter" style="font-size:0.85rem; color:var(--ink-soft);">Meter:</label>
               <select id="customShlokaMeter" style="padding:6px 12px; border-radius:6px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); outline:none;">
                 <option value="anushtubh">Anushtubh (अनुष्टुभ्)</option>
-                <option value="gayatri">Gayatri (गायत्री)</option>
+                <option value="gayatri">Gāyatrī (गायत्री)</option>
                 <option value="trishtubh">Trishtubh (त्रिष्टुभ्)</option>
+                <option value="jagati">Jagati (जगती)</option>
                 <option value="vasantatilaka">Vasantatilaka (वसन्ततिलका)</option>
-                <option value="jajati">Jajati (ययाति)</option>
+                <option value="malini">Mālinī (मालिनी)</option>
+                <option value="mandakranta">Mandākrāntā (मन्दाक्रान्ता)</option>
+                <option value="sragdhara">Sragdharā (स्रग्धರಾ)</option>
+                <option value="shardulavikridita">Śārdūlavikrīḍita (ಶಾರ್ದೂಲವಿಕ್ರೀಡಿತ)</option>
+                <option value="shikharini">Śikharinī (ಶಿಕರಿಣಿ)</option>
+                <option value="jajati">Yayāti/Jajati (ಯಯಾತಿ)</option>
+                <option value="upajati">Upajāti (ಉಪಜಾತಿ)</option>
+                <option value="rathoddhatah">Rathoddhatā (ರಥೋದ್ಧತಾ)</option>
               </select>
             </div>
 
-            <button class="spc-play-btn" id="customReciteBtn" onclick="generateCustomAIChant()" style="background:var(--teal); color:#F6EFDD; box-shadow: 0 4px 16px rgba(54,124,89,0.35);">
-              🔊 AI Recite Shloka
-            </button>
+            <!-- Speed & Seed controls -->
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="display:flex; align-items:center; gap:6px;">
+                <label for="customShlokaSpeed" style="font-size:0.8rem; color:var(--ink-soft);">Speed: <span id="customSpeedVal" style="color:var(--gold); font-weight:600;">0.90x</span></label>
+                <input type="range" id="customShlokaSpeed" min="0.70" max="1.10" step="0.05" value="0.90" style="width:70px; accent-color:var(--gold);" oninput="document.getElementById('customSpeedVal').textContent = parseFloat(this.value).toFixed(2) + 'x'">
+              </div>
+              <div style="display:flex; align-items:center; gap:6px;">
+                <label for="customShlokaSeed" style="font-size:0.8rem; color:var(--ink-soft);">Seed:</label>
+                <input type="number" id="customShlokaSeed" value="42" min="0" max="999" style="width:50px; padding:4px 6px; border-radius:4px; border:1px solid var(--line); background:var(--bg-soft); color:var(--cream); outline:none;">
+              </div>
+            </div>
+
+            <!-- Buttons -->
+            <div style="display:flex; align-items:center; gap:8px;">
+              <button class="spc-play-btn" id="customReciteBtn" onclick="generateCustomAIChant()" style="background:var(--teal); color:#F6EFDD; box-shadow: 0 4px 16px rgba(54,124,89,0.35);">
+                🔊 AI Recite
+              </button>
+              <button class="spc-play-btn" id="customDownloadBtn" onclick="downloadCustomAudio()" style="background:rgba(228,201,124,0.1); border:1.5px solid rgba(228,201,124,0.3); color:var(--gold-light); display:none; padding:8px 14px;">
+                📥 Download WAV
+              </button>
+            </div>
           </div>
+          
+          <!-- Collapsible Sandhi Analysis details -->
+          <details style="border:1px solid var(--line); border-radius:8px; overflow:hidden; margin-top:4px;">
+            <summary style="padding:10px 14px; cursor:pointer; font-size:0.8rem; font-weight:600; color:var(--gold); background:rgba(228,201,124,0.04); letter-spacing:0.04em; list-style:none; display:flex; align-items:center; gap:8px; user-select:none;">
+              🔬 Sandhi Vicheda Analysis
+              <span style="font-size:0.7rem; color:var(--ink-soft); margin-left:auto;">G2P · Visarga · Anusvāra</span>
+            </summary>
+            <div id="customSandhiPanel" style="padding:12px; font-size:0.82rem; color:var(--sage); background:rgba(255,255,255,0.01);">
+              Type text above to see sandhi analysis.
+            </div>
+          </details>
         </div>
 
 
@@ -3294,13 +3348,13 @@ function hideDravyagunaDetail() {
 const openDravyagunaDetail = showDravyagunaDetail;
 const closeDravyagunaDetail = hideDravyagunaDetail;
 
-function getReciteUrl(text, meter) {
+function getReciteUrl(text, meter, seed = 42, speed = 0.90) {
   const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
   const encodedText = encodeURIComponent(text);
   if (isLocalhost) {
-    return `${VAGDHENU_SERVER}/recite?text=${encodedText}&meter=${meter}&seed=42&speed=0.90`;
+    return `${VAGDHENU_SERVER}/recite?text=${encodedText}&meter=${meter}&seed=${seed}&speed=${speed}`;
   } else {
-    return `/api/recite?text=${encodedText}&meter=${meter}&server_url=${encodeURIComponent(VAGDHENU_SERVER)}&seed=42&speed=0.90`;
+    return `/api/recite?text=${encodedText}&meter=${meter}&server_url=${encodeURIComponent(VAGDHENU_SERVER)}&seed=${seed}&speed=${speed}`;
   }
 }
 </script>
@@ -5483,7 +5537,111 @@ function createMagicParticle(x, y) {
   }, 600);
 }
 
+// Vāgdhenu Server config
+const VAGDHENU_SERVER = 'https://prathoshap-vagdhenu-demo.hf.space';
+
+// Install custom recite handler updates
+let customAudioBlob = null;
+
+async function generateCustomAIChant() {
+  const text = (document.getElementById('customShlokaText').value || '').trim();
+  if (!text) { showToast('Pehle shloka text input karein ya text file upload karein.'); return; }
+  
+  const meter = document.getElementById('customShlokaMeter')?.value || 'anushtubh';
+  const speed = parseFloat(document.getElementById('customShlokaSpeed')?.value || 0.90);
+  const seed = parseInt(document.getElementById('customShlokaSeed')?.value || 42, 10);
+  
+  const reciteBtn = document.getElementById('customReciteBtn');
+  const downloadBtn = document.getElementById('customDownloadBtn');
+  
+  if (reciteBtn) { reciteBtn.disabled = true; reciteBtn.innerHTML = '⏳ Reciting...'; }
+  if (downloadBtn) downloadBtn.style.display = 'none';
+  showToast('Vāgdhenu AI से custom recitation generate हो रही है...');
+  
+  if (shlokaPlayerAudio) { shlokaPlayerAudio.pause(); shlokaPlayerAudio = null; }
+  
+  try {
+    const url = getReciteUrl(text, meter, seed, speed);
+    const resp = await fetch(url, { headers: { 'Bypass-Tunnel-Reminder': 'true' } });
+    if (!resp.ok) {
+      const errData = await resp.json().catch(() => ({}));
+      throw new Error(errData.error || ('Server error: ' + resp.status));
+    }
+    
+    const blob = await resp.blob();
+    customAudioBlob = blob;
+    if (downloadBtn) downloadBtn.style.display = 'inline-block';
+    
+    // Display in Player Card
+    document.getElementById('spcCat').textContent = 'Custom Recitation';
+    document.getElementById('spcSanskrit').textContent = text;
+    document.getElementById('spcTranslit').textContent = `Meter: ${meter}`;
+    document.getElementById('spcMeaning').textContent = 'Generated dynamically using your custom text.';
+    document.getElementById('spcTimer').textContent = '0:00 / 0:00';
+    
+    const badge = document.getElementById('spcAudioBadge');
+    if (badge) badge.style.display = 'inline-block';
+    
+    const aiBtn = document.getElementById('spcAiBtn');
+    if (aiBtn) aiBtn.style.display = 'none';
+    
+    const card = document.getElementById('shlokaPlayerCard');
+    card.style.display = 'block';
+    card.style.animation = 'none';
+    requestAnimationFrame(() => { card.style.animation = 'fadeSlideUp 0.3s ease'; });
+    
+    await startShlokaAudio({ id: 'custom_generation', audioUrl: 'stored-blob' }, blob);
+    
+  } catch (err) {
+    console.error('Custom generation error:', err);
+    showToast('❌ Recitation failed: ' + err.message);
+  } finally {
+    if (reciteBtn) { reciteBtn.disabled = false; reciteBtn.innerHTML = '🔊 AI Recite'; }
+  }
+}
+
+function downloadCustomAudio() {
+  if (!customAudioBlob) return;
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(customAudioBlob);
+  a.download = `custom-recitation-${Date.now()}.wav`;
+  a.click();
+}
+
+let customSandhiDebounce = null;
+function updateCustomShlokaPreview() {
+  const text = (document.getElementById('customShlokaText').value || '').trim();
+  clearTimeout(customSandhiDebounce);
+  const panel = document.getElementById('customSandhiPanel');
+  if (!panel) return;
+  if (!text) {
+    panel.innerHTML = 'Type text above to see sandhi analysis.';
+    return;
+  }
+  panel.innerHTML = '<div style="color:var(--ink-soft);font-size:0.75rem;">⏳ Analysing sandhi...</div>';
+  customSandhiDebounce = setTimeout(async () => {
+    try {
+      const data = await VagdhenuClient.fetchPreview(text);
+      if (data.error) throw new Error(data.error);
+      const rows = (data.padas || []).map((pada, i) => `
+        <div style="margin-bottom:8px;padding:8px 12px;background:rgba(255,255,255,0.02);border-radius:6px;border-left:2px solid var(--gold);">
+          <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:1.02rem;color:var(--gold-light);margin-bottom:3px;">${pada}</div>
+          <div style="font-size:0.7rem;color:var(--ink-soft);text-transform:uppercase;margin-bottom:2px;">Sandhi-Processed (Devanagari):</div>
+          <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:0.95rem;color:var(--sage);margin-bottom:3px;">${data.devanagari_routed?.[i] || ''}</div>
+          <div style="font-size:0.68rem;color:var(--ink-soft);">
+            SLP1: <span style="font-family:monospace;color:var(--copper);">${data.slp1?.[i] || ''}</span>
+            &nbsp;·&nbsp; Syllables: <strong style="color:var(--gold);">${data.n_syllables?.[i] || '?'}</strong>
+          </div>
+        </div>`).join('');
+      panel.innerHTML = rows || 'No padas found.';
+    } catch (e) {
+      panel.innerHTML = '<div style="color:var(--copper);font-size:0.75rem;">Sandhi preview unavailable.</div>';
+    }
+  }, 600);
+}
+
 init();
 </script>
+<script src="js/vagdhenu-ui.js"></script>
 </body>
 </html>

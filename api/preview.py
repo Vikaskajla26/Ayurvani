@@ -139,6 +139,48 @@ def visarga_echo_final(slp):
         ws[-1] = ws[-1][:-1] + "h" + ws[-1][-2]
     return " ".join(ws)
 
+def slp_to_deva(slp):
+    v_matras = {"a":"","A":"ा","i":"ि","I":"ी","u":"ु","U":"ू","f":"ೃ","F":"ॄ","x":"ॢ","X":"ॣ","e":"े","E":"ै","o":"ो","O":"ौ"}
+    v_indep = {"a":"अ","A":"आ","i":"इ","I":"ई","u":"उ","U":"ऊ","f":"ऋ","F":"ॠ","x":"ऌ","X":"ॡ","e":"ए","E":"ऐ","o":"ओ","O":"औ"}
+    cons = {
+        "k":"क","K":"ख","g":"ग","G":"घ","N":"ङ","c":"च","C":"छ","j":"ज","J":"झ","Y":"ञ",
+        "w":"ट","W":"ठ","q":"ड","Q":"ढ","R":"ण","t":"त","T":"थ","d":"द","D":"ध","n":"न",
+        "p":"प","P":"फ","b":"ब","B":"भ","m":"म",
+        "y":"य","r":"र","l":"ल","v":"व","S":"श","z":"ष","s":"स","h":"ह"
+    }
+    out = []
+    i = 0
+    L = len(slp)
+    while i < L:
+        c = slp[i]
+        if c in v_indep:
+            out.append(v_indep[c])
+            i += 1
+        elif c in cons:
+            nxt = slp[i+1] if i+1 < L else ""
+            out.append(cons[c])
+            if nxt in v_indep:
+                out.append(v_matras[nxt])
+                i += 2
+            elif nxt == "M":
+                out.append("ं")
+                i += 2
+            elif nxt == "H":
+                out.append("ः")
+                i += 2
+            else:
+                out.append("्")
+                i += 1
+        elif c == "M":
+            out.append("ं"); i += 1
+        elif c == "H":
+            out.append("ः"); i += 1
+        elif c == "'":
+            out.append("ऽ"); i += 1
+        else:
+            out.append(c); i += 1
+    return "".join(out)
+
 def model_text_sandhi(src_text, echo_final=True):
     slp = to_slp1(src_text)
     slp = visarga_sandhi(slp)
@@ -219,17 +261,34 @@ def preview_text(text):
         padas = [p for p in padas if not re.match(r'^[\d\u0966-\u096f\s]+$', p)]
         if not padas:
             padas = [text]
-        pieces = [model_text_sandhi(p, echo_final=True) for p in padas]
-        pieces = [_satva(x) for x in pieces]
-        pieces = [_danda_fix(_anusvara_m(x)) for x in pieces]
-        pieces = [_hna_metathesis(x) for x in pieces]
-        pieces = [_vocalic_l(x) for x in pieces]
+            
+        pieces_kannada = []
+        pieces_devanagari = []
+        
+        for p in padas:
+            slp = to_slp1(p)
+            slp = visarga_sandhi(slp)
+            slp = visarga_echo_final(slp)
+            slp = slp.replace("F", "rU")
+            
+            pieces_kannada.append(slp_to_kannada(slp))
+            pieces_devanagari.append(slp_to_deva(slp))
+            
+        pieces_kannada_post = []
+        for x in pieces_kannada:
+            x = _satva(x)
+            x = _danda_fix(_anusvara_m(x))
+            x = _hna_metathesis(x)
+            x = _vocalic_l(x)
+            pieces_kannada_post.append(x)
+            
         slp_pieces = [to_slp1(p) for p in padas]
         return {
             "padas": padas,
-            "kannada_routed": pieces,
+            "kannada_routed": pieces_kannada_post,
+            "devanagari_routed": pieces_devanagari,
             "slp1": slp_pieces,
-            "n_syllables": [n_aksharas(x) for x in pieces],
+            "n_syllables": [n_aksharas(x) for x in pieces_kannada_post],
         }
     except Exception as e:
         return {"error": str(e)}

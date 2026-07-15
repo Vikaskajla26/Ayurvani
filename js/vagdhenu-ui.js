@@ -138,9 +138,9 @@ const SandhiPreview = {
       <div style="margin-bottom:12px;padding:10px 14px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:3px solid var(--gold);">
         <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:1.05rem;color:var(--gold-light);margin-bottom:4px;">${pada}</div>
         <div style="font-size:0.72rem;color:var(--ink-soft);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:3px;">
-          Kannada-routed (model input):
+          Sandhi-Processed (Devanagari):
         </div>
-        <div style="font-family:'JetBrains Mono',monospace;font-size:0.82rem;color:var(--sage);word-break:break-all;">${data.kannada_routed?.[i] || ''}</div>
+        <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:1rem;color:var(--sage);word-break:break-all;margin-bottom:4px;">${data.devanagari_routed?.[i] || ''}</div>
         <div style="margin-top:4px;font-size:0.72rem;color:var(--ink-soft);">
           SLP1: <span style="font-family:monospace;color:var(--copper);">${data.slp1?.[i] || ''}</span>
           &nbsp;·&nbsp; Syllables: <strong style="color:var(--gold);">${data.n_syllables?.[i] || '?'}</strong>
