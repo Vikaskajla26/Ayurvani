@@ -5922,5 +5922,306 @@
    "Insecticidal activity",
    "Antispasmodic"
   ]
+ },
+ {
+  "id": "meshashringi",
+  "name": "Meshashringi",
+  "sanskrit_name": "मेषशृङ्गी",
+  "sloka": "मेषशृङ्गीफलं तिक्तं कुष्ठमेहकफप्रणुत् | दीपनं श्वासकासास्रविषहा लघू पाचनी || तद्वीजं परमं वृष्यं वातशूलहरं लघु ||",
+  "sloka_source": "",
+  "botanical_name": "Gymnema sylvestre",
+  "family": "Asclepiadaceae",
+  "synonyms": [
+   {
+    "term": "अजशृङ्गी",
+    "meaning": "Fruits resemble horns of a goat"
+   },
+   {
+    "term": "विषाणी",
+    "meaning": "Fruits resemble horns of a goat"
+   },
+   {
+    "term": "मधुनाशिनी",
+    "meaning": "Eating the leaves temporarily removes the ability to taste sweetness"
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Periploca of the Woods"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Medhasingi"
+   },
+   {
+    "lang": "Marathi",
+    "name": "Bedaki, Kavali, Medhashingi"
+   }
+  ],
+  "classification_of_gana": [
+   "चरक: —",
+   "सुश्रुत: —",
+   "भावप्रकाश: गुडुच्यादि वर्ग"
+  ],
+  "external_morphology": {
+   "habitat": "",
+   "details": [
+    "Habit: Large woody, much-branched climber running over the tops of high trees",
+    "Stem: Young stems pubescent",
+    "Leaves: Opposite, simple",
+    "Flowers: Green, in sessile cymes, yellow",
+    "Fruits: Follicles 6-7.5 cm long, lanceolate"
+   ]
+  },
+  "useful_parts": "Leaf, Root",
+  "phytoconstituents": "Gymnamine, alanine, valine, adenine, betaine",
+  "rasa_panchaka": {
+   "rasa": "Tikta, Kashaya",
+   "guna": "Laghu, Ruksha",
+   "virya": "Ushna",
+   "vipaka": "Katu"
+  },
+  "karma": {
+   "dosha_karma": "कफवातशामक (Kaphavatashamak)",
+   "karma": "मेहघ्न, श्वासहर, कासहर, व्रणहर, अश्रिशूलहर | Others: कृमिघ्न, अक्षिरोगहर, विषविकारहर"
+  },
+  "doshaghnata": "कफवातशामक (Kaphavatashamak)",
+  "rogaghnata": "मेह, श्वास, कास, व्रण, अश्रिशूल, कृमी, अक्षिरोग, विषविकार",
+  "amayika_prayoga": [
+   "मधुमेह (Diabetes) = Meshashringi churna",
+   "सन्धिशोथ (joint swelling) = Leaf paste of Meshashringi applied over joints"
+  ],
+  "matra": [
+   {
+    "form": "Patra Churna",
+    "dose": "3-6 g"
+   },
+   {
+    "form": "Mula Kwatha",
+    "dose": "50-100 ml"
+   }
+  ],
+  "pharmacological_actions": [
+   "Antidiabetic",
+   "Hypoglycemic",
+   "Antiviral",
+   "Antimicrobial",
+   "Antiatherosclerotic",
+   "Spasmolytic"
+  ],
+  "kalpana": [
+   "Madhumehantaka Churna - मधुमेह",
+   "Nyagrodhadi Churna - मधुमेहज व्रण",
+   "Maha Vishagarbha Taila - वातविकार",
+   "Meshashringi Taila - कुष्ठ"
+  ],
+  "varieties": "Not mentioned in notes",
+  "research_updates": [
+   "Anti-obesity effect",
+   "Antioxidant"
+  ]
+ },
+ {
+  "id": "methika",
+  "name": "Methika",
+  "sanskrit_name": "मेथिका",
+  "sloka": "मेथिका कटुरुष्णा च रक्तपित्तप्रकोपणी | अरुचिज्वरशमन दीपिनी वातशूलघ्नी ||",
+  "sloka_source": "ध. नि.",
+  "botanical_name": "Trigonella foenum-graecum",
+  "family": "Leguminoseae",
+  "synonyms": [
+   {
+    "term": "पीतबीजा",
+    "meaning": "Seeds are yellow in colour"
+   },
+   {
+    "term": "दीपिनी",
+    "meaning": "Acts as Deepana"
+   },
+   {
+    "term": "बोधिनी",
+    "meaning": "Increases appetite"
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Fenugreek"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Methi"
+   },
+   {
+    "lang": "Marathi",
+    "name": "Methi"
+   }
+  ],
+  "classification_of_gana": [
+   "चरक: —",
+   "सुश्रुत: —",
+   "भावप्रकाश: हरितक्यादि वर्ग"
+  ],
+  "external_morphology": {
+   "habitat": "",
+   "details": [
+    "Habit: Nearly smooth erect annual",
+    "Stipules: Not toothed",
+    "Leaves: Compound, leaflets 2-2.5 cm long",
+    "Flowers: Axillary, sessile",
+    "Fruits: Pods, 5-7.5 cm long, with a long persistent beak, often falcate, 10-20 seeded"
+   ]
+  },
+  "useful_parts": "Panchanga, Bija",
+  "phytoconstituents": "Whole plant: β-carotene, choline, essential amino acids, β-sitosterol. Seed: vitexin, vitamins, carbohydrates, protein",
+  "rasa_panchaka": {
+   "rasa": "Katu",
+   "guna": "Laghu, Snigdha",
+   "virya": "Ushna",
+   "vipaka": "Katu"
+  },
+  "karma": {
+   "dosha_karma": "वातकफशामक (Vatakaphashamak)",
+   "karma": "ज्वरघ्न, कान्तिकर, दीपन, नाडीबल्य, बल्य, शूलहर, वृष्य"
+  },
+  "doshaghnata": "वातकफशामक (Vatakaphashamak)",
+  "rogaghnata": "वातव्याधि, ज्वर, अग्निमांद्य, नाडीदौर्बल्य, दौर्बल्य, शूल, गृध्रसी, श्वेतप्रदर",
+  "amayika_prayoga": [
+   "वातव्याधि = Powder of Chaturbija (Methika, Chandrashura, Kalajaji, Yavani) taken to destroy all Vatavyadhi",
+   "अजीर्ण, शूल, आध्मान, पार्श्वशूल, कटिवात"
+  ],
+  "matra": [
+   {
+    "form": "Bija Churna",
+    "dose": "1-3 g"
+   }
+  ],
+  "pharmacological_actions": [
+   "Hypoglycemic",
+   "Fungitoxic",
+   "Insecticidal",
+   "Antibiotic",
+   "Anti-inflammatory",
+   "Analgesic",
+   "Hypocholesterolemic"
+  ],
+  "kalpana": [
+   "Chaturbija Churna - शूल, वातरोग",
+   "Pramehamihira Taila - प्रमेह, ज्वर"
+  ],
+  "varieties": "राजनिघण्टु: 1) Gramya (cultivated) 2) Vanya (wild)",
+  "research_updates": [
+   "Antihyperglycemic",
+   "Antioxidative"
+  ]
+ },
+ {
+  "id": "musta",
+  "name": "Musta",
+  "sanskrit_name": "मुस्ता",
+  "sloka": "मुस्तं हिमं कटु ग्राहि तिक्तं दीपनपाचनम् | कषायं कफपित्तास्त्रतृड्ज्वरारुचिजन्तुजित् ||",
+  "sloka_source": "भा. प्र.",
+  "botanical_name": "Cyperus rotundus",
+  "family": "Cyperaceae",
+  "synonyms": [
+   {
+    "term": "गङ्गेयी",
+    "meaning": "Commonly grows near the banks of the river Ganga"
+   },
+   {
+    "term": "कुरुविन्दा",
+    "meaning": "Common in the north-eastern region of India"
+   },
+   {
+    "term": "वारिद",
+    "meaning": "Grows near water resources"
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Nut Grass"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Motha"
+   },
+   {
+    "lang": "Marathi",
+    "name": "Nagarmotha"
+   }
+  ],
+  "classification_of_gana": [
+   "चरक: तृप्तिघ्न वर्ग, तृष्णानिग्रहण, लेखनीय, कण्डूघ्न",
+   "सुश्रुत: मुस्तादि गण, वचादि गण",
+   "भावप्रकाश: कर्पूरादि वर्ग"
+  ],
+  "external_morphology": {
+   "habitat": "Grows like a weed in waste fields and water resources",
+   "details": [
+    "Habit: Rhizomatous perennial herb",
+    "Stem: Caespitose/solitary, sparsely tufted",
+    "Leaves: Basal, lower ones often scale-like",
+    "Flowers: Small, bisexual",
+    "Fruit: Nut, oblong and trigonous"
+   ]
+  },
+  "useful_parts": "Kanda (Tuber)",
+  "phytoconstituents": "Tubers yield cyperene, α-selinine, cyperone, keto-alcohols",
+  "rasa_panchaka": {
+   "rasa": "Tikta, Kashaya, Katu",
+   "guna": "Laghu, Ruksha",
+   "virya": "Sheeta",
+   "vipaka": "Katu"
+  },
+  "karma": {
+   "dosha_karma": "पित्तकफशामक (Pittakaphashamak). Agryakarma: Astringent, Appetizer and Digestant",
+   "karma": "शीतग्राही, ज्वरघ्न, त्वचाहर, रोचक, कृमिघ्न, स्तन्यशोधन, पाचक, दीपन"
+  },
+  "doshaghnata": "पित्तकफशामक (Pittakaphashamak)",
+  "rogaghnata": "अतिसार, ज्वर, अरुची, दाह, तृष्णा, कृमी",
+  "amayika_prayoga": [
+   "अतिसार (Diarrhoea) = Decoction of Musta root taken with honey checks all kinds of diarrhoea",
+   "ज्वर (Fever) = Decoction and cold infusion of Musta and Parpata",
+   "हालीमक (chronic obstructive jaundice) = Iron powder + Musta churna taken with Kashaya of Khadira",
+   "वातरक्त (Vatarakta) = Continuous use of decoction of Musta, Amalaki, Nisha taken with honey"
+  ],
+  "matra": [
+   {
+    "form": "Churna",
+    "dose": "1-3 g"
+   },
+   {
+    "form": "Kwatha",
+    "dose": "50-100 ml"
+   }
+  ],
+  "pharmacological_actions": [
+   "Appetizer",
+   "Digestant",
+   "Astringent",
+   "Anthelmintic",
+   "Anti-inflammatory",
+   "Analgesic",
+   "Anti-diarrhoeal",
+   "Antibacterial",
+   "Antigiardial",
+   "Antiviral"
+  ],
+  "kalpana": [
+   "Mustakadi Kwatha - ज्वर, ग्रहणी",
+   "Mustakarishta - ग्रहणी, अजीर्ण",
+   "Mustadi Leha - कफशामक, कास",
+   "Mustadi Churna - श्वास, पाण्डु, कामला, ग्रहणी"
+  ],
+  "varieties": "राजनिघण्टु: 1) Musta 2) Nagaramusta",
+  "research_updates": [
+   "Analgesic",
+   "Anti-diarrhoeal",
+   "Antibacterial",
+   "Antigiardial",
+   "Antiviral"
+  ]
  }
 ]
