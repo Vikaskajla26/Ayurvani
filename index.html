@@ -1786,7 +1786,7 @@
       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:16px; margin-bottom: 20px;">
         <div>
           <label style="font-size:0.8rem; color:var(--ink-soft); font-weight:600; display:block; margin-bottom:6px;">Sthana (स्थान)</label>
-          <select id="carakaSthana" onchange="updateReferencePreview()" style="width:100%; padding:11px 14px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-size:0.95rem; outline:none;">
+          <select id="carakaSthana" onchange="populateCarakaChapters()" style="width:100%; padding:11px 14px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-size:0.95rem; outline:none;">
             <option value="Sutrasthana">Sutra Sthana (सूत्रस्थान)</option>
             <option value="Nidanasthana">Nidan Sthana (निदानस्थान)</option>
             <option value="Vimanasthana">Vimana Sthana (विमानस्थान)</option>
@@ -1799,7 +1799,9 @@
         </div>
         <div>
           <label style="font-size:0.8rem; color:var(--ink-soft); font-weight:600; display:block; margin-bottom:6px;">Chapter (अध्याय संख्या)</label>
-          <input type="number" id="carakaChapter" min="1" oninput="updateReferencePreview()" placeholder="e.g. 1" style="width:100%; padding:11px 14px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-size:0.95rem; outline:none;">
+          <select id="carakaChapter" onchange="updateReferencePreview()" style="width:100%; padding:11px 14px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-size:0.95rem; outline:none;">
+            <!-- Dynamic options -->
+          </select>
         </div>
         <div>
           <label style="font-size:0.8rem; color:var(--ink-soft); font-weight:600; display:block; margin-bottom:6px;">Shloka / Verse (श्लोक संख्या)</label>
@@ -4812,6 +4814,25 @@ let currentECarakaSthanaText = "";
 let currentECarakaChapterText = "";
 let currentLocalVerseText = "";
 
+function populateCarakaChapters() {
+  const sthanaSelect = document.getElementById('carakaSthana');
+  const chapterSelect = document.getElementById('carakaChapter');
+  if (!sthanaSelect || !chapterSelect) return;
+  
+  const sthana = sthanaSelect.value;
+  const sthanaInfo = CARAKA_CHAPTERS[sthana];
+  if (!sthanaInfo) return;
+  
+  let html = '';
+  const chapterKeys = Object.keys(sthanaInfo.chapters).map(Number).sort((a, b) => a - b);
+  chapterKeys.forEach(chNum => {
+    const ch = sthanaInfo.chapters[chNum];
+    html += `<option value="${chNum}">${chNum}. ${ch.en} (${ch.hi})</option>`;
+  });
+  chapterSelect.innerHTML = html;
+  updateReferencePreview();
+}
+
 function updateReferencePreview() {
   const sthanaSelect = document.getElementById('carakaSthana');
   const sthana = sthanaSelect ? sthanaSelect.value : 'Sutrasthana';
@@ -5349,6 +5370,7 @@ async function init(){
   initScrollNavAdvance();
   
   showView('home');
+  populateCarakaChapters();
 
   document.getElementById('chantSearch').addEventListener('input', renderChants);
   document.getElementById('bookSearch').addEventListener('input', renderBooks);

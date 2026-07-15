@@ -315,7 +315,12 @@ def render_verse(text, meter="anushtubh", seed=42, speed=0.90):
 # HTTP Request Handler
 
 # ---- Charaka Samhita Online verse fetcher via MediaWiki API ----
-CSO_API = "http://www.carakasamhitaonline.com/api.php"
+CSO_API_HOSTS = [
+    "https://www.carakasamhitaonline.com/api.php",
+    "https://carakasamhitaonline.com/api.php",
+    "http://www.carakasamhitaonline.com/api.php",
+]
+CSO_API = CSO_API_HOSTS[0]
 
 # Map chapter wiki page titles for all 120 chapters of Charaka Samhita
 CHARAKA_PAGE_TITLES = {
@@ -475,35 +480,45 @@ def _to_devanagari_num(n):
     return ''.join(chr(ord(c) + 0x0966 - 48) for c in str(n))
 
 def _fetch_wiki_page(title):
-    """Fetch raw wikitext for a page from carakasamhitaonline.com MediaWiki API."""
+    """Fetch raw wikitext for a page from carakasamhitaonline.com MediaWiki API.
+    Tries each host in CSO_API_HOSTS in turn. Follows redirects automatically."""
     if title in _page_cache:
-        return _page_cache[title]
+        cached_content = _page_cache[title]
+        # If it's a redirect, ignore the cached value so we can fetch it fresh with redirects followed
+        if not re.match(r'^\s*#\s*REDIRECT', cached_content, re.IGNORECASE):
+            return cached_content
     
     safe_title = urllib.parse.quote(title.replace(" ", "_"))
-    url = f"{CSO_API}?action=query&prop=revisions&titles={safe_title}&rvslots=*&rvprop=content&format=json"
-    
-    try:
-        req = urllib.request.Request(url, headers={"User-Agent": "Ayurvani/1.0"})
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            data = json.loads(resp.read().decode("utf-8"))
-        
-        pages = data.get("query", {}).get("pages", {})
-        for page_id, page_data in pages.items():
-            if page_id == "-1":
-                return None
-            revisions = page_data.get("revisions", [])
-            if revisions:
-                content = revisions[0].get("slots", {}).get("main", {}).get("*", "")
-                _page_cache[title] = content
-                # Save persistent cache
-                try:
-                    with open(_cache_file, "w", encoding="utf-8") as f:
-                        json.dump(_page_cache, f, ensure_ascii=False, indent=2)
-                except Exception as ex:
-                    print(f"[fetch_verse] Error writing cache: {ex}")
-                return content
-    except Exception as e:
-        print(f"[fetch_verse] Error fetching wiki page '{title}': {e}")
+    last_error = None
+    for host in CSO_API_HOSTS:
+        url = f"{host}?action=query&prop=revisions&titles={safe_title}&rvslots=*&rvprop=content&format=json&redirects=1"
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "Ayurvani/1.0"})
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+            
+            pages = data.get("query", {}).get("pages", {})
+            for page_id, page_data in pages.items():
+                if page_id == "-1":
+                    # This host confirms the page doesn't exist under this title --
+                    # no point trying the other hosts for the same title.
+                    return None
+                revisions = page_data.get("revisions", [])
+                if revisions:
+                    content = revisions[0].get("slots", {}).get("main", {}).get("*", "")
+                    _page_cache[title] = content
+                    try:
+                        with open(_cache_file, "w", encoding="utf-8") as f:
+                            json.dump(_page_cache, f, ensure_ascii=False, indent=2)
+                    except Exception as ex:
+                        print(f"[fetch_verse] Error writing cache: {ex}")
+                    return content
+        except Exception as e:
+            last_error = e
+            print(f"[fetch_verse] Host '{host}' failed for '{title}': {e}")
+            continue  # try the next host
+            
+    print(f"[fetch_verse] All hosts failed fetching '{title}'. Last error: {last_error}")
     return None
 
 def _clean_wiki_text(text):

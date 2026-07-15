@@ -1,4 +1,13 @@
 __pycache__/
 *.pyc
+*.py[cod]
+*$py.class
 cso_page_cache.json
 cso_title_cache.json
+.DS_Store
+.venv/
+node_modules/
+dist/
+build/
+*.log
+scratch/

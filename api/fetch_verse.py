@@ -212,19 +212,23 @@ def _fetch_wiki_page(title, timeout=12):
     timeout here can make the whole function get killed by the platform before
     it ever returns, which looks like a broken feature to the visitor. The
     offline build_index.py script (which runs on a real machine with no such
-    limit) explicitly passes a longer timeout for its batch run instead."""
+    limit) explicitly passes a longer timeout for its batch run instead.
+
+    Follows redirects automatically."""
     if title in _page_cache:
-        return _page_cache[title]
+        cached_content = _page_cache[title]
+        # If it's a redirect, ignore the cached value so we can fetch it fresh with redirects followed
+        if not re.match(r'^\s*#\s*REDIRECT', cached_content, re.IGNORECASE):
+            return cached_content
 
     safe_title = urllib.parse.quote(title.replace(" ", "_"))
     last_error = None
     for host in CSO_API_HOSTS:
-        url = f"{host}?action=query&prop=revisions&titles={safe_title}&rvslots=*&rvprop=content&format=json"
+        url = f"{host}?action=query&prop=revisions&titles={safe_title}&rvslots=*&rvprop=content&format=json&redirects=1"
         try:
             req = urllib.request.Request(url, headers={"User-Agent": "Ayurvani/1.0"})
             with urllib.request.urlopen(req, timeout=timeout) as resp:
                 data = json.loads(resp.read().decode("utf-8"))
-
             pages = data.get("query", {}).get("pages", {})
             for page_id, page_data in pages.items():
                 if page_id == "-1":

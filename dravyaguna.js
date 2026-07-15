@@ -271,8 +271,8 @@ function dgBuildDetailHtml(plant) {
   var galHtml = '<div class="dravya-image-gallery"><div class="dravya-gallery-tabs">';
   var plantImg = plant.plantPhotoUrl || '';
   var usefulImg = plant.usefulPartPhotoUrl || '';
-  if (plantImg) galHtml += '<button class="dravya-tab-btn active" onclick="dgSwitchTab(\'plantTab\',event)">🌿 Plant</button>';
-  if (usefulImg) galHtml += '<button class="dravya-tab-btn" onclick="dgSwitchTab(\'usefulTab\',event)">🔬 ' + (plant.usefulPart || 'Useful Part') + '</button>';
+  if (plantImg) galHtml += '<button class="dravya-tab-btn active" onclick="dgSwitchTab(\'dgPlantTab\',event)">🌿 Plant</button>';
+  if (usefulImg) galHtml += '<button class="dravya-tab-btn" onclick="dgSwitchTab(\'dgUsefulTab\',event)">🔬 ' + (plant.usefulPart || 'Useful Part') + '</button>';
   galHtml += '</div><div class="dravya-gallery-content">';
   if (plantImg) {
     galHtml += '<div id="dgPlantTab" class="dravya-image-tab active">';
