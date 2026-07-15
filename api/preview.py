@@ -62,7 +62,7 @@ def to_slp1(t):
             out.append(c)
     return "".join(out)
 
-def slp1_to_kannada(slp):
+def slp_to_kannada(slp):
     # Simple SLP1 to Kannada mapper
     k_vowels = {"a":"ಅ","A":"ಆ","i":"ಇ","I":"ಈ","u":"ಉ","U":"ಊ","f":"ಋ","F":"ಋೂ","x":"ಌ","X":"ೡ","e":"ಎ","E":"ಐ","o":"ಒ","O":"ಔ"}
     k_cons = {
@@ -195,7 +195,7 @@ def _hna_metathesis(s):
     return s.replace("ಹ್ಣ", "ಣ್ಹ").replace("ಹ್ನ", "ನ್ಹ")
 
 def _vocalic_l(s):
-    return s.replace("ೢ", "್ಲೃ").replace("ೣ", "್ಲೄ").replace("", "ಲೃ").replace("ೡ", "ಲೄ")
+    return s.replace("ೢ", "್ಲೃ").replace("ೣ", "್ಲೄ").replace("ಌ", "ಲೃ").replace("ೡ", "ಲೄ")
 
 _VECHO_SHORT = {"i": "hi", "u": "hu", "e": "he"}
 _VLONG = set("ಾೀೂೄೆೇೈೊೋೌ")
