@@ -8,7 +8,7 @@ sdk_version: 5.49.1
 app_file: demo/app.py
 pinned: false
 license: apache-2.0
-short_description: Metered Sanskrit/Vedic chant text-to-speech (Devanagari in, audio out)
+short_description: Sanskrit Vedic chant metered text-to-speech
 ---
 
 # Vāgdhenu — Sanskrit chant TTS (demo)
