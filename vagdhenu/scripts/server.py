@@ -243,6 +243,29 @@ def _stitch(segs, GAPS, fric=False, halant=False):
         b += [gate(s, fric=(fric and i == 0), halant=(halant and i == last)), GAPS[i] if i < len(GAPS) else GAPS[-1]]
     return np.concatenate(b[:-1])
 
+def preview_text(text):
+    """Return the preprocessed Kannada-routed text (model_text_sandhi output) without running inference.
+    Used by the /preview endpoint for Sandhi Analysis display."""
+    try:
+        padas = [p.strip() for p in re.split(r'[\n|।]+', text) if p.strip()]
+        padas = [p for p in padas if not re.match(r'^[\d\u0966-\u096f\s]+$', p)]
+        if not padas:
+            padas = [text]
+        pieces = [PT.model_text_sandhi(p, echo_final=True) for p in padas]
+        pieces = [_satva(x) for x in pieces]
+        pieces = [_danda_fix(_anusvara_m(x)) for x in pieces]
+        pieces = [_hna_metathesis(x) for x in pieces]
+        pieces = [_vocalic_l(x) for x in pieces]
+        slp_pieces = [PT.align_slp1(p) for p in padas]
+        return {
+            "padas": padas,
+            "kannada_routed": pieces,
+            "slp1": slp_pieces,
+            "n_syllables": [n_aksharas(x) for x in pieces],
+        }
+    except Exception as e:
+        return {"error": str(e)}
+
 def render_verse(text, meter="anushtubh", seed=42, speed=0.90):
     ref_audio, ref_t, sps, ref_len = get_ref(meter)
     
@@ -856,6 +879,50 @@ class RecitationHandler(BaseHTTPRequestHandler):
             self.send_header("Content-Type", "text/plain")
             self.end_headers()
             self.wfile.write(b"OK")
+            return
+        elif parsed.path == "/meters":
+            try:
+                meter_list = []
+                for k, v in lut.items():
+                    if isinstance(v, dict) and "wav" in v:
+                        meter_list.append({
+                            "id": k,
+                            "sec_per_syll": v.get("sec_per_syll", 0.26)
+                        })
+                resp_json = json.dumps({"meters": meter_list}, ensure_ascii=False).encode("utf-8")
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.send_header("Content-Length", str(len(resp_json)))
+                self.end_headers()
+                self.wfile.write(resp_json)
+            except Exception as e:
+                self.send_response(500)
+                self.send_header("Content-Type", "application/json")
+                self.end_headers()
+                self.wfile.write(json.dumps({"error": str(e)}).encode("utf-8"))
+            return
+        elif parsed.path == "/preview":
+            params = urllib.parse.parse_qs(parsed.query)
+            text = params.get("text", [""])[0].strip()
+            if not text:
+                self.send_response(400)
+                self.send_header("Content-Type", "application/json")
+                self.end_headers()
+                self.wfile.write(json.dumps({"error": "text parameter is required"}).encode("utf-8"))
+                return
+            try:
+                result = preview_text(text)
+                resp_json = json.dumps(result, ensure_ascii=False).encode("utf-8")
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.send_header("Content-Length", str(len(resp_json)))
+                self.end_headers()
+                self.wfile.write(resp_json)
+            except Exception as e:
+                self.send_response(500)
+                self.send_header("Content-Type", "application/json")
+                self.end_headers()
+                self.wfile.write(json.dumps({"error": str(e)}).encode("utf-8"))
             return
         elif parsed.path == "/fetch_verse":
             params = urllib.parse.parse_qs(parsed.query)
