@@ -1,4 +1,4 @@
-﻿/**
+/**
  * vagdhenu-ui.js — Vāgdhenu Sanskrit TTS Frontend Module
  * Ayurvani · Sanskrit Recitation Studio
  *
