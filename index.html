@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>à¤†à¤¯à¥à¤°à¥à¤µà¥‡à¤¦ à¤µà¤¾à¤£à¥€ | Ayurved Vani</title>
+<title>आयुर्वेद वाणी | Ayurved Vani</title>
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#0b0f19">
 <link rel="apple-touch-icon" href="/icon-192.png">
@@ -378,7 +378,7 @@
   body.light-mode #bgCanvas {
     filter: brightness(0.82) contrast(0.98);
   }
-  /* Gradient overlay â€” dark vignette on top of background */
+  /* Gradient overlay — dark vignette on top of background */
   #bgGradient {
     position: fixed;
     inset: 0;
@@ -392,11 +392,11 @@
     );
     pointer-events: none;
   }
-  /* Legacy heroCanvas inside scroll-track â€” hidden, replaced by bgCanvas */
+  /* Legacy heroCanvas inside scroll-track — hidden, replaced by bgCanvas */
   #heroCanvas {
     display: none;
   }
-  /* Scroll Track â€” now a transparent spacer for scroll events only */
+  /* Scroll Track — now a transparent spacer for scroll events only */
   .scroll-track {
     position: relative;
     height: 200vh;
@@ -1439,7 +1439,7 @@
 <div class="preloader-overlay" id="preloader">
   <div class="preloader-content">
     <div class="mandala-loader"></div>
-    <div class="shlok-breathing">à¤¸à¥à¤µà¤¸à¥à¤¥à¤¸à¥à¤¯ à¤¸à¥à¤µà¤¾à¤¸à¥à¤¥à¥à¤¯ à¤°à¤•à¥à¤·à¤£à¤®à¥</div>
+    <div class="shlok-breathing">स्वस्थस्य स्वास्थ्य रक्षणम्</div>
     <div class="preloader-progress" id="preloadProgress">Loading sacred visuals... 0%</div>
   </div>
 </div>
@@ -1482,16 +1482,6 @@
         <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.4"/><path d="M4.5 20.5c1.5-4 4.2-6 7.5-6s6 2 7.5 6"/></svg>
         <span class="tip">About Us</span>
       </div>
-      <!-- Recitation Studio dock button -->
-      <div class="dock-item" style="--glow:#c1633b" data-label="Recite" onclick="openRecitationStudio()" title="Sanskrit Recitation Studio">
-        <div class="fill"></div>
-        <svg viewBox="0 0 24 24" style="stroke:var(--copper);">
-          <path d="M12 3a9 9 0 0 1 9 9v1a2 2 0 0 1-2 2h-1.26A8 8 0 0 1 4 13.5V12a9 9 0 0 1 9-9z" stroke-width="1.5"/>
-          <path d="M8 12h8M10 15h4" stroke-width="1.5"/>
-          <path d="M12 21v-3" stroke-width="1.5"/>
-        </svg>
-        <span class="tip">Sanskrit Studio</span>
-      </div>
       <div class="dock-item" style="--glow:var(--gold)" data-label="Admin" data-view="admin" onclick="showView('admin')">
         <div class="fill"></div>
         <svg viewBox="0 0 24 24"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" fill="currentColor"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z" stroke="currentColor" fill="none" stroke-width="1.6"/></svg>
@@ -1503,28 +1493,22 @@
 <header>
   <div class="logo">
     <div class="logo-mark"></div>
-    <div class="logo-text">Ayurved Vani<span class="sub">chants Â· texts Â· wisdom</span></div>
+    <div class="logo-text">Ayurved Vani<span class="sub">chants · texts · wisdom</span></div>
   </div>
   <nav id="mainNav"></nav>
   <div class="header-right">
     <button class="theme-btn" id="pwaInstallBtn" onclick="triggerPwaInstall()" aria-label="Install App" style="display:none; margin-right: 4px; background:var(--gold); color:var(--teal-deep);" title="Install Ayurvani as an app">
-      <span style="font-size:0.85rem; font-weight:600; padding:0 4px;">â¬‡ Install App</span>
+      <span style="font-size:0.85rem; font-weight:600; padding:0 4px;">⬇ Install App</span>
     </button>
     <div class="lang-toggle" id="langToggle">
-      <button data-lang="hi">à¤¹à¤¿à¤‚</button>
+      <button data-lang="hi">हिं</button>
       <button data-lang="en" class="active">EN</button>
     </div>
-    <!-- Recitation Studio quick-launch in header -->
-    <button class="theme-btn" id="vagStudioHeaderBtn" onclick="openRecitationStudio()" aria-label="Sanskrit Recitation Studio"
-      title="Sanskrit Recitation Studio"
-      style="margin-right:4px; background:linear-gradient(135deg,rgba(193,99,59,0.25),rgba(193,99,59,0.12)); border-color:rgba(193,99,59,0.4); font-size:1.05rem;">
-      ðŸ•‰
-    </button>
     <button class="theme-btn" id="serverSettingsBtn" onclick="openServerSettingsModal()" aria-label="Audio Server Settings" style="margin-right: 4px;">
-      <span class="theme-icon">âš™ï¸</span>
+      <span class="theme-icon">⚙️</span>
     </button>
     <button class="theme-btn" id="themeToggleBtn" onclick="toggleTheme()" aria-label="Toggle Theme">
-      <span class="theme-icon">ðŸŒ™</span>
+      <span class="theme-icon">🌙</span>
     </button>
     <div id="authArea"></div>
   </div>
@@ -1534,35 +1518,35 @@
 
   <section id="view-home" class="active section-visible">
     
-    <!-- Dynamic Hero Container (scroll spacer â€” canvas is global fixed) -->
+    <!-- Dynamic Hero Container (scroll spacer — canvas is global fixed) -->
     <div class="scroll-track" id="homeScrollTrack">
       <div class="sticky-container">
         <!-- canvas is now a fixed full-page element outside this tree -->
-        <!-- PAGE 1: Scroll hint only â€” pure background -->
+        <!-- PAGE 1: Scroll hint only — pure background -->
         <div id="homePageOne" style="position:absolute; inset:0; z-index:5; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; padding-bottom:40px; pointer-events:none; transition: opacity 0.5s ease;">
           <div style="display:flex; flex-direction:column; align-items:center; gap:8px; animation: fadeSlideUp 1.2s ease-out 0.5s both;">
-            <span style="font-family:'Tiro Devanagari Hindi',serif; font-size:1.1rem; color:rgba(243,238,223,0.7); letter-spacing:0.08em;">à¤¸à¥à¤µà¤¸à¥à¤¥à¤¸à¥à¤¯ à¤¸à¥à¤µà¤¾à¤¸à¥à¤¥à¥à¤¯ à¤°à¤•à¥à¤·à¤£à¤®à¥</span>
+            <span style="font-family:'Tiro Devanagari Hindi',serif; font-size:1.1rem; color:rgba(243,238,223,0.7); letter-spacing:0.08em;">स्वस्थस्य स्वास्थ्य रक्षणम्</span>
             <span style="font-size:0.75rem; color:rgba(243,238,223,0.45); letter-spacing:0.15em; text-transform:uppercase;">Scroll to explore</span>
             <div style="width:1.5px; height:32px; background:linear-gradient(to bottom, rgba(228,201,124,0.6), transparent); margin-top:4px;"></div>
           </div>
         </div>
 
-        <!-- PAGE 2: Intro copy â€” fades in at 50%+ scroll -->
+        <!-- PAGE 2: Intro copy — fades in at 50%+ scroll -->
         <div id="homePageTwo" style="position:absolute; inset:0; z-index:6; display:flex; align-items:center; padding: 0 min(8vw,80px); opacity:0; transform:translateY(30px); transition: opacity 0.6s cubic-bezier(0.25,1,0.5,1), transform 0.7s cubic-bezier(0.25,1,0.5,1); pointer-events:none;">
           <div style="max-width:640px;">
             <div style="display:flex; align-items:center; gap:10px; color:var(--sage); font-size:13px; letter-spacing:0.14em; text-transform:uppercase; margin-bottom:22px;">
               <span style="width:26px; height:1px; background:var(--sage); display:inline-block;"></span>
-              Shloka Â· Samhita Â· Sadhana
+              Shloka · Samhita · Sadhana
             </div>
             <h1 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:clamp(38px,5.5vw,72px); line-height:1.05; color:#f3eedf; margin:0; text-shadow:0 2px 20px rgba(0,0,0,0.6);">
-              The <span style="color:var(--gold); font-family:'Tiro Devanagari Hindi',serif;">à¤µà¤¾à¤£à¥€</span><br>of ancient healing
+              The <span style="color:var(--gold); font-family:'Tiro Devanagari Hindi',serif;">वाणी</span><br>of ancient healing
             </h1>
             <p style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:22px; color:var(--sage); margin:18px 0 0;">read aloud, understood anew</p>
             <p style="margin:20px 0 0; font-size:15.5px; line-height:1.75; color:rgba(243,238,223,0.75); max-width:480px; text-shadow:0 1px 8px rgba(0,0,0,0.5);">
-              Search shlokas from the Caraka Samhita, hear them chanted with correct svara, and build a daily practice â€” all in one calm, considered space.
+              Search shlokas from the Caraka Samhita, hear them chanted with correct svara, and build a daily practice — all in one calm, considered space.
             </p>
             <div style="margin-top:34px; display:flex; gap:16px; flex-wrap:wrap;">
-              <button onclick="showView('chants')" style="background:var(--gold); color:var(--teal-deep); border:none; padding:14px 28px; border-radius:12px; font-weight:700; font-size:14.5px; cursor:pointer; pointer-events:all; transition:transform .25s ease, box-shadow .25s ease;">Begin reading â†’</button>
+              <button onclick="showView('chants')" style="background:var(--gold); color:var(--teal-deep); border:none; padding:14px 28px; border-radius:12px; font-weight:700; font-size:14.5px; cursor:pointer; pointer-events:all; transition:transform .25s ease, box-shadow .25s ease;">Begin reading →</button>
               <button onclick="showView('chants')" style="color:#f3eedf; font-size:14.5px; border:1.5px solid rgba(243,238,223,0.35); padding:14px 22px; border-radius:12px; background:rgba(28,51,39,0.45); cursor:pointer; pointer-events:all; backdrop-filter:blur(8px); transition:border-color .25s;">Listen to a shloka</button>
             </div>
           </div>
@@ -1579,13 +1563,13 @@
 
       <!-- Shloka Search Section -->
       <div class="shloka-search-section">
-        <div class="section-eyebrow">ðŸŽ™ï¸ Shloka Recitation</div>
+        <div class="section-eyebrow">🎙️ Shloka Recitation</div>
         <h2>Apna Shloka Dhundein, Sunein</h2>
-        <p class="subtitle">Koi bhi shloka search karein â€” naam, category ya Sanskrit text se. Select karte hi audio recitation automatically chalegi.</p>
+        <p class="subtitle">Koi bhi shloka search karein — naam, category ya Sanskrit text se. Select karte hi audio recitation automatically chalegi.</p>
 
         <div class="lang-toggle" style="margin-bottom: 22px; display: inline-flex; width: auto; background: rgba(255,255,255,0.03); border-radius: 20px; padding: 3px; border: 1px solid var(--line);">
-          <button id="tabSearchChants" class="active" onclick="switchShlokaTab('search')" style="padding: 6px 18px; border-radius: 16px; font-size: 0.82rem; border: none; background: var(--gold); color: var(--teal-deep); font-weight: 700;">ðŸ” Search Shlokas</button>
-          <button id="tabCustomChants" onclick="switchShlokaTab('custom')" style="padding: 6px 18px; border-radius: 16px; font-size: 0.82rem; border: none; background: transparent; color: var(--ink-soft);">âœï¸ Custom Recite</button>
+          <button id="tabSearchChants" class="active" onclick="switchShlokaTab('search')" style="padding: 6px 18px; border-radius: 16px; font-size: 0.82rem; border: none; background: var(--gold); color: var(--teal-deep); font-weight: 700;">🔍 Search Shlokas</button>
+          <button id="tabCustomChants" onclick="switchShlokaTab('custom')" style="padding: 6px 18px; border-radius: 16px; font-size: 0.82rem; border: none; background: transparent; color: var(--ink-soft);">✍️ Custom Recite</button>
         </div>
 
         <div id="shlokaSearchTabContent">
@@ -1599,76 +1583,48 @@
               onfocus="homeShlokaSearchFilter()"
               autocomplete="off"
             >
-            <span class="home-search-icon">ðŸ”</span>
+            <span class="home-search-icon">🔍</span>
             <div id="homeShlokaDropdown" class="home-search-dropdown"></div>
           </div>
         </div>
 
         <div id="shlokaCustomTabContent" style="display:none; flex-direction: column; gap: 14px; background: var(--card); border: 1px solid var(--line); padding: 24px; border-radius: 16px; backdrop-filter: blur(8px); margin-bottom: 14px;">
-          <!-- Open full studio button -->
-          <div style="text-align:right;">
-            <button onclick="openRecitationStudio()" style="background:linear-gradient(135deg,rgba(193,99,59,0.2),rgba(193,99,59,0.08));border:1.5px solid rgba(193,99,59,0.35);color:var(--copper);padding:5px 14px;border-radius:20px;font-size:0.78rem;font-weight:600;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='rgba(193,99,59,0.3)'" onmouseout="this.style.background='linear-gradient(135deg,rgba(193,99,59,0.2),rgba(193,99,59,0.08))'">
-              ðŸ•‰ Open Full Recitation Studio
-            </button>
-          </div>
-
-          <textarea id="customShlokaText" rows="3" placeholder="Sanskrit Shloka likhein ya niche text file (.txt) upload karein..." style="width:100%; padding:12px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-family:'Noto Serif Devanagari',serif; font-size:1.15rem; outline:none; transition:border-color 0.25s; resize:vertical;" oninput="updateCustomShlokaPreview()"></textarea>
+          <textarea id="customShlokaText" rows="3" placeholder="Sanskrit Shloka likhein ya niche text file (.txt) upload karein..." style="width:100%; padding:12px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-family:'Noto Serif Devanagari',serif; font-size:1.15rem; outline:none; transition:border-color 0.25s; resize:vertical;"></textarea>
           
           <div class="custom-chant-actions">
             <label class="spc-upload-label" style="margin:0; border-style:dashed;">
-              ðŸ“‚ Upload Shloka Text File (.txt)
+              📂 Upload Shloka Text File (.txt)
               <input type="file" id="customShlokaFile" accept=".txt" onchange="uploadCustomShlokaTextFile()">
             </label>
             
-            <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
-              <label for="customShlokaMeter" style="font-size:0.85rem; color:var(--ink-soft);">Meter (à¤µà¥ƒà¤¤à¥à¤¤):</label>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <label for="customShlokaMeter" style="font-size:0.85rem; color:var(--ink-soft);">Meter (वृत्त):</label>
               <select id="customShlokaMeter" style="padding:6px 12px; border-radius:6px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); outline:none;">
-                <option value="anushtubh">Anushtubh (à¤…à¤¨à¥à¤·à¥à¤Ÿà¥à¤­à¥)</option>
-                <option value="gayatri">GÄyatrÄ« (à¤—à¤¾à¤¯à¤¤à¥à¤°à¥€)</option>
-                <option value="trishtubh">Trishtubh (à¤¤à¥à¤°à¤¿à¤·à¥à¤Ÿà¥à¤­à¥)</option>
-                <option value="vasantatilaka">Vasantatilaka (à¤µà¤¸à¤¨à¥à¤¤à¤¤à¤¿à¤²à¤•à¤¾)</option>
-                <option value="malini">MÄlinÄ« (à¤®à¤¾à¤²à¤¿à¤¨à¥€)</option>
-                <option value="mandakranta">MandÄkrÄntÄ (à¤®à¤¨à¥à¤¦à¤¾à¤•à¥à¤°à¤¾à¤¨à¥à¤¤à¤¾)</option>
-                <option value="shardulavikridita">ÅšÄrdÅ«lavikrÄ«á¸ita</option>
-                <option value="sragdhara">SragdharÄ (à¤¸à¥à¤°à¤—à¥à¤§à¤°à¤¾)</option>
-                <option value="jajati">YayÄti/Jajati</option>
+                <option value="anushtubh">Anushtubh (अनुष्टुभ्)</option>
+                <option value="gayatri">Gayatri (गायत्री)</option>
+                <option value="trishtubh">Trishtubh (त्रिष्टुभ्)</option>
+                <option value="vasantatilaka">Vasantatilaka (वसन्ततिलका)</option>
+                <option value="jajati">Jajati (ययाति)</option>
               </select>
-
-              <label for="customShlokaSpeed" style="font-size:0.85rem; color:var(--ink-soft);">Gati:</label>
-              <input type="range" id="customShlokaSpeed" min="0.70" max="1.10" step="0.05" value="0.90"
-                oninput="document.getElementById('customShlokaSpeedLbl').textContent=parseFloat(this.value).toFixed(2)+'Ã—'"
-                style="width:80px; accent-color:var(--gold);">
-              <span id="customShlokaSpeedLbl" style="font-size:0.8rem;color:var(--gold);min-width:32px;">0.90Ã—</span>
             </div>
 
-            <div style="display:flex; gap:10px; flex-wrap:wrap;">
-              <button class="spc-play-btn" id="customReciteBtn" onclick="generateCustomAIChant()" style="background:var(--teal); color:#F6EFDD; box-shadow: 0 4px 16px rgba(54,124,89,0.35); flex:1; min-width:140px;">
-                ðŸ”Š AI Recite Shloka
-              </button>
-              <button id="customDownloadBtn" style="display:none; padding:8px 16px; border-radius:10px; background:rgba(228,201,124,0.1); border:1.5px solid rgba(228,201,124,0.3); color:var(--gold-light); font-size:0.85rem; font-weight:600; cursor:pointer; white-space:nowrap;" onclick="downloadCustomAudio()">
-                ðŸ“¥ Download WAV
-              </button>
-            </div>
+            <button class="spc-play-btn" id="customReciteBtn" onclick="generateCustomAIChant()" style="background:var(--teal); color:#F6EFDD; box-shadow: 0 4px 16px rgba(54,124,89,0.35);">
+              🔊 AI Recite Shloka
+            </button>
           </div>
-
-          <!-- Sandhi Analysis (inline) -->
-          <details id="customSandhiDetails" style="border:1px solid rgba(228,201,124,0.15);border-radius:10px;overflow:hidden; margin-top:2px;">
-            <summary style="padding:10px 14px;cursor:pointer;font-size:0.8rem;font-weight:600;color:var(--gold);background:rgba(228,201,124,0.04);letter-spacing:0.04em;list-style:none;display:flex;align-items:center;gap:8px;user-select:none;">ðŸ”¬ Sandhi Vicheda Analysis<span style="font-size:0.7rem;color:var(--ink-soft);margin-left:auto;">G2P Â· Visarga Â· AnusvÄra</span></summary>
-            <div id="customSandhiPanel" style="padding:12px 14px;font-size:0.82rem;color:var(--sage);">Type text above to see G2P analysis.</div>
-          </details>
         </div>
 
 
         <!-- Recitation Player Card (shown after selection) -->
         <div class="shloka-player-card" id="shlokaPlayerCard">
           <div class="spc-header">
-            <div class="spc-icon">ðŸ•‰</div>
+            <div class="spc-icon">🕉</div>
             <div class="spc-meta">
               <div class="spc-cat" id="spcCat"></div>
               <div class="spc-sanskrit" id="spcSanskrit"></div>
               <div class="spc-translit" id="spcTranslit"></div>
             </div>
-            <span class="spc-audio-badge" id="spcAudioBadge">ðŸŽµ Audio Ready</span>
+            <span class="spc-audio-badge" id="spcAudioBadge">🎵 Audio Ready</span>
           </div>
           <div class="spc-body">
             <div class="spc-meaning" id="spcMeaning"></div>
@@ -1689,16 +1645,16 @@
 
             <div class="spc-controls">
               <button class="spc-play-btn" id="spcPlayBtn" onclick="toggleShlokaPlayer()">
-                <span id="spcPlayIcon">â–¶</span>
+                <span id="spcPlayIcon">▶</span>
                 <span id="spcPlayLabel">Recitation Sunein</span>
               </button>
 
               <button class="spc-upload-label" id="spcAiBtn" onclick="generateAIChant()" style="display:none;border:1.5px solid var(--teal);color:#5dba8a;background:rgba(54,124,89,0.08);">
-                ðŸ¤– AI Chant Generate
+                🤖 AI Chant Generate
               </button>
 
               <label class="spc-upload-label" title="Upload MP3 recitation for this shloka">
-                ðŸ“‚ MP3 Upload karein
+                📂 MP3 Upload karein
                 <input type="file" id="spcMp3Upload" accept="audio/*" onchange="uploadShlokaAudio()">
               </label>
 
@@ -1710,12 +1666,12 @@
         <!-- Shloka Chanting Practice Studio (Bottom Area) -->
         <div id="homeRecordingStudio" style="display: none; background: rgba(54, 124, 89, 0.04); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 16px; padding: 20px; margin-top: 16px; backdrop-filter: blur(8px); animation: fadeSlideUp 0.3s ease-out;">
           <div style="font-size: 0.95rem; font-weight: 600; color: var(--gold-light); margin-bottom: 12px; display: flex; align-items: center; justify-content: center; gap: 8px;">
-            <span>ðŸŽ™ï¸</span> Chanting Practice Studio
+            <span>🎙️</span> Chanting Practice Studio
           </div>
           <p style="font-size:0.8rem; color:var(--ink-soft); margin:0 0 16px 0; text-align:center;">Apne swar mein shloka ka uchcharan record karein, playback karein, aur local library mein save karein.</p>
           <div style="display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;">
             <button id="btnRecord" class="spc-play-btn" onclick="togglePracticeRecording()" style="background: var(--gold); color: var(--teal-deep); font-weight: 700; margin: 0; padding: 8px 18px; border: none; border-radius: 20px;">
-              ðŸŽ™ï¸ Start Practice
+              🎙️ Start Practice
             </button>
             
             <div id="recordingTimer" style="display: none; align-items: center; gap: 6px; background: rgba(220, 53, 69, 0.15); color: #ff6b6b; padding: 6px 14px; border-radius: 12px; font-size: 0.85rem; font-family: monospace; border: 1px solid rgba(220, 53, 69, 0.3);">
@@ -1724,15 +1680,15 @@
             </div>
 
             <button id="btnPlayRecording" class="btn-ghost" onclick="playPracticeRecording()" style="display: none; padding: 8px 16px; border-radius: 20px; font-size: 0.8rem; border: 1px solid var(--teal); color: var(--teal); background: transparent;">
-              â–¶ Play My Voice
+              ▶ Play My Voice
             </button>
             
             <button id="btnSaveRecording" class="btn-ghost" onclick="savePracticeRecording()" style="display: none; padding: 8px 16px; border-radius: 20px; font-size: 0.8rem; border: 1px solid var(--gold); color: var(--gold-light); background: transparent;">
-              ðŸ’¾ Save to Library
+              💾 Save to Library
             </button>
             
             <button id="btnDownloadRecording" class="btn-ghost" onclick="downloadPracticeRecording()" style="display: none; padding: 8px 16px; border-radius: 20px; font-size: 0.8rem; border: 1px solid var(--line); color: var(--ink-soft); background: transparent;">
-              ðŸ“¥ Download MP3
+              📥 Download MP3
             </button>
           </div>
         </div>
@@ -1750,7 +1706,7 @@
     <!-- Shloka Library Grid -->
     <div style="margin-top: 40px; border-top: 1px solid var(--line); padding-top: 40px;">
       <div class="section-head">
-        <h2 class="hin-serif">à¤¶à¥à¤²à¥‹à¤• à¤—à¥à¤°à¤‚à¤¥à¤¾à¤²à¤¯ Â· Shloka Library</h2>
+        <h2 class="hin-serif">श्लोक ग्रंथालय · Shloka Library</h2>
         <span class="count mono" id="chantCount"></span>
       </div>
       <div class="toolbar">
@@ -1763,13 +1719,13 @@
 
   <section id="view-books">
     <div class="section-head">
-      <h2 class="hin-serif">à¤—à¥à¤°à¤‚à¤¥ Â· Books</h2>
+      <h2 class="hin-serif">ग्रंथ · Books</h2>
       <span class="count mono" id="bookCount"></span>
     </div>
     
     <div class="card" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; border:1px solid rgba(0, 136, 204, 0.3); background:rgba(0, 136, 204, 0.04); margin-bottom:20px; padding:16px 20px; border-radius:12px;">
       <div style="display:flex; align-items:center; gap:12px; flex:1; min-width:260px;">
-        <span style="font-size:1.8rem; line-height:1;">ðŸ¤–</span>
+        <span style="font-size:1.8rem; line-height:1;">🤖</span>
         <div>
           <h4 style="margin:0 0 4px; color:var(--ink); font-size:0.95rem;">Looking for more Ayurvedic E-Books?</h4>
           <p style="margin:0; font-size:0.82rem; color:var(--ink-soft); line-height:1.4;">Use the official <strong>@ayurbot_bot</strong> on Telegram to instantly search and download BAMS textbooks & reference PDFs.</p>
@@ -1789,7 +1745,7 @@
 
   <section id="view-gemini-search">
     <div class="section-head">
-      <h2 class="hin-serif">à¤šà¤°à¤• à¤¸à¤‚à¤¹à¤¿à¤¤à¤¾ à¤–à¥‹à¤œ Â· Caraka Samhita Finder</h2>
+      <h2 class="hin-serif">चरक संहिता खोज · Caraka Samhita Finder</h2>
       <span class="count mono" style="color:var(--gold); text-transform: uppercase; font-weight:700;">Wiki Edition</span>
     </div>
     
@@ -1808,47 +1764,47 @@
     </div>
 
     <div class="card" style="margin-bottom: 24px; padding: 28px; border-color: var(--gold);">
-      <h3 style="margin-top:0; color:var(--gold-light); font-family:'Fraunces', serif;">Paste Your Shloka (à¤¶à¥à¤²à¥‹à¤• à¤ªà¥‡à¤¸à¥à¤Ÿ à¤•à¤°à¥‡à¤‚)</h3>
+      <h3 style="margin-top:0; color:var(--gold-light); font-family:'Fraunces', serif;">Paste Your Shloka (श्लोक पेस्ट करें)</h3>
       <p style="font-size:0.92rem; color:var(--ink-soft); margin-bottom: 18px;">
-        Paste a full or partial shloka (Devanagari) below. Ayurved Vani will find the closest matching verse â€” Sthana, Chapter, and Verse number â€” anywhere in the Charak Samhita.
+        Paste a full or partial shloka (Devanagari) below. Ayurved Vani will find the closest matching verse — Sthana, Chapter, and Verse number — anywhere in the Charak Samhita.
       </p>
-      <textarea id="pasteShlokaInput" rows="3" placeholder="à¤¯à¤¹à¤¾à¤ à¤¶à¥à¤²à¥‹à¤• à¤ªà¥‡à¤¸à¥à¤Ÿ à¤•à¤°à¥‡à¤‚... (paste Sanskrit verse text here, full or partial)" style="width:100%; padding:12px 16px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-size:1rem; font-family:'Noto Sans Devanagari', sans-serif; resize:vertical; margin-bottom:14px;"></textarea>
+      <textarea id="pasteShlokaInput" rows="3" placeholder="यहाँ श्लोक पेस्ट करें... (paste Sanskrit verse text here, full or partial)" style="width:100%; padding:12px 16px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-size:1rem; font-family:'Noto Sans Devanagari', sans-serif; resize:vertical; margin-bottom:14px;"></textarea>
       <div style="display:flex; justify-content:flex-end;">
         <button class="btn-primary" onclick="matchPastedShloka()" style="padding:12px 24px; white-space:nowrap; background:var(--gold); color:var(--teal-deep); font-weight:700; border-color:var(--gold);">
-          ðŸ”Ž Find This Shloka's Reference
+          🔎 Find This Shloka's Reference
         </button>
       </div>
       <div id="pasteShlokaMatches" style="display:none; margin-top:18px; border-top:1.5px dashed var(--line); padding-top:16px;"></div>
     </div>
 
     <div class="card" style="margin-bottom: 24px; padding: 28px; border-color: var(--gold);">
-      <h3 style="margin-top:0; color:var(--gold-light); font-family:'Fraunces', serif;">Find Direct Reference (à¤¸à¤¨à¥à¤¦à¤°à¥à¤­ à¤–à¥‹à¤œ)</h3>
+      <h3 style="margin-top:0; color:var(--gold-light); font-family:'Fraunces', serif;">Find Direct Reference (सन्दर्भ खोज)</h3>
       <p style="font-size:0.92rem; color:var(--ink-soft); margin-bottom: 22px;">
         Sthana, Chapter number aur Shloka/Verse number select karke direct reference link open karein.
       </p>
       
       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:16px; margin-bottom: 20px;">
         <div>
-          <label style="font-size:0.8rem; color:var(--ink-soft); font-weight:600; display:block; margin-bottom:6px;">Sthana (à¤¸à¥à¤¥à¤¾à¤¨)</label>
+          <label style="font-size:0.8rem; color:var(--ink-soft); font-weight:600; display:block; margin-bottom:6px;">Sthana (स्थान)</label>
           <select id="carakaSthana" onchange="populateCarakaChapters()" style="width:100%; padding:11px 14px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-size:0.95rem; outline:none;">
-            <option value="Sutrasthana">Sutra Sthana (à¤¸à¥‚à¤¤à¥à¤°à¤¸à¥à¤¥à¤¾à¤¨)</option>
-            <option value="Nidanasthana">Nidan Sthana (à¤¨à¤¿à¤¦à¤¾à¤¨à¤¸à¥à¤¥à¤¾à¤¨)</option>
-            <option value="Vimanasthana">Vimana Sthana (à¤µà¤¿à¤®à¤¾à¤¨à¤¸à¥à¤¥à¤¾à¤¨)</option>
-            <option value="Sharirasthana">Sharira Sthana (à¤¶à¤¾à¤°à¥€à¤°à¤¿à¤•à¤¸à¥à¤¥à¤¾à¤¨)</option>
-            <option value="Indriyasthana">Indriya Sthana (à¤‡à¤¨à¥à¤¦à¥à¤°à¤¿à¤¯à¤¸à¥à¤¥à¤¾à¤¨)</option>
-            <option value="Chikitsasthana">Chikitsa Sthana (à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾à¤¸à¥à¤¥à¤¾à¤¨)</option>
-            <option value="Kalpasthana">Kalpa Sthana (à¤•à¤²à¥à¤ªà¤¸à¥à¤¥à¤¾à¤¨)</option>
-            <option value="Siddhisthana">Siddhi Sthana (à¤¸à¤¿à¤¦à¥à¤§à¤¿à¤¸à¥à¤¥à¤¾à¤¨)</option>
+            <option value="Sutrasthana">Sutra Sthana (सूत्रस्थान)</option>
+            <option value="Nidanasthana">Nidan Sthana (निदानस्थान)</option>
+            <option value="Vimanasthana">Vimana Sthana (विमानस्थान)</option>
+            <option value="Sharirasthana">Sharira Sthana (शारीरिकस्थान)</option>
+            <option value="Indriyasthana">Indriya Sthana (इन्द्रियस्थान)</option>
+            <option value="Chikitsasthana">Chikitsa Sthana (चिकित्सास्थान)</option>
+            <option value="Kalpasthana">Kalpa Sthana (कल्पस्थान)</option>
+            <option value="Siddhisthana">Siddhi Sthana (सिद्धिस्थान)</option>
           </select>
         </div>
         <div>
-          <label style="font-size:0.8rem; color:var(--ink-soft); font-weight:600; display:block; margin-bottom:6px;">Chapter (à¤…à¤§à¥à¤¯à¤¾à¤¯ à¤¸à¤‚à¤–à¥à¤¯à¤¾)</label>
+          <label style="font-size:0.8rem; color:var(--ink-soft); font-weight:600; display:block; margin-bottom:6px;">Chapter (अध्याय संख्या)</label>
           <select id="carakaChapter" onchange="updateReferencePreview()" style="width:100%; padding:11px 14px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-size:0.95rem; outline:none;">
             <!-- Dynamic options -->
           </select>
         </div>
         <div>
-          <label style="font-size:0.8rem; color:var(--ink-soft); font-weight:600; display:block; margin-bottom:6px;">Shloka / Verse (à¤¶à¥à¤²à¥‹à¤• à¤¸à¤‚à¤–à¥à¤¯à¤¾)</label>
+          <label style="font-size:0.8rem; color:var(--ink-soft); font-weight:600; display:block; margin-bottom:6px;">Shloka / Verse (श्लोक संख्या)</label>
           <input type="number" id="carakaShloka" min="1" oninput="updateReferencePreview()" placeholder="e.g. 20 (Optional)" style="width:100%; padding:11px 14px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-size:0.95rem; outline:none;">
         </div>
       </div>
@@ -1858,30 +1814,30 @@
           Format: <code style="background:rgba(255,255,255,0.05); padding:2px 6px; border-radius:4px;" id="referencePreview">Sutrasthana</code>
         </span>
         <button class="btn-primary" onclick="findCarakaReference()" style="padding:12px 24px; white-space:nowrap; background:var(--gold); color:var(--teal-deep); font-weight:700; border-color:var(--gold);">
-          ðŸ” Find Reference
+          🔍 Find Reference
         </button>
       </div>
 
       <!-- Reference Result Block -->
       <div id="carakaReferenceResult" style="display:none; margin-top:20px; border-top:1.5px dashed var(--line); padding-top:20px; animation:fadeSlideUp 0.3s ease;">
         <div style="background:var(--bg-soft); border:1px solid var(--line); border-radius:12px; padding:20px;">
-          <h4 style="margin:0 0 12px; color:var(--gold-light); font-family:'Fraunces', serif;">Reference Result (à¤¸à¤¨à¥à¤¦à¤°à¥à¤­ à¤ªà¤°à¤¿à¤£à¤¾à¤®)</h4>
+          <h4 style="margin:0 0 12px; color:var(--gold-light); font-family:'Fraunces', serif;">Reference Result (सन्दर्भ परिणाम)</h4>
           
           <table style="width:100%; border-collapse:collapse; margin-bottom:16px; font-size:0.92rem;">
             <tr style="border-bottom:1px solid var(--line);">
-              <td style="padding:8px 0; color:var(--ink-soft); font-weight:600; width:35%;">Sthana (à¤¸à¥à¤¥à¤¾à¤¨)</td>
-              <td style="padding:8px 0; color:var(--cream);" id="resSthana">Sutrasthana (à¤¸à¥‚à¤¤à¥à¤°à¤¸à¥à¤¥à¤¾à¤¨)</td>
+              <td style="padding:8px 0; color:var(--ink-soft); font-weight:600; width:35%;">Sthana (स्थान)</td>
+              <td style="padding:8px 0; color:var(--cream);" id="resSthana">Sutrasthana (सूत्रस्थान)</td>
             </tr>
             <tr style="border-bottom:1px solid var(--line);">
-              <td style="padding:8px 0; color:var(--ink-soft); font-weight:600;">Chapter (à¤…à¤§à¥à¤¯à¤¾à¤¯)</td>
+              <td style="padding:8px 0; color:var(--ink-soft); font-weight:600;">Chapter (अध्याय)</td>
               <td style="padding:8px 0; color:var(--cream);" id="resChapter">Chapter 1</td>
             </tr>
             <tr style="border-bottom:1px solid var(--line);">
-              <td style="padding:8px 0; color:var(--ink-soft); font-weight:600;">Chapter Name (à¤¨à¤¾à¤®)</td>
-              <td style="padding:8px 0; color:var(--gold-light); font-family:'Noto Serif Devanagari', serif; font-weight:700;" id="resChapterName">Deerghanjiviteeya Adhyaya (à¤¦à¥€à¤°à¥à¤˜à¤žà¥à¤œà¥€à¤µà¤¿à¤¤à¥€à¤¯à¥‹à¤½à¤§à¥à¤¯à¤¾à¤¯à¤ƒ)</td>
+              <td style="padding:8px 0; color:var(--ink-soft); font-weight:600;">Chapter Name (नाम)</td>
+              <td style="padding:8px 0; color:var(--gold-light); font-family:'Noto Serif Devanagari', serif; font-weight:700;" id="resChapterName">Deerghanjiviteeya Adhyaya (दीर्घञ्जीवितीयोऽध्यायः)</td>
             </tr>
             <tr style="border-bottom:1px solid var(--line);">
-              <td style="padding:8px 0; color:var(--ink-soft); font-weight:600;">Shloka (à¤¶à¥à¤²à¥‹à¤•)</td>
+              <td style="padding:8px 0; color:var(--ink-soft); font-weight:600;">Shloka (श्लोक)</td>
               <td style="padding:8px 0; color:var(--cream);" id="resShloka">-</td>
             </tr>
           </table>
@@ -1900,13 +1856,10 @@
               <!-- Header with topic and recite button -->
               <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; border-bottom:1px dashed var(--line); padding-bottom:10px; flex-wrap:wrap; gap:8px;">
                 <div>
-                  <span id="localVerseRef" style="font-size:0.7rem; font-weight:700; color:var(--gold); text-transform:uppercase; letter-spacing:0.08em;">ðŸ“– Classical Verse (à¤®à¥‚à¤² à¤¶à¥à¤²à¥‹à¤•)</span>
+                  <span id="localVerseRef" style="font-size:0.7rem; font-weight:700; color:var(--gold); text-transform:uppercase; letter-spacing:0.08em;">📖 Classical Verse (मूल श्लोक)</span>
                   <span id="localVerseHeading" style="display:block; font-size:0.82rem; color:var(--copper); font-weight:600; margin-top:2px;"></span>
                 </div>
-                <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
-                  <button class="play-btn" id="btnReciteLocalVerse" onclick="reciteLocalVerse()" style="font-size:0.78rem; padding:4px 12px; margin:0; border-radius:12px; background:var(--gold); color:var(--teal-deep); font-weight:700;">ðŸ”Š AI Recite</button>
-                  <button onclick="openRecitationStudioForVerse(currentLocalVerseText,'anushtubh')" style="font-size:0.76rem; padding:4px 10px; margin:0; border-radius:12px; background:rgba(193,99,59,0.15); border:1px solid rgba(193,99,59,0.4); color:var(--copper); font-weight:600; cursor:pointer;">ðŸ•‰ Studio</button>
-                </div>
+                <button class="play-btn" id="btnReciteLocalVerse" onclick="reciteLocalVerse()" style="font-size:0.78rem; padding:4px 12px; margin:0; border-radius:12px; background:var(--gold); color:var(--teal-deep); font-weight:700;">🔊 AI Recite</button>
               </div>
               
               <!-- Sanskrit Text -->
@@ -1914,31 +1867,31 @@
               
               <!-- Translation -->
               <div style="border-left:3px solid var(--copper); padding-left:12px; margin-bottom:18px;">
-                <strong style="font-size:0.82rem; color:var(--ink-soft); display:block; margin-bottom:4px;">ðŸ“ Translation (à¤…à¤¨à¥à¤µà¤¾à¤¦):</strong>
+                <strong style="font-size:0.82rem; color:var(--ink-soft); display:block; margin-bottom:4px;">📝 Translation (अनुवाद):</strong>
                 <p id="localVerseTranslation" style="font-size:0.92rem; color:var(--cream); margin:0; line-height:1.6;"></p>
               </div>
               
               <!-- Tattva Vimarsha (Fundamental Principles) -->
               <div id="tattvaVimarsha" style="display:none; background:rgba(197,152,65,0.04); border:1px solid rgba(197,152,65,0.15); border-radius:8px; padding:16px; margin-bottom:14px;">
-                <strong style="font-size:0.82rem; color:var(--gold); display:block; margin-bottom:8px; font-weight:700;">ðŸ”‘ Tattva Vimarsha (Fundamental Principle):</strong>
+                <strong style="font-size:0.82rem; color:var(--gold); display:block; margin-bottom:8px; font-weight:700;">🔑 Tattva Vimarsha (Fundamental Principle):</strong>
                 <div id="tattvaContent" style="font-size:0.88rem; color:var(--cream); margin:0; line-height:1.6;"></div>
               </div>
               
               <!-- Vidhi Vimarsha (Applied Inferences) -->
               <div id="vidhiVimarsha" style="display:none; background:rgba(206,106,82,0.04); border:1px solid rgba(206,106,82,0.15); border-radius:8px; padding:16px; margin-bottom:14px;">
-                <strong style="font-size:0.82rem; color:var(--copper); display:block; margin-bottom:8px; font-weight:700;">ðŸ“š Vidhi Vimarsha (Applied Commentary):</strong>
+                <strong style="font-size:0.82rem; color:var(--copper); display:block; margin-bottom:8px; font-weight:700;">📚 Vidhi Vimarsha (Applied Commentary):</strong>
                 <div id="vidhiContent" style="font-size:0.88rem; color:var(--cream); margin:0; line-height:1.6;"></div>
               </div>
               
               <!-- Humanized Explanation -->
               <div style="background:linear-gradient(135deg, rgba(197,152,65,0.06), rgba(206,106,82,0.04)); border:1px solid rgba(197,152,65,0.12); border-radius:8px; padding:16px;">
-                <strong style="font-size:0.82rem; color:var(--gold-light); display:block; margin-bottom:8px; font-weight:700;">ðŸ’¡ Easy Explanation (à¤¸à¤°à¤² à¤µà¥à¤¯à¤¾à¤–à¥à¤¯à¤¾):</strong>
+                <strong style="font-size:0.82rem; color:var(--gold-light); display:block; margin-bottom:8px; font-weight:700;">💡 Easy Explanation (सरल व्याख्या):</strong>
                 <p id="localVerseEasy" style="font-size:0.9rem; color:var(--cream); margin:0; line-height:1.7; font-style:italic;"></p>
               </div>
               
               <!-- Source Attribution -->
               <p style="margin:12px 0 0; font-size:0.72rem; color:var(--ink-soft); text-align:right; opacity:0.7;">
-                Source: <span id="verseSourceLabel">carakasamhitaonline.com</span> â€¢ Deep Research from Tattva & Vidhi Vimarsha
+                Source: <span id="verseSourceLabel">carakasamhitaonline.com</span> • Deep Research from Tattva & Vidhi Vimarsha
               </p>
             </div>
           </div>
@@ -1946,15 +1899,15 @@
           <div style="display:flex; flex-direction:column; gap:10px;">
             <div style="display:flex; gap:10px; width:100%; flex-wrap:wrap;">
               <button class="btn-primary" onclick="openCSO()" style="flex:1; min-width:180px; padding:10px; font-size:0.85rem; background:var(--gold); border-color:var(--gold); color:var(--teal-deep); font-weight:700;">
-                ðŸŒ Open on Charaka Online
+                🌐 Open on Charaka Online
               </button>
               <button class="btn-primary" onclick="openECaraka()" style="flex:1; min-width:180px; padding:10px; font-size:0.85rem; background:var(--teal); border-color:var(--teal); color:#fff; font-weight:700;">
-                ðŸ›ï¸ Open e-Caraka (NIIMH)
+                🏛️ Open e-Caraka (NIIMH)
               </button>
             </div>
             
             <div style="background:rgba(197,152,65,0.05); border:1px solid rgba(197,152,65,0.15); border-radius:8px; padding:12px; font-size:0.82rem; color:var(--ink-soft); line-height:1.4;">
-              <strong>ðŸ’¡ Navigating on e-Caraka (NIIMH) website:</strong><br>
+              <strong>💡 Navigating on e-Caraka (NIIMH) website:</strong><br>
               1. Click "Open e-Caraka (NIIMH)" above to open the reader page.<br>
               2. In the left-side index menu, select the proper Sthana: <strong style="color:var(--gold);" id="instructionSthana">Sutrasthana</strong>.<br>
               3. Click the chapter name: <strong style="color:var(--gold);" id="instructionChapter">1. Deerghanjiviteeya Adhyaya</strong>.<br>
@@ -2003,15 +1956,15 @@
   </section>
 
   <section id="view-dravyaguna">
-    <div class="section-head"><h2>Dravya Guna (à¤¦à¥à¤°à¤µà¥à¤¯à¤—à¥à¤£)</h2><span class="count" id="dravyaCount">27 plants</span></div>
+    <div class="section-head"><h2>Dravya Guna (द्रव्यगुण)</h2><span class="count" id="dravyaCount">27 plants</span></div>
     <p style="font-size:0.92rem; color:var(--ink-soft); margin-bottom:20px;">
-      Materia medica encyclopedia with plant identification photos. Browse 27 medicinal plants with smart filtering by Dosha, Rasa, Virya, and Plant Family â€” sourced from handwritten Dravyaguna study notes.
+      Materia medica encyclopedia with plant identification photos. Browse 27 medicinal plants with smart filtering by Dosha, Rasa, Virya, and Plant Family — sourced from handwritten Dravyaguna study notes.
     </p>
 
     <div id="dravyagunaListView">
       <!-- Search Box -->
       <div class="search-row" style="margin-bottom:18px;">
-        <input type="text" id="dravyagunaSearchInput" placeholder="ðŸ” Search by plant name, Sanskrit, or botanical name... e.g. Chandan, à¤šà¤¨à¥à¤¦à¤¨, Santalum" style="flex:1; padding:12px 16px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-size:0.95rem;">
+        <input type="text" id="dravyagunaSearchInput" placeholder="🔍 Search by plant name, Sanskrit, or botanical name... e.g. Chandan, चन्दन, Santalum" style="flex:1; padding:12px 16px; border-radius:8px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-size:0.95rem;">
       </div>
 
       <!-- Advanced Filters -->
@@ -2039,10 +1992,10 @@
       <img src="ayur/about-me.jpg" alt="Vikas Kajla" class="about-avatar">
       <div class="about-info">
         <h2>Vikas Kajla</h2>
-        <div class="about-role">BAMS Student Â· All India Institute of Ayurveda (AIIA), Goa</div>
-        <p class="about-bio">Namaste ðŸ™ Main Vikas Kajla, BAMS (Bachelor of Ayurvedic Medicine and Surgery) kar raha hoon All India Institute of Ayurveda se. Ayurved Vani mera ek chhota sa prayaas hai â€” Ayurveda ke mantra, shlok aur classical granthon ko sabke liye ek jagah, saral bhasha mein pahunchane ka.</p>
+        <div class="about-role">BAMS Student · All India Institute of Ayurveda (AIIA), Goa</div>
+        <p class="about-bio">Namaste 🙏 Main Vikas Kajla, BAMS (Bachelor of Ayurvedic Medicine and Surgery) kar raha hoon All India Institute of Ayurveda se. Ayurved Vani mera ek chhota sa prayaas hai — Ayurveda ke mantra, shlok aur classical granthon ko sabke liye ek jagah, saral bhasha mein pahunchane ka.</p>
         <a class="about-insta" href="https://www.instagram.com/cinematicvaidya" target="_blank" rel="noopener noreferrer">
-          <span class="insta-icon">ðŸ“¸</span> @cinematicvaidya
+          <span class="insta-icon">📸</span> @cinematicvaidya
         </a>
         <p style="margin-top:18px; font-size:0.82rem;"><a href="/privacy-policy.html" target="_blank" style="color:var(--gold);">Privacy Policy</a></p>
       </div>
@@ -2052,7 +2005,7 @@
   <section id="view-admin">
     <!-- Admin Lock Screen (Protected Access) -->
     <div id="adminLockScreen" style="display: block; max-width: 440px; margin: 50px auto; padding: 32px; background: var(--card); border: 1.5px solid var(--gold); border-radius: 16px; box-shadow: var(--shadow); backdrop-filter: blur(8px); text-align: center; animation: fadeSlideUp 0.4s ease;">
-      <div style="font-size: 3.2rem; margin-bottom: 16px;">ðŸ”</div>
+      <div style="font-size: 3.2rem; margin-bottom: 16px;">🔐</div>
       <h3 style="margin-top:0; color:var(--gold-light); font-size:1.45rem; font-family:'Cormorant Garamond',serif; letter-spacing: 0.02em;">Admin Verification Required</h3>
       <p style="font-size:0.86rem; color:var(--ink-soft); margin-bottom: 24px; line-height: 1.55;">
         Sanskrit shlokas and books can only be added, updated, or deleted by authorized administrators. Please verify your credentials.
@@ -2068,7 +2021,7 @@
           <input type="password" id="adminPasswordInput" placeholder="Enter admin password" style="width:100%; padding:11px 14px; border-radius:10px; border:1.5px solid var(--line); background:var(--bg-soft); color:var(--cream); font-size:0.95rem; outline:none;" onkeydown="if(event.key==='Enter') verifyAdminCredentials()">
         </div>
         <button class="save-btn" onclick="verifyAdminCredentials()" style="width:100%; margin-top:8px; padding:12px; font-weight:700;">
-          ðŸ”“ Unlock Admin Panel
+          🔓 Unlock Admin Panel
         </button>
       </div>
     </div>
@@ -2079,20 +2032,20 @@
         <h2>Admin Panel <span class="tag-role">ADMIN</span></h2>
         <div style="display:flex; align-items:center; gap:8px; margin-left: auto;">
           <p style="color:var(--ink-soft); font-size:0.9rem; margin:0;">Manage shlokas, books and site content</p>
-          <button class="del-btn" onclick="lockAdminPanel()" style="padding: 5px 12px; border-radius: 7px; margin-left: 8px;">ðŸ”’ Lock Panel</button>
+          <button class="del-btn" onclick="lockAdminPanel()" style="padding: 5px 12px; border-radius: 7px; margin-left: 8px;">🔒 Lock Panel</button>
         </div>
       </div>
 
     <!-- Admin Tab Navigation -->
     <div class="admin-tab-bar">
       <button class="admin-tab active" id="tab-shlokas" onclick="switchAdminTab('shlokas')">
-        <span>ðŸ•‰ï¸</span> Shlokas
+        <span>🕉️</span> Shlokas
       </button>
       <button class="admin-tab" id="tab-books" onclick="switchAdminTab('books')">
-        <span>ðŸ“š</span> Books & PDFs
+        <span>📚</span> Books & PDFs
       </button>
       <button class="admin-tab" id="tab-settings" onclick="switchAdminTab('settings')">
-        <span>âš™ï¸</span> Settings
+        <span>⚙️</span> Settings
       </button>
     </div>
 
@@ -2100,12 +2053,12 @@
     <div class="admin-panel active" id="panel-shlokas">
       <div class="admin-form">
         <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
-          <h3 id="chantFormTitle" style="margin:0;">âœ¨ Add New Shloka</h3>
+          <h3 id="chantFormTitle" style="margin:0;">✨ Add New Shloka</h3>
           <span id="chantEditBadge" style="display:none; background:rgba(228,201,124,0.15); color:var(--gold); font-size:0.78rem; padding:4px 12px; border-radius:20px; border:1px solid rgba(228,201,124,0.3);">Editing Mode</span>
         </div>
         <input type="hidden" id="af-edit-id">
         <div class="row">
-          <div><label>Sanskrit Text</label><input id="af-sanskrit" placeholder="à¥ ..."></div>
+          <div><label>Sanskrit Text</label><input id="af-sanskrit" placeholder="ॐ ..."></div>
           <div><label>Transliteration</label><input id="af-translit" placeholder="Om ..."></div>
         </div>
         <div class="row">
@@ -2116,14 +2069,14 @@
         <input id="af-audio" placeholder="https://example.com/mantra.mp3">
         <label style="margin-top:14px;">Or Upload MP3 File</label>
         <div class="file-drop" id="audioDropZone" onclick="document.getElementById('af-audio-file').click()" ondragover="event.preventDefault(); this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleAudioDrop(event)">
-          <div class="file-icon">ðŸŽµ</div>
+          <div class="file-icon">🎵</div>
           <div id="audioDropLabel">Click or drag MP3 / audio file here</div>
         </div>
         <input type="file" id="af-audio-file" accept="audio/*" style="display:none" onchange="handleAudioFileSelect(this)">
         <div class="upload-progress" id="audioUploadProgress"><div class="upload-progress-bar" id="audioProgressBar"></div></div>
         <div style="margin-top:18px; display:flex; gap:0; flex-wrap:wrap;">
-          <button class="save-btn" id="chantSaveBtn" onclick="addChant()">ðŸ’¾ Save Shloka</button>
-          <button class="cancel-btn" id="chantCancelBtn" style="display:none" onclick="resetChantForm()">âœ• Cancel Edit</button>
+          <button class="save-btn" id="chantSaveBtn" onclick="addChant()">💾 Save Shloka</button>
+          <button class="cancel-btn" id="chantCancelBtn" style="display:none" onclick="resetChantForm()">✕ Cancel Edit</button>
         </div>
       </div>
       <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
@@ -2137,16 +2090,16 @@
     <div class="admin-panel" id="panel-books">
       <div class="admin-form">
         <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:20px;">
-          <h3 id="bookFormTitle" style="margin:0;">ðŸ“– Add New Book</h3>
+          <h3 id="bookFormTitle" style="margin:0;">📖 Add New Book</h3>
           <span id="bookEditBadge" style="display:none; background:rgba(228,201,124,0.15); color:var(--gold); font-size:0.78rem; padding:4px 12px; border-radius:20px; border:1px solid rgba(228,201,124,0.3);">Editing Mode</span>
         </div>
         <input type="hidden" id="bf-edit-id">
         <div class="row">
-          <div><label>Title (Devanagari)</label><input id="bf-title-hi" placeholder="à¤šà¤°à¤• à¤¸à¤‚à¤¹à¤¿à¤¤à¤¾"></div>
+          <div><label>Title (Devanagari)</label><input id="bf-title-hi" placeholder="चरक संहिता"></div>
           <div><label>Title (English)</label><input id="bf-title-en" placeholder="Charak Samhita"></div>
         </div>
         <div class="row">
-          <div><label>Author / Era</label><input id="bf-author" placeholder="Acharya Charak Â· ~400 BCE"></div>
+          <div><label>Author / Era</label><input id="bf-author" placeholder="Acharya Charak · ~400 BCE"></div>
           <div><label>Category</label><input id="bf-cat" placeholder="Foundational text"></div>
         </div>
         <div class="row" style="margin-top:4px;">
@@ -2174,7 +2127,7 @@
         <!-- Cover Image Upload -->
         <label style="margin-top:14px;">Cover Image</label>
         <div class="file-drop" id="coverDropZone" onclick="document.getElementById('bf-cover-file').click()" ondragover="event.preventDefault(); this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleCoverDrop(event)">
-          <div class="file-icon">ðŸ–¼ï¸</div>
+          <div class="file-icon">🖼️</div>
           <div id="coverDropLabel">Click or drag JPG/PNG cover image here</div>
         </div>
         <input type="file" id="bf-cover-file" accept="image/*" style="display:none" onchange="handleCoverFileSelect(this)">
@@ -2183,7 +2136,7 @@
         <!-- PDF Upload -->
         <label style="margin-top:14px;">PDF File Upload</label>
         <div class="file-drop" id="pdfDropZone" onclick="document.getElementById('bf-file').click()" ondragover="event.preventDefault(); this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handlePdfDrop(event)">
-          <div class="file-icon">ðŸ“„</div>
+          <div class="file-icon">📄</div>
           <div id="pdfDropLabel">Click or drag PDF file here</div>
         </div>
         <input type="file" id="bf-file" accept="application/pdf" style="display:none" onchange="handlePdfFileSelect(this)">
@@ -2195,8 +2148,8 @@
         <label>Description</label>
         <textarea id="bf-desc" rows="2" placeholder="Short description of the book..."></textarea>
         <div style="margin-top:0; display:flex; gap:0; flex-wrap:wrap;">
-          <button class="save-btn" id="bookSaveBtn" onclick="addBook()">ðŸ’¾ Save Book</button>
-          <button class="cancel-btn" id="bookCancelBtn" style="display:none" onclick="resetBookForm()">âœ• Cancel Edit</button>
+          <button class="save-btn" id="bookSaveBtn" onclick="addBook()">💾 Save Book</button>
+          <button class="cancel-btn" id="bookCancelBtn" style="display:none" onclick="resetBookForm()">✕ Cancel Edit</button>
         </div>
       </div>
       <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
@@ -2209,23 +2162,23 @@
     <!-- ===== SETTINGS PANEL ===== -->
     <div class="admin-panel" id="panel-settings">
       <div class="admin-form">
-        <h3>ðŸŒ Site Settings</h3>
+        <h3>🌐 Site Settings</h3>
         <div class="row">
           <div>
             <label>Default Language</label>
             <select id="settings-lang" onchange="setLang(this.value)">
               <option value="en">English</option>
-              <option value="hi">Hindi (à¤¹à¤¿à¤‚à¤¦à¥€)</option>
+              <option value="hi">Hindi (हिंदी)</option>
             </select>
           </div>
           <div>
             <label>Background Animation Speed</label>
             <select id="settings-fps" onchange="setBgFps(parseInt(this.value))">
-              <option value="6">6 fps â€” Slow / Meditative</option>
-              <option value="12">12 fps â€” Balanced</option>
-              <option value="24">24 fps â€” Cinematic (24fps)</option>
-              <option value="30">30 fps â€” Fast</option>
-              <option value="60" selected>60 fps â€” Ultra Smooth (60fps)</option>
+              <option value="6">6 fps — Slow / Meditative</option>
+              <option value="12">12 fps — Balanced</option>
+              <option value="24">24 fps — Cinematic (24fps)</option>
+              <option value="30">30 fps — Fast</option>
+              <option value="60" selected>60 fps — Ultra Smooth (60fps)</option>
             </select>
           </div>
         </div>
@@ -2237,21 +2190,21 @@
           <div>
             <label>Gradient Overlay Intensity</label>
             <select id="settings-overlay" onchange="setOverlayIntensity(this.value)">
-              <option value="light">Light â€” More Visible BG</option>
-              <option value="medium" selected>Medium â€” Balanced</option>
-              <option value="dark">Dark â€” Better Readability</option>
+              <option value="light">Light — More Visible BG</option>
+              <option value="medium" selected>Medium — Balanced</option>
+              <option value="dark">Dark — Better Readability</option>
             </select>
           </div>
         </div>
-        <button class="save-btn" onclick="saveAdminSettings()">ðŸ’¾ Save Settings</button>
+        <button class="save-btn" onclick="saveAdminSettings()">💾 Save Settings</button>
       </div>
 
       <div class="admin-form">
-        <h3>ðŸ—‘ï¸ Data Management</h3>
+        <h3>🗑️ Data Management</h3>
         <p style="color:var(--ink-soft); font-size:0.88rem; margin-bottom:16px;">These actions are irreversible. Use with caution.</p>
         <div style="display:flex; gap:12px; flex-wrap:wrap;">
-          <button class="del-btn" style="padding:10px 18px; font-size:0.85rem;" onclick="if(confirm('Export all data as JSON?')) exportAllData()">ðŸ“¤ Export All Data</button>
-          <button class="del-btn" style="padding:10px 18px; font-size:0.85rem;" onclick="if(confirm('This will delete ALL shlokas and books. Are you sure?')) clearAllContent()">ðŸ—‘ï¸ Clear All Content</button>
+          <button class="del-btn" style="padding:10px 18px; font-size:0.85rem;" onclick="if(confirm('Export all data as JSON?')) exportAllData()">📤 Export All Data</button>
+          <button class="del-btn" style="padding:10px 18px; font-size:0.85rem;" onclick="if(confirm('This will delete ALL shlokas and books. Are you sure?')) clearAllContent()">🗑️ Clear All Content</button>
         </div>
       </div>
     </div> <!-- #adminContentArea -->
@@ -2263,19 +2216,19 @@
 <!-- Scroll-to-next-section hint indicator -->
 <div class="scroll-next-hint" id="scrollNextHint">
   <div class="hint-label" id="scrollNextLabel">Next</div>
-  <div class="hint-arrow">â†“</div>
+  <div class="hint-arrow">↓</div>
 </div>
 
 <!-- Sticky Bottom Player Bar -->
 <div class="bottom-player-bar" id="bottomPlayerBar">
   <div class="player-content">
     <div class="player-info">
-      <div class="player-sanskrit" id="pb-sanskrit">à¥ à¤§à¤¨à¥à¤µà¤¨à¥à¤¤à¤°ye à¤¨à¤®à¤ƒ</div>
+      <div class="player-sanskrit" id="pb-sanskrit">ॐ धन्वन्तरye नमः</div>
       <div class="player-translit" id="pb-translit">Om Dhanvantaraye Namah</div>
       <div class="player-scansion" id="pb-scansion" style="font-size: 11px; opacity: 0.85; color: #e0aa3e; margin-top: 3px; font-family: monospace; display: none;"></div>
     </div>
     <div class="player-controls">
-      <button class="player-btn-main" id="pb-play-btn" onclick="togglePlayerPlay()">â¸</button>
+      <button class="player-btn-main" id="pb-play-btn" onclick="togglePlayerPlay()">⏸</button>
       <div class="wave-visualizer" id="pb-wave">
         <span></span><span></span><span></span><span></span><span></span>
       </div>
@@ -2289,19 +2242,19 @@
         </select>
       </div>
     </div>
-    <button class="player-close-btn" onclick="stopPlayback()">Ã—</button>
+    <button class="player-close-btn" onclick="stopPlayback()">×</button>
   </div>
 </div>
 
-<footer>Ayurved Vani Â· shraddha se collected content Â· yeh ek prototype platform hai</footer>
+<footer>Ayurved Vani · shraddha se collected content · yeh ek prototype platform hai</footer>
 
 <!-- Server Settings Modal -->
 <div class="modal-overlay" id="serverSettingsModal">
   <div class="modal" style="max-height: 90vh; overflow-y: auto;">
-    <button class="modal-close" onclick="closeServerSettingsModal()">Ã—</button>
-    <h3>ðŸŽ™ï¸ Vagdhenu Speech Server Settings</h3>
+    <button class="modal-close" onclick="closeServerSettingsModal()">×</button>
+    <h3>🎙️ Vagdhenu Speech Server Settings</h3>
     
-    <label for="inputServerUrl">VÄgdhenu AI Speech Server URL</label>
+    <label for="inputServerUrl">Vāgdhenu AI Speech Server URL</label>
     <input type="text" id="inputServerUrl" placeholder="e.g., http://localhost:5001 or https://xxxx.loca.lt" style="margin-bottom:12px;">
     
     <div style="font-size:0.75rem; color:var(--ink-soft); line-height:1.4; margin-top:12px;">
@@ -2321,7 +2274,7 @@
 <!-- Login Modal -->
 <div class="modal-overlay" id="loginModal">
   <div class="modal">
-    <button class="modal-close" onclick="closeModal()">Ã—</button>
+    <button class="modal-close" onclick="closeModal()">×</button>
     <h3>Sign in karein</h3>
     <label>Aapka naam</label>
     <input type="text" id="loginName" placeholder="e.g. Priya Sharma">
@@ -2337,7 +2290,7 @@
   <div class="modal" style="max-width: 92%; width: 1000px; height: 85vh; padding: 0; display: flex; flex-direction: column; overflow: hidden; background: var(--bg-soft); border: 1.5px solid var(--gold);">
     <div style="display:flex; justify-content:space-between; align-items:center; padding:16px 24px; border-bottom:1px solid var(--line); background: rgba(0,0,0,0.15);">
       <h3 id="pdfViewerTitle" style="margin:0; font-family:'Cormorant Garamond',serif; color:var(--gold-light); font-size:1.3rem;">Read Book</h3>
-      <button class="modal-close" onclick="closePdfViewerModal()" style="position:static; font-size:1.6rem; cursor:pointer; color:var(--ink-soft); background:none; border:none; padding: 0 4px;">Ã—</button>
+      <button class="modal-close" onclick="closePdfViewerModal()" style="position:static; font-size:1.6rem; cursor:pointer; color:var(--ink-soft); background:none; border:none; padding: 0 4px;">×</button>
     </div>
     <div style="flex:1; width:100%; height:100%; position:relative; background: #2a2a2a;">
       <iframe id="pdfViewerIframe" style="width:100%; height:100%; border:none; background: #fff;" src=""></iframe>
@@ -2363,14 +2316,14 @@ if (!window.storage) {
 }
 
 const NAV_ITEMS = [
-  {id:'home', hi:'à¤¹à¥‹à¤®', en:'Home'},
-  {id:'chants', hi:'à¤¶à¥à¤²à¥‹à¤• à¤µà¤¾à¤šà¤¨', en:'Shloka Recitation'},
-  {id:'books', hi:'à¤—à¥à¤°à¤‚à¤¥', en:'Books'},
-  {id:'gemini-search', hi:'à¤šà¤°à¤• à¤–à¥‹à¤œ', en:'Caraka Finder'},
-  {id:'dravyaguna', hi:'à¤¦à¥à¤°à¤µà¥à¤¯à¤—à¥à¤£', en:'Dravya Guna'},
-  {id:'favorites', hi:'à¤ªà¤¸à¤‚à¤¦à¥€à¤¦à¤¾', en:'Favorites'},
-  {id:'about', hi:'à¤¹à¤®à¤¾à¤°à¥‡ à¤¬à¤¾à¤°à¥‡ à¤®à¥‡à¤‚', en:'About Us'},
-  {id:'admin', hi:'à¤à¤¡à¤®à¤¿à¤¨', en:'Admin'},
+  {id:'home', hi:'होम', en:'Home'},
+  {id:'chants', hi:'श्लोक वाचन', en:'Shloka Recitation'},
+  {id:'books', hi:'ग्रंथ', en:'Books'},
+  {id:'gemini-search', hi:'चरक खोज', en:'Caraka Finder'},
+  {id:'dravyaguna', hi:'द्रव्यगुण', en:'Dravya Guna'},
+  {id:'favorites', hi:'पसंदीदा', en:'Favorites'},
+  {id:'about', hi:'हमारे बारे में', en:'About Us'},
+  {id:'admin', hi:'एडमिन', en:'Admin'},
 ];
 
 let state = {
@@ -2388,25 +2341,25 @@ let playbackRate = 0.75;
 let audioCtx = null;
 
 const DEFAULT_CHANTS = [
-  {id:'c1', cat:'Deity Â· Healing', sanskrit:'à¥ à¤§à¤¨à¥à¤µà¤¨à¥à¤¤à¤°à¤¯à¥‡ à¤¨à¤®à¤ƒ', translit:'Om Dhanvantaraye Namah', meaning:'Bhagwan Dhanvantari (Ayurveda ke devta) ko naman â€” rog-nivaran aur swasthya ke liye.', audioUrl:''},
-  {id:'c2', cat:'Healing', sanskrit:'à¥ à¤¤à¥à¤°à¥à¤¯à¤®à¥à¤¬à¤•à¤‚ à¤¯à¤œà¤¾à¤®à¤¹à¥‡ à¤¸à¥à¤—à¤¨à¥à¤§à¤¿à¤‚ à¤ªà¥à¤·à¥à¤Ÿà¤¿à¤µà¤°à¥à¤§à¤¨à¤®à¥ à¥¤ à¤‰à¤°à¥à¤µà¤¾à¤°à¥à¤•à¤®à¤¿à¤µ à¤¬à¤¨à¥à¤§à¤¨à¤¾à¤¨à¥ à¤®à¥ƒà¤¤à¥à¤¯à¥‹à¤°à¥à¤®à¥à¤•à¥à¤·à¥€à¤¯ à¤®à¤¾à¤®à¥ƒà¤¤à¤¾à¤¤à¥ à¥¥', translit:'Om Tryambakam Yajamahe...', meaning:'Mahamrityunjaya mantra â€” dirghayu, swasthya aur bhay se mukti ki prarthana.', audioUrl:''},
-  {id:'c3', cat:'Wisdom', sanskrit:'à¥ à¤­à¥‚à¤°à¥à¤­à¥à¤µà¤ƒ à¤¸à¥à¤µà¤ƒ à¤¤à¤¤à¥à¤¸à¤µà¤¿à¤¤à¥à¤°à¥à¤µà¤°à¥‡à¤£à¥à¤¯à¤‚ à¤­à¤°à¥à¤—à¥‹ à¤¦à¥‡à¤µà¤¸à¥à¤¯ à¤§à¥€à¤®à¤¹à¤¿ à¤§à¤¿à¤¯à¥‹ à¤¯à¥‹ à¤¨à¤ƒ à¤ªà¥à¤°à¤šà¥‹à¤¦à¤¯à¤¾à¤¤à¥', translit:'Om Bhur Bhuvah Swah...', meaning:'Gayatri mantra â€” buddhi aur prakash ke liye prarthana, healing aur clarity dono mein sahayak.', audioUrl:''},
-  {id:'c4', cat:'Herb Â· Tulsi', sanskrit:'à¤®à¤¹à¤¾à¤ªà¥à¤°à¤¸à¤¾à¤¦ à¤œà¤¨à¤¨à¥€ à¤¸à¤°à¥à¤µ à¤¸à¥Œà¤­à¤¾à¤—à¥à¤¯à¤µà¤°à¥à¤§à¤¿à¤¨à¥€ à¥¤ à¤†à¤§à¤¿ à¤µà¥à¤¯à¤¾à¤§à¤¿ à¤¹à¤°à¤¾ à¤¨à¤¿à¤¤à¥à¤¯à¤‚ à¤¤à¥à¤²à¤¸à¥€ à¤¤à¥à¤µà¤‚ à¤¨à¤®à¥‹à¤½à¤¸à¥à¤¤à¥ à¤¤à¥‡ à¥¥', translit:'Mahaprasada Janani...', meaning:'Tulsi (holy basil) ki stuti â€” rog aur mansik peeda ko dur karne wali maani jaati hai.', audioUrl:''},
-  {id:'c5', cat:'Shanti', sanskrit:'à¥ à¤¸à¤°à¥à¤µà¥‡ à¤­à¤µà¤¨à¥à¤¤à¥ à¤¸à¥à¤–à¤¿à¤¨à¤ƒ à¤¸à¤°à¥à¤µà¥‡ à¤¸à¤¨à¥à¤¤à¥ à¤¨à¤¿à¤°à¤¾à¤®à¤¯à¤¾à¤ƒ à¥¤ à¤¸à¤°à¥à¤µà¥‡ à¤­à¤¦à¥à¤°à¤¾à¤£à¤¿ à¤ªà¤¶à¥à¤¯à¤¨à¥à¤¤à¥ à¤®à¤¾ à¤•à¤¶à¥à¤šà¤¿à¤¦à¥duà¤ƒà¤–à¤­à¤¾à¤—à¥à¤­à¤µà¥‡à¤¤à¥ à¥¥', translit:'Om Sarve Bhavantu Sukhinah...', meaning:'Sabke sukh, swasthya aur mangal ki saamuhik prarthana â€” Ayurveda ki bhawna ka saar.', audioUrl:''},
-  {id:'c6', cat:'Wisdom Â· Subhashita', sanskrit:'à¤†à¤°à¥‹à¤—à¥à¤¯à¤‚ à¤­à¤¾à¤¸à¥à¤•à¤°à¤¾à¤¦à¤¿à¤šà¥à¤›à¥‡à¤¤à¥ à¤¦à¥à¤°à¤µà¤¿à¤£à¤‚ à¤¹à¥à¤¤à¤µà¤¾à¤¹à¤¨à¤¾à¤¤à¥ à¥¤', translit:'Arogyam Bhaskaradicchhet...', meaning:'Swasthya Surya se, dhan Agni se maango â€” ek prachin subhashita jo Ayurveda ke prakriti-sambandh ko darshata hai.', audioUrl:''},
+  {id:'c1', cat:'Deity · Healing', sanskrit:'ॐ धन्वन्तरये नमः', translit:'Om Dhanvantaraye Namah', meaning:'Bhagwan Dhanvantari (Ayurveda ke devta) ko naman — rog-nivaran aur swasthya ke liye.', audioUrl:''},
+  {id:'c2', cat:'Healing', sanskrit:'ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम् । उर्वारुकमिव बन्धनान् मृत्योर्मुक्षीय मामृतात् ॥', translit:'Om Tryambakam Yajamahe...', meaning:'Mahamrityunjaya mantra — dirghayu, swasthya aur bhay se mukti ki prarthana.', audioUrl:''},
+  {id:'c3', cat:'Wisdom', sanskrit:'ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यं भर्गो देवस्य धीमहि धियो यो नः प्रचोदयात्', translit:'Om Bhur Bhuvah Swah...', meaning:'Gayatri mantra — buddhi aur prakash ke liye prarthana, healing aur clarity dono mein sahayak.', audioUrl:''},
+  {id:'c4', cat:'Herb · Tulsi', sanskrit:'महाप्रसाद जननी सर्व सौभाग्यवर्धिनी । आधि व्याधि हरा नित्यं तुलसी त्वं नमोऽस्तु ते ॥', translit:'Mahaprasada Janani...', meaning:'Tulsi (holy basil) ki stuti — rog aur mansik peeda ko dur karne wali maani jaati hai.', audioUrl:''},
+  {id:'c5', cat:'Shanti', sanskrit:'ॐ सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः । सर्वे भद्राणि पश्यन्तु मा कश्चिद्duःखभाग्भवेत् ॥', translit:'Om Sarve Bhavantu Sukhinah...', meaning:'Sabke sukh, swasthya aur mangal ki saamuhik prarthana — Ayurveda ki bhawna ka saar.', audioUrl:''},
+  {id:'c6', cat:'Wisdom · Subhashita', sanskrit:'आरोग्यं भास्करादिच्छेत् द्रविणं हुतवाहनात् ।', translit:'Arogyam Bhaskaradicchhet...', meaning:'Swasthya Surya se, dhan Agni se maango — ek prachin subhashita jo Ayurveda ke prakriti-sambandh ko darshata hai.', audioUrl:''},
 ];
 
 const DEFAULT_BOOKS = [
-  {id:'b1', titleHi:'à¤šà¤°à¤• à¤¸à¤‚à¤¹à¤¿à¤¤à¤¾', titleEn:'Charak Samhita', author:'Acharya Charak Â· ~400 BCE', cat:'Foundational text', proff:'2nd Proff', subject:'Charak Samhita', pdfUrl:'', desc:'Ayurveda ka sabse pramukh grantha, jisme internal medicine (Kaya Chikitsa), rog-nidaan aur chikitsa siddhant vistar se varnit hain.'},
-  {id:'b2', titleHi:'à¤¸à¥à¤¶à¥à¤°à¥à¤¤ à¤¸à¤‚à¤¹à¤¿à¤¤à¤¾', titleEn:'Sushruta Samhita', author:'Acharya Sushruta Â· ~600 BCE', cat:'Surgery text', proff:'3rd Proff', subject:'', pdfUrl:'', desc:'Shalya chikitsa (surgery) par kendrit granth â€” plastic surgery jaisi ancient techniques ka varnan bhi ismein milta hai.'},
-  {id:'b3', titleHi:'à¤…à¤·à¥à¤Ÿà¤¾à¤‚à¤— à¤¹à¥ƒà¤¦à¤¯à¤®à¥', titleEn:'Ashtanga Hridayam', author:'Vagbhata Â· ~7th century CE', cat:'Compilation', proff:'1st Proff', subject:'', pdfUrl:'', desc:'Charak aur Sushruta dono ke gyaan ko sankshep mein prastut karta hai â€” Ayurveda ke aath angon ka sarvangeen vivaran.'},
-  {id:'b4', titleHi:'à¤­à¤¾à¤µà¤ªà¥à¤°à¤•à¤¾à¤¶', titleEn:'Bhavaprakasha', author:'Bhavamishra Â· 16th century CE', cat:'Materia medica', proff:'2nd Proff', subject:'Dravyaguna', pdfUrl:'', desc:'Aushadhiyon (herbs, minerals) ka vistrit varnan â€” dravyaguna shastra ka mahatvapurn granth.'},
-  {id:'b5', titleHi:'à¤®à¤¾à¤§à¤µ à¤¨à¤¿à¤¦à¤¾à¤¨à¤®à¥', titleEn:'Madhava Nidanam', author:'Madhavakara Â· ~7th century CE', cat:'Diagnosis text', proff:'2nd Proff', subject:'Roga Nidan', pdfUrl:'', desc:'Rog-nidaan (diagnosis) par kendrit â€” lakshan aur karan ke aadhar par rogon ka vargikaran.'},
-  {id:'b6', titleHi:'à¤¶à¤¾à¤°à¤‚à¤—à¤§à¤° à¤¸à¤‚à¤¹à¤¿à¤¤à¤¾', titleEn:'Sharangdhara Samhita', author:'Sharangdhara Â· 13th century CE', cat:'Pharmacology', proff:'2nd Proff', subject:'Rasashastra & Bhaishajya', pdfUrl:'', desc:'Aushadhi nirman vidhi (pharmaceutical processes) aur nadi-pariksha (pulse diagnosis) ka vivaran.'},
-  {id:'b7', titleHi:'à¤­à¥ˆà¤·à¤œà¥à¤¯ à¤°à¤¤à¥à¤¨à¤¾à¤µà¤²à¥€', titleEn:'Bhaishajya Ratnavali', author:'Govinda Das Sen Â· 18th century CE', cat:'Ayurvedic Pharmaceutics', proff:'2nd Proff', subject:'Rasashastra & Bhaishajya', pdfUrl:'', desc:'Bhaishajya Kalpana ka vistrit granth, jismein vibhinn rogon ke liye aushadhi nirmaan aur yogon ka varnan hai.'},
-  {id:'b8', titleHi:'à¤¦à¥à¤°à¤µà¥à¤¯à¤—à¥à¤£ à¤µà¤¿à¤œà¥à¤žà¤¾à¤¨', titleEn:'Dravyaguna Vijnana', author:'Acharya Priyavrat Sharma', cat:'Pharmacology Text', proff:'2nd Proff', subject:'Dravyaguna', pdfUrl:'', desc:'Dravyaguna shastra ka aadhunik evam pramanik pathyapustak, jisme herbs ka shastriya aur vaigyanik vishleshan hai.'},
-  {id:'b9', titleHi:'à¤…à¤—à¤¦ à¤¤à¤‚à¤¤à¥à¤°', titleEn:'Agada Tantra', author:'Dr. Dilip Kumar Goswami', cat:'Toxicology Text', proff:'2nd Proff', subject:'Agada Tantra', pdfUrl:'', desc:'Vish-vigyan (Toxicology) aur forensic medicine ke prachin evam aadhunik siddhanton ka sangrah.'},
-  {id:'b10', titleHi:'à¤¸à¥à¤µà¤¸à¥à¤¥à¤µà¥ƒà¤¤à¥à¤¤ à¤¸à¥à¤§à¤¾', titleEn:'Swasthavritta Sudha', author:'Dr. Kashinath Samagandi', cat:'Preventive Medicine', proff:'2nd Proff', subject:'Swasthavritta & Yoga', pdfUrl:'', desc:'Dinacharya, Ritucharya, sadvritta aur yogasanon dwara swasthya raksha ke niyamon ka varnan.'},
+  {id:'b1', titleHi:'चरक संहिता', titleEn:'Charak Samhita', author:'Acharya Charak · ~400 BCE', cat:'Foundational text', proff:'2nd Proff', subject:'Charak Samhita', pdfUrl:'', desc:'Ayurveda ka sabse pramukh grantha, jisme internal medicine (Kaya Chikitsa), rog-nidaan aur chikitsa siddhant vistar se varnit hain.'},
+  {id:'b2', titleHi:'सुश्रुत संहिता', titleEn:'Sushruta Samhita', author:'Acharya Sushruta · ~600 BCE', cat:'Surgery text', proff:'3rd Proff', subject:'', pdfUrl:'', desc:'Shalya chikitsa (surgery) par kendrit granth — plastic surgery jaisi ancient techniques ka varnan bhi ismein milta hai.'},
+  {id:'b3', titleHi:'अष्टांग हृदयम्', titleEn:'Ashtanga Hridayam', author:'Vagbhata · ~7th century CE', cat:'Compilation', proff:'1st Proff', subject:'', pdfUrl:'', desc:'Charak aur Sushruta dono ke gyaan ko sankshep mein prastut karta hai — Ayurveda ke aath angon ka sarvangeen vivaran.'},
+  {id:'b4', titleHi:'भावप्रकाश', titleEn:'Bhavaprakasha', author:'Bhavamishra · 16th century CE', cat:'Materia medica', proff:'2nd Proff', subject:'Dravyaguna', pdfUrl:'', desc:'Aushadhiyon (herbs, minerals) ka vistrit varnan — dravyaguna shastra ka mahatvapurn granth.'},
+  {id:'b5', titleHi:'माधव निदानम्', titleEn:'Madhava Nidanam', author:'Madhavakara · ~7th century CE', cat:'Diagnosis text', proff:'2nd Proff', subject:'Roga Nidan', pdfUrl:'', desc:'Rog-nidaan (diagnosis) par kendrit — lakshan aur karan ke aadhar par rogon ka vargikaran.'},
+  {id:'b6', titleHi:'शारंगधर संहिता', titleEn:'Sharangdhara Samhita', author:'Sharangdhara · 13th century CE', cat:'Pharmacology', proff:'2nd Proff', subject:'Rasashastra & Bhaishajya', pdfUrl:'', desc:'Aushadhi nirman vidhi (pharmaceutical processes) aur nadi-pariksha (pulse diagnosis) ka vivaran.'},
+  {id:'b7', titleHi:'भैषज्य रत्नावली', titleEn:'Bhaishajya Ratnavali', author:'Govinda Das Sen · 18th century CE', cat:'Ayurvedic Pharmaceutics', proff:'2nd Proff', subject:'Rasashastra & Bhaishajya', pdfUrl:'', desc:'Bhaishajya Kalpana ka vistrit granth, jismein vibhinn rogon ke liye aushadhi nirmaan aur yogon ka varnan hai.'},
+  {id:'b8', titleHi:'द्रव्यगुण विज्ञान', titleEn:'Dravyaguna Vijnana', author:'Acharya Priyavrat Sharma', cat:'Pharmacology Text', proff:'2nd Proff', subject:'Dravyaguna', pdfUrl:'', desc:'Dravyaguna shastra ka aadhunik evam pramanik pathyapustak, jisme herbs ka shastriya aur vaigyanik vishleshan hai.'},
+  {id:'b9', titleHi:'अगद तंत्र', titleEn:'Agada Tantra', author:'Dr. Dilip Kumar Goswami', cat:'Toxicology Text', proff:'2nd Proff', subject:'Agada Tantra', pdfUrl:'', desc:'Vish-vigyan (Toxicology) aur forensic medicine ke prachin evam aadhunik siddhanton ka sangrah.'},
+  {id:'b10', titleHi:'स्वस्थवृत्त सुधा', titleEn:'Swasthavritta Sudha', author:'Dr. Kashinath Samagandi', cat:'Preventive Medicine', proff:'2nd Proff', subject:'Swasthavritta & Yoga', pdfUrl:'', desc:'Dinacharya, Ritucharya, sadvritta aur yogasanon dwara swasthya raksha ke niyamon ka varnan.'},
 ];
 
 // ---------- Storage helpers ----------
@@ -2623,17 +2576,17 @@ async function initTheme() {
   const theme = storedTheme ? storedTheme.value : 'dark';
   if (theme === 'light') {
     document.body.classList.add('light-mode');
-    document.getElementById('themeToggleBtn').querySelector('.theme-icon').textContent = 'â˜€ï¸';
+    document.getElementById('themeToggleBtn').querySelector('.theme-icon').textContent = '☀️';
   } else {
     document.body.classList.remove('light-mode');
-    document.getElementById('themeToggleBtn').querySelector('.theme-icon').textContent = 'ðŸŒ™';
+    document.getElementById('themeToggleBtn').querySelector('.theme-icon').textContent = '🌙';
   }
 }
 
 async function toggleTheme() {
   const isLight = document.body.classList.toggle('light-mode');
   const btn = document.getElementById('themeToggleBtn');
-  btn.querySelector('.theme-icon').textContent = isLight ? 'â˜€ï¸' : 'ðŸŒ™';
+  btn.querySelector('.theme-icon').textContent = isLight ? '☀️' : '🌙';
   await window.storage.set('ayurved-theme', isLight ? 'light' : 'dark', false);
   
   if (document.getElementById('view-home').classList.contains('active')) {
@@ -2860,14 +2813,14 @@ function handleScroll() {
   
   const pct = getScrollPercent();
   
-  // Page 1 â†’ fade out the scroll hint as user scrolls
+  // Page 1 → fade out the scroll hint as user scrolls
   const pageOne = document.getElementById('homePageOne');
   if (pageOne) {
     const p1opacity = Math.max(0, 1 - pct * 5); // disappears by 20% scroll
     pageOne.style.opacity = p1opacity;
   }
   
-  // Page 2 â†’ fade in intro copy after 50% scroll
+  // Page 2 → fade in intro copy after 50% scroll
   const pageTwo = document.getElementById('homePageTwo');
   if (pageTwo) {
     if (pct >= 0.45) {
@@ -2948,7 +2901,7 @@ function showView(id){
 function renderAuth(){
   const area = document.getElementById('authArea');
   if(state.profile){
-    area.innerHTML = `<div class="profile-pill">ðŸ™ ${state.profile.name}${state.profile.isAdmin?' <span class="tag-role">ADMIN</span>':''}</div>`;
+    area.innerHTML = `<div class="profile-pill">🙏 ${state.profile.name}${state.profile.isAdmin?' <span class="tag-role">ADMIN</span>':''}</div>`;
   } else {
     area.innerHTML = `<button class="login-btn" onclick="openModal()">Sign in</button>`;
   }
@@ -3016,8 +2969,8 @@ function selectChantHome(id) {
     <div class="sanskrit" style="font-size:1.15rem; margin-bottom:8px; font-weight:600; color:var(--gold-light); line-height:1.4;">${c.sanskrit}</div>
     <div class="translit" style="font-size:0.85rem; color:var(--ink-soft); margin-bottom:10px; line-height:1.3;">${c.translit}</div>
     <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
-      <button class="play-btn" style="padding:4px 10px; font-size:0.75rem; background:rgba(212,175,55,0.15); border:1px solid var(--gold); color:var(--gold-light); margin:0;" onclick="playChant('${c.id}')">ðŸ”Š Listen Guide</button>
-      <button id="btnRecordedVoiceBadge" class="btn-ghost" style="display:none; padding:4px 10px; font-size:0.75rem; border-color:var(--teal); color:var(--teal);" onclick="playStoredPractice('${c.id}')">ðŸŽ™ Play My Chant</button>
+      <button class="play-btn" style="padding:4px 10px; font-size:0.75rem; background:rgba(212,175,55,0.15); border:1px solid var(--gold); color:var(--gold-light); margin:0;" onclick="playChant('${c.id}')">🔊 Listen Guide</button>
+      <button id="btnRecordedVoiceBadge" class="btn-ghost" style="display:none; padding:4px 10px; font-size:0.75rem; border-color:var(--teal); color:var(--teal);" onclick="playStoredPractice('${c.id}')">🎙 Play My Chant</button>
     </div>
   `;
   
@@ -3056,7 +3009,7 @@ async function togglePracticeRecording() {
       
       stream.getTracks().forEach(track => track.stop());
       
-      btn.textContent = 'ðŸŽ™ Re-record';
+      btn.textContent = '🎙 Re-record';
       btn.style.background = '';
       document.getElementById('btnPlayRecording').style.display = 'inline-block';
       document.getElementById('btnSaveRecording').style.display = 'inline-block';
@@ -3068,7 +3021,7 @@ async function togglePracticeRecording() {
     recordingSeconds = 0;
     document.getElementById('recTime').textContent = '0:00';
     document.getElementById('recordingTimer').style.display = 'inline-flex';
-    btn.textContent = 'â¹ Stop Practice';
+    btn.textContent = '⏹ Stop Practice';
     btn.style.background = '#e74c3c';
     
     recordingTimerInterval = setInterval(() => {
@@ -3162,18 +3115,18 @@ function homeShlokaSearchFilter() {
   ).slice(0, 8);
 
   if (hits.length === 0) {
-    dropdown.innerHTML = `<div class="home-search-dropdown-item" style="pointer-events:none;opacity:0.6;">ðŸ” Koi shloka nahi mila â€” thoda aur likho</div>`;
+    dropdown.innerHTML = `<div class="home-search-dropdown-item" style="pointer-events:none;opacity:0.6;">🔍 Koi shloka nahi mila — thoda aur likho</div>`;
   } else {
     dropdown.innerHTML = hits.map(c => {
       const hasAudio = !!(c.audioUrl);  // shown in dropdown badge
       const preview = (c.translit || c.sanskrit).slice(0, 42);
       return `<div class="home-search-dropdown-item" onclick="selectShlokaHome('${c.id}')">
-        <span class="home-sdi-icon">ðŸ•‰</span>
+        <span class="home-sdi-icon">🕉</span>
         <span class="home-sdi-text">
           <strong>${preview}${preview.length >= 42 ? '...' : ''}</strong>
           <span>${c.cat || 'Shloka'}</span>
         </span>
-        ${hasAudio ? '<span class="home-sdi-has-audio">ðŸŽµ Audio</span>' : ''}
+        ${hasAudio ? '<span class="home-sdi-has-audio">🎵 Audio</span>' : ''}
       </div>`;
     }).join('');
   }
@@ -3265,11 +3218,9 @@ async function startShlokaAudio(c, localBlob) {
   });
 }
 
-// ---------- VÄgdhenu AI Chant Generation ----------
+// ---------- Vāgdhenu AI Chant Generation ----------
 const VAGDHENU_SERVER_KEY = 'vagdhenu_server_url';
-// Default: HuggingFace Space (always online). Replace with your Space URL after setup.
-const VAGDHENU_HF_SPACE_DEFAULT = 'https://vikaskajla26-vagdhenu.hf.space';
-let VAGDHENU_SERVER = localStorage.getItem(VAGDHENU_SERVER_KEY) || VAGDHENU_HF_SPACE_DEFAULT;
+let VAGDHENU_SERVER = localStorage.getItem(VAGDHENU_SERVER_KEY) || 'https://major-jobs-design.loca.lt';
 let vagdhenuAvailable = null;  // null=unchecked, true/false
 
 function openServerSettingsModal() {
@@ -3287,7 +3238,7 @@ function saveServerSettings() {
     VAGDHENU_SERVER = url;
     localStorage.setItem(VAGDHENU_SERVER_KEY, url);
   }
-  showToast('âš™ï¸ Chanting settings saved successfully!');
+  showToast('⚙️ Chanting settings saved successfully!');
   closeServerSettingsModal();
 }
 
@@ -3343,15 +3294,13 @@ function hideDravyagunaDetail() {
 const openDravyagunaDetail = showDravyagunaDetail;
 const closeDravyagunaDetail = hideDravyagunaDetail;
 
-function getReciteUrl(text, meter, seed, speed) {
+function getReciteUrl(text, meter) {
   const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
   const encodedText = encodeURIComponent(text);
-  const s = seed  !== undefined ? seed  : 42;
-  const p = speed !== undefined ? speed : 0.90;
   if (isLocalhost) {
-    return `${VAGDHENU_SERVER}/recite?text=${encodedText}&meter=${meter}&seed=${s}&speed=${p}`;
+    return `${VAGDHENU_SERVER}/recite?text=${encodedText}&meter=${meter}&seed=42&speed=0.90`;
   } else {
-    return `/api/recite?text=${encodedText}&meter=${meter}&server_url=${encodeURIComponent(VAGDHENU_SERVER)}&seed=${s}&speed=${p}`;
+    return `/api/recite?text=${encodedText}&meter=${meter}&server_url=${encodeURIComponent(VAGDHENU_SERVER)}&seed=42&speed=0.90`;
   }
 }
 </script>
@@ -3389,9 +3338,9 @@ async function triggerPwaInstall() {
   // there's no programmatic install API there, so show manual steps instead.
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
   if (isIOS) {
-    showToast('iPhone/iPad par: neeche Share button dabayein, phir "Add to Home Screen" à¤šà¥à¤¨à¥‡à¤‚');
+    showToast('iPhone/iPad par: neeche Share button dabayein, phir "Add to Home Screen" चुनें');
   } else {
-    showToast('Aapka browser abhi install support nahi karta yahan se â€” Chrome ya Edge try karein');
+    showToast('Aapka browser abhi install support nahi karta yahan se — Chrome ya Edge try karein');
   }
 }
 
@@ -3442,8 +3391,8 @@ async function generateAIChant() {
   if (!c) return;
 
   const aiBtn = document.getElementById('spcAiBtn');
-  if (aiBtn) { aiBtn.disabled = true; aiBtn.innerHTML = 'â³ Generating...'; }
-  showToast('ðŸŒŠ Vagdhenu AI se recitation generate ho rahi hai...');
+  if (aiBtn) { aiBtn.disabled = true; aiBtn.innerHTML = '⏳ Generating...'; }
+  showToast('🌊 Vagdhenu AI se recitation generate ho rahi hai...');
 
   try {
     const meter = c.cat && c.cat.toLowerCase().includes('gayatri') ? 'gayatri' : 'anushtubh';
@@ -3461,7 +3410,7 @@ async function generateAIChant() {
     // Save generated audio to IndexedDB for this shloka
     await savePDFBlob('audio_' + shlokaPlayerChantId, blob);
 
-    showToast('ðŸŽµ AI chanting ready! Playing...');
+    showToast('🎵 AI chanting ready! Playing...');
     if (aiBtn) { aiBtn.style.display = 'none'; }
     const badge = document.getElementById('spcAudioBadge');
     if (badge) badge.style.display = 'inline-block';
@@ -3471,9 +3420,9 @@ async function generateAIChant() {
     await startShlokaAudio(c, localBlob);
   } catch (err) {
     console.error('AI generation error:', err);
-    showToast('âŒ Recitation failed: ' + err.message);
+    showToast('❌ Recitation failed: ' + err.message);
   } finally {
-    if (aiBtn) { aiBtn.disabled = false; aiBtn.innerHTML = 'ðŸ¤– AI Chant Generate'; }
+    if (aiBtn) { aiBtn.disabled = false; aiBtn.innerHTML = '🤖 AI Chant Generate'; }
   }
 }
 
@@ -3577,11 +3526,11 @@ function uploadCustomShlokaTextFile() {
   reader.onload = function(e) {
     const text = e.target.result;
     document.getElementById('customShlokaText').value = text;
-    showToast('ðŸ“„ Text file successfully uploaded!');
+    showToast('📄 Text file successfully uploaded!');
     fileInput.value = '';
   };
   reader.onerror = function() {
-    showToast('âŒ File read error.');
+    showToast('❌ File read error.');
   };
   reader.readAsText(file);
 }
@@ -3592,18 +3541,16 @@ async function generateCustomAIChant() {
   
   const meterSelect = document.getElementById('customShlokaMeter');
   const meter = meterSelect ? meterSelect.value : 'anushtubh';
-  const speedEl = document.getElementById('customShlokaSpeed');
-  const speed = speedEl ? parseFloat(speedEl.value) : 0.90;
   
   const reciteBtn = document.getElementById('customReciteBtn');
-  if (reciteBtn) { reciteBtn.disabled = true; reciteBtn.innerHTML = 'â³ Reciting...'; }
-  showToast('ðŸŒŠ Vagdhenu AI se custom recitation generate ho rahi hai...');
+  if (reciteBtn) { reciteBtn.disabled = true; reciteBtn.innerHTML = '⏳ Reciting...'; }
+  showToast('🌊 Vagdhenu AI se custom recitation generate ho rahi hai...');
   
   // Stop existing audio
   if (shlokaPlayerAudio) { shlokaPlayerAudio.pause(); shlokaPlayerAudio = null; }
   
   try {
-    const url = getReciteUrl(text, meter, 42, speed);
+    const url = getReciteUrl(text, meter);
     
     const resp = await fetch(url, {
       headers: { 'Bypass-Tunnel-Reminder': 'true' }
@@ -3614,8 +3561,6 @@ async function generateCustomAIChant() {
     }
     
     const blob = await resp.blob();
-    _customBlob = blob;
-    window._lastCustomBlob = blob; // for downloadCustomAudio()
     
     // Save to IndexedDB under custom key
     shlokaPlayerChantId = 'custom_generation';
@@ -3624,16 +3569,12 @@ async function generateCustomAIChant() {
     // Display in Player Card
     document.getElementById('spcCat').textContent = 'Custom Recitation';
     document.getElementById('spcSanskrit').textContent = text;
-    document.getElementById('spcTranslit').textContent = `Meter: ${meter} Â· Speed: ${speed}Ã—`;
+    document.getElementById('spcTranslit').textContent = `Meter: ${meter}`;
     document.getElementById('spcMeaning').textContent = 'Generated dynamically using your uploaded shloka text.';
     document.getElementById('spcTimer').textContent = '0:00 / 0:00';
     
     const badge = document.getElementById('spcAudioBadge');
     if (badge) badge.style.display = 'inline-block';
-    
-    // Show download button
-    const dlBtn = document.getElementById('customDownloadBtn');
-    if (dlBtn) dlBtn.style.display = 'inline-block';
     
     // Hide standard AI button since we just generated it
     const aiBtn = document.getElementById('spcAiBtn');
@@ -3651,9 +3592,9 @@ async function generateCustomAIChant() {
     
   } catch (err) {
     console.error('Custom generation error:', err);
-    showToast('âŒ Recitation failed: ' + err.message);
+    showToast('❌ Recitation failed: ' + err.message);
   } finally {
-    if (reciteBtn) { reciteBtn.disabled = false; reciteBtn.innerHTML = 'ðŸ”Š AI Recite Shloka'; }
+    if (reciteBtn) { reciteBtn.disabled = false; reciteBtn.innerHTML = '🔊 AI Recite Shloka'; }
   }
 }
 
@@ -3687,7 +3628,7 @@ function updatePlayerBar(c) {
   }
   
   const playBtn = document.getElementById('pb-play-btn');
-  playBtn.textContent = 'â¸';
+  playBtn.textContent = '⏸';
   
   const wave = document.getElementById('pb-wave');
   if (wave) wave.classList.add('playing');
@@ -3736,7 +3677,7 @@ function stopPlayback(){
   if (bar) bar.classList.remove('show');
   
   const playBtn = document.getElementById('pb-play-btn');
-  if (playBtn) playBtn.textContent = 'â–¶';
+  if (playBtn) playBtn.textContent = '▶';
   
   const wave = document.getElementById('pb-wave');
   if (wave) wave.classList.remove('playing');
@@ -3774,7 +3715,7 @@ function playChant(id){
 }
 
 async function speakChant(c){
-  showToast('ðŸŒŠ Vagdhenu AI se recitation generate ho rahi hai...');
+  showToast('🌊 Vagdhenu AI se recitation generate ho rahi hai...');
   try {
     const meter = c.cat && c.cat.toLowerCase().includes('gayatri') ? 'gayatri' : 'anushtubh';
     const url = getReciteUrl(c.sanskrit, meter);
@@ -3798,16 +3739,16 @@ async function speakChant(c){
     if (wave) wave.classList.add('playing');
     
     const playBtn = document.getElementById('pb-play-btn');
-    if (playBtn) playBtn.textContent = 'â¸';
+    if (playBtn) playBtn.textContent = '⏸';
     
     currentAudio.onended = () => { stopPlayback(); };
     currentAudio.onerror = () => {
-      showToast('âŒ Recitation playback failed');
+      showToast('❌ Recitation playback failed');
       stopPlayback();
     };
   } catch (err) {
     console.error('Vagdhenu recitation error:', err);
-    showToast('âŒ Vagdhenu recitation failed: ' + err.message);
+    showToast('❌ Vagdhenu recitation failed: ' + err.message);
     stopPlayback();
   }
 }
@@ -3829,21 +3770,21 @@ function renderChants(){
   );
   document.getElementById('chantCount').textContent = `${list.length} chants`;
   document.getElementById('chantGrid').innerHTML = list.length ? list.map(chantCard).join('') :
-    `<div class="empty-state" style="grid-column:1/-1;"><span class="big">ðŸ”</span>Kuch nahi mila. Dobara search karein.</div>`;
+    `<div class="empty-state" style="grid-column:1/-1;"><span class="big">🔍</span>Kuch nahi mila. Dobara search karein.</div>`;
 }
 
 function chantCard(c){
   const saved = state.favorites.chants.includes(c.id);
   const playing = state.nowPlaying === c.id;
   return `<div class="card">
-    <button class="fav-btn ${saved?'saved':''}" onclick="toggleFav('chants','${c.id}')">${saved?'â™¥':'â™¡'}</button>
+    <button class="fav-btn ${saved?'saved':''}" onclick="toggleFav('chants','${c.id}')">${saved?'♥':'♡'}</button>
     <div class="cat">${c.cat}</div>
     <div class="sanskrit">${c.sanskrit}</div>
     <div class="translit">${c.translit}</div>
     <div class="meaning">${c.meaning}</div>
     <div style="display:flex; gap:8px; margin-top:4px; flex-wrap:wrap;">
-      <button class="play-btn ${playing?'playing':''}" onclick="playChant('${c.id}')">${playing? 'â¸ Sun rahe hain...' : 'ðŸ”Š Sunein'}</button>
-      <button class="btn-ghost" style="padding:6px 14px; font-size:0.8rem;" onclick="selectShlokaHome('${c.id}'); window.scrollTo({ top: document.getElementById('homeBottomContent').offsetTop - 20, behavior: 'smooth' });">ðŸŽ™ Practice Recitation</button>
+      <button class="play-btn ${playing?'playing':''}" onclick="playChant('${c.id}')">${playing? '⏸ Sun rahe hain...' : '🔊 Sunein'}</button>
+      <button class="btn-ghost" style="padding:6px 14px; font-size:0.8rem;" onclick="selectShlokaHome('${c.id}'); window.scrollTo({ top: document.getElementById('homeBottomContent').offsetTop - 20, behavior: 'smooth' });">🎙 Practice Recitation</button>
     </div>
     ${!c.audioUrl ? '<div class="tts-note">Browser voice mein (Audio file upload nahi hui)</div>' : ''}
   </div>`;
@@ -3911,7 +3852,7 @@ function renderBooks(){
   
   document.getElementById('bookCount').textContent = `${list.length} books`;
   document.getElementById('bookGrid').innerHTML = list.length ? list.map(bookCard).join('') :
-    `<div class="empty-state" style="grid-column:1/-1;"><span class="big">ðŸ“š</span>No books found. Try modifying your search or subject filters.</div>`;
+    `<div class="empty-state" style="grid-column:1/-1;"><span class="big">📚</span>No books found. Try modifying your search or subject filters.</div>`;
   
   // Asynchronously load any local covers stored as blob in IndexedDB
   loadBookCovers();
@@ -3936,16 +3877,16 @@ async function loadBookCovers() {
 function bookCard(b){
   const saved = state.favorites.books.includes(b.id);
   const badgeColor = b.proff === '1st Proff' ? 'var(--gold)' : b.proff === '2nd Proff' ? 'var(--copper)' : 'var(--teal)';
-  const badgeLabel = (b.proff === '2nd Proff' && b.subject) ? `2nd Proff Â· ${b.subject}` : (b.proff || 'General');
+  const badgeLabel = (b.proff === '2nd Proff' && b.subject) ? `2nd Proff · ${b.subject}` : (b.proff || 'General');
   
   const coverHtml = b.coverUrl ? 
     `<div class="book-cover-wrap" style="height:140px; background:rgba(0,0,0,0.15); border-radius:10px; overflow:hidden; margin-bottom:14px; display:flex; align-items:center; justify-content:center; border:1px solid var(--line); position:relative;">
        <img data-book-cover="${b.id}" style="height:100%; width:100%; object-fit:cover; display:none;" onload="this.style.display='block'">
-       <span class="cover-placeholder" style="font-size:2.2rem; opacity:0.65; transition:opacity .2s;">ðŸ“–</span>
+       <span class="cover-placeholder" style="font-size:2.2rem; opacity:0.65; transition:opacity .2s;">📖</span>
      </div>` : '';
 
   return `<div class="card">
-    <button class="fav-btn ${saved?'saved':''}" onclick="toggleFav('books','${b.id}')">${saved?'â™¥':'â™¡'}</button>
+    <button class="fav-btn ${saved?'saved':''}" onclick="toggleFav('books','${b.id}')">${saved?'♥':'♡'}</button>
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
       <div class="cat" style="margin:0;">${b.cat}</div>
       <span style="font-size:0.65rem; font-weight:700; color:${badgeColor}; border:1px solid ${badgeColor}; padding:2px 8px; border-radius:12px; text-transform:uppercase; letter-spacing:0.3px;">${badgeLabel}</span>
@@ -3959,10 +3900,10 @@ function bookCard(b){
     <div style="margin-top:auto; display:flex; gap:8px; align-items:center; border-top:1px dashed var(--line); padding-top:12px;">
       ${b.pdfUrl ? 
         (b.pdfUrl === 'stored-blob' ? 
-          `<button class="play-btn" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:6px; font-size:0.8rem; padding:6px 12px; margin-top:0;" onclick="openStoredPDF('${b.id}')">ðŸ“– Read PDF</button>` :
-          `<a href="${b.pdfUrl}" target="_blank" class="play-btn" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:6px; font-size:0.8rem; padding:6px 12px; margin-top:0;">ðŸ“– Read PDF</a>`
+          `<button class="play-btn" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:6px; font-size:0.8rem; padding:6px 12px; margin-top:0;" onclick="openStoredPDF('${b.id}')">📖 Read PDF</button>` :
+          `<a href="${b.pdfUrl}" target="_blank" class="play-btn" style="text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:6px; font-size:0.8rem; padding:6px 12px; margin-top:0;">📖 Read PDF</a>`
         ) : 
-        `<button class="btn-ghost" style="padding:6px 12px; font-size:0.8rem; opacity:0.5; cursor:not-allowed;" disabled>ðŸ“„ PDF not linked</button>`
+        `<button class="btn-ghost" style="padding:6px 12px; font-size:0.8rem; opacity:0.5; cursor:not-allowed;" disabled>📄 PDF not linked</button>`
       }
     </div>
   </div>`;
@@ -3982,9 +3923,9 @@ function renderFavorites(){
   const c = state.chants.filter(x=>state.favorites.chants.includes(x.id));
   const b = state.books.filter(x=>state.favorites.books.includes(x.id));
   const el = document.getElementById('favContent');
-  if(!state.profile){ el.innerHTML = `<div class="empty-state"><span class="big">ðŸ”’</span>Favorites dekhne ke liye sign in karein.</div>`; return; }
-  if(!c.length && !b.length){ el.innerHTML = `<div class="empty-state"><span class="big">ðŸ¤</span>Abhi koi favorite nahi hai. Chants ya Books mein â™¡ par click karein.</div>`; return; }
-  el.innerHTML = (c.length ? `<h3 class="hin-serif" style="margin-top:20px;">à¤®à¤‚à¤¤à¥à¤°</h3><div class="grid">${c.map(chantCard).join('')}</div>` : '') +
+  if(!state.profile){ el.innerHTML = `<div class="empty-state"><span class="big">🔒</span>Favorites dekhne ke liye sign in karein.</div>`; return; }
+  if(!c.length && !b.length){ el.innerHTML = `<div class="empty-state"><span class="big">🤍</span>Abhi koi favorite nahi hai. Chants ya Books mein ♡ par click karein.</div>`; return; }
+  el.innerHTML = (c.length ? `<h3 class="hin-serif" style="margin-top:20px;">मंत्र</h3><div class="grid">${c.map(chantCard).join('')}</div>` : '') +
                  (b.length ? `<h3 style="margin-top:30px;">Books</h3><div class="grid">${b.map(bookCard).join('')}</div>` : '');
 }
 
@@ -4134,7 +4075,7 @@ async function addChant() {
     if (cloudUrl) {
       finalAudioUrl = cloudUrl;
       if (progressBar) progressBar.style.width = '100%';
-      showToast('ðŸŽµ Audio file uploaded!');
+      showToast('🎵 Audio file uploaded!');
     } else {
       showToast('Error uploading audio file.');
       if (progressContainer) progressContainer.style.display = 'none';
@@ -4161,17 +4102,17 @@ function editChant(id) {
   document.getElementById('af-audio').value = c.audioUrl.startsWith('http') ? c.audioUrl : '';
 
   if (c.audioUrl.startsWith('http')) {
-    document.getElementById('audioDropLabel').textContent = 'ðŸŽµ Audio stored in cloud (upload again to replace)';
+    document.getElementById('audioDropLabel').textContent = '🎵 Audio stored in cloud (upload again to replace)';
   } else if (c.audioUrl === 'stored-blob') {
-    document.getElementById('audioDropLabel').textContent = 'ðŸŽµ Audio stored in local database';
+    document.getElementById('audioDropLabel').textContent = '🎵 Audio stored in local database';
   }
 
   editingChantId = id;
-  document.getElementById('chantFormTitle').textContent = 'ðŸ“ Edit Shloka Details';
+  document.getElementById('chantFormTitle').textContent = '📝 Edit Shloka Details';
   document.getElementById('chantEditBadge').style.display = 'inline-block';
 
   const btn = document.getElementById('chantSaveBtn');
-  btn.textContent = 'ðŸ’¾ Update Shloka';
+  btn.textContent = '💾 Update Shloka';
   btn.onclick = () => updateChant(id);
 
   const cancelBtn = document.getElementById('chantCancelBtn');
@@ -4190,12 +4131,12 @@ function resetChantForm() {
   const fileInput = document.getElementById('af-audio-file');
   if (fileInput) fileInput.value = '';
   document.getElementById('audioDropLabel').textContent = 'Click or drag MP3 / audio file here';
-  document.getElementById('chantFormTitle').textContent = 'âœ¨ Add New Shloka';
+  document.getElementById('chantFormTitle').textContent = '✨ Add New Shloka';
   document.getElementById('chantEditBadge').style.display = 'none';
 
   const btn = document.getElementById('chantSaveBtn');
   if (btn) {
-    btn.textContent = 'ðŸ’¾ Save Shloka';
+    btn.textContent = '💾 Save Shloka';
     btn.onclick = addChant;
   }
   const cancelBtn = document.getElementById('chantCancelBtn');
@@ -4227,7 +4168,7 @@ async function updateChant(id) {
     if (cloudUrl) {
       finalAudioUrl = cloudUrl;
       if (progressBar) progressBar.style.width = '100%';
-      showToast('ðŸŽµ Audio file updated on cloud!');
+      showToast('🎵 Audio file updated on cloud!');
     } else {
       showToast('Error uploading audio file.');
       if (progressContainer) progressContainer.style.display = 'none';
@@ -4283,7 +4224,7 @@ async function addBook() {
     if (cloudUrl) {
       finalPdfUrl = cloudUrl;
       if (progressBar) progressBar.style.width = '100%';
-      showToast('ðŸ“„ PDF file uploaded!');
+      showToast('📄 PDF file uploaded!');
     } else {
       showToast("Error uploading PDF file.");
       if (progressContainer) progressContainer.style.display = 'none';
@@ -4297,7 +4238,7 @@ async function addBook() {
     const cloudUrl = await uploadFileToCloud(selectedCoverFile);
     if (cloudUrl) {
       finalCoverUrl = cloudUrl;
-      showToast('ðŸ–¼ï¸ Cover image uploaded!');
+      showToast('🖼️ Cover image uploaded!');
     } else {
       showToast("Error uploading cover image.");
     }
@@ -4323,18 +4264,18 @@ async function editBook(id) {
   document.getElementById('bf-desc').value = b.desc || '';
 
   if (b.pdfUrl.startsWith('http')) {
-    document.getElementById('pdfDropLabel').textContent = 'ðŸ“„ PDF stored in cloud (upload again to replace)';
+    document.getElementById('pdfDropLabel').textContent = '📄 PDF stored in cloud (upload again to replace)';
   } else if (b.pdfUrl === 'stored-blob') {
-    document.getElementById('pdfDropLabel').textContent = 'ðŸ“„ PDF already stored in database';
+    document.getElementById('pdfDropLabel').textContent = '📄 PDF already stored in database';
   }
   
   if (b.coverUrl.startsWith('http')) {
-    document.getElementById('coverDropLabel').textContent = 'ðŸ–¼ï¸ Cover image stored in cloud (upload again to replace)';
+    document.getElementById('coverDropLabel').textContent = '🖼️ Cover image stored in cloud (upload again to replace)';
     const img = document.getElementById('coverPreview');
     img.src = b.coverUrl;
     img.style.display = 'block';
   } else if (b.coverUrl === 'stored-blob') {
-    document.getElementById('coverDropLabel').textContent = 'ðŸ–¼ï¸ Cover image already stored (upload again to replace)';
+    document.getElementById('coverDropLabel').textContent = '🖼️ Cover image already stored (upload again to replace)';
     const blob = await getPDFBlob('cover_' + b.id);
     if (blob) {
       const img = document.getElementById('coverPreview');
@@ -4349,11 +4290,11 @@ async function editBook(id) {
   }
 
   editingBookId = id;
-  document.getElementById('bookFormTitle').textContent = 'ðŸ“ Edit Book Details';
+  document.getElementById('bookFormTitle').textContent = '📝 Edit Book Details';
   document.getElementById('bookEditBadge').style.display = 'inline-block';
 
   const btn = document.getElementById('bookSaveBtn');
-  btn.textContent = 'ðŸ’¾ Update Book';
+  btn.textContent = '💾 Update Book';
   btn.onclick = () => updateBook(id);
 
   const cancelBtn = document.getElementById('bookCancelBtn');
@@ -4383,12 +4324,12 @@ function resetBookForm() {
   document.getElementById('bf-proff').value = '2nd Proff';
   toggleAdminSubjectSelector();
 
-  document.getElementById('bookFormTitle').textContent = 'ðŸ“– Add New Book';
+  document.getElementById('bookFormTitle').textContent = '📖 Add New Book';
   document.getElementById('bookEditBadge').style.display = 'none';
 
   const btn = document.getElementById('bookSaveBtn');
   if (btn) {
-    btn.textContent = 'ðŸ’¾ Save Book';
+    btn.textContent = '💾 Save Book';
     btn.onclick = addBook;
   }
   const cancelBtn = document.getElementById('bookCancelBtn');
@@ -4424,7 +4365,7 @@ async function updateBook(id) {
     if (cloudUrl) {
       finalPdfUrl = cloudUrl;
       if (progressBar) progressBar.style.width = '100%';
-      showToast("ðŸ“„ PDF file uploaded!");
+      showToast("📄 PDF file uploaded!");
     } else {
       showToast("Error uploading PDF file.");
       if (progressContainer) progressContainer.style.display = 'none';
@@ -4438,7 +4379,7 @@ async function updateBook(id) {
     const cloudUrl = await uploadFileToCloud(selectedCoverFile);
     if (cloudUrl) {
       finalCoverUrl = cloudUrl;
-      showToast("ðŸ–¼ï¸ Cover image uploaded!");
+      showToast("🖼️ Cover image uploaded!");
     } else {
       showToast("Error uploading cover image.");
     }
@@ -4533,11 +4474,11 @@ async function verifyAdminCredentials() {
   }
   
   const btn = document.querySelector('#adminLockScreen .save-btn');
-  let originalText = 'ðŸ”“ Unlock Admin Panel';
+  let originalText = '🔓 Unlock Admin Panel';
   if (btn) {
     originalText = btn.innerHTML;
     btn.disabled = true;
-    btn.innerHTML = 'â³ Verifying...';
+    btn.innerHTML = '⏳ Verifying...';
   }
   
   try {
@@ -4622,11 +4563,11 @@ function renderAdmin() {
       <div class="admin-list-item">
         <div class="item-info">
           <div class="item-title">${c.sanskrit.slice(0, 50)}...</div>
-          <div class="item-meta">${c.cat} Â· ${c.audioUrl === 'stored-blob' ? 'ðŸ“ Local MP3' : c.audioUrl ? 'ðŸ”— Remote MP3' : 'ðŸ”‡ No Audio'}</div>
+          <div class="item-meta">${c.cat} · ${c.audioUrl === 'stored-blob' ? '📁 Local MP3' : c.audioUrl ? '🔗 Remote MP3' : '🔇 No Audio'}</div>
         </div>
         <div class="item-actions">
-          <button class="edit-btn" onclick="editChant('${c.id}')">âœï¸ Edit</button>
-          <button class="del-btn" onclick="deleteChant('${c.id}')">ðŸ—‘ï¸ Delete</button>
+          <button class="edit-btn" onclick="editChant('${c.id}')">✏️ Edit</button>
+          <button class="del-btn" onclick="deleteChant('${c.id}')">🗑️ Delete</button>
         </div>
       </div>
     `).join('') || '<div class="empty-state">No shlokas added yet.</div>';
@@ -4638,11 +4579,11 @@ function renderAdmin() {
       <div class="admin-list-item">
         <div class="item-info">
           <div class="item-title">${b.titleEn} (${b.titleHi})</div>
-          <div class="item-meta">${b.author} Â· ${b.proff} ${b.subject ? `Â· ${b.subject}` : ''} Â· ${b.pdfUrl === 'stored-blob' ? 'ðŸ“ Local PDF' : b.pdfUrl ? 'ðŸ”— Remote Link' : 'ðŸ“„ No PDF'}</div>
+          <div class="item-meta">${b.author} · ${b.proff} ${b.subject ? `· ${b.subject}` : ''} · ${b.pdfUrl === 'stored-blob' ? '📁 Local PDF' : b.pdfUrl ? '🔗 Remote Link' : '📄 No PDF'}</div>
         </div>
         <div class="item-actions">
-          <button class="edit-btn" onclick="editBook('${b.id}')">âœï¸ Edit</button>
-          <button class="del-btn" onclick="deleteBook('${b.id}')">ðŸ—‘ï¸ Delete</button>
+          <button class="edit-btn" onclick="editBook('${b.id}')">✏️ Edit</button>
+          <button class="del-btn" onclick="deleteBook('${b.id}')">🗑️ Delete</button>
         </div>
       </div>
     `).join('') || '<div class="empty-state">No books added yet.</div>';
@@ -4659,7 +4600,7 @@ async function triggerCarakaSearch() {
   }
 
   resultsDiv.style.display = 'block';
-  resultsDiv.innerHTML = '<p style="color:var(--ink-soft); font-size:0.9rem; margin-top:10px;">ðŸ”Ž Searching Charak Samhita for "' + query + '"...</p>';
+  resultsDiv.innerHTML = '<p style="color:var(--ink-soft); font-size:0.9rem; margin-top:10px;">🔎 Searching Charak Samhita for "' + query + '"...</p>';
 
   try {
     const url = getSearchTreatiseUrl(query, 8);
@@ -4667,7 +4608,7 @@ async function triggerCarakaSearch() {
     const data = await resp.json();
 
     if (data.error) {
-      resultsDiv.innerHTML = `<p style="color:var(--copper); font-size:0.9rem; margin-top:10px;">âš ï¸ ${data.error} â€” <a href="${quickCarakaSearchUrl(query)}" target="_blank" style="color:var(--gold);">try searching directly on the source site</a>.</p>`;
+      resultsDiv.innerHTML = `<p style="color:var(--copper); font-size:0.9rem; margin-top:10px;">⚠️ ${data.error} — <a href="${quickCarakaSearchUrl(query)}" target="_blank" style="color:var(--gold);">try searching directly on the source site</a>.</p>`;
       return;
     }
 
@@ -4680,12 +4621,12 @@ async function triggerCarakaSearch() {
     let html = '<div style="margin-top:14px;">';
     html += results.map(r => {
       const refAttr = (r.sthana && r.chapter) ? `onclick="applyPastedShlokaMatch('${r.sthana}', ${r.chapter}, 1)" style="cursor:pointer;"` : `onclick="window.open('${quickCarakaSearchUrl(r.title)}','_blank')" style="cursor:pointer;"`;
-      const refLabel = (r.sthana && r.chapter) ? `${r.sthana} Â· Chapter ${r.chapter}` : 'View on source site';
+      const refLabel = (r.sthana && r.chapter) ? `${r.sthana} · Chapter ${r.chapter}` : 'View on source site';
       return `
         <div ${refAttr} style="cursor:pointer; padding:10px 14px; margin-bottom:8px; border-radius:8px; background:var(--bg-soft); border:1px solid var(--line);">
           <div style="font-size:0.85rem; color:var(--cream); font-weight:600;">${r.title}</div>
           <div style="font-size:0.8rem; color:var(--ink-soft); margin-top:4px;">${r.snippet}</div>
-          <div style="font-size:0.75rem; color:var(--gold); margin-top:4px;">${refLabel} â†’</div>
+          <div style="font-size:0.75rem; color:var(--gold); margin-top:4px;">${refLabel} →</div>
         </div>`;
     }).join('');
     html += '</div>';
@@ -4693,7 +4634,7 @@ async function triggerCarakaSearch() {
 
   } catch (err) {
     console.error('Treatise search error:', err);
-    resultsDiv.innerHTML = `<p style="color:var(--copper); font-size:0.9rem; margin-top:10px;">âš ï¸ Could not reach the search service â€” <a href="${quickCarakaSearchUrl(query)}" target="_blank" style="color:var(--gold);">try the source site directly</a>.</p>`;
+    resultsDiv.innerHTML = `<p style="color:var(--copper); font-size:0.9rem; margin-top:10px;">⚠️ Could not reach the search service — <a href="${quickCarakaSearchUrl(query)}" target="_blank" style="color:var(--gold);">try the source site directly</a>.</p>`;
   }
 }
 
@@ -4707,163 +4648,163 @@ function quickCarakaSearch(query) {
 
 const CARAKA_CHAPTERS = {
   Sutrasthana: {
-    nameHi: "à¤¸à¥‚à¤¤à¥à¤°à¤¸à¥à¤¥à¤¾à¤¨",
+    nameHi: "सूत्रस्थान",
     chapters: {
-      1: { en: "Deerghanjiviteeya Adhyaya", hi: "à¤¦à¥€à¤°à¥à¤˜à¤žà¥à¤œà¥€à¤µà¤¿à¤¤à¥€à¤¯à¥‹à¤½à¤§à¥à¤¯à¤¾à¤¯à¤ƒ" },
-      2: { en: "Apamargatanduleeya Adhyaya", hi: "à¤…à¤ªà¤¾à¤®à¤¾à¤°à¥à¤—à¤¤à¤£à¥à¤¡à¥à¤²à¥€à¤¯" },
-      3: { en: "Aragvadheeya Adhyaya", hi: "à¤†à¤°à¤—à¥à¤µà¤§à¥€à¤¯" },
-      4: { en: "Shadvirechanashatasashriteeya Adhyaya", hi: "à¤·à¤¡à¥à¤µà¤¿à¤°à¥‡à¤šà¤¨à¤¶à¤¤à¤¾à¤¶à¥à¤°à¤¿à¤¤à¥€à¤¯" },
-      5: { en: "Matrashiteeya Adhyaya", hi: "à¤®à¤¾à¤¤à¥à¤°à¤¾à¤¶à¤¿à¤¤à¥€à¤¯" },
-      6: { en: "Tasyashiteeya Adhyaya", hi: "à¤¤à¤¸à¥à¤¯à¤¾à¤¶à¤¿à¤¤à¥€à¤¯" },
-      7: { en: "Navegandharaneeya Adhyaya", hi: "à¤¨à¤µà¥‡à¤—à¤¾à¤¨à¥à¤§à¤¾à¤°à¤£à¥€à¤¯" },
-      8: { en: "Indriyopakramaneeya Adhyaya", hi: "à¤‡à¤¨à¥à¤¦à¥à¤°à¤¿à¤¯à¥‹à¤ªà¤•à¥à¤°à¤®à¤£à¥€à¤¯" },
-      9: { en: "Khuddakachatushpada Adhyaya", hi: "à¤–à¥à¤¡à¥à¤¡à¤¾à¤•à¤šà¤¤à¥à¤·à¥à¤ªà¤¾à¤¦" },
-      10: { en: "Mahaachatushpada Adhyaya", hi: "à¤®à¤¹à¤¾à¤šà¤¤à¥à¤·à¥à¤ªà¤¾à¤¦" },
-      11: { en: "Tisraishaneeya Adhyaya", hi: "à¤¤à¤¿à¤¸à¥à¤°à¥ˆà¤·à¤£à¥€à¤¯" },
-      12: { en: "Vatakalakaleeya Adhyaya", hi: "à¤µà¤¾à¤¤à¤•à¤²à¤¾à¤•à¤²à¥€à¤¯" },
-      13: { en: "Snehadhyaya", hi: "à¤¸à¥à¤¨à¥‡à¤¹à¤¾à¤§à¥à¤¯à¤¾à¤¯" },
-      14: { en: "Swedadhyaya", hi: "à¤¸à¥à¤µà¥‡à¤¦à¤¾à¤§à¥à¤¯à¤¾à¤¯" },
-      15: { en: "Upakalpaneeya Adhyaya", hi: "à¤‰à¤ªà¤•à¤²à¥à¤ªà¤¨à¥€à¤¯" },
-      16: { en: "Chikitsaprabhriteeya Adhyaya", hi: "à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾à¤ªà¥à¤°à¤­à¥ƒà¤¤à¥€à¤¯" },
-      17: { en: "Kiyanta Shiraseeya Adhyaya", hi: "à¤•à¤¿à¤¯à¤¨à¥à¤¤à¤ƒà¤¶à¤¿à¤°à¤¸à¥€à¤¯" },
-      18: { en: "Trishotheeya Adhyaya", hi: "à¤¤à¥à¤°à¤¿à¤¶à¥‹à¤¥à¥€à¤¯" },
-      19: { en: "Ashtodareeya Adhyaya", hi: "à¤…à¤·à¥à¤Ÿà¥‹à¤¦à¤°à¥€à¤¯" },
-      20: { en: "Maharoga Adhyaya", hi: "à¤®à¤¹à¤¾à¤°à¥‹à¤—" },
-      21: { en: "Ashtouninditeeya Adhyaya", hi: "à¤…à¤·à¥à¤Ÿà¥Œà¤¨à¤¿à¤¨à¥à¤¦à¤¿à¤¤à¥€à¤¯" },
-      22: { en: "Langhanabrimhaneeya Adhyaya", hi: "à¤²à¤™à¥à¤˜à¤¨à¤¬à¥ƒà¤‚à¤¹à¤£à¥€à¤¯" },
-      23: { en: "Santarpaneeya Adhyaya", hi: "à¤¸à¤¨à¥à¤¤à¤°à¥à¤ªà¤£à¥€à¤¯" },
-      24: { en: "Vidhishoniteeya Adhyaya", hi: "à¤µà¤¿à¤§à¤¿à¤¶à¥‹à¤£à¤¿à¤¤à¥€à¤¯" },
-      25: { en: "Yajjah Purusheeya Adhyaya", hi: "à¤¯à¤œà¥à¤œà¤ƒà¤ªà¥à¤°à¥à¤·à¥€à¤¯" },
-      26: { en: "Atreyabhadrakapyeeya Adhyaya", hi: "à¤†à¤¤à¥à¤°à¥‡à¤¯à¤­à¤¦à¥à¤°à¤•à¤¾à¤ªà¥à¤¯à¥€à¤¯" },
-      27: { en: "Annapanavidhi", hi: "à¤…à¤¨à¥à¤¨à¤ªà¤¾à¤¨à¤µà¤¿à¤§à¤¿" },
-      28: { en: "Vividhashitapeeteeya Adhyaya", hi: "à¤µà¤¿à¤µà¤¿à¤§à¤¾à¤¶à¤¿à¤¤à¤ªà¥€à¤¤à¥€à¤¯" },
-      29: { en: "Dashapranayataneeya Adhyaya", hi: "à¤¦à¤¶à¤ªà¥à¤°à¤¾à¤£à¤¾à¤¯à¤¤à¤¨à¥€à¤¯" },
-      30: { en: "Artayedashamahamoola Adhyaya", hi: "à¤…à¤°à¥à¤¥à¥‡à¤¦à¤¶à¤®à¤¹à¤¾à¤®à¥‚à¤²à¥€à¤¯" }
+      1: { en: "Deerghanjiviteeya Adhyaya", hi: "दीर्घञ्जीवितीयोऽध्यायः" },
+      2: { en: "Apamargatanduleeya Adhyaya", hi: "अपामार्गतण्डुलीय" },
+      3: { en: "Aragvadheeya Adhyaya", hi: "आरग्वधीय" },
+      4: { en: "Shadvirechanashatasashriteeya Adhyaya", hi: "षड्विरेचनशताश्रितीय" },
+      5: { en: "Matrashiteeya Adhyaya", hi: "मात्राशितीय" },
+      6: { en: "Tasyashiteeya Adhyaya", hi: "तस्याशितीय" },
+      7: { en: "Navegandharaneeya Adhyaya", hi: "नवेगान्धारणीय" },
+      8: { en: "Indriyopakramaneeya Adhyaya", hi: "इन्द्रियोपक्रमणीय" },
+      9: { en: "Khuddakachatushpada Adhyaya", hi: "खुड्डाकचतुष्पाद" },
+      10: { en: "Mahaachatushpada Adhyaya", hi: "महाचतुष्पाद" },
+      11: { en: "Tisraishaneeya Adhyaya", hi: "तिस्रैषणीय" },
+      12: { en: "Vatakalakaleeya Adhyaya", hi: "वातकलाकलीय" },
+      13: { en: "Snehadhyaya", hi: "स्नेहाध्याय" },
+      14: { en: "Swedadhyaya", hi: "स्वेदाध्याय" },
+      15: { en: "Upakalpaneeya Adhyaya", hi: "उपकल्पनीय" },
+      16: { en: "Chikitsaprabhriteeya Adhyaya", hi: "चिकित्साप्रभृतीय" },
+      17: { en: "Kiyanta Shiraseeya Adhyaya", hi: "कियन्तःशिरसीय" },
+      18: { en: "Trishotheeya Adhyaya", hi: "त्रिशोथीय" },
+      19: { en: "Ashtodareeya Adhyaya", hi: "अष्टोदरीय" },
+      20: { en: "Maharoga Adhyaya", hi: "महारोग" },
+      21: { en: "Ashtouninditeeya Adhyaya", hi: "अष्टौनिन्दितीय" },
+      22: { en: "Langhanabrimhaneeya Adhyaya", hi: "लङ्घनबृंहणीय" },
+      23: { en: "Santarpaneeya Adhyaya", hi: "सन्तर्पणीय" },
+      24: { en: "Vidhishoniteeya Adhyaya", hi: "विधिशोणितीय" },
+      25: { en: "Yajjah Purusheeya Adhyaya", hi: "यज्जःपुरुषीय" },
+      26: { en: "Atreyabhadrakapyeeya Adhyaya", hi: "आत्रेयभद्रकाप्यीय" },
+      27: { en: "Annapanavidhi", hi: "अन्नपानविधि" },
+      28: { en: "Vividhashitapeeteeya Adhyaya", hi: "विविधाशितपीतीय" },
+      29: { en: "Dashapranayataneeya Adhyaya", hi: "दशप्राणायतनीय" },
+      30: { en: "Artayedashamahamoola Adhyaya", hi: "अर्थेदशमहामूलीय" }
     }
   },
   Nidanasthana: {
-    nameHi: "à¤¨à¤¿à¤¦à¤¾à¤¨à¤¸à¥à¤¥à¤¾à¤¨",
+    nameHi: "निदानस्थान",
     chapters: {
-      1: { en: "Jvara Nidana", hi: "à¤œà¥à¤µà¤°à¤¨à¤¿à¤¦à¤¾à¤¨" },
-      2: { en: "Raktapitta Nidana", hi: "à¤°à¤•à¥à¤¤à¤ªà¤¿à¤¤à¥à¤¤à¤¨à¤¿à¤¦à¤¾à¤¨" },
-      3: { en: "Gulma Nidana", hi: "à¤—à¥à¤²à¥à¤®à¤¨à¤¿à¤¦à¤¾à¤¨" },
-      4: { en: "Prameha Nidana", hi: "à¤ªà¥à¤°à¤®à¥‡à¤¹à¤¨à¤¿à¤¦à¤¾à¤¨" },
-      5: { en: "Kushtha Nidana", hi: "à¤•à¥à¤·à¥à¤ à¤¨à¤¿à¤¦à¤¾à¤¨" },
-      6: { en: "Shosha Nidana", hi: "à¤¶à¥‹à¤·à¤¨à¤¿à¤¦à¤¾à¤¨" },
-      7: { en: "Unmada Nidana", hi: "à¤‰à¤¨à¥à¤®à¤¾à¤¦à¤¨à¤¿à¤¦à¤¾à¤¨" },
-      8: { en: "Apasmara Nidana", hi: "à¤…à¤ªà¤¸à¥à¤®à¤¾à¤°à¤¨à¤¿à¤¦à¤¾à¤¨" }
+      1: { en: "Jvara Nidana", hi: "ज्वरनिदान" },
+      2: { en: "Raktapitta Nidana", hi: "रक्तपित्तनिदान" },
+      3: { en: "Gulma Nidana", hi: "गुल्मनिदान" },
+      4: { en: "Prameha Nidana", hi: "प्रमेहनिदान" },
+      5: { en: "Kushtha Nidana", hi: "कुष्ठनिदान" },
+      6: { en: "Shosha Nidana", hi: "शोषनिदान" },
+      7: { en: "Unmada Nidana", hi: "उन्मादनिदान" },
+      8: { en: "Apasmara Nidana", hi: "अपस्मारनिदान" }
     }
   },
   Vimanasthana: {
-    nameHi: "à¤µà¤¿à¤®à¤¾à¤¨à¤¸à¥à¤¥à¤¾à¤¨",
+    nameHi: "विमानस्थान",
     chapters: {
-      1: { en: "Rasa Vimana", hi: "à¤°à¤¸à¤µà¤¿à¤®à¤¾à¤¨" },
-      2: { en: "Trividha Kuksheeya", hi: "à¤¤à¥à¤°à¤¿à¤µà¤¿à¤§à¤•à¥à¤•à¥à¤·à¥€à¤¯" },
-      3: { en: "Janapadodhvansaneeya", hi: "à¤œà¤¨à¤ªà¤¦à¥‹à¤§à¥à¤µà¤‚à¤¸à¤¨à¥€à¤¯" },
-      4: { en: "Trividha Rogavishesha Vijnaneeya", hi: "à¤¤à¥à¤°à¤¿à¤µà¤¿à¤§à¤°à¥‹à¤—à¤µà¤¿à¤¶à¥‡à¤·à¤µà¤¿à¤œà¥à¤žà¤¾à¤¨à¥€à¤¯" },
-      5: { en: "Srotas Vimana", hi: "à¤¸à¥à¤°à¥‹à¤¤à¥‹à¤µà¤¿à¤®à¤¾à¤¨" },
-      6: { en: "Roganika Vimana", hi: "à¤°à¥‹à¤—à¤¾à¤¨à¥€à¤•à¤µà¤¿à¤®à¤¾à¤¨" },
-      7: { en: "Vyadhita Roopiya", hi: "à¤µà¥à¤¯à¤¾à¤§à¤¿à¤¤à¤°à¥‚à¤ªà¥€à¤¯" },
-      8: { en: "Rogabhishagjitiya", hi: "à¤°à¥‹à¤—à¤­à¤¿à¤·à¤—à¥à¤œà¤¿à¤¤à¥€à¤¯" }
+      1: { en: "Rasa Vimana", hi: "रसविमान" },
+      2: { en: "Trividha Kuksheeya", hi: "त्रिविधकुक्षीय" },
+      3: { en: "Janapadodhvansaneeya", hi: "जनपदोध्वंसनीय" },
+      4: { en: "Trividha Rogavishesha Vijnaneeya", hi: "त्रिविधरोगविशेषविज्ञानीय" },
+      5: { en: "Srotas Vimana", hi: "स्रोतोविमान" },
+      6: { en: "Roganika Vimana", hi: "रोगानीकविमान" },
+      7: { en: "Vyadhita Roopiya", hi: "व्याधितरूपीय" },
+      8: { en: "Rogabhishagjitiya", hi: "रोगभिषग्जितीय" }
     }
   },
   Sharirasthana: {
-    nameHi: "à¤¶à¤¾à¤°à¥€à¤°à¤¿à¤•à¤¸à¥à¤¥à¤¾à¤¨",
+    nameHi: "शारीरिकस्थान",
     chapters: {
-      1: { en: "Katidhapurusha Sharira", hi: "à¤•à¤¤à¤¿à¤§à¤¾à¤ªà¥à¤°à¥à¤·à¥€à¤¯" },
-      2: { en: "Atulyagotriya Sharira", hi: "à¤…à¤¤à¥à¤²à¥à¤¯à¤—à¥‹à¤¤à¥à¤°à¥€à¤¯" },
-      3: { en: "Khuddika Garbhavakranti", hi: "à¤–à¥à¤¡à¥à¤¡à¤¿à¤•à¤¾ à¤—à¤°à¥à¤­à¤¾à¤µà¤•à¥à¤°à¤¾à¤¨à¥à¤¤à¤¿" },
-      4: { en: "Mahati Garbhavakranti", hi: "à¤®à¤¹à¤¤à¥€ à¤—à¤°à¥à¤­à¤¾à¤µà¤•à¥à¤°à¤¾à¤¨à¥à¤¤à¤¿" },
-      5: { en: "Purusha Vichaya", hi: "à¤ªà¥à¤°à¥à¤·à¤µà¤¿à¤šà¤¯" },
-      6: { en: "Shareera Vichaya", hi: "à¤¶à¤°à¥€à¤°à¤µà¤¿à¤šà¤¯" },
-      7: { en: "Shareera Sankhya", hi: "à¤¶à¤°à¥€à¤°à¤¸à¤‚à¤–à¥à¤¯à¤¾" },
-      8: { en: "Jatisutriya Sharira", hi: "à¤œà¤¾à¤¤à¤¿à¤¸à¥‚à¤¤à¥à¤°à¥€à¤¯" }
+      1: { en: "Katidhapurusha Sharira", hi: "कतिधापुरुषीय" },
+      2: { en: "Atulyagotriya Sharira", hi: "अतुल्यगोत्रीय" },
+      3: { en: "Khuddika Garbhavakranti", hi: "खुड्डिका गर्भावक्रान्ति" },
+      4: { en: "Mahati Garbhavakranti", hi: "महती गर्भावक्रान्ति" },
+      5: { en: "Purusha Vichaya", hi: "पुरुषविचय" },
+      6: { en: "Shareera Vichaya", hi: "शरीरविचय" },
+      7: { en: "Shareera Sankhya", hi: "शरीरसंख्या" },
+      8: { en: "Jatisutriya Sharira", hi: "जातिसूत्रीय" }
     }
   },
   Indriyasthana: {
-    nameHi: "à¤‡à¤¨à¥à¤¦à¥à¤°à¤¿à¤¯à¤¸à¥à¤¥à¤¾à¤¨",
+    nameHi: "इन्द्रियस्थान",
     chapters: {
-      1: { en: "Varnaswariya Indriya", hi: "à¤µà¤°à¥à¤£à¤¸à¥à¤µà¤°à¥€à¤¯" },
-      2: { en: "Pushpitaka Indriya", hi: "à¤ªà¥à¤·à¥à¤ªà¤¿à¤¤à¤•" },
-      3: { en: "Parimarshana Indriya", hi: "à¤ªà¤°à¤¿à¤®à¤°à¥à¤¶à¤¨" },
-      4: { en: "Indriyaneeka Indriya", hi: "à¤‡à¤¨à¥à¤¦à¥à¤°à¤¿à¤¯à¤¾à¤¨à¥€à¤•" },
-      5: { en: "Purvarupeeya Indriya", hi: "à¤ªà¥‚à¤°à¥à¤µà¤°à¥‚à¤ªà¥€à¤¯" },
-      6: { en: "Katamani Shareeriya", hi: "à¤•à¤¤à¤®à¤¾à¤¨à¤¿à¤¶à¤¾à¤°à¥€à¤°à¥€à¤¯" },
-      7: { en: "Pannarupa Indriya", hi: "à¤ªà¤¨à¥à¤¨à¤°à¥‚à¤ªà¥€" },
-      8: { en: "Apachaya Indriya", hi: "à¤…à¤ªà¤šà¤¾à¤¯" },
-      9: { en: "Yasya Syava Nimittiya", hi: "à¤¯à¤¸à¥à¤¯à¤¶à¥à¤¯à¤¾à¤µà¤¨à¤¿à¤®à¤¿à¤¤à¥à¤¤à¥€à¤¯" },
-      10: { en: "Sadyomaraniya Indriya", hi: "à¤¸à¤¦à¥à¤¯à¥‹à¤®à¤°à¤£à¥€à¤¯" },
-      11: { en: "Anujyoteeya Indriya", hi: "à¤…à¤£à¥à¤œà¥à¤¯à¥‹à¤¤à¥€à¤¯" },
-      12: { en: "Gomayachurniya Indriya", hi: "à¤—à¥‹à¤®à¤¯à¤šà¥‚à¤°à¥à¤£à¥€à¤¯" }
+      1: { en: "Varnaswariya Indriya", hi: "वर्णस्वरीय" },
+      2: { en: "Pushpitaka Indriya", hi: "पुष्पितक" },
+      3: { en: "Parimarshana Indriya", hi: "परिमर्शन" },
+      4: { en: "Indriyaneeka Indriya", hi: "इन्द्रियानीक" },
+      5: { en: "Purvarupeeya Indriya", hi: "पूर्वरूपीय" },
+      6: { en: "Katamani Shareeriya", hi: "कतमानिशारीरीय" },
+      7: { en: "Pannarupa Indriya", hi: "पन्नरूपी" },
+      8: { en: "Apachaya Indriya", hi: "अपचाय" },
+      9: { en: "Yasya Syava Nimittiya", hi: "यस्यश्यावनिमित्तीय" },
+      10: { en: "Sadyomaraniya Indriya", hi: "सद्योमरणीय" },
+      11: { en: "Anujyoteeya Indriya", hi: "अणुज्योतीय" },
+      12: { en: "Gomayachurniya Indriya", hi: "गोमयचूर्णीय" }
     }
   },
   Chikitsasthana: {
-    nameHi: "à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾à¤¸à¥à¤¥à¤¾à¤¨",
+    nameHi: "चिकित्सास्थान",
     chapters: {
-      1: { en: "Rasayana Chikitsa Adhyaya", hi: "à¤°à¤¸à¤¾à¤¯à¤¨ à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      2: { en: "Vajikarana Chikitsa Adhyaya", hi: "à¤µà¤¾à¤œà¥€à¤•à¤°à¤£ à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      3: { en: "Jvara Chikitsa Adhyaya", hi: "à¤œà¥à¤µà¤° à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      4: { en: "Raktapitta Chikitsa Adhyaya", hi: "à¤°à¤•à¥à¤¤à¤ªà¤¿à¤¤à¥à¤¤ à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      5: { en: "Gulma Chikitsa Adhyaya", hi: "à¤—à¥à¤²à¥à¤® à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      6: { en: "Prameha Chikitsa Adhyaya", hi: "à¤ªà¥à¤°à¤®à¥‡à¤¹ à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      7: { en: "Kushtha Chikitsa Adhyaya", hi: "à¤•à¥à¤·à¥à¤  à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      8: { en: "Rajayakshma Chikitsa Adhyaya", hi: "à¤°à¤¾à¤œà¤¯à¤•à¥à¤·à¥à¤®à¤¾ à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      9: { en: "Unmada Chikitsa Adhyaya", hi: "à¤‰à¤¨à¥à¤®à¤¾à¤¦ à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      10: { en: "Apasmara Chikitsa Adhyaya", hi: "à¤…à¤ªà¤¸à¥à¤®à¤¾à¤° à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      11: { en: "Kshata Kshin Chikitsa Adhyaya", hi: "à¤•à¥à¤·à¤¤à¤•à¥à¤·à¥€à¤£ à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      12: { en: "Shvayathu Chikitsa Adhyaya", hi: "à¤¶à¥à¤µà¤¯à¤¥à¥ à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      13: { en: "Udara Chikitsa Adhyaya", hi: "à¤‰à¤¦à¤° à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      14: { en: "Arsha Chikitsa Adhyaya", hi: "à¤…à¤°à¥à¤¶ à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      15: { en: "Grahani Chikitsa Adhyaya", hi: "à¤—à¥à¤°à¤¹à¤£à¥€ à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      16: { en: "Pandu Chikitsa Adhyaya", hi: "à¤ªà¤¾à¤£à¥à¤¡à¥ à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      17: { en: "Hikka Shwasa Chikitsa Adhyaya", hi: "à¤¹à¤¿à¤•à¥à¤•à¤¾à¤¶à¥à¤µà¤¾à¤¸ à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      18: { en: "Kasa Chikitsa Adhyaya", hi: "à¤•à¤¾à¤¸ à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      19: { en: "Atisara Chikitsa Adhyaya", hi: "à¤…à¤¤à¤¿à¤¸à¤¾à¤° à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      20: { en: "Chardi Chikitsa Adhyaya", hi: "à¤›à¤°à¥à¤¦à¤¿ à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      21: { en: "Visarpa Chikitsa Adhyaya", hi: "à¤µà¤¿à¤¸à¤°à¥à¤ª à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      22: { en: "Trishna Chikitsa Adhyaya", hi: "à¤¤à¥ƒà¤·à¥à¤£à¤¾ à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      23: { en: "Visha Chikitsa Adhyaya", hi: "à¤µà¤¿à¤· à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      24: { en: "Madatyaya Chikitsa Adhyaya", hi: "à¤®à¤¦à¤¾à¤¤à¥à¤¯à¤¯ à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      25: { en: "Dwivraneeya Chikitsa Adhyaya", hi: "à¤¦à¥à¤µà¤¿à¤µà¥à¤°à¤£à¥€à¤¯ à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      26: { en: "Trimarmeeya Chikitsa Adhyaya", hi: "à¤¤à¥à¤°à¤¿à¤®à¤°à¥à¤®à¥€à¤¯ à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      27: { en: "Urustambha Chikitsa Adhyaya", hi: "à¤Šà¤°à¥à¤¸à¥à¤¤à¤®à¥à¤­ à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      28: { en: "Vata Vyadhi Chikitsa Adhyaya", hi: "à¤µà¤¾à¤¤à¤µà¥à¤¯à¤¾à¤§à¤¿ à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      29: { en: "Vatarakta Chikitsa Adhyaya", hi: "à¤µà¤¾à¤¤à¤°à¤•à¥à¤¤ à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" },
-      30: { en: "Yonivyapat Chikitsa Adhyaya", hi: "à¤¯à¥‹à¤¨à¤¿à¤µà¥à¤¯à¤¾à¤ªà¤¤à¥ à¤šà¤¿à¤•à¤¿à¤¤à¥à¤¸à¤¾" }
+      1: { en: "Rasayana Chikitsa Adhyaya", hi: "रसायन चिकित्सा" },
+      2: { en: "Vajikarana Chikitsa Adhyaya", hi: "वाजीकरण चिकित्सा" },
+      3: { en: "Jvara Chikitsa Adhyaya", hi: "ज्वर चिकित्सा" },
+      4: { en: "Raktapitta Chikitsa Adhyaya", hi: "रक्तपित्त चिकित्सा" },
+      5: { en: "Gulma Chikitsa Adhyaya", hi: "गुल्म चिकित्सा" },
+      6: { en: "Prameha Chikitsa Adhyaya", hi: "प्रमेह चिकित्सा" },
+      7: { en: "Kushtha Chikitsa Adhyaya", hi: "कुष्ठ चिकित्सा" },
+      8: { en: "Rajayakshma Chikitsa Adhyaya", hi: "राजयक्ष्मा चिकित्सा" },
+      9: { en: "Unmada Chikitsa Adhyaya", hi: "उन्माद चिकित्सा" },
+      10: { en: "Apasmara Chikitsa Adhyaya", hi: "अपस्मार चिकित्सा" },
+      11: { en: "Kshata Kshin Chikitsa Adhyaya", hi: "क्षतक्षीण चिकित्सा" },
+      12: { en: "Shvayathu Chikitsa Adhyaya", hi: "श्वयथु चिकित्सा" },
+      13: { en: "Udara Chikitsa Adhyaya", hi: "उदर चिकित्सा" },
+      14: { en: "Arsha Chikitsa Adhyaya", hi: "अर्श चिकित्सा" },
+      15: { en: "Grahani Chikitsa Adhyaya", hi: "ग्रहणी चिकित्सा" },
+      16: { en: "Pandu Chikitsa Adhyaya", hi: "पाण्डु चिकित्सा" },
+      17: { en: "Hikka Shwasa Chikitsa Adhyaya", hi: "हिक्काश्वास चिकित्सा" },
+      18: { en: "Kasa Chikitsa Adhyaya", hi: "कास चिकित्सा" },
+      19: { en: "Atisara Chikitsa Adhyaya", hi: "अतिसार चिकित्सा" },
+      20: { en: "Chardi Chikitsa Adhyaya", hi: "छर्दि चिकित्सा" },
+      21: { en: "Visarpa Chikitsa Adhyaya", hi: "विसर्प चिकित्सा" },
+      22: { en: "Trishna Chikitsa Adhyaya", hi: "तृष्णा चिकित्सा" },
+      23: { en: "Visha Chikitsa Adhyaya", hi: "विष चिकित्सा" },
+      24: { en: "Madatyaya Chikitsa Adhyaya", hi: "मदात्यय चिकित्सा" },
+      25: { en: "Dwivraneeya Chikitsa Adhyaya", hi: "द्विव्रणीय चिकित्सा" },
+      26: { en: "Trimarmeeya Chikitsa Adhyaya", hi: "त्रिमर्मीय चिकित्सा" },
+      27: { en: "Urustambha Chikitsa Adhyaya", hi: "ऊरुस्तम्भ चिकित्सा" },
+      28: { en: "Vata Vyadhi Chikitsa Adhyaya", hi: "वातव्याधि चिकित्सा" },
+      29: { en: "Vatarakta Chikitsa Adhyaya", hi: "वातरक्त चिकित्सा" },
+      30: { en: "Yonivyapat Chikitsa Adhyaya", hi: "योनिव्यापत् चिकित्सा" }
     }
   },
   Kalpasthana: {
-    nameHi: "à¤•à¤²à¥à¤ªà¤¸à¥à¤¥à¤¾à¤¨",
+    nameHi: "कल्पस्थान",
     chapters: {
-      1: { en: "Madanaphala Kalpa", hi: "à¤®à¤¦à¤¨à¤•à¤²à¥à¤ª" },
-      2: { en: "Jimutaka Kalpa", hi: "à¤œà¥€à¤®à¥‚à¤¤à¤•à¤•à¤²à¥à¤ª" },
-      3: { en: "Ikshvaku Kalpa", hi: "à¤‡à¤•à¥à¤·à¥à¤µà¤¾à¤•à¥à¤•à¤²à¥à¤ª" },
-      4: { en: "Dhamargava Kalpa", hi: "à¤§à¤¾à¤®à¤¾à¤°à¥à¤—à¤µà¤•à¤²à¥à¤ª" },
-      5: { en: "Vatsaka Kalpa", hi: "à¤µà¤¤à¥à¤¸à¤•à¤•à¤²à¥à¤ª" },
-      6: { en: "Kritavedhana Kalpa", hi: "à¤•à¥ƒà¤¤à¤µà¥‡à¤§à¤¨à¤•à¤²à¥à¤ª" },
-      7: { en: "Shyama Trivrit Kalpa", hi: "à¤¶à¥à¤¯à¤¾à¤®à¤¾à¤¤à¥à¤°à¤¿à¤µà¥ƒà¤¤à¥à¤•à¤²à¥à¤ª" },
-      8: { en: "Chaturangula Kalpa", hi: "à¤šà¤¤à¥à¤°à¤™à¥à¤—à¥à¤²à¤•à¤²à¥à¤ª" },
-      9: { en: "Tilvaka Kalpa", hi: "à¤¤à¤¿à¤²à¥à¤µà¤•à¤•à¤²à¥à¤ª" },
-      10: { en: "Sudha Kalpa", hi: "à¤¸à¥à¤§à¤¾à¤•à¤²à¥à¤ª" },
-      11: { en: "Saptala Shankhini Kalpa", hi: "à¤¸à¤ªà¥à¤¤à¤²à¤¾à¤¶à¤™à¥à¤–à¤¿à¤¨à¥€à¤•à¤²à¥à¤ª" },
-      12: { en: "Dantidravanti Kalpa", hi: "à¤¦à¤¨à¥à¤¤à¥€à¤¦à¥à¤°à¤µà¤¨à¥à¤¤à¥€à¤•à¤²à¥à¤ª" }
+      1: { en: "Madanaphala Kalpa", hi: "मदनकल्प" },
+      2: { en: "Jimutaka Kalpa", hi: "जीमूतककल्प" },
+      3: { en: "Ikshvaku Kalpa", hi: "इक्ष्वाकुकल्प" },
+      4: { en: "Dhamargava Kalpa", hi: "धामार्गवकल्प" },
+      5: { en: "Vatsaka Kalpa", hi: "वत्सककल्प" },
+      6: { en: "Kritavedhana Kalpa", hi: "कृतवेधनकल्प" },
+      7: { en: "Shyama Trivrit Kalpa", hi: "श्यामात्रिवृत्कल्प" },
+      8: { en: "Chaturangula Kalpa", hi: "चतुरङ्गुलकल्प" },
+      9: { en: "Tilvaka Kalpa", hi: "तिल्वककल्प" },
+      10: { en: "Sudha Kalpa", hi: "सुधाकल्प" },
+      11: { en: "Saptala Shankhini Kalpa", hi: "सप्तलाशङ्खिनीकल्प" },
+      12: { en: "Dantidravanti Kalpa", hi: "दन्तीद्रवन्तीकल्प" }
     }
   },
   Siddhisthana: {
-    nameHi: "à¤¸à¤¿à¤¦à¥à¤§à¤¿à¤¸à¥à¤¥à¤¾à¤¨",
+    nameHi: "सिद्धिस्थान",
     chapters: {
-      1: { en: "Kalpana Siddhi", hi: "à¤•à¤²à¥à¤ªà¤¨à¤¾à¤¸à¤¿à¤¦à¥à¤§à¤¿" },
-      2: { en: "Panchakarma Siddhi", hi: "à¤ªà¤žà¥à¤šà¤•à¤°à¥à¤®à¤¸à¤¿à¤¦à¥à¤§à¤¿" },
-      3: { en: "Basti Sutri Siddhi", hi: "à¤¬à¤¸à¥à¤¤à¥€à¤¸à¥‚à¤¤à¥à¤°à¥€à¤¯" },
-      4: { en: "Snehavyapadiki Siddhi", hi: "à¤¸à¥à¤¨à¥‡à¤¹à¤µà¥à¤¯à¤¾à¤ªà¤¦à¥à¤¿à¤•à¥€à¤¸à¤¿à¤¦à¥à¤§à¤¿" },
-      5: { en: "Netrabasti Vyapad Siddhi", hi: "à¤¨à¥‡à¤¤à¥à¤°à¤¬à¤¸à¥à¤¤à¥€à¤µà¥à¤¯à¤¾à¤ªà¤¸à¤¿à¤¦à¥à¤§à¤¿" },
-      6: { en: "Ganda Vyapad Siddhi", hi: "à¤—à¤£à¥à¤¡à¤µà¥à¤¯à¤¾à¤ªà¤¤à¥à¤¸à¤¿à¤¦à¥à¤§à¤¿" },
-      7: { en: "Uttarabasti Siddhi", hi: "à¤‰à¤¤à¥à¤¤à¤°à¤¬à¤¸à¥à¤¤à¤¿à¤¸à¤¿à¤¦à¥à¤§à¤¿" },
-      8: { en: "Prasrita Yogeeya Siddhi", hi: "à¤ªà¥à¤°à¤¾à¤¸à¥ƒà¤¤à¤¯à¥‹à¤—à¥€à¤¯" },
-      9: { en: "Trimarmasiddhi", hi: "à¤¤à¥à¤°à¤¿à¤®à¤°à¥à¤®à¥€à¤¯à¤¸à¤¿à¤¦à¥à¤§à¤¿" },
-      10: { en: "Bastisiddhi", hi: "à¤¬à¤¸à¥à¤¤à¤¿à¤¸à¤¿à¤¦à¥à¤§à¤¿" },
-      11: { en: "PhalamÄtra Siddhi", hi: "à¤«à¤²à¤®à¤¾à¤¤à¥à¤°à¤¾à¤¸à¤¿à¤¦à¥à¤§à¤¿" },
-      12: { en: "Uttara-Siddhi", hi: "à¤‰à¤¤à¥à¤¤à¤°à¤¸à¤¿à¤¦à¥à¤§à¤¿" }
+      1: { en: "Kalpana Siddhi", hi: "कल्पनासिद्धि" },
+      2: { en: "Panchakarma Siddhi", hi: "पञ्चकर्मसिद्धि" },
+      3: { en: "Basti Sutri Siddhi", hi: "बस्तीसूत्रीय" },
+      4: { en: "Snehavyapadiki Siddhi", hi: "स्नेहव्यापद्िकीसिद्धि" },
+      5: { en: "Netrabasti Vyapad Siddhi", hi: "नेत्रबस्तीव्यापसिद्धि" },
+      6: { en: "Ganda Vyapad Siddhi", hi: "गण्डव्यापत्सिद्धि" },
+      7: { en: "Uttarabasti Siddhi", hi: "उत्तरबस्तिसिद्धि" },
+      8: { en: "Prasrita Yogeeya Siddhi", hi: "प्रासृतयोगीय" },
+      9: { en: "Trimarmasiddhi", hi: "त्रिमर्मीयसिद्धि" },
+      10: { en: "Bastisiddhi", hi: "बस्तिसिद्धि" },
+      11: { en: "Phalamātra Siddhi", hi: "फलमात्रासिद्धि" },
+      12: { en: "Uttara-Siddhi", hi: "उत्तरसिद्धि" }
     }
   }
 };
@@ -4913,24 +4854,24 @@ function _generateEasyExplanation(data) {
   const chapterCtx = data.section_heading || data.chapter_title || '';
 
   if (data.translation && data.translation !== 'Translation not available for this verse.') {
-    parts.push('ðŸ“Œ Saral Bhasha Mein: ' + data.translation);
+    parts.push('📌 Saral Bhasha Mein: ' + data.translation);
   } else {
-    parts.push('ðŸ“Œ Is shloka ka direct translation abhi source se nahi mil paaya, lekin niche diya gaya chapter context aur Sanskrit text padhkar matlab samajhna aasan hoga.');
+    parts.push('📌 Is shloka ka direct translation abhi source se nahi mil paaya, lekin niche diya gaya chapter context aur Sanskrit text padhkar matlab samajhna aasan hoga.');
   }
 
   if (chapterCtx) {
-    parts.push('ðŸ“– Context: Yeh shloka "' + chapterCtx + '" adhyaya ka hissa hai â€” isi topic se judi baaki jaankari bhi wahin mil jaayegi.');
+    parts.push('📖 Context: Yeh shloka "' + chapterCtx + '" adhyaya ka hissa hai — isi topic se judi baaki jaankari bhi wahin mil jaayegi.');
   }
 
   if (data.tattva_vimarsha && data.tattva_vimarsha.length > 0) {
-    parts.push('ðŸ§  Mool Siddhant (Key Principle): ' + data.tattva_vimarsha[0]);
+    parts.push('🧠 Mool Siddhant (Key Principle): ' + data.tattva_vimarsha[0]);
   }
 
   if (data.vidhi_vimarsha && data.vidhi_vimarsha.length > 0) {
-    parts.push('ðŸ“š Practical Application: ' + data.vidhi_vimarsha[0]);
+    parts.push('📚 Practical Application: ' + data.vidhi_vimarsha[0]);
   }
 
-  parts.push('ðŸ’¡ Study Tip: Sanskrit text ko dobara padhein aur upar diye gaye translation ke shabd-anuwad (word-by-word) se match karein â€” is tarah yaad rakhna sabse aasan hota hai.');
+  parts.push('💡 Study Tip: Sanskrit text ko dobara padhein aur upar diye gaye translation ke shabd-anuwad (word-by-word) se match karein — is tarah yaad rakhna sabse aasan hota hai.');
 
   return parts.join('\n\n');
 }
@@ -4945,7 +4886,7 @@ async function matchPastedShloka() {
   }
 
   matchesDiv.style.display = 'block';
-  matchesDiv.innerHTML = '<p style="color:var(--ink-soft); font-size:0.9rem;">ðŸ”Ž Searching Charak Samhita...</p>';
+  matchesDiv.innerHTML = '<p style="color:var(--ink-soft); font-size:0.9rem;">🔎 Searching Charak Samhita...</p>';
 
   try {
     const url = getMatchShlokaUrl(raw, 5);
@@ -4953,7 +4894,7 @@ async function matchPastedShloka() {
     const data = await resp.json();
 
     if (data.error) {
-      matchesDiv.innerHTML = `<p style="color:var(--copper); font-size:0.9rem;">âš ï¸ ${data.error}</p>`;
+      matchesDiv.innerHTML = `<p style="color:var(--copper); font-size:0.9rem;">⚠️ ${data.error}</p>`;
       return;
     }
 
@@ -4965,14 +4906,14 @@ async function matchPastedShloka() {
 
     const best = matches[0];
     const confidence = best.score >= 0.55 ? 'high' : (best.score >= 0.3 ? 'medium' : 'low');
-    const confidenceLabel = confidence === 'high' ? 'âœ… Strong match' : (confidence === 'medium' ? 'ðŸŸ¡ Possible match' : 'âš ï¸ Weak match â€” verify manually');
+    const confidenceLabel = confidence === 'high' ? '✅ Strong match' : (confidence === 'medium' ? '🟡 Possible match' : '⚠️ Weak match — verify manually');
 
     let html = `<p style="font-size:0.85rem; color:var(--gold-light); font-weight:600; margin-bottom:10px;">${confidenceLabel} (score ${(best.score*100).toFixed(0)}%)</p>`;
     html += matches.map((m, i) => `
       <div style="padding:10px 14px; margin-bottom:8px; border-radius:8px; background:${i===0 ? 'rgba(212,175,55,0.08)' : 'var(--bg-soft)'}; border:1px solid var(--line); cursor:pointer;" onclick="applyPastedShlokaMatch('${m.sthana}', ${m.chapter}, ${m.verse})">
-        <div style="font-size:0.85rem; color:var(--cream); font-weight:600;">${m.sthana} Â· Chapter ${m.chapter} (${m.chapter_title}) Â· Verse ${m.verse}</div>
-        <div style="font-size:0.8rem; color:var(--ink-soft); margin-top:4px;">${m.sanskrit.slice(0, 80)}${m.sanskrit.length > 80 ? 'â€¦' : ''}</div>
-        <div style="font-size:0.75rem; color:var(--gold); margin-top:4px;">Match score: ${(m.score*100).toFixed(0)}% â€” click to view full verse & tika â†“</div>
+        <div style="font-size:0.85rem; color:var(--cream); font-weight:600;">${m.sthana} · Chapter ${m.chapter} (${m.chapter_title}) · Verse ${m.verse}</div>
+        <div style="font-size:0.8rem; color:var(--ink-soft); margin-top:4px;">${m.sanskrit.slice(0, 80)}${m.sanskrit.length > 80 ? '…' : ''}</div>
+        <div style="font-size:0.75rem; color:var(--gold); margin-top:4px;">Match score: ${(m.score*100).toFixed(0)}% — click to view full verse & tika ↓</div>
       </div>
     `).join('');
     matchesDiv.innerHTML = html;
@@ -4982,7 +4923,7 @@ async function matchPastedShloka() {
 
   } catch (err) {
     console.error('Shloka match error:', err);
-    matchesDiv.innerHTML = '<p style="color:var(--copper); font-size:0.9rem;">âš ï¸ Could not reach the matching service. Please try again.</p>';
+    matchesDiv.innerHTML = '<p style="color:var(--copper); font-size:0.9rem;">⚠️ Could not reach the matching service. Please try again.</p>';
   }
 }
 
@@ -5052,9 +4993,9 @@ async function findCarakaReference() {
       
       if (data.error) {
         if (data.chapter_title) {
-          showToast('âš ï¸ Chapter mil gaya (' + data.chapter_title + '), lekin verse ' + shloka + ' nahi mila. Kripya verse number check karein.');
+          showToast('⚠️ Chapter mil gaya (' + data.chapter_title + '), lekin verse ' + shloka + ' nahi mila. Kripya verse number check karein.');
         } else {
-          showToast('âš ï¸ ' + data.error);
+          showToast('⚠️ ' + data.error);
         }
         localVerseCard.style.display = 'none';
         return;
@@ -5067,13 +5008,13 @@ async function findCarakaReference() {
       const refEl = document.getElementById('localVerseRef');
       if (refEl) {
         const chapTitle = data.chapter_title || chapterNameEn;
-        refEl.textContent = `ðŸ“– ${data.sthana} â€¢ Chapter ${data.chapter} (${chapTitle}) â€¢ Verse ${data.verse}`;
+        refEl.textContent = `📖 ${data.sthana} • Chapter ${data.chapter} (${chapTitle}) • Verse ${data.verse}`;
       }
       
       // Populate section heading
       const headingEl = document.getElementById('localVerseHeading');
       if (data.section_heading) {
-        headingEl.textContent = 'Â§ ' + data.section_heading;
+        headingEl.textContent = '§ ' + data.section_heading;
         headingEl.style.display = 'block';
       } else {
         headingEl.style.display = 'none';
@@ -5086,7 +5027,7 @@ async function findCarakaReference() {
       const tattvaDiv = document.getElementById('tattvaVimarsha');
       const tattvaContent = document.getElementById('tattvaContent');
       if (data.tattva_vimarsha && data.tattva_vimarsha.length > 0) {
-        tattvaContent.innerHTML = data.tattva_vimarsha.map(t => `<p style="margin:0 0 8px; padding-left:12px; border-left:2px solid var(--gold); opacity:0.95;">â€¢ ${t}</p>`).join('');
+        tattvaContent.innerHTML = data.tattva_vimarsha.map(t => `<p style="margin:0 0 8px; padding-left:12px; border-left:2px solid var(--gold); opacity:0.95;">• ${t}</p>`).join('');
         tattvaDiv.style.display = 'block';
       } else {
         tattvaDiv.style.display = 'none';
@@ -5096,7 +5037,7 @@ async function findCarakaReference() {
       const vidhiDiv = document.getElementById('vidhiVimarsha');
       const vidhiContent = document.getElementById('vidhiContent');
       if (data.vidhi_vimarsha && data.vidhi_vimarsha.length > 0) {
-        vidhiContent.innerHTML = data.vidhi_vimarsha.map(v => `<p style="margin:0 0 8px; padding-left:12px; border-left:2px solid var(--copper); opacity:0.95;">â€¢ ${v}</p>`).join('');
+        vidhiContent.innerHTML = data.vidhi_vimarsha.map(v => `<p style="margin:0 0 8px; padding-left:12px; border-left:2px solid var(--copper); opacity:0.95;">• ${v}</p>`).join('');
         vidhiDiv.style.display = 'block';
       } else {
         vidhiDiv.style.display = 'none';
@@ -5110,13 +5051,13 @@ async function findCarakaReference() {
       loadingState.style.display = 'none';
       contentArea.style.display = 'block';
       
-      showToast('âœ… Verse fetched with deep research from Charaka Samhita Online!');
+      showToast('✅ Verse fetched with deep research from Charaka Samhita Online!');
       
     } catch (err) {
       console.error('Verse fetch error:', err);
       loadingState.style.display = 'none';
       localVerseCard.style.display = 'none';
-      showToast('âš ï¸ Server offline - Run: python vagdhenu/scripts/server.py');
+      showToast('⚠️ Server offline - Run: python vagdhenu/scripts/server.py');
     }
   } else {
     localVerseCard.style.display = 'none';
@@ -5139,8 +5080,8 @@ async function reciteLocalVerse() {
   if (!currentLocalVerseText) return;
   
   const btn = document.getElementById('btnReciteLocalVerse');
-  if (btn) { btn.disabled = true; btn.innerHTML = 'â³ Reciting...'; }
-  showToast('ðŸŒŠ Vagdhenu AI se verse recitation generate ho rahi hai...');
+  if (btn) { btn.disabled = true; btn.innerHTML = '⏳ Reciting...'; }
+  showToast('🌊 Vagdhenu AI se verse recitation generate ho rahi hai...');
   
   if (shlokaPlayerAudio) { shlokaPlayerAudio.pause(); shlokaPlayerAudio = null; }
   
@@ -5163,9 +5104,9 @@ async function reciteLocalVerse() {
     
   } catch (err) {
     console.error('Local verse recitation error:', err);
-    showToast('âŒ Recitation failed: ' + err.message);
+    showToast('❌ Recitation failed: ' + err.message);
   } finally {
-    if (btn) { btn.disabled = false; btn.innerHTML = 'ðŸ”Š AI Recite'; }
+    if (btn) { btn.disabled = false; btn.innerHTML = '🔊 AI Recite'; }
   }
 }
 
@@ -5177,8 +5118,8 @@ function setLang(l){
   const heroText = document.querySelector('[data-i18n=heroText]');
   if(heroText) {
     heroText.textContent = l==='hi'
-      ? 'Ayurveda ke shlok, mantra aur classical granthon ka collection â€” ek jagah par. Scroll karein aur anubhav karein.'
-      : 'A sacred collection of Ayurvedic mantras, chants, and classical treatises â€” all in one place. Scroll to experience.';
+      ? 'Ayurveda ke shlok, mantra aur classical granthon ka collection — ek jagah par. Scroll karein aur anubhav karein.'
+      : 'A sacred collection of Ayurvedic mantras, chants, and classical treatises — all in one place. Scroll to experience.';
   }
 }
 
@@ -5349,7 +5290,7 @@ function updateScrollAdvanceIndicator() {
   const isAtBottom = checkIfAtBottom();
   if (isAtBottom && currIdx < NAV_ITEMS.length - 1) {
     const nextItem = NAV_ITEMS[currIdx + 1];
-    labelEl.textContent = state.lang === 'hi' ? 'à¤…à¤—à¤²à¤¾: ' + nextItem.hi : 'Next: ' + nextItem.en;
+    labelEl.textContent = state.lang === 'hi' ? 'अगला: ' + nextItem.hi : 'Next: ' + nextItem.en;
     hintEl.classList.add('visible');
   } else {
     hintEl.classList.remove('visible');
@@ -5385,7 +5326,7 @@ function checkScrollAdvanceGesture(dir) {
     if (isAtBottom && currIdx < NAV_ITEMS.length - 1) {
       lastScrollAdvanceTime = now;
       const nextItem = NAV_ITEMS[currIdx + 1];
-      showToast(state.lang === 'hi' ? `${nextItem.hi} à¤ªà¤° à¤œà¤¾ à¤°à¤¹à¥‡ à¤¹à¥ˆà¤‚...` : `Navigating to ${nextItem.en}...`);
+      showToast(state.lang === 'hi' ? `${nextItem.hi} पर जा रहे हैं...` : `Navigating to ${nextItem.en}...`);
       
       const hintArrow = document.querySelector('.scroll-next-hint .hint-arrow');
       if (hintArrow) hintArrow.style.transform = 'translateY(15px)';
@@ -5400,7 +5341,7 @@ function checkScrollAdvanceGesture(dir) {
     if (isAtTop && currIdx > 0) {
       lastScrollAdvanceTime = now;
       const prevItem = NAV_ITEMS[currIdx - 1];
-      showToast(state.lang === 'hi' ? `${prevItem.hi} à¤ªà¤° à¤µà¤¾à¤ªà¤¸ à¤œà¤¾ à¤°à¤¹à¥‡ à¤¹à¥ˆà¤‚...` : `Going back to ${prevItem.en}...`);
+      showToast(state.lang === 'hi' ? `${prevItem.hi} पर वापस जा रहे हैं...` : `Going back to ${prevItem.en}...`);
       
       showView(prevItem.id);
       setTimeout(() => {
@@ -5544,53 +5485,5 @@ function createMagicParticle(x, y) {
 
 init();
 </script>
-
-<!-- â”€â”€ Vagdhenu Recitation Studio UI â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ -->
-<script src="/js/vagdhenu-ui.js" defer></script>
-<script>
-// â”€â”€ Helper functions for Custom Recite inline tab â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-function downloadCustomAudio() {
-  const blob = window._lastCustomBlob;
-  if (!blob) { showToast('No audio generated yet.'); return; }
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = `ayurvani-recitation-${Date.now()}.wav`;
-  a.click();
-  showToast('ðŸ“¥ WAV file downloaded!');
-}
-
-// Debounced sandhi preview for the inline Custom Recite tab
-let _customSandhiTimer = null;
-function updateCustomShlokaPreview() {
-  const text = (document.getElementById('customShlokaText')?.value || '').trim();
-  const panel = document.getElementById('customSandhiPanel');
-  clearTimeout(_customSandhiTimer);
-  if (!text || !panel) return;
-  _customSandhiTimer = setTimeout(async () => {
-    panel.innerHTML = `<span style="color:var(--ink-soft);">â³ Analysing...</span>`;
-    try {
-      const isLocal = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-      const base = isLocal ? VAGDHENU_SERVER : '';
-      const api  = isLocal ? '/preview' : '/api/preview';
-      const q    = new URLSearchParams({ text });
-      if (!isLocal) q.set('server_url', VAGDHENU_SERVER);
-      const res = await fetch(`${base}${api}?${q}`, { headers: { 'Bypass-Tunnel-Reminder':'true' } });
-      if (!res.ok) throw new Error('Preview offline');
-      const data = await res.json();
-      if (data.error) throw new Error(data.error);
-      panel.innerHTML = (data.padas || []).map((pada, i) => `
-        <div style="margin-bottom:10px;padding:8px 12px;background:rgba(255,255,255,0.03);border-radius:6px;border-left:3px solid var(--gold);">
-          <div style="font-family:'Tiro Devanagari Hindi',serif;color:var(--gold-light);margin-bottom:3px;">${pada}</div>
-          <div style="font-family:monospace;font-size:0.78rem;color:var(--sage);">Kannada: ${data.kannada_routed?.[i] || ''}</div>
-          <div style="font-size:0.72rem;color:var(--ink-soft);margin-top:2px;">SLP1: <span style="color:var(--copper);">${data.slp1?.[i] || ''}</span> &nbsp;Â· Syllables: <strong style="color:var(--gold);">${data.n_syllables?.[i] || '?'}</strong></div>
-        </div>`).join('') || '<span style="color:var(--ink-soft);">No padas found.</span>';
-    } catch {
-      panel.innerHTML = `<span style="color:var(--copper);font-size:0.78rem;">Preview unavailable (server offline?)</span>`;
-    }
-  }, 700);
-}
-</script>
-
 </body>
 </html>
-
