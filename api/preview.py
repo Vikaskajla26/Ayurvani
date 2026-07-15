@@ -1,5 +1,6 @@
 import re
 import json
+import urllib.parse
 from http.server import BaseHTTPRequestHandler
 
 # ── Self-contained Indic Pre-processing Rules ──────────────────────────────────────────
