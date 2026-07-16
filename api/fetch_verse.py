@@ -1,6 +1,7 @@
 import os
 import json
 import re
+import time
 import urllib.parse
 import urllib.request
 from http.server import BaseHTTPRequestHandler
@@ -200,7 +201,33 @@ def _to_devanagari_num(n):
     """Convert integer to Devanagari numeral string."""
     return ''.join(chr(ord(c) + 0x0966 - 48) for c in str(n))
 
-def _fetch_wiki_page(title, timeout=12):
+class _Deadline:
+    """Tracks a shared time budget across a whole chain of nested network
+    attempts (title-resolution can try up to 3 hosts x up to 5-7 fallback
+    strategies). Without this, each individual call's own timeout is honored
+    independently, and worst-case they stack far past Vercel's 90s serverless
+    function limit -- causing a hard timeout crash for the visitor instead of
+    a fast, graceful fallback to the local offline verse index. Each network
+    call asks the deadline how much time is left and uses that (capped at its
+    own preferred per-call timeout) as its urlopen timeout, so the whole
+    chain is guaranteed to finish -- one way or another -- well inside a safe
+    budget, leaving time to fall back to the offline index and still respond
+    before Vercel kills the function."""
+    def __init__(self, budget_seconds):
+        self._deadline = time.monotonic() + budget_seconds
+
+    def remaining(self):
+        return self._deadline - time.monotonic()
+
+    def timeout_for(self, preferred):
+        """Returns min(preferred, time actually left), or 0 if already expired."""
+        return max(0, min(preferred, self.remaining()))
+
+    def expired(self):
+        return self.remaining() <= 0
+
+
+def _fetch_wiki_page(title, timeout=12, deadline=None):
     """Fetch raw wikitext for a page from carakasamhitaonline.com MediaWiki API.
     Tries each host in CSO_API_HOSTS in turn -- the source wiki has been observed
     to fail intermittently on some host/protocol combinations while others work,
@@ -214,6 +241,11 @@ def _fetch_wiki_page(title, timeout=12):
     offline build_index.py script (which runs on a real machine with no such
     limit) explicitly passes a longer timeout for its batch run instead.
 
+    If a shared `deadline` (_Deadline) is passed, it's respected on top of the
+    per-call timeout -- once the overall request budget is exhausted, this
+    stops trying further hosts immediately rather than waiting out its own
+    timeout on each remaining one.
+
     Follows redirects automatically."""
     if title in _page_cache:
         cached_content = _page_cache[title]
@@ -224,10 +256,16 @@ def _fetch_wiki_page(title, timeout=12):
     safe_title = urllib.parse.quote(title.replace(" ", "_"))
     last_error = None
     for host in CSO_API_HOSTS:
+        if deadline is not None and deadline.expired():
+            print(f"[fetch_verse] Deadline exhausted, skipping remaining hosts for '{title}'")
+            break
+        effective_timeout = deadline.timeout_for(timeout) if deadline is not None else timeout
+        if effective_timeout <= 0:
+            break
         url = f"{host}?action=query&prop=revisions&titles={safe_title}&rvslots=*&rvprop=content&format=json&redirects=1"
         try:
             req = urllib.request.Request(url, headers={"User-Agent": "Ayurvani/1.0"})
-            with urllib.request.urlopen(req, timeout=timeout) as resp:
+            with urllib.request.urlopen(req, timeout=effective_timeout) as resp:
                 data = json.loads(resp.read().decode("utf-8"))
             pages = data.get("query", {}).get("pages", {})
             for page_id, page_data in pages.items():
@@ -253,16 +291,22 @@ def _fetch_wiki_page(title, timeout=12):
     print(f"[fetch_verse] All hosts failed fetching '{title}'. Last error: {last_error}")
     return None
 
-def _search_wiki_page_title(query, timeout=12):
+def _search_wiki_page_title(query, timeout=12, deadline=None):
     """Use the site's own search to find the closest matching page title,
     used as a fallback when a stored/guessed chapter title is wrong.
-    Same short-default-timeout reasoning as _fetch_wiki_page above."""
+    Same short-default-timeout and shared-deadline reasoning as _fetch_wiki_page above."""
     safe_q = urllib.parse.quote(query)
     for host in CSO_API_HOSTS:
+        if deadline is not None and deadline.expired():
+            print(f"[fetch_verse] Deadline exhausted, skipping remaining hosts for search '{query}'")
+            break
+        effective_timeout = deadline.timeout_for(timeout) if deadline is not None else timeout
+        if effective_timeout <= 0:
+            break
         url = f"{host}?action=query&list=search&srsearch={safe_q}&format=json&srlimit=3"
         try:
             req = urllib.request.Request(url, headers={"User-Agent": "Ayurvani/1.0"})
-            with urllib.request.urlopen(req, timeout=timeout) as resp:
+            with urllib.request.urlopen(req, timeout=effective_timeout) as resp:
                 data = json.loads(resp.read().decode("utf-8"))
             results = data.get("query", {}).get("search", [])
             if results:
@@ -272,7 +316,7 @@ def _search_wiki_page_title(query, timeout=12):
             continue
     return None
 
-def _resolve_page_title(sthana, chapter_num, guessed_title, timeout=12):
+def _resolve_page_title(sthana, chapter_num, guessed_title, timeout=12, deadline=None):
     """Resolve the real wiki page title for a chapter, self-correcting if the
     stored guess is wrong. Order of attempts:
       1. Previously confirmed title (cached)
@@ -280,12 +324,21 @@ def _resolve_page_title(sthana, chapter_num, guessed_title, timeout=12):
       3. The guess with "Adhyaya" added or removed (the most common mismatch)
       4. A live search on the source wiki using the guessed title
       5. A live search using "<Sthana> Chapter <N>"
-    Whatever works is cached so future requests for this chapter skip straight to it."""
+    Whatever works is cached so future requests for this chapter skip straight to it.
+
+    If a shared `deadline` is passed, each stage checks it before starting --
+    once the overall request time budget is used up, this returns None
+    immediately (letting the caller fall back to the offline index) instead
+    of continuing through remaining stages that would each wait out their own
+    timeout regardless of how little time is actually left."""
     cache_key = f"{sthana}:{chapter_num}"
     if cache_key in _title_cache:
         cached_title = _title_cache[cache_key]
-        if _fetch_wiki_page(cached_title, timeout=timeout):
+        if _fetch_wiki_page(cached_title, timeout=timeout, deadline=deadline):
             return cached_title
+
+    if deadline is not None and deadline.expired():
+        return None
 
     candidates = [guessed_title]
     if guessed_title.endswith(" Adhyaya"):
@@ -294,19 +347,27 @@ def _resolve_page_title(sthana, chapter_num, guessed_title, timeout=12):
         candidates.append(guessed_title + " Adhyaya")
 
     for candidate in candidates:
-        if _fetch_wiki_page(candidate, timeout=timeout):
+        if deadline is not None and deadline.expired():
+            return None
+        if _fetch_wiki_page(candidate, timeout=timeout, deadline=deadline):
             _title_cache[cache_key] = candidate
             _save_title_cache()
             return candidate
 
-    found = _search_wiki_page_title(guessed_title, timeout=timeout)
-    if found and _fetch_wiki_page(found, timeout=timeout):
+    if deadline is not None and deadline.expired():
+        return None
+
+    found = _search_wiki_page_title(guessed_title, timeout=timeout, deadline=deadline)
+    if found and _fetch_wiki_page(found, timeout=timeout, deadline=deadline):
         _title_cache[cache_key] = found
         _save_title_cache()
         return found
 
-    found = _search_wiki_page_title(f"{sthana} Chapter {chapter_num}", timeout=timeout)
-    if found and _fetch_wiki_page(found, timeout=timeout):
+    if deadline is not None and deadline.expired():
+        return None
+
+    found = _search_wiki_page_title(f"{sthana} Chapter {chapter_num}", timeout=timeout, deadline=deadline)
+    if found and _fetch_wiki_page(found, timeout=timeout, deadline=deadline):
         _title_cache[cache_key] = found
         _save_title_cache()
         return found
@@ -678,14 +739,21 @@ def fetch_charaka_verse(sthana, chapter_num, verse_num):
     if not guessed_title:
         return {"error": f"Chapter {chapter_num} not found in {sthana}"}
 
-    page_title = _resolve_page_title(sthana, chapter_num, guessed_title)
+    # Shared time budget across ALL nested network attempts in this request
+    # (title resolution alone can try up to 3 hosts x up to 5-7 fallback
+    # strategies). 25s leaves a wide safety margin under Vercel's 90s
+    # function limit even accounting for the offline fallback and response
+    # serialization that happen afterward.
+    deadline = _Deadline(25)
+
+    page_title = _resolve_page_title(sthana, chapter_num, guessed_title, deadline=deadline)
     if not page_title:
         local_res = fetch_charaka_verse_offline(sthana, chapter_num, verse_num)
         if local_res:
             return local_res
         return {"error": f"Could not locate the wiki page for {sthana} Chapter {chapter_num} ({guessed_title}). The source site may be unreachable right now."}
 
-    content = _fetch_wiki_page(page_title)
+    content = _fetch_wiki_page(page_title, deadline=deadline)
     if not content:
         local_res = fetch_charaka_verse_offline(sthana, chapter_num, verse_num)
         if local_res:
