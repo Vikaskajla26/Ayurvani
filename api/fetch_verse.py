@@ -637,6 +637,37 @@ def _extract_vimarsha(content, verse_num, section_heading=None):
     
     return tattva, vidhi
 
+def fetch_charaka_verse_offline(sthana, chapter_num, verse_num):
+    try:
+        here = os.path.dirname(os.path.abspath(__file__))
+        index_file = os.path.join(here, "index_data", "charaka_verse_index.json")
+        if not os.path.exists(index_file):
+            return None
+        with open(index_file, "r", encoding="utf-8") as f:
+            index = json.load(f)
+            
+        for entry in index:
+            if (entry.get("sthana", "").strip().lower() == sthana.strip().lower() and
+                int(entry.get("chapter", 0)) == int(chapter_num) and
+                int(entry.get("verse", 0)) == int(verse_num)):
+                
+                return {
+                    "sthana": sthana,
+                    "chapter": chapter_num,
+                    "chapter_title": entry.get("chapter_title", sthana),
+                    "verse": verse_num,
+                    "sanskrit": entry.get("sanskrit"),
+                    "translation": entry.get("translation") or "Translation not available for this verse.",
+                    "section_heading": "",
+                    "tattva_vimarsha": [],
+                    "vidhi_vimarsha": [],
+                    "source": "Local Cache (Offline Fallback)"
+                }
+    except Exception as e:
+        print(f"[fetch_charaka_verse_offline] Error: {e}")
+    return None
+
+
 def fetch_charaka_verse(sthana, chapter_num, verse_num):
     """Main function to fetch a verse from Charaka Samhita with deep research."""
     sthana_pages = CHARAKA_PAGE_TITLES.get(sthana)
@@ -649,10 +680,16 @@ def fetch_charaka_verse(sthana, chapter_num, verse_num):
 
     page_title = _resolve_page_title(sthana, chapter_num, guessed_title)
     if not page_title:
+        local_res = fetch_charaka_verse_offline(sthana, chapter_num, verse_num)
+        if local_res:
+            return local_res
         return {"error": f"Could not locate the wiki page for {sthana} Chapter {chapter_num} ({guessed_title}). The source site may be unreachable right now."}
 
     content = _fetch_wiki_page(page_title)
     if not content:
+        local_res = fetch_charaka_verse_offline(sthana, chapter_num, verse_num)
+        if local_res:
+            return local_res
         return {"error": f"Could not fetch wiki page: {page_title}"}
     
     sanskrit, translation = _extract_verse(content, verse_num)
@@ -660,6 +697,9 @@ def fetch_charaka_verse(sthana, chapter_num, verse_num):
     tattva, vidhi = _extract_vimarsha(content, verse_num, section_heading=heading)
     
     if not sanskrit:
+        local_res = fetch_charaka_verse_offline(sthana, chapter_num, verse_num)
+        if local_res:
+            return local_res
         return {
             "error": f"Verse {verse_num} not found in Chapter {chapter_num} ({page_title}). This chapter was located correctly -- try a different verse number, or the numbering on the source page may not match a plain sequential count.",
             "chapter_title": page_title

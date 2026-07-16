@@ -36,6 +36,88 @@ def _strip_html(text):
     return text
 
 
+INDEX_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "index_data", "charaka_verse_index.json")
+_INDEX = None
+
+
+def _load_index():
+    global _INDEX
+    if _INDEX is not None:
+        return _INDEX
+    if not os.path.exists(INDEX_FILE):
+        _INDEX = []
+        return _INDEX
+    try:
+        with open(INDEX_FILE, "r", encoding="utf-8") as f:
+            _INDEX = json.load(f)
+    except Exception as e:
+        print(f"[search_treatise] Error loading index: {e}")
+        _INDEX = []
+    return _INDEX
+
+
+def local_search_treatise(query, limit=8):
+    index = _load_index()
+    if not index:
+        return []
+        
+    query_lower = query.lower()
+    results = []
+    
+    for entry in index:
+        sanskrit = entry.get("sanskrit", "")
+        translation = entry.get("translation", "")
+        sthana = entry.get("sthana", "")
+        chapter = entry.get("chapter", 1)
+        chapter_title = entry.get("chapter_title", "")
+        verse = entry.get("verse", 1)
+        
+        in_sanskrit = query in sanskrit
+        in_translation = query_lower in translation.lower()
+        in_title = query_lower in chapter_title.lower()
+        
+        if in_sanskrit or in_translation or in_title:
+            snippet = ""
+            if in_translation:
+                idx = translation.lower().find(query_lower)
+                start = max(0, idx - 40)
+                end = min(len(translation), idx + len(query) + 40)
+                snippet = translation[start:end]
+                if start > 0: snippet = "..." + snippet
+                if end < len(translation): snippet = snippet + "..."
+            elif in_sanskrit:
+                idx = sanskrit.find(query)
+                start = max(0, idx - 30)
+                end = min(len(sanskrit), idx + len(query) + 30)
+                snippet = sanskrit[start:end]
+                if start > 0: snippet = "..." + snippet
+                if end < len(sanskrit): snippet = snippet + "..."
+            else:
+                snippet = (sanskrit[:60] + "...") if len(sanskrit) > 60 else sanskrit
+                
+            score = 0
+            if query_lower == translation.lower() or query == sanskrit:
+                score = 100
+            elif translation.lower().startswith(query_lower) or sanskrit.startswith(query):
+                score = 80
+            elif in_translation:
+                score = 50
+            else:
+                score = 30
+                
+            title = f"{chapter_title} - Verse {verse}"
+            results.append((score, {
+                "title": title,
+                "snippet": snippet,
+                "sthana": sthana,
+                "chapter": chapter,
+                "verse": verse
+            }))
+            
+    results.sort(key=lambda x: x[0], reverse=True)
+    return [r[1] for r in results[:limit]]
+
+
 def search_treatise(query, limit=8):
     query = query.strip()
     if not query:
@@ -68,7 +150,16 @@ def search_treatise(query, limit=8):
             print(f"[search_treatise] Host '{host}' failed for '{query}': {e}")
             continue
 
-    return {"error": f"Could not reach the source wiki ({last_error}).", "results": []}
+    # Fallback to local index search if online search fails
+    print(f"[search_treatise] Online search failed. Falling back to local offline search for '{query}'...")
+    try:
+        local_results = local_search_treatise(query, limit)
+        if local_results:
+            return {"results": local_results}
+    except Exception as local_e:
+        print(f"[search_treatise] Local search failed: {local_e}")
+
+    return {"error": f"Could not reach the search service ({last_error}).", "results": []}
 
 
 class handler(BaseHTTPRequestHandler):
