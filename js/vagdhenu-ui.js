@@ -100,35 +100,15 @@ const VagdhenuClient = {
 
   async recite(text, meter = 'anushtubh', seed = 42, speed = 0.90, onProgress) {
     const { server } = _getBase();
-    const resolvedMeter = (meter === 'anushtubh' || !meter) ? '__auto__' : meter;
-
-    // 1. Try direct HF Space call from browser (avoids Vercel 10s proxy timeout)
-    //    The HF Space exposes a FastAPI /recite endpoint with CORS enabled.
     const spaceBase = server.replace(/\/$/, '');
+
+    // Use Gradio 5 queue protocol directly from browser when HF Space is configured.
+    // This bypasses Vercel's 10s serverless proxy timeout entirely.
     if (spaceBase.includes('hf.space')) {
-      try {
-        onProgress?.('Connecting to Vāgdhenu AI...');
-        const directUrl = `${spaceBase}/recite?` + new URLSearchParams({ text, meter: resolvedMeter, seed, speed });
-        const directRes = await fetch(directUrl, {
-          headers: { 'Bypass-Tunnel-Reminder': 'true' },
-          signal: AbortSignal.timeout(90_000)
-        });
-        if (directRes.ok) {
-          onProgress?.('Receiving audio...');
-          const blob = await directRes.blob();
-          if (blob.size > 1000) return blob;  // valid audio (>1KB)
-        } else {
-          const errBody = await directRes.json().catch(() => ({}));
-          const msg = errBody.error || `HF Space error ${directRes.status}`;
-          if (directRes.status === 400) throw new Error(msg);  // validation error, don't retry
-        }
-      } catch (e) {
-        if (e.message && (e.message.includes('Please enter just one shloka') || e.message.includes('longer than one shloka'))) throw e;
-        console.warn('[VagdhenuClient] Direct HF call failed, trying proxy:', e.message);
-      }
+      return this._reciteViaGradio(spaceBase, text, meter, seed, onProgress);
     }
 
-    // 2. Fallback: Vercel /api/recite proxy (works for local/non-hf.space servers)
+    // Fallback: Vercel /api/recite proxy (for local/custom servers)
     onProgress?.('Sending to Vāgdhenu AI...');
     const url = _getApiUrl('recite', { text, meter, seed, speed });
     const res = await fetch(url, {
@@ -141,9 +121,77 @@ const VagdhenuClient = {
     }
     onProgress?.('Receiving audio...');
     const blob = await res.blob();
-    if (blob.size < 1000) throw new Error('Recitation failed: empty audio file received. The AI server may be busy — please try again.');
+    if (blob.size < 1000) throw new Error('Recitation failed: empty audio received. Please try again.');
+    return blob;
+  },
+
+  async _reciteViaGradio(spaceBase, text, meter, seed, onProgress) {
+    // Step 1: POST to Gradio queue to get event_id
+    onProgress?.('Queuing with Vāgdhenu AI...');
+    const postRes = await fetch(`${spaceBase}/gradio_api/call/synthesize`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ data: [text, '__auto__', Number(seed)] }),
+      signal: AbortSignal.timeout(30_000)
+    });
+    if (!postRes.ok) {
+      const err = await postRes.json().catch(() => ({}));
+      throw new Error(err.detail || err.error || 'Failed to queue recitation');
+    }
+    const { event_id } = await postRes.json();
+    if (!event_id) throw new Error('No event_id from Gradio queue');
+
+    // Step 2: Stream SSE events until 'complete' or 'error'
+    onProgress?.('Generating recitation (this takes ~30s)...');
+    const audioUrl = await new Promise((resolve, reject) => {
+      const sseUrl = `${spaceBase}/gradio_api/call/synthesize/${event_id}`;
+      const es = new EventSource(sseUrl);
+      const timer = setTimeout(() => {
+        es.close();
+        reject(new Error('Recitation timed out after 90 seconds. The AI server may be busy — please try again.'));
+      }, 90_000);
+
+      es.addEventListener('complete', (e) => {
+        clearTimeout(timer);
+        es.close();
+        try {
+          const payload = JSON.parse(e.data);
+          const audioInfo = Array.isArray(payload) ? payload[0] : null;
+          if (audioInfo && audioInfo.url) {
+            resolve(audioInfo.url);
+          } else {
+            reject(new Error('Audio URL missing in response'));
+          }
+        } catch (err) {
+          reject(new Error('Failed to parse audio response'));
+        }
+      });
+
+      es.addEventListener('error', (e) => {
+        // EventSource fires 'error' on reconnect too — only reject if we have data
+        if (e.data) {
+          clearTimeout(timer);
+          es.close();
+          reject(new Error('Recitation error from AI: ' + (e.data || 'unknown')));
+        }
+        // otherwise it's a transient reconnect, keep waiting
+      });
+
+      es.onerror = (e) => {
+        // Connection dropped and SSE auto-reconnects; non-fatal unless we time out
+        console.warn('[VagdhenuClient] SSE connection error, waiting for reconnect...');
+      };
+    });
+
+    // Step 3: Download the WAV from the absolute audio URL
+    onProgress?.('Downloading audio...');
+    const audioRes = await fetch(audioUrl, { signal: AbortSignal.timeout(30_000) });
+    if (!audioRes.ok) throw new Error('Failed to download audio: ' + audioRes.status);
+    const blob = await audioRes.blob();
+    if (blob.size < 1000) throw new Error('Received empty audio file. Please try again.');
     return blob;
   }
+
 };
 
 /* ─────────────────────────────────────────────────────────

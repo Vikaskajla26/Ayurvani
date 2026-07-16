@@ -3619,18 +3619,22 @@ async function generateCustomAIChant() {
   if (shlokaPlayerAudio) { shlokaPlayerAudio.pause(); shlokaPlayerAudio = null; }
   
   try {
-    const url = getReciteUrl(text, meter);
-    
-    const resp = await fetch(url, {
-      headers: { 'Bypass-Tunnel-Reminder': 'true' }
-    });
-    if (!resp.ok) {
-      const errData = await resp.json().catch(() => ({}));
-      throw new Error(errData.error || ('Server error: ' + resp.status));
+    let blob;
+    const spaceBase = VAGDHENU_SERVER && VAGDHENU_SERVER.includes('hf.space')
+      ? VAGDHENU_SERVER.replace(/\/$/, '') : null;
+    if (spaceBase) {
+      blob = await VagdhenuClient._reciteViaGradio(spaceBase, text, meter, 42,
+        (msg) => { if (reciteBtn) reciteBtn.innerHTML = `⏳ ${msg}`; });
+    } else {
+      const url = getReciteUrl(text, meter);
+      const resp = await fetch(url, { headers: { 'Bypass-Tunnel-Reminder': 'true' } });
+      if (!resp.ok) {
+        const errData = await resp.json().catch(() => ({}));
+        throw new Error(errData.error || ('Server error: ' + resp.status));
+      }
+      blob = await resp.blob();
+      if (blob.size < 1000) throw new Error('AI server returned empty audio. Please try again.');
     }
-    
-    const blob = await resp.blob();
-    if (blob.size < 1000) throw new Error('AI server returned empty audio. The server may be busy — please try again in a moment.');
     shlokaPlayerChantId = 'custom_generation';
     await savePDFBlob('audio_custom_generation', blob);
     
@@ -5574,15 +5578,22 @@ async function generateCustomAIChant() {
   if (shlokaPlayerAudio) { shlokaPlayerAudio.pause(); shlokaPlayerAudio = null; }
   
   try {
-    const url = getReciteUrl(text, meter, seed, speed);
-    const resp = await fetch(url, { headers: { 'Bypass-Tunnel-Reminder': 'true' } });
-    if (!resp.ok) {
-      const errData = await resp.json().catch(() => ({}));
-      throw new Error(errData.error || ('Server error: ' + resp.status));
+    let blob;
+    const spaceBase = VAGDHENU_SERVER && VAGDHENU_SERVER.includes('hf.space')
+      ? VAGDHENU_SERVER.replace(/\/$/, '') : null;
+    if (spaceBase) {
+      blob = await VagdhenuClient._reciteViaGradio(spaceBase, text, meter, seed,
+        (msg) => { if (reciteBtn) reciteBtn.innerHTML = `⏳ ${msg}`; });
+    } else {
+      const url = getReciteUrl(text, meter, seed, speed);
+      const resp = await fetch(url, { headers: { 'Bypass-Tunnel-Reminder': 'true' } });
+      if (!resp.ok) {
+        const errData = await resp.json().catch(() => ({}));
+        throw new Error(errData.error || ('Server error: ' + resp.status));
+      }
+      blob = await resp.blob();
+      if (blob.size < 1000) throw new Error('AI server returned empty audio. Please try again.');
     }
-    
-    const blob = await resp.blob();
-    if (blob.size < 1000) throw new Error('AI server returned empty audio. The server may be busy — please try again in a moment.');
     customAudioBlob = blob;
     if (downloadBtn) downloadBtn.style.display = 'inline-block';
     
