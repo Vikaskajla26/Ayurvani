@@ -3284,7 +3284,7 @@ async function startShlokaAudio(c, localBlob) {
 
 // ---------- Vāgdhenu AI Chant Generation ----------
 const VAGDHENU_SERVER_KEY = 'vagdhenu_server_url';
-let VAGDHENU_SERVER = localStorage.getItem(VAGDHENU_SERVER_KEY) || 'https://major-jobs-design.loca.lt';
+let VAGDHENU_SERVER = localStorage.getItem(VAGDHENU_SERVER_KEY) || 'https://prathoshap-vagdhenu-demo.hf.space';
 let vagdhenuAvailable = null;  // null=unchecked, true/false
 
 function openServerSettingsModal() {
@@ -5547,8 +5547,7 @@ function createMagicParticle(x, y) {
   }, 600);
 }
 
-// Vāgdhenu Server config
-const VAGDHENU_SERVER = 'https://prathoshap-vagdhenu-demo.hf.space';
+// Vāgdhenu Server config (declared globally above)
 
 // Install custom recite handler updates
 let customAudioBlob = null;
