@@ -99,15 +99,50 @@ const VagdhenuClient = {
   },
 
   async recite(text, meter = 'anushtubh', seed = 42, speed = 0.90, onProgress) {
-    const url = _getApiUrl('recite', { text, meter, seed, speed });
+    const { server } = _getBase();
+    const resolvedMeter = (meter === 'anushtubh' || !meter) ? '__auto__' : meter;
+
+    // 1. Try direct HF Space call from browser (avoids Vercel 10s proxy timeout)
+    //    The HF Space exposes a FastAPI /recite endpoint with CORS enabled.
+    const spaceBase = server.replace(/\/$/, '');
+    if (spaceBase.includes('hf.space')) {
+      try {
+        onProgress?.('Connecting to Vāgdhenu AI...');
+        const directUrl = `${spaceBase}/recite?` + new URLSearchParams({ text, meter: resolvedMeter, seed, speed });
+        const directRes = await fetch(directUrl, {
+          headers: { 'Bypass-Tunnel-Reminder': 'true' },
+          signal: AbortSignal.timeout(90_000)
+        });
+        if (directRes.ok) {
+          onProgress?.('Receiving audio...');
+          const blob = await directRes.blob();
+          if (blob.size > 1000) return blob;  // valid audio (>1KB)
+        } else {
+          const errBody = await directRes.json().catch(() => ({}));
+          const msg = errBody.error || `HF Space error ${directRes.status}`;
+          if (directRes.status === 400) throw new Error(msg);  // validation error, don't retry
+        }
+      } catch (e) {
+        if (e.message && (e.message.includes('Please enter just one shloka') || e.message.includes('longer than one shloka'))) throw e;
+        console.warn('[VagdhenuClient] Direct HF call failed, trying proxy:', e.message);
+      }
+    }
+
+    // 2. Fallback: Vercel /api/recite proxy (works for local/non-hf.space servers)
     onProgress?.('Sending to Vāgdhenu AI...');
-    const res = await fetch(url, { headers: { 'Bypass-Tunnel-Reminder': 'true' } });
+    const url = _getApiUrl('recite', { text, meter, seed, speed });
+    const res = await fetch(url, {
+      headers: { 'Bypass-Tunnel-Reminder': 'true' },
+      signal: AbortSignal.timeout(90_000)
+    });
     if (!res.ok) {
       const err = await res.json().catch(() => ({}));
       throw new Error(err.error || 'Server error ' + res.status);
     }
     onProgress?.('Receiving audio...');
-    return res.blob();
+    const blob = await res.blob();
+    if (blob.size < 1000) throw new Error('Recitation failed: empty audio file received. The AI server may be busy — please try again.');
+    return blob;
   }
 };
 

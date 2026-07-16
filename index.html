@@ -3358,13 +3358,18 @@ function hideDravyagunaDetail() {
 const openDravyagunaDetail = showDravyagunaDetail;
 const closeDravyagunaDetail = hideDravyagunaDetail;
 
+
 function getReciteUrl(text, meter, seed = 42, speed = 0.90) {
   const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-  const encodedText = encodeURIComponent(text);
+  const resolvedMeter = (meter === 'anushtubh' || !meter) ? '__auto__' : meter;
+  const qs = `text=${encodeURIComponent(text)}&meter=${encodeURIComponent(resolvedMeter)}&seed=${seed}&speed=${speed}`;
   if (isLocalhost) {
-    return `${VAGDHENU_SERVER}/recite?text=${encodedText}&meter=${meter}&seed=${seed}&speed=${speed}`;
+    return `${VAGDHENU_SERVER}/recite?${qs}`;
+  } else if (VAGDHENU_SERVER && VAGDHENU_SERVER.includes('hf.space')) {
+    // Call HF Space directly from the browser — avoids Vercel's 10s serverless proxy timeout
+    return `${VAGDHENU_SERVER.replace(/\/$/, '')}/recite?${qs}`;
   } else {
-    return `/api/recite?text=${encodedText}&meter=${meter}&server_url=${encodeURIComponent(VAGDHENU_SERVER)}&seed=${seed}&speed=${speed}`;
+    return `/api/recite?text=${encodeURIComponent(text)}&meter=${encodeURIComponent(resolvedMeter)}&server_url=${encodeURIComponent(VAGDHENU_SERVER)}&seed=${seed}&speed=${speed}`;
   }
 }
 </script>
@@ -3625,8 +3630,7 @@ async function generateCustomAIChant() {
     }
     
     const blob = await resp.blob();
-    
-    // Save to IndexedDB under custom key
+    if (blob.size < 1000) throw new Error('AI server returned empty audio. The server may be busy — please try again in a moment.');
     shlokaPlayerChantId = 'custom_generation';
     await savePDFBlob('audio_custom_generation', blob);
     
@@ -5578,6 +5582,7 @@ async function generateCustomAIChant() {
     }
     
     const blob = await resp.blob();
+    if (blob.size < 1000) throw new Error('AI server returned empty audio. The server may be busy — please try again in a moment.');
     customAudioBlob = blob;
     if (downloadBtn) downloadBtn.style.display = 'inline-block';
     
