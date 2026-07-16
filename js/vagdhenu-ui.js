@@ -99,100 +99,103 @@ const VagdhenuClient = {
   },
 
   async recite(text, meter = 'anushtubh', seed = 42, speed = 0.90, onProgress) {
-    const { server } = _getBase();
-    const spaceBase = server.replace(/\/$/, '');
+    const { isLocal, server } = _getBase();
 
-    // Use Gradio 5 queue protocol directly from browser when HF Space is configured.
-    // This bypasses Vercel's 10s serverless proxy timeout entirely.
-    if (spaceBase.includes('hf.space')) {
-      return this._reciteViaGradio(spaceBase, text, meter, seed, onProgress);
+    // If running locally with a real server, use the local server
+    if (isLocal) {
+      onProgress?.('Sending to local Vāgdhenu server...');
+      const url = _getApiUrl('recite', { text, meter, seed, speed });
+      const res = await fetch(url, { headers: { 'Bypass-Tunnel-Reminder': 'true' }, signal: AbortSignal.timeout(90_000) });
+      if (!res.ok) { const err = await res.json().catch(() => ({})); throw new Error(err.error || 'Server error ' + res.status); }
+      onProgress?.('Receiving audio...');
+      const blob = await res.blob();
+      if (blob.size < 1000) throw new Error('Empty audio received. Please try again.');
+      return blob;
     }
 
-    // Fallback: Vercel /api/recite proxy (for local/custom servers)
-    onProgress?.('Sending to Vāgdhenu AI...');
-    const url = _getApiUrl('recite', { text, meter, seed, speed });
-    const res = await fetch(url, {
-      headers: { 'Bypass-Tunnel-Reminder': 'true' },
-      signal: AbortSignal.timeout(90_000)
-    });
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      throw new Error(err.error || 'Server error ' + res.status);
-    }
-    onProgress?.('Receiving audio...');
-    const blob = await res.blob();
-    if (blob.size < 1000) throw new Error('Recitation failed: empty audio received. Please try again.');
-    return blob;
+    // Web Speech API — works in all browsers, instant, no server needed
+    onProgress?.('Using browser speech synthesis...');
+    return this._reciteWebSpeech(text, speed, onProgress);
   },
 
-  async _reciteViaGradio(spaceBase, text, meter, seed, onProgress) {
-    // Step 1: POST to Gradio queue to get event_id
-    onProgress?.('Queuing with Vāgdhenu AI...');
-    const postRes = await fetch(`${spaceBase}/gradio_api/call/synthesize`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ data: [text, '__auto__', Number(seed)] }),
-      signal: AbortSignal.timeout(30_000)
-    });
-    if (!postRes.ok) {
-      const err = await postRes.json().catch(() => ({}));
-      throw new Error(err.detail || err.error || 'Failed to queue recitation');
-    }
-    const { event_id } = await postRes.json();
-    if (!event_id) throw new Error('No event_id from Gradio queue');
+  _reciteWebSpeech(text, speed = 0.90, onProgress) {
+    return new Promise((resolve, reject) => {
+      if (!window.speechSynthesis) {
+        reject(new Error('Browser speech synthesis not supported. Please use Chrome/Edge/Safari.'));
+        return;
+      }
 
-    // Step 2: Stream SSE events until 'complete' or 'error'
-    onProgress?.('Generating recitation (this takes ~30s)...');
-    const audioUrl = await new Promise((resolve, reject) => {
-      const sseUrl = `${spaceBase}/gradio_api/call/synthesize/${event_id}`;
-      const es = new EventSource(sseUrl);
-      const timer = setTimeout(() => {
-        es.close();
-        reject(new Error('Recitation timed out after 90 seconds. The AI server may be busy — please try again.'));
-      }, 90_000);
+      // Cancel any ongoing speech
+      window.speechSynthesis.cancel();
 
-      es.addEventListener('complete', (e) => {
-        clearTimeout(timer);
-        es.close();
-        try {
-          const payload = JSON.parse(e.data);
-          const audioInfo = Array.isArray(payload) ? payload[0] : null;
-          if (audioInfo && audioInfo.url) {
-            resolve(audioInfo.url);
-          } else {
-            reject(new Error('Audio URL missing in response'));
-          }
-        } catch (err) {
-          reject(new Error('Failed to parse audio response'));
-        }
-      });
+      // Record audio using MediaRecorder
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      const dest = new AudioCtx().createMediaStreamDestination();
+      const recorder = new MediaRecorder(dest.stream);
+      const chunks = [];
 
-      es.addEventListener('error', (e) => {
-        // EventSource fires 'error' on reconnect too — only reject if we have data
-        if (e.data) {
-          clearTimeout(timer);
-          es.close();
-          reject(new Error('Recitation error from AI: ' + (e.data || 'unknown')));
-        }
-        // otherwise it's a transient reconnect, keep waiting
-      });
+      // We use Web Audio API to capture but Web Speech doesn't pipe through it.
+      // Instead: synthesize speech, capture via MediaRecorder from audio output.
+      // Simpler: collect audio from speechSynthesis via the audio element trick.
 
-      es.onerror = (e) => {
-        // Connection dropped and SSE auto-reconnects; non-fatal unless we time out
-        console.warn('[VagdhenuClient] SSE connection error, waiting for reconnect...');
+      // Best approach for blob: use MediaRecorder on a silent stream + play in parallel,
+      // then return the blob. But Web Speech output can't be captured to a blob in most browsers.
+      // So: speak it live AND simultaneously record the system audio if possible,
+      // otherwise just speak it and return a special sentinel blob.
+
+      const utt = new SpeechSynthesisUtterance(text);
+      utt.rate = parseFloat(speed) * 0.85;  // Sanskrit is slower
+      utt.pitch = 0.9;
+      utt.volume = 1.0;
+      utt.lang = 'hi-IN';  // Devanagari / Hindi voice closest to Sanskrit
+
+      // Pick best available voice for Sanskrit/Hindi
+      const voices = window.speechSynthesis.getVoices();
+      const preferred = voices.find(v => v.lang === 'hi-IN' && v.localService) ||
+                        voices.find(v => v.lang === 'hi-IN') ||
+                        voices.find(v => v.lang.startsWith('hi')) ||
+                        voices.find(v => v.lang.startsWith('sa')) ||  // Sanskrit voice if available
+                        null;
+      if (preferred) utt.voice = preferred;
+
+      onProgress?.('Speaking Sanskrit...');
+
+      utt.onend = () => {
+        // Return a tiny WAV blob as sentinel so caller knows speech completed
+        const wav = _makeSilentWav(500);
+        resolve(new Blob([wav], { type: 'audio/wav' }));
       };
-    });
+      utt.onerror = (e) => {
+        if (e.error === 'interrupted' || e.error === 'canceled') return;
+        reject(new Error('Speech synthesis error: ' + e.error));
+      };
 
-    // Step 3: Download the WAV from the absolute audio URL
-    onProgress?.('Downloading audio...');
-    const audioRes = await fetch(audioUrl, { signal: AbortSignal.timeout(30_000) });
-    if (!audioRes.ok) throw new Error('Failed to download audio: ' + audioRes.status);
-    const blob = await audioRes.blob();
-    if (blob.size < 1000) throw new Error('Received empty audio file. Please try again.');
-    return blob;
+      window.speechSynthesis.speak(utt);
+    });
+  },
+
+  openHFSpace() {
+    window.open('https://prathoshap-vagdhenu-demo.hf.space', '_blank');
   }
 
 };
+
+// Helper: create a minimal silent WAV blob
+function _makeSilentWav(durationMs = 500) {
+  const sr = 22050, channels = 1, bps = 16;
+  const samples = Math.floor(sr * durationMs / 1000);
+  const buf = new ArrayBuffer(44 + samples * 2);
+  const v = new DataView(buf);
+  const str = (o, s) => { for (let i = 0; i < s.length; i++) v.setUint8(o + i, s.charCodeAt(i)); };
+  str(0, 'RIFF'); v.setUint32(4, 36 + samples * 2, true); str(8, 'WAVE');
+  str(12, 'fmt '); v.setUint32(16, 16, true); v.setUint16(20, 1, true);
+  v.setUint16(22, channels, true); v.setUint32(24, sr, true);
+  v.setUint32(28, sr * channels * bps / 8, true); v.setUint16(32, channels * bps / 8, true);
+  v.setUint16(34, bps, true); str(36, 'data'); v.setUint32(40, samples * 2, true);
+  return buf;
+}
+
+
 
 /* ─────────────────────────────────────────────────────────
    SANDHI PREVIEW PANEL
@@ -592,10 +595,12 @@ window.vagRecite = async function() {
   const wave   = document.getElementById('vagWave');
 
   btn.disabled = true;
-  document.getElementById('vagReciteLabel').textContent = 'Generating...';
+  document.getElementById('vagReciteLabel').textContent = 'Speaking...';
   prog.style.display = 'flex';
   if (wrap) wrap.style.display = 'none';
   if (_studioAudio) { _studioAudio.pause(); _studioAudio = null; }
+  // Cancel any ongoing Web Speech
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
 
   try {
     const blob = await VagdhenuClient.recite(text, meter, seed, speed, msg => {
@@ -603,25 +608,44 @@ window.vagRecite = async function() {
     });
 
     _studioBlob = blob;
-    const url = URL.createObjectURL(blob);
 
-    const audio = new Audio(url);
-    _studioAudio = audio;
+    // Check if this is a Web Speech result (silent sentinel blob < 5KB)
+    // or a real server audio blob
+    const isWebSpeech = blob.size < 5000;
 
-    const el = document.getElementById('vagAudio');
-    if (el) {
-      el.src = url;
-      el.onplay  = () => wave?.classList.add('playing');
-      el.onpause = () => wave?.classList.remove('playing');
-      el.onended = () => wave?.classList.remove('playing');
-    }
-
-    if (wrap) wrap.style.display = 'block';
     prog.style.display = 'none';
-    if (typeof showToast === 'function') showToast('🎵 Vāgdhenu recitation ready!');
 
-    // Auto-play
-    el?.play().catch(() => {});
+    if (isWebSpeech) {
+      // Web Speech played live — show the wave animation briefly and a helpful note
+      wave?.classList.add('playing');
+      if (typeof showToast === 'function') showToast('🔊 Sanskrit recitation spoken! For AI neural audio, visit the Vāgdhenu Space.');
+      // Show player wrap with note about premium AI audio
+      const el = document.getElementById('vagAudio');
+      if (el) el.removeAttribute('src');
+      if (wrap) {
+        wrap.style.display = 'block';
+        // Replace download button text to indicate Web Speech mode
+        const dlBtn = document.getElementById('vagDownloadBtn');
+        if (dlBtn) { dlBtn.textContent = '🕉 Open Vāgdhenu AI for WAV'; dlBtn.onclick = () => VagdhenuClient.openHFSpace(); }
+      }
+      // Stop wave after speech ends (approximate)
+      setTimeout(() => wave?.classList.remove('playing'), text.length * 80);
+    } else {
+      // Real server audio blob
+      const url = URL.createObjectURL(blob);
+      const audio = new Audio(url);
+      _studioAudio = audio;
+      const el = document.getElementById('vagAudio');
+      if (el) {
+        el.src = url;
+        el.onplay  = () => wave?.classList.add('playing');
+        el.onpause = () => wave?.classList.remove('playing');
+        el.onended = () => wave?.classList.remove('playing');
+      }
+      if (wrap) wrap.style.display = 'block';
+      if (typeof showToast === 'function') showToast('🎵 Vāgdhenu recitation ready!');
+      el?.play().catch(() => {});
+    }
 
   } catch (err) {
     prog.style.display = 'none';
