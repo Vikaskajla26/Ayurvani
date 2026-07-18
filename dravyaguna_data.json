@@ -6441,7 +6441,9 @@
    "Antihyperlipidemic",
    "Antioxidative",
    "Osteogenic activity"
-  ]
+  ],
+  "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Butea%20monosperma%20-%20Palash-flame%20of%20forest%2001.jpg",
+  "plantPhotoAttribution": "Wikimedia Commons - Butea monosperma"
  },
  {
   "id": "pashanbheda",
@@ -6527,7 +6529,9 @@
   "research_updates": [
    "Antiurolithic activity",
    "Diuretic, hypermagnesuric and antioxidant effects"
-  ]
+  ],
+  "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/20210605%20Hortus%20botanicus%20Leiden%20-%20Bergenia%20ligulata.jpg",
+  "plantPhotoAttribution": "Wikimedia Commons - Bergenia ligulata"
  },
  {
   "id": "patha",
@@ -6630,7 +6634,9 @@
    "Antiurolithic activity",
    "Antitumor activity",
    "Cytotoxic/anticancer activity"
-  ]
+  ],
+  "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Cissampelos%20pareira%20NP.JPG",
+  "plantPhotoAttribution": "Wikimedia Commons - Cissampelos pareira"
  },
  {
   "id": "pippali",
@@ -6731,6 +6737,8 @@
    "Antihyperglycemic and antihyperlipidemic effects",
    "Antibacterial",
    "Anti-mycobacterial activity"
-  ]
+  ],
+  "plantPhotoUrl": "https://commons.wikimedia.org/wiki/Special:FilePath/Long%20pepper%20plant%28Piper%20longum%29.JPG",
+  "plantPhotoAttribution": "Wikimedia Commons - Piper longum"
  }
 ]
