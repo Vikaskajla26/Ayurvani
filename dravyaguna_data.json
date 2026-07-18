@@ -6631,5 +6631,106 @@
    "Antitumor activity",
    "Cytotoxic/anticancer activity"
   ]
+ },
+ {
+  "id": "pippali",
+  "name": "Pippali",
+  "sanskrit_name": "पिप्पली",
+  "sloka": "पिप्पली मागधी कृष्णा वैदेही चपला कणा | उपकुल्या शौण्डी कोल्या व्यालीक्ष्ण तण्डुला || गर्भश्याशूद्विकार बल्या च सुगन्धिकम् ||",
+  "sloka_source": "भा. प्र.",
+  "botanical_name": "Piper longum",
+  "family": "Piperaceae",
+  "synonyms": [
+   {
+    "term": "मागधी",
+    "meaning": "Available in Magadha desha"
+   },
+   {
+    "term": "वैदेही",
+    "meaning": "Common in Videha desha"
+   },
+   {
+    "term": "कृष्णा",
+    "meaning": "Red in colour on ripening but turns black once dried"
+   },
+   {
+    "term": "कणा",
+    "meaning": "Pungent taste"
+   },
+   {
+    "term": "चपला",
+    "meaning": "Cures many diseases"
+   }
+  ],
+  "vernacular_names": [
+   {
+    "lang": "English",
+    "name": "Long Pepper"
+   },
+   {
+    "lang": "Hindi",
+    "name": "Pipli"
+   },
+   {
+    "lang": "Marathi",
+    "name": "Pipli"
+   }
+  ],
+  "classification_of_gana": [
+   "चरक: कासहर वर्ग, कण्ठ्य वर्ग, हिक्कानिग्रहण वर्ग, पिप्पल्यादि वर्ग, तृष्णानिग्रहण वर्ग",
+   "सुश्रुत: पिप्पल्यादि गण",
+   "भावप्रकाश: हरितक्यादि वर्ग"
+  ],
+  "external_morphology": {
+   "habitat": "Cultivated in Bengal, Bihar",
+   "details": [
+    "Habit: Ascending climber",
+    "Stem: Numerous, cylindrical",
+    "Root stock: Erect, thick",
+    "Fruits: Small, ovoid, blackish green colour"
+   ]
+  },
+  "useful_parts": "Phala (fruit), Mula (root)",
+  "phytoconstituents": "Piperine, piplatine, n-hexadecane, n-heptadecane",
+  "rasa_panchaka": {
+   "rasa": "Katu",
+   "guna": "Tikshna, Laghu, Snigdha",
+   "virya": "Anushna",
+   "vipaka": "Madhura"
+  },
+  "karma": {
+   "dosha_karma": "कफवातशामक (Kaphavatashamak). Agryakarma: Root of Pippali - Appetizer, Digestant, Carminative",
+   "karma": "वमन, रसायन, वृष्य, केश्य, श्वासहर, कासहर, ज्वरहर, कुष्ठघ्न, प्रमेहहर, शूलनाशक"
+  },
+  "doshaghnata": "कफवातशामक (Kaphavatashamak)",
+  "rogaghnata": "Pippali: अग्निमांद्य, ज्वर, श्वास, कुष्ठ | Pippali Mula: गुल्म, श्वास | Simhali Pippali: अग्निमांद्य, हिक्का | Vanadi Pippali: अरुची",
+  "amayika_prayoga": [
+   "शूल (Colic) = Combination of Pippali + Shunthi",
+   "कास (Cough) = Powder of Pippali + Kantakari with honey",
+   "ज्वर (Fever) = Decoction of Pippali with 4 times water",
+   "कफलीरोग = Decoction of Pippali mula + goat's urine"
+  ],
+  "matra": [
+   {
+    "form": "Churna",
+    "dose": "5-10 g"
+   }
+  ],
+  "pharmacological_actions": [
+   "Fruit: Appetizer, digestant, stimulant",
+   "Root: Stimulant"
+  ],
+  "kalpana": [
+   "Pippali Khanda - अम्लपित्त, उदरशूल",
+   "Pippalyadya Varti - नेत्ररोग",
+   "Pippali Paka - जीर्णज्वर, श्वास",
+   "Pippali Ghrita - कफज कास"
+  ],
+  "varieties": "राजनिघण्टु: Pippali, Gajapippali, Simhali Pippali, Vanadi Pippali",
+  "research_updates": [
+   "Antihyperglycemic and antihyperlipidemic effects",
+   "Antibacterial",
+   "Anti-mycobacterial activity"
+  ]
  }
 ]
