@@ -220,19 +220,116 @@ const SandhiPreview = {
   },
 
   _render(data) {
-    const rows = (data.padas || []).map((pada, i) => `
-      <div style="margin-bottom:12px;padding:10px 14px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:3px solid var(--gold);">
-        <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:1.05rem;color:var(--gold-light);margin-bottom:4px;">${pada}</div>
-        <div style="font-size:0.72rem;color:var(--ink-soft);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:3px;">
-          Sandhi-Processed (Devanagari):
+    if (!data) {
+      this._el.innerHTML = '<div style="color:var(--ink-soft);font-size:0.8rem;">No data received.</div>';
+      return;
+    }
+
+    let html = '';
+    
+    // 1. Warning block if text is ambiguous or corrupted
+    if (data.is_ambiguous && data.warning_message) {
+      html += `
+        <div style="background:rgba(193,99,59,0.12); border:1px solid rgba(193,99,59,0.3); border-radius:10px; padding:12px; margin-bottom:16px; color:var(--copper); font-size:0.82rem; line-height:1.4;">
+          ⚠️ <strong>Ambiguity / Wording Issue:</strong> ${data.warning_message}
         </div>
-        <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:1rem;color:var(--sage);word-break:break-all;margin-bottom:4px;">${data.devanagari_routed?.[i] || ''}</div>
-        <div style="margin-top:4px;font-size:0.72rem;color:var(--ink-soft);">
-          SLP1: <span style="font-family:monospace;color:var(--copper);">${data.slp1?.[i] || ''}</span>
-          &nbsp;·&nbsp; Syllables: <strong style="color:var(--gold);">${data.n_syllables?.[i] || '?'}</strong>
+      `;
+    }
+
+    // 2. Devanagari Normalization & IAST details
+    html += `
+      <div style="display:grid; grid-template-columns: 1fr; gap:12px; margin-bottom:16px;">
+        <div>
+          <div style="font-size:0.7rem; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:4px;">Normalized Devanagari</div>
+          <div style="font-family:'Tiro Devanagari Hindi',serif; font-size:1.25rem; color:var(--gold-light); line-height:1.6; background:rgba(255,255,255,0.02); padding:10px 14px; border-radius:8px; border:1px solid rgba(228,201,124,0.12);">${data.normalized_deva || ''}</div>
         </div>
-      </div>`).join('');
-    this._el.innerHTML = rows || '<div style="color:var(--ink-soft);font-size:0.8rem;">No padas found.</div>';
+        <div>
+          <div style="font-size:0.7rem; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:4px;">IAST Transliteration</div>
+          <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.1rem; color:var(--sage); background:rgba(255,255,255,0.01); padding:8px 12px; border-radius:8px; border:1px solid rgba(255,255,255,0.04);">${data.iast || ''}</div>
+        </div>
+      </div>
+    `;
+
+    // 3. Syllable Scansion / Chandas Identification
+    const syllables = data.syllables || [];
+    const meterName = data.meter_name ? data.meter_name.charAt(0).toUpperCase() + data.meter_name.slice(1).replace(/_/g, ' ') : 'Unknown';
+
+    html += `
+      <div style="margin-bottom:18px; background:rgba(255,255,255,0.02); border:1px solid rgba(228,201,124,0.12); border-radius:12px; padding:14px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
+          <span style="font-size:0.72rem; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.06em;">Syllable-Level Scansion</span>
+          <span style="background:var(--copper); color:#fff; font-size:0.7rem; font-weight:bold; padding:2px 8px; border-radius:20px; letter-spacing:0.04em;">Meter: ${meterName}</span>
+        </div>
+        
+        <div style="display:flex; flex-wrap:wrap; gap:6px; max-height:220px; overflow-y:auto; padding:4px;">
+    `;
+
+    if (syllables.length === 0) {
+      html += `<div style="font-size:0.8rem; color:var(--ink-soft); padding:4px;">No syllable scansion details available.</div>`;
+    } else {
+      syllables.forEach((s) => {
+        const weightColor = s.weight === 'G' ? 'var(--gold)' : 'var(--sage)';
+        const weightLabel = s.weight === 'G' ? 'Guru (heavy - 2 matras)' : 'Laghu (light - 1 matra)';
+        const badgeBg = s.weight === 'G' ? 'rgba(228,201,124,0.18)' : 'rgba(169,194,160,0.15)';
+        const cause = s.weight_cause ? s.weight_cause.replace(/_/g, ' ') : '';
+        
+        html += `
+          <div style="display:flex; flex-direction:column; align-items:center; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.06); border-radius:8px; padding:6px 10px; min-width:54px; box-sizing:border-box;" title="${weightLabel} - Cause: ${cause}">
+            <div style="font-family:'Tiro Devanagari Hindi',serif; font-size:1.1rem; color:#fff; font-weight:500; margin-bottom:4px;">${s.text}</div>
+            <div style="background:${badgeBg}; color:${weightColor}; font-weight:700; font-size:0.7rem; padding:1px 6px; border-radius:4px; letter-spacing:0.03em;">${s.weight}</div>
+            <div style="font-size:0.6rem; color:var(--ink-soft); font-family:monospace; margin-top:3px;">${s.slp1}</div>
+          </div>
+        `;
+      });
+    }
+
+    html += `
+        </div>
+      </div>
+    `;
+
+    // 4. Sandhi splitting details
+    const splits = data.sandhi_vicched || [];
+    html += `
+      <div style="margin-bottom:4px;">
+        <div style="font-size:0.72rem; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:8px;">Sandhi-Vicched Breakdown</div>
+    `;
+
+    if (splits.length === 0) {
+      html += `<div style="font-size:0.8rem; color:var(--ink-soft); padding:4px;">No compound splits detected.</div>`;
+    } else {
+      splits.forEach((sp) => {
+        let badgeColor = '#9e9e9e';
+        let badgeBg = 'rgba(255,255,255,0.06)';
+        if (sp.type === 'swar') {
+          badgeColor = '#81c784';
+          badgeBg = 'rgba(129,199,132,0.12)';
+        } else if (sp.type === 'vyanjan') {
+          badgeColor = '#4db6ac';
+          badgeBg = 'rgba(77,182,172,0.12)';
+        } else if (sp.type === 'visarga') {
+          badgeColor = '#ff8a65';
+          badgeBg = 'rgba(255,138,101,0.12)';
+        }
+
+        html += `
+          <div style="background:rgba(255,255,255,0.02); border-left:3px solid ${badgeColor}; border-radius:6px; padding:10px 14px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+            <div style="flex:1; min-width:200px;">
+              <div style="font-family:'Tiro Devanagari Hindi',serif; font-size:1.02rem; color:var(--gold-light); margin-bottom:2px;">
+                ${sp.joined} &nbsp;→&nbsp; <strong style="color:#fff;">${sp.split}</strong>
+              </div>
+              ${sp.explanation ? `<div style="font-size:0.75rem; color:var(--ink-soft);">${sp.explanation}</div>` : ''}
+            </div>
+            <div style="background:${badgeBg}; color:${badgeColor}; font-size:0.68rem; font-weight:bold; text-transform:uppercase; padding:3px 8px; border-radius:4px; letter-spacing:0.03em; border: 1px solid ${badgeColor}40;">
+              ${sp.type}
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    html += `</div>`;
+    this._el.innerHTML = html;
   }
 };
 

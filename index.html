@@ -5648,17 +5648,8 @@ function updateCustomShlokaPreview() {
     try {
       const data = await VagdhenuClient.fetchPreview(text);
       if (data.error) throw new Error(data.error);
-      const rows = (data.padas || []).map((pada, i) => `
-        <div style="margin-bottom:8px;padding:8px 12px;background:rgba(255,255,255,0.02);border-radius:6px;border-left:2px solid var(--gold);">
-          <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:1.02rem;color:var(--gold-light);margin-bottom:3px;">${pada}</div>
-          <div style="font-size:0.7rem;color:var(--ink-soft);text-transform:uppercase;margin-bottom:2px;">Sandhi-Processed (Devanagari):</div>
-          <div style="font-family:'Tiro Devanagari Hindi',serif;font-size:0.95rem;color:var(--sage);margin-bottom:3px;">${data.devanagari_routed?.[i] || ''}</div>
-          <div style="font-size:0.68rem;color:var(--ink-soft);">
-            SLP1: <span style="font-family:monospace;color:var(--copper);">${data.slp1?.[i] || ''}</span>
-            &nbsp;·&nbsp; Syllables: <strong style="color:var(--gold);">${data.n_syllables?.[i] || '?'}</strong>
-          </div>
-        </div>`).join('');
-      panel.innerHTML = rows || 'No padas found.';
+      SandhiPreview.mount(panel);
+      SandhiPreview._render(data);
     } catch (e) {
       panel.innerHTML = '<div style="color:var(--copper);font-size:0.75rem;">Sandhi preview unavailable.</div>';
     }
