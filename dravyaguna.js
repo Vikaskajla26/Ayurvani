@@ -53,7 +53,12 @@ function dgExtractFamily(p) {
 async function dgLoadData() {
   if (dgLoaded) return;
   try {
-    var resp = await fetch('/dravyaguna_data.json');
+    // cache:'no-store' + a per-load cache-busting query param ensures we never
+    // get served a stale cached copy of this file (by the browser's HTTP cache,
+    // an intermediate CDN, or anything else) -- this file changes frequently as
+    // more plants are added, so any caching layer holding onto an old response
+    // silently shows an outdated (smaller) plant list with no visible error.
+    var resp = await fetch('/dravyaguna_data.json?v=' + Date.now(), { cache: 'no-store' });
     dgData = await resp.json();
     dgLoaded = true;
     var el = document.getElementById('dravyaCount');
