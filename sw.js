@@ -1,6 +1,6 @@
 // sw.js
 // Bump this string on every deploy where cached files changed.
-const CACHE = 'ayurvani-v7';
+const CACHE = 'ayurvani-v8';
 
 // Only long-lived, rarely-changing assets go here — safe to cache-first.
 const STATIC_ASSETS = [
@@ -47,7 +47,6 @@ function isNetworkFirst(pathname) {
     pathname === '/' ||
     pathname === '/index.html' ||
     pathname.endsWith('.js') ||
-    pathname.endsWith('.json') ||
     pathname.endsWith('.css')
   );
 }
@@ -57,8 +56,13 @@ self.addEventListener('fetch', e => {
 
   const url = new URL(e.request.url);
 
-  // Completely bypass Service Worker cache for Vercel API and Hugging Face routes
-  if (url.pathname.startsWith('/api/') || url.hostname.includes('hf.space') || url.hostname.includes('huggingface')) {
+  // Completely bypass Service Worker cache for Vercel API, Hugging Face, and database JSON files
+  if (
+    url.pathname.startsWith('/api/') || 
+    url.hostname.includes('hf.space') || 
+    url.hostname.includes('huggingface') ||
+    url.pathname.endsWith('.json')
+  ) {
     return;
   }
 

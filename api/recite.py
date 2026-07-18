@@ -81,18 +81,25 @@ class handler(BaseHTTPRequestHandler):
                     except Exception:
                         pass
 
-                # If targeting personal space but it's failed, fallback to official space
+                # Try direct FastAPI /recite GET endpoint on Space first (fast, single round-trip)
                 try:
-                    audio_bytes = self.query_hf_space(target_space, text, meter, seed, speed)
-                except Exception as e:
-                    if target_space != OFFICIAL_SPACE:
-                        print(f"Personal space failed: {e}. Falling back to official space...")
-                        try:
-                            audio_bytes = self.query_hf_space(OFFICIAL_SPACE, text, meter, seed, speed)
-                        except Exception as inner_e:
-                            raise Exception(f"Official space query failed: {inner_e}")
-                    else:
-                        raise e
+                    audio_bytes = self.query_hf_space_direct(target_space, text, meter, seed, speed)
+                except Exception as e_dir:
+                    print(f"[recite] Direct query failed: {e_dir}. Falling back to queue protocol...")
+                    try:
+                        audio_bytes = self.query_hf_space(target_space, text, meter, seed, speed)
+                    except Exception as e:
+                        if target_space != OFFICIAL_SPACE:
+                            print(f"[recite] Personal space queue failed: {e}. Falling back to official space...")
+                            try:
+                                try:
+                                    audio_bytes = self.query_hf_space_direct(OFFICIAL_SPACE, text, meter, seed, speed)
+                                except Exception:
+                                    audio_bytes = self.query_hf_space(OFFICIAL_SPACE, text, meter, seed, speed)
+                            except Exception as inner_e:
+                                raise Exception(f"Official space query failed: {inner_e}")
+                        else:
+                            raise e
 
             if audio_bytes:
                 self.send_response(200)
@@ -110,13 +117,39 @@ class handler(BaseHTTPRequestHandler):
             self.wfile.write(json.dumps({"error": str(e)}).encode("utf-8"))
         return
 
+    def query_hf_space_direct(self, target_space, text, meter, seed, speed):
+        """Query HuggingFace Space directly via its FastAPI /recite GET endpoint."""
+        space_url = f"https://{target_space.replace('/', '-')}.hf.space"
+        resolved_meter = "__auto__" if meter == "anushtubh" or not meter else meter
+        
+        params = {
+            "text": text,
+            "meter": resolved_meter,
+            "seed": int(seed),
+            "speed": float(speed)
+        }
+        qs = urllib.parse.urlencode(params)
+        call_url = f"{space_url}/recite?{qs}"
+        
+        req_headers = {
+            "User-Agent": "Ayurvani/1.0",
+            "Bypass-Tunnel-Reminder": "true"
+        }
+        hf_token = os.environ.get("HF_TOKEN")
+        if hf_token:
+            req_headers["Authorization"] = f"Bearer {hf_token}"
+            
+        req = urllib.request.Request(call_url, headers=req_headers)
+        with urllib.request.urlopen(req, timeout=45) as resp:
+            if resp.status == 200:
+                return resp.read()
+        return None
+
     def query_hf_space(self, target_space, text, meter, seed, speed):
         """Query HuggingFace Space via Gradio 5 queue REST protocol."""
         space_url = f"https://{target_space.replace('/', '-')}.hf.space"
         call_url = f"{space_url}/gradio_api/call/synthesize"
         
-        # Format input data array corresponding to components: [text, meter, seed]
-        # Dropdown uses original diacritics/pretty name or __auto__
         payload = {
             "data": [
                 text,
@@ -130,7 +163,6 @@ class handler(BaseHTTPRequestHandler):
             "User-Agent": "Ayurvani/1.0"
         }
         
-        # Pass token if provided to authenticate/increase ZeroGPU limits
         hf_token = os.environ.get("HF_TOKEN")
         if hf_token:
             req_headers["Authorization"] = f"Bearer {hf_token}"
@@ -154,7 +186,6 @@ class handler(BaseHTTPRequestHandler):
         audio_url = None
         
         start_time = time.time()
-        # Max poll duration 60 seconds
         while time.time() - start_time < 60:
             time.sleep(2)
             req_poll = urllib.request.Request(status_url, headers=req_headers, method="GET")
@@ -162,30 +193,53 @@ class handler(BaseHTTPRequestHandler):
                 with urllib.request.urlopen(req_poll, timeout=12) as resp_poll:
                     content = resp_poll.read().decode("utf-8")
                     done = False
+                    current_event = None
                     for line in content.split("\n"):
-                        if line.startswith("data:"):
+                        line = line.strip()
+                        if line.startswith("event:"):
+                            current_event = line[6:].strip()
+                        elif line.startswith("data:"):
                             data_str = line[5:].strip()
                             if not data_str or data_str == "null":
                                 continue
-                            event_payload = json.loads(data_str)
-                            msg = event_payload.get("msg")
-                            if msg == "process_completed":
-                                if event_payload.get("success"):
-                                    output_data = event_payload.get("output", {}).get("data", [])
-                                    if output_data:
-                                        audio_info = output_data[0]
-                                        if isinstance(audio_info, dict) and "url" in audio_info:
-                                            audio_url = audio_info.get("url")
-                                            # format relative URL to absolute
-                                            if audio_url.startswith("/"):
-                                                audio_url = f"{space_url}{audio_url}"
-                                            elif not audio_url.startswith("http"):
-                                                audio_url = f"{space_url}/gradio_api/file={audio_url}"
-                                            done = True
-                                            break
-                                else:
-                                    error_detail = event_payload.get("output", {}).get("error", "Generation failed")
-                                    raise Exception(error_detail)
+                            
+                            # Gradio 5: complete event delivers the list [file_info, status]
+                            if current_event == "complete":
+                                output_data = json.loads(data_str)
+                                if output_data and isinstance(output_data, list):
+                                    audio_info = output_data[0]
+                                    if isinstance(audio_info, dict) and "url" in audio_info:
+                                        audio_url = audio_info.get("url")
+                                        if audio_url.startswith("/"):
+                                            audio_url = f"{space_url}{audio_url}"
+                                        elif not audio_url.startswith("http"):
+                                            audio_url = f"{space_url}/gradio_api/file={audio_url}"
+                                        done = True
+                                        break
+                                        
+                            # Gradio 4/Legacy compatibility
+                            try:
+                                event_payload = json.loads(data_str)
+                                if isinstance(event_payload, dict):
+                                    msg = event_payload.get("msg")
+                                    if msg == "process_completed":
+                                        if event_payload.get("success"):
+                                            output_data = event_payload.get("output", {}).get("data", [])
+                                            if output_data:
+                                                audio_info = output_data[0]
+                                                if isinstance(audio_info, dict) and "url" in audio_info:
+                                                    audio_url = audio_info.get("url")
+                                                    if audio_url.startswith("/"):
+                                                        audio_url = f"{space_url}{audio_url}"
+                                                    elif not audio_url.startswith("http"):
+                                                        audio_url = f"{space_url}/gradio_api/file={audio_url}"
+                                                    done = True
+                                                    break
+                                        else:
+                                            error_detail = event_payload.get("output", {}).get("error", "Generation failed")
+                                            raise Exception(error_detail)
+                            except Exception:
+                                pass
                     if done:
                         break
             except Exception as pe:

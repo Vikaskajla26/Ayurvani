@@ -3358,13 +3358,18 @@ function hideDravyagunaDetail() {
 const openDravyagunaDetail = showDravyagunaDetail;
 const closeDravyagunaDetail = hideDravyagunaDetail;
 
+
 function getReciteUrl(text, meter, seed = 42, speed = 0.90) {
   const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-  const encodedText = encodeURIComponent(text);
+  const resolvedMeter = (meter === 'anushtubh' || !meter) ? '__auto__' : meter;
+  const qs = `text=${encodeURIComponent(text)}&meter=${encodeURIComponent(resolvedMeter)}&seed=${seed}&speed=${speed}`;
   if (isLocalhost) {
-    return `${VAGDHENU_SERVER}/recite?text=${encodedText}&meter=${meter}&seed=${seed}&speed=${speed}`;
+    return `${VAGDHENU_SERVER}/recite?${qs}`;
+  } else if (VAGDHENU_SERVER && VAGDHENU_SERVER.includes('hf.space')) {
+    // Call HF Space directly from the browser — avoids Vercel's 10s serverless proxy timeout
+    return `${VAGDHENU_SERVER.replace(/\/$/, '')}/recite?${qs}`;
   } else {
-    return `/api/recite?text=${encodedText}&meter=${meter}&server_url=${encodeURIComponent(VAGDHENU_SERVER)}&seed=${seed}&speed=${speed}`;
+    return `/api/recite?text=${encodeURIComponent(text)}&meter=${encodeURIComponent(resolvedMeter)}&server_url=${encodeURIComponent(VAGDHENU_SERVER)}&seed=${seed}&speed=${speed}`;
   }
 }
 </script>
@@ -3614,19 +3619,22 @@ async function generateCustomAIChant() {
   if (shlokaPlayerAudio) { shlokaPlayerAudio.pause(); shlokaPlayerAudio = null; }
   
   try {
-    const url = getReciteUrl(text, meter);
-    
-    const resp = await fetch(url, {
-      headers: { 'Bypass-Tunnel-Reminder': 'true' }
-    });
-    if (!resp.ok) {
-      const errData = await resp.json().catch(() => ({}));
-      throw new Error(errData.error || ('Server error: ' + resp.status));
+    let blob;
+    const spaceBase = VAGDHENU_SERVER && VAGDHENU_SERVER.includes('hf.space')
+      ? VAGDHENU_SERVER.replace(/\/$/, '') : null;
+    if (spaceBase) {
+      blob = await VagdhenuClient._reciteViaGradio(spaceBase, text, meter, 42,
+        (msg) => { if (reciteBtn) reciteBtn.innerHTML = `⏳ ${msg}`; });
+    } else {
+      const url = getReciteUrl(text, meter);
+      const resp = await fetch(url, { headers: { 'Bypass-Tunnel-Reminder': 'true' } });
+      if (!resp.ok) {
+        const errData = await resp.json().catch(() => ({}));
+        throw new Error(errData.error || ('Server error: ' + resp.status));
+      }
+      blob = await resp.blob();
+      if (blob.size < 1000) throw new Error('AI server returned empty audio. Please try again.');
     }
-    
-    const blob = await resp.blob();
-    
-    // Save to IndexedDB under custom key
     shlokaPlayerChantId = 'custom_generation';
     await savePDFBlob('audio_custom_generation', blob);
     
@@ -5570,14 +5578,22 @@ async function generateCustomAIChant() {
   if (shlokaPlayerAudio) { shlokaPlayerAudio.pause(); shlokaPlayerAudio = null; }
   
   try {
-    const url = getReciteUrl(text, meter, seed, speed);
-    const resp = await fetch(url, { headers: { 'Bypass-Tunnel-Reminder': 'true' } });
-    if (!resp.ok) {
-      const errData = await resp.json().catch(() => ({}));
-      throw new Error(errData.error || ('Server error: ' + resp.status));
+    let blob;
+    const spaceBase = VAGDHENU_SERVER && VAGDHENU_SERVER.includes('hf.space')
+      ? VAGDHENU_SERVER.replace(/\/$/, '') : null;
+    if (spaceBase) {
+      blob = await VagdhenuClient._reciteViaGradio(spaceBase, text, meter, seed,
+        (msg) => { if (reciteBtn) reciteBtn.innerHTML = `⏳ ${msg}`; });
+    } else {
+      const url = getReciteUrl(text, meter, seed, speed);
+      const resp = await fetch(url, { headers: { 'Bypass-Tunnel-Reminder': 'true' } });
+      if (!resp.ok) {
+        const errData = await resp.json().catch(() => ({}));
+        throw new Error(errData.error || ('Server error: ' + resp.status));
+      }
+      blob = await resp.blob();
+      if (blob.size < 1000) throw new Error('AI server returned empty audio. Please try again.');
     }
-    
-    const blob = await resp.blob();
     customAudioBlob = blob;
     if (downloadBtn) downloadBtn.style.display = 'inline-block';
     
