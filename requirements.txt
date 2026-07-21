@@ -1,0 +1,17 @@
+# Installed by Vercel for every Python function under /api.
+#
+# indic-transliteration is the ONLY third-party dependency any api/*.py file
+# needs (everything else uses the standard library or local sibling modules).
+# Specifically required by:
+#   - api/preview.py -> imports vagdhenu/src/chandas_labeler.py, which needs
+#     `from indic_transliteration import sanscript` for meter/scansion analysis
+#     (Study Mode's "Chandas (Meter)" panel). Without this, HAS_LOCAL_SCANSION
+#     silently becomes False and that panel just shows "Meter data unavailable".
+#   - api/preview.py's own IAST fallback path (HAS_SANSCRIPT).
+#
+# Deliberately NOT included here: the heavy ML/TTS stack (torch, transformers,
+# IndicF5, etc.) listed in vagdhenu/requirements.txt -- those are for local/
+# training use only and would badly exceed Vercel's serverless function size
+# limits. Nothing in /api needs them; audio generation is proxied to an
+# external HF Space instead (see api/recite.py).
+indic-transliteration==2.3.82

@@ -185,7 +185,12 @@ def _load_verse_index():
     if _VERSE_INDEX_CACHE is not None:
         return _VERSE_INDEX_CACHE
     try:
-        idx_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "charaka_verse_index.json")
+        # Use the full verse index (api/index_data/), NOT the stale ~16-verse
+        # leftover demo file that used to sit at the project root -- reading
+        # that one silently made verse-source matching fail for almost every
+        # real verse (only worked for the 2 original demo chapters).
+        here = os.path.dirname(os.path.abspath(__file__))
+        idx_path = os.path.join(here, "index_data", "charaka_verse_index.json")
         with open(idx_path, "r", encoding="utf-8") as f:
             _VERSE_INDEX_CACHE = json.load(f)
     except Exception:
@@ -204,30 +209,30 @@ def _strip_punct(s):
     return "".join(out)
 
 def lookup_verse_source(text):
-    """Try to match `text` against charaka_verse_index. Returns a dict or None."""
+    """Try to match `text` against charaka_verse_index. Returns a dict or None.
+
+    Uses difflib.SequenceMatcher (same proven approach as match_shloka.py)
+    rather than a plain subsequence-character-overlap heuristic -- at this
+    index's scale (~6800 verses), a greedy "how many needle chars appear in
+    order somewhere in the haystack" check is too easy to satisfy by chance
+    (Sanskrit verses share a lot of common short words/syllables), which was
+    producing confident-looking but wrong verse matches. SequenceMatcher's
+    ratio accounts for actual alignment and relative ordering, giving far
+    fewer false positives for the same 0.75 confidence threshold."""
     idx = _load_verse_index()
     if not idx:
         return None
     needle = _strip_punct(text)
     if len(needle) < 8:
         return None
-    # Short-circuit: look for the longest common prefix match (≥ 60% of chars)
+    import difflib
     best_ratio = 0.0
     best_entry = None
     for entry in idx:
         haystack = _strip_punct(entry.get("sanskrit", ""))
         if not haystack:
             continue
-        # Cheap overlap: count chars of needle that appear in order in haystack
-        hi = 0
-        matched = 0
-        for ch in needle:
-            while hi < len(haystack) and haystack[hi] != ch:
-                hi += 1
-            if hi < len(haystack):
-                matched += 1
-                hi += 1
-        ratio = matched / max(len(needle), 1)
+        ratio = difflib.SequenceMatcher(None, needle, haystack).ratio()
         if ratio > best_ratio:
             best_ratio = ratio
             best_entry = entry
