@@ -27,7 +27,7 @@ import urllib.request
 import urllib.parse
 from http.server import BaseHTTPRequestHandler
 
-GEMINI_MODEL = "gemini-2.5-flash"
+GEMINI_MODEL = "gemini-2.0-flash"
 
 TREATISE_CONTEXT = {
     "charaka": (
