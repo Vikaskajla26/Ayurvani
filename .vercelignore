@@ -1,0 +1,17 @@
+# Exclude large local Python envs, datasets, and ML models from Vercel uploads
+.git/
+.venv/
+node_modules/
+vagdhenu/models/
+vagdhenu/training/
+vagdhenu/BigVGAN/
+vagdhenu/IndicF5/
+vagdhenu/scratch/
+data/
+scratch/
+*.pyc
+__pycache__/
+*.wav
+*.mp3
+*.pth
+*.pt
