@@ -177,34 +177,107 @@ def n_aksharas(s):
                 n += 1
     return n
 
+# ── Verse source lookup ─────────────────────────────────────────────────────
+_VERSE_INDEX_CACHE = None
+
+def _load_verse_index():
+    global _VERSE_INDEX_CACHE
+    if _VERSE_INDEX_CACHE is not None:
+        return _VERSE_INDEX_CACHE
+    try:
+        idx_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "charaka_verse_index.json")
+        with open(idx_path, "r", encoding="utf-8") as f:
+            _VERSE_INDEX_CACHE = json.load(f)
+    except Exception:
+        _VERSE_INDEX_CACHE = []
+    return _VERSE_INDEX_CACHE
+
+def _strip_punct(s):
+    """Remove dandas, spaces, and digits for fuzzy verse matching."""
+    import unicodedata
+    out = []
+    for c in s:
+        cat = unicodedata.category(c)
+        if cat.startswith("P") or cat.startswith("N") or c in " \t\n|।॥":
+            continue
+        out.append(c)
+    return "".join(out)
+
+def lookup_verse_source(text):
+    """Try to match `text` against charaka_verse_index. Returns a dict or None."""
+    idx = _load_verse_index()
+    if not idx:
+        return None
+    needle = _strip_punct(text)
+    if len(needle) < 8:
+        return None
+    # Short-circuit: look for the longest common prefix match (≥ 60% of chars)
+    best_ratio = 0.0
+    best_entry = None
+    for entry in idx:
+        haystack = _strip_punct(entry.get("sanskrit", ""))
+        if not haystack:
+            continue
+        # Cheap overlap: count chars of needle that appear in order in haystack
+        hi = 0
+        matched = 0
+        for ch in needle:
+            while hi < len(haystack) and haystack[hi] != ch:
+                hi += 1
+            if hi < len(haystack):
+                matched += 1
+                hi += 1
+        ratio = matched / max(len(needle), 1)
+        if ratio > best_ratio:
+            best_ratio = ratio
+            best_entry = entry
+    if best_ratio >= 0.75 and best_entry:
+        return {
+            "treatise": "Charaka Samhita",
+            "sthana": best_entry.get("sthana", ""),
+            "chapter": best_entry.get("chapter"),
+            "chapter_title": best_entry.get("chapter_title", ""),
+            "verse": best_entry.get("verse"),
+            "match_confidence": round(best_ratio, 2)
+        }
+    return None
+
+
 def call_gemini_analysis(text):
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
         return None
-    
+
     prompt = (
-        "You are an expert traditional Sanskrit scholar and priest (Vyakarana grammarian).\n"
-        "Please analyze the following user-submitted text and return a structured analysis.\n"
-        "Requirements:\n"
-        "1. Lipi Normalization: Convert the input (which might be in Devanagari, IAST, Harvard-Kyoto, or colloquial Romanized Sanskrit) into clean, grammatically correct Devanagari with correct anusvara, visarga, and matras. Do not silently rewrite words unless fixing obvious corruption/spelling errors. If the text is severely corrupted or ambiguous, set is_ambiguous to true and write a warning message in warning_message.\n"
-        "2. Transliteration: Generate a clean IAST transliteration of the normalized Devanagari verse.\n"
-        "3. Sandhi-Vicched: Decompose the verse into individual grammatical component words (padas). For each conjunction split, provide:\n"
+        "You are an expert traditional Sanskrit scholar specializing in Ayurvedic literature "
+        "(Charaka Samhita, Sushruta Samhita, Ashtanga Hridayam) and classical Vyakarana grammar.\n"
+        "Analyze the following Sanskrit text (which may be in Devanagari, IAST, Harvard-Kyoto, "
+        "or colloquial Romanized Sanskrit) and return a structured analysis with FOUR parts:\n\n"
+        "1. Lipi Normalization: Convert to clean, grammatically correct Devanagari with correct "
+        "anusvara, visarga, and matras. Do not silently rewrite words — only fix obvious "
+        "corruption or spelling errors. If severely corrupted or ambiguous, set is_ambiguous=true "
+        "and describe the issue in warning_message.\n\n"
+        "2. IAST Transliteration: Generate a clean IAST transliteration of the normalized Devanagari.\n\n"
+        "3. Sandhi-Vicched: Decompose each sandhi junction in the verse. For each:\n"
         "   - joined: the compound as it appears in the text\n"
         "   - split: the constituent padas (separated by ' + ')\n"
-        "   - type: the sandhi type applied ('swar', 'vyanjan', 'visarga', or 'none' / 'compound splitting')\n"
-        "   - explanation: a short grammatical note/rule applied (e.g. 'Adguṇaḥ', 'visarga utva')\n\n"
+        "   - type: 'swar', 'vyanjan', 'visarga', 'none', or 'compound_splitting'\n"
+        "   - explanation: short grammatical note (e.g. 'Adguṇaḥ', 'visarga utva', 'Tatpurusha samasa')\n\n"
+        "4. Word Meanings: For each INDIVIDUAL WORD after sandhi-vicched, provide:\n"
+        "   - devanagari: word in Devanagari\n"
+        "   - iast: IAST form\n"
+        "   - root: dhatu or pratipadika (e.g. 'āyu (to live)', 'rāj (to shine)')\n"
+        "   - grammar: grammatical analysis (e.g. 'n. nom. sg.', 'v. 3sg. pres. act.')\n"
+        "   - gloss_en: concise English meaning in context\n"
+        "   - commentary_note: if this word has a notable interpretation in Chakrapani (Charaka), "
+        "Dalhana (Sushruta), or Arunadatta/Hemadri (Ashtanga Hridaya) commentaries, mention it briefly. "
+        "Otherwise leave empty.\n\n"
         f"Sanskrit Text to analyze:\n{text}"
     )
 
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
     payload = {
-        "contents": [
-            {
-                "parts": [
-                    {"text": prompt}
-                ]
-            }
-        ],
+        "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {
             "responseMimeType": "application/json",
             "responseSchema": {
@@ -217,22 +290,37 @@ def call_gemini_analysis(text):
                         "items": {
                             "type": "OBJECT",
                             "properties": {
-                                "joined": {"type": "STRING"},
-                                "split": {"type": "STRING"},
-                                "type": {"type": "STRING"},
+                                "joined":      {"type": "STRING"},
+                                "split":       {"type": "STRING"},
+                                "type":        {"type": "STRING"},
                                 "explanation": {"type": "STRING"}
                             },
                             "required": ["joined", "split", "type"]
                         }
                     },
-                    "is_ambiguous": {"type": "BOOLEAN"},
-                    "warning_message": {"type": "STRING"}
+                    "word_meanings": {
+                        "type": "ARRAY",
+                        "items": {
+                            "type": "OBJECT",
+                            "properties": {
+                                "devanagari":      {"type": "STRING"},
+                                "iast":            {"type": "STRING"},
+                                "root":            {"type": "STRING"},
+                                "grammar":         {"type": "STRING"},
+                                "gloss_en":        {"type": "STRING"},
+                                "commentary_note": {"type": "STRING"}
+                            },
+                            "required": ["devanagari", "iast", "gloss_en"]
+                        }
+                    },
+                    "is_ambiguous":   {"type": "BOOLEAN"},
+                    "warning_message":{"type": "STRING"}
                 },
-                "required": ["normalized_deva", "iast", "sandhi_vicched", "is_ambiguous"]
+                "required": ["normalized_deva", "iast", "sandhi_vicched", "word_meanings", "is_ambiguous"]
             }
         }
     }
-    
+
     req_headers = {"Content-Type": "application/json"}
     req = urllib.request.Request(
         url,
@@ -240,9 +328,9 @@ def call_gemini_analysis(text):
         headers=req_headers,
         method="POST"
     )
-    
+
     try:
-        with urllib.request.urlopen(req, timeout=20) as resp:
+        with urllib.request.urlopen(req, timeout=30) as resp:
             res = json.loads(resp.read().decode("utf-8"))
             text_out = res["candidates"][0]["content"]["parts"][0]["text"]
             return json.loads(text_out)
@@ -256,7 +344,7 @@ def local_fallback_preview(text):
     padas = [p for p in padas if not re.match(r'^[\d\u0966-\u096f\s]+$', p)]
     if not padas:
         padas = [text]
-        
+
     pieces_devanagari = []
     for p in padas:
         slp = to_slp1(p)
@@ -264,35 +352,40 @@ def local_fallback_preview(text):
         slp = visarga_echo_final(slp)
         slp = slp.replace("F", "rU")
         pieces_devanagari.append(slp_to_deva(slp))
-        
-    slp_pieces = [to_slp1(p) for p in padas]
-    
+
     normalized_deva = " ".join(pieces_devanagari)
     return {
         "normalized_deva": normalized_deva,
         "iast": normalized_deva,
         "sandhi_vicched": [{"joined": p, "split": p, "type": "none", "explanation": "local fallback"} for p in padas],
+        "word_meanings": [],
         "is_ambiguous": False,
         "warning_message": ""
     }
 
 def preview_text(text):
     try:
-        # 1. Try Gemini Analysis first
+        # 1. Try Gemini Analysis first (includes sandhi-vicched + word gloss)
         result = call_gemini_analysis(text)
-        
-        # 2. Fall back if Gemini fails or is not configured
+
+        # 2. Fall back to local rule-based parser if Gemini is unavailable
         if not result:
             result = local_fallback_preview(text)
-            
-        # 3. Add Chandas (Meter) & Laghu-Guru Scansion locally using vagdhenu libraries
+
+        # 3. Verse source lookup (Charaka index — fast, local, no API)
+        verse_ref = lookup_verse_source(result.get("normalized_deva", text))
+        if not verse_ref:
+            # Try matching against the raw input in case normalization changed it
+            verse_ref = lookup_verse_source(text)
+        result["verse_source"] = verse_ref  # dict or None
+
+        # 4. Chandas (Meter) & Laghu-Guru Scansion — local, via vagdhenu libraries
         if HAS_LOCAL_SCANSION:
             slp_clean = chandas_labeler.to_slp1(result["normalized_deva"], src="devanagari")
             syls = tts_syllabify.syllabify(slp_clean)
             tts_weight.tag_weights(syls)
             meter = tts_meter.analyze(syls)
-            
-            # Format syllables list
+
             syl_list = []
             for s in syls:
                 syl_list.append({
@@ -304,7 +397,7 @@ def preview_text(text):
                     "pos_in_pada": s.get("pos_in_pada", 0),
                     "is_pada_final": s.get("is_pada_final", False)
                 })
-            
+
             result["meter_name"] = meter.get("name", "unknown")
             result["pada_length"] = meter.get("pada_length")
             result["syllables"] = syl_list
@@ -312,7 +405,7 @@ def preview_text(text):
             result["meter_name"] = "unknown"
             result["pada_length"] = None
             result["syllables"] = []
-            
+
         return result
     except Exception as e:
         return {"error": str(e)}

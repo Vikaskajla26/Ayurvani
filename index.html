@@ -1492,6 +1492,15 @@
         </svg>
         <span class="tip">Sanskrit Studio</span>
       </div>
+      <!-- Study Mode dock button -->
+      <div class="dock-item" style="--glow:var(--gold)" data-label="Study" data-view="study" onclick="showView('study')" title="Shloka Study Mode">
+        <div class="fill"></div>
+        <svg viewBox="0 0 24 24">
+          <path d="M12 3v18M3 9h18M3 15h18" stroke-width="1.6"/>
+          <circle cx="12" cy="12" r="3" fill="none" stroke-width="1.6"/>
+        </svg>
+        <span class="tip">Study Mode</span>
+      </div>
       <div class="dock-item" style="--glow:var(--gold)" data-label="Admin" data-view="admin" onclick="showView('admin')">
         <div class="fill"></div>
         <svg viewBox="0 0 24 24"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" fill="currentColor"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z" stroke="currentColor" fill="none" stroke-width="1.6"/></svg>
@@ -2275,7 +2284,639 @@
 
   </section>
 
+  <!-- ====================================================
+       STUDY MODE VIEW  — Phase 1 Text Intelligence Layer
+       ==================================================== -->
+  <section id="view-study">
+    <div class="study-wrap">
+      <!-- ── Input Panel ── -->
+      <div class="study-input-card">
+        <div class="study-header">
+          <h2 class="study-title hin-serif">
+            <span style="color:var(--gold)">अध्ययन</span> — Study Mode
+          </h2>
+          <p class="study-subtitle">Paste any Ayurvedic shloka in Devanagari, IAST, or colloquial Roman. Get sandhi-viccheda, meter, word-by-word gloss, and a reference recitation.</p>
+        </div>
+
+        <div class="study-input-row">
+          <textarea
+            id="studyInput"
+            class="study-textarea hin"
+            placeholder="यहाँ श्लोक लिखें… e.g. निष्क्रियं च स्वतन्त्रं च वशिनं सर्वगं विभुम्"
+            rows="4"
+            oninput="studyClearResults()"
+          ></textarea>
+          <div class="study-actions">
+            <select id="studyTreatise" class="study-select">
+              <option value="auto">Auto-detect treatise</option>
+              <option value="charaka">Charaka Samhita</option>
+              <option value="sushruta">Sushruta Samhita</option>
+              <option value="ashtanga_hridaya">Ashtanga Hridayam</option>
+            </select>
+            <button class="study-analyze-btn" id="studyAnalyzeBtn" onclick="runStudyAnalysis()">
+              <span id="studyBtnLabel">Analyse ✦</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick-fill examples -->
+        <div class="study-examples">
+          <span class="study-examples-label">Try:</span>
+          <button class="study-eg-pill" onclick="studyFill('निष्क्रियं च स्वतन्त्रं च वशिनं सर्वगं विभुम् | वदन्त्यात्मानमात्मज्ञाः क्षेत्रज्ञं साक्षिणं तथा')">CS·Sha 1.5</button>
+          <button class="study-eg-pill" onclick="studyFill('हितं सुखं च यद् भुक्तं जीर्णे पथ्यं च यद् भवेत् | इन्द्रियार्थानभीष्टांश्च लभते न च विज्यते')">CS·Su sample</button>
+          <button class="study-eg-pill" onclick="studyFill('om tryambakam yajamahe sugandhim pustivardhanam')">Mahamrityunjaya</button>
+        </div>
+      </div>
+
+      <!-- ── Results Area ── -->
+      <div id="studyResults" class="study-results" style="display:none">
+
+        <!-- Top row: Normalized text + Verse source -->
+        <div class="study-results-top">
+          <div class="study-card study-card-deva">
+            <div class="study-card-label">Normalized Devanagari</div>
+            <div id="studyNormalDeva" class="study-deva-text hin-serif"></div>
+            <div id="studyIAST" class="study-iast-text"></div>
+          </div>
+          <div class="study-card study-card-meta">
+            <div class="study-card-label">Chandas (Meter)</div>
+            <div id="studyMeterName" class="study-meter-name"></div>
+            <div id="studyLGGrid" class="study-lg-grid"></div>
+            <div id="studyVerseRef" class="study-verse-ref" style="display:none"></div>
+          </div>
+        </div>
+
+        <!-- Sandhi-viccheda -->
+        <div class="study-card">
+          <div class="study-card-label">Sandhi-Viccheda</div>
+          <div id="studySandhiList" class="study-sandhi-list"></div>
+        </div>
+
+        <!-- Word-by-word gloss -->
+        <div class="study-card">
+          <div class="study-card-label">Word-by-Word Gloss
+            <span id="studyGlossSource" class="study-gloss-source"></span>
+          </div>
+          <div id="studyWordGrid" class="study-word-grid"></div>
+        </div>
+
+        <!-- Recite button -->
+        <div class="study-recite-row">
+          <button class="study-recite-btn" id="studyReciteBtn" onclick="studyRecite()">
+            🔊 Hear Reference Recitation
+          </button>
+          <div id="studyAudioWrap" style="display:none; margin-top:12px;">
+            <audio id="studyAudio" controls style="width:100%; border-radius:8px;"></audio>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Loading state -->
+      <div id="studyLoading" class="study-loading" style="display:none">
+        <div class="study-spinner"></div>
+        <div id="studyLoadingMsg" class="study-loading-msg">Analysing…</div>
+      </div>
+
+      <!-- Error state -->
+      <div id="studyError" class="study-error" style="display:none"></div>
+    </div>
+  </section>
+
 </main>
+
+<style>
+/* ══════════════════════════════════════════
+   STUDY MODE STYLES
+   ══════════════════════════════════════════ */
+#view-study {
+  padding: 28px 20px 60px;
+  min-height: 100vh;
+}
+.study-wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* Input card */
+.study-input-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 28px;
+  backdrop-filter: blur(16px);
+}
+.study-header { margin-bottom: 20px; }
+.study-title {
+  margin: 0 0 8px;
+  font-size: clamp(1.3rem, 3vw, 1.75rem);
+  color: var(--cream);
+}
+.study-subtitle {
+  margin: 0;
+  font-size: 14px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+.study-input-row {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+.study-textarea {
+  flex: 1;
+  background: rgba(0,0,0,0.25);
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  color: var(--cream);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  padding: 14px 16px;
+  resize: vertical;
+  transition: border-color .25s;
+  font-family: 'Tiro Devanagari Hindi', serif;
+}
+.study-textarea:focus { outline: none; border-color: var(--gold); }
+.study-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 180px;
+}
+.study-select {
+  background: var(--panel-soft);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--cream);
+  font-size: 13px;
+  padding: 9px 12px;
+  cursor: pointer;
+}
+.study-analyze-btn {
+  background: linear-gradient(135deg, var(--gold), var(--clay));
+  border: none;
+  border-radius: 12px;
+  color: var(--teal-deep);
+  font-weight: 700;
+  font-size: 15px;
+  padding: 13px 18px;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+  letter-spacing: .02em;
+}
+.study-analyze-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(228,201,124,.35); }
+.study-analyze-btn:disabled { opacity: .5; transform: none; }
+
+/* Quick examples */
+.study-examples {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.study-examples-label { font-size: 12px; color: var(--ink-soft); }
+.study-eg-pill {
+  background: rgba(228,201,124,.1);
+  border: 1px solid rgba(228,201,124,.25);
+  border-radius: 20px;
+  color: var(--gold);
+  font-size: 12px;
+  padding: 5px 12px;
+  cursor: pointer;
+  transition: background .2s;
+}
+.study-eg-pill:hover { background: rgba(228,201,124,.2); }
+
+/* Results area */
+.study-results { display: flex; flex-direction: column; gap: 16px; }
+
+.study-results-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 620px) {
+  .study-results-top { grid-template-columns: 1fr; }
+  .study-input-row { flex-direction: column; }
+  .study-actions { min-width: unset; flex-direction: row; flex-wrap: wrap; }
+}
+
+/* Cards */
+.study-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px 22px;
+  backdrop-filter: blur(12px);
+  animation: studyCardIn .35s ease both;
+}
+@keyframes studyCardIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.study-card-label {
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.study-deva-text {
+  font-family: 'Tiro Devanagari Hindi', serif;
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: var(--cream);
+  margin-bottom: 8px;
+}
+.study-iast-text {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  font-style: italic;
+  line-height: 1.6;
+}
+.study-meter-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.study-lg-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.study-lg-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+}
+.study-lg-pill.G { background: rgba(228,201,124,.2); color: var(--gold); border: 1px solid rgba(228,201,124,.3); }
+.study-lg-pill.L { background: rgba(169,194,160,.15); color: var(--sage); border: 1px solid rgba(169,194,160,.25); }
+.study-lg-pill.pada-break { width: 6px; height: 28px; background: var(--line); border-radius: 2px; }
+
+.study-verse-ref {
+  margin-top: 12px;
+  padding: 8px 12px;
+  background: rgba(228,201,124,.08);
+  border: 1px solid rgba(228,201,124,.2);
+  border-radius: 8px;
+  font-size: 12.5px;
+  color: var(--gold);
+  line-height: 1.5;
+}
+
+/* Sandhi list */
+.study-sandhi-list { display: flex; flex-direction: column; gap: 8px; }
+.study-sandhi-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr 1fr;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 14px;
+  background: rgba(0,0,0,.18);
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  font-size: 13.5px;
+}
+.study-sandhi-joined { font-family: 'Tiro Devanagari Hindi', serif; color: var(--cream); }
+.study-sandhi-arrow { color: var(--ink-soft); font-size: 11px; }
+.study-sandhi-split { font-family: 'Tiro Devanagari Hindi', serif; color: var(--gold); }
+.study-sandhi-type {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 20px;
+  background: rgba(169,194,160,.15);
+  color: var(--sage);
+  text-align: center;
+  white-space: nowrap;
+}
+.study-sandhi-note { grid-column: 1/-1; font-size: 12px; color: var(--ink-soft); padding-left: 2px; }
+
+/* Word grid */
+.study-word-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+}
+.study-word-card {
+  background: rgba(0,0,0,.2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px;
+  cursor: default;
+  transition: border-color .2s, background .2s;
+  position: relative;
+}
+.study-word-card:hover { border-color: rgba(228,201,124,.4); background: rgba(228,201,124,.05); }
+.study-word-deva {
+  font-family: 'Tiro Devanagari Hindi', serif;
+  font-size: 1.1rem;
+  color: var(--cream);
+  margin-bottom: 4px;
+}
+.study-word-iast { font-size: 11.5px; color: var(--ink-soft); font-style: italic; margin-bottom: 6px; }
+.study-word-gloss { font-size: 13px; color: var(--gold); line-height: 1.4; margin-bottom: 4px; }
+.study-word-grammar { font-size: 11px; color: var(--sage); }
+.study-word-root {
+  font-size: 11px;
+  color: var(--ink-soft);
+  margin-top: 4px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.study-word-commentary {
+  display: none; /* shown on hover via JS tooltip */
+}
+.study-tooltip {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--cream);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  max-width: 260px;
+  z-index: 100;
+  box-shadow: 0 8px 24px rgba(0,0,0,.5);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .2s;
+}
+.study-word-card:hover .study-tooltip { opacity: 1; }
+.study-gloss-source {
+  font-size: 10px;
+  background: rgba(228,201,124,.12);
+  color: var(--gold);
+  border-radius: 20px;
+  padding: 2px 8px;
+  font-weight: normal;
+  letter-spacing: .05em;
+}
+
+/* Recite row */
+.study-recite-row {
+  text-align: center;
+  padding: 4px 0 8px;
+}
+.study-recite-btn {
+  background: linear-gradient(135deg, var(--clay), #8a3a20);
+  border: none;
+  border-radius: 14px;
+  color: #fff;
+  font-size: 15px;
+  padding: 14px 30px;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+  font-weight: 600;
+}
+.study-recite-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(193,99,59,.4); }
+.study-recite-btn:disabled { opacity: .5; transform: none; }
+
+/* Loading */
+.study-loading {
+  text-align: center;
+  padding: 48px 20px;
+}
+.study-spinner {
+  width: 44px; height: 44px;
+  border: 3px solid var(--line);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  animation: studySpin .8s linear infinite;
+}
+@keyframes studySpin { to { transform: rotate(360deg); } }
+.study-loading-msg { color: var(--ink-soft); font-size: 14px; }
+
+/* Error */
+.study-error {
+  padding: 20px 24px;
+  background: rgba(193,99,59,.12);
+  border: 1px solid rgba(193,99,59,.3);
+  border-radius: 14px;
+  color: var(--clay);
+  font-size: 14px;
+  line-height: 1.6;
+}
+</style>
+
+<script>
+/* ══════════════════════════════════════════
+   STUDY MODE JS
+   ══════════════════════════════════════════ */
+(function() {
+
+let _studyLastText = '';
+
+window.studyClearResults = function() {
+  document.getElementById('studyResults').style.display = 'none';
+  document.getElementById('studyError').style.display = 'none';
+};
+
+window.studyFill = function(text) {
+  const ta = document.getElementById('studyInput');
+  ta.value = text;
+  ta.focus();
+  studyClearResults();
+};
+
+window.runStudyAnalysis = async function() {
+  const text = document.getElementById('studyInput').value.trim();
+  if (!text) { showToast('श्लोक दर्ज करें'); return; }
+
+  const btn = document.getElementById('studyAnalyzeBtn');
+  const lbl = document.getElementById('studyBtnLabel');
+  const loading = document.getElementById('studyLoading');
+  const results = document.getElementById('studyResults');
+  const errDiv = document.getElementById('studyError');
+
+  btn.disabled = true;
+  lbl.textContent = 'Analysing…';
+  loading.style.display = 'block';
+  results.style.display = 'none';
+  errDiv.style.display = 'none';
+  document.getElementById('studyLoadingMsg').textContent = 'Calling Gemini analysis…';
+
+  try {
+    _studyLastText = text;
+    const url = `/api/preview?text=${encodeURIComponent(text)}`;
+    const resp = await fetch(url);
+    const data = await resp.json();
+
+    if (data.error) throw new Error(data.error);
+
+    loading.style.display = 'none';
+    renderStudyResults(data, text);
+    results.style.display = 'flex';
+
+  } catch(e) {
+    loading.style.display = 'none';
+    errDiv.textContent = '⚠ Analysis failed: ' + e.message;
+    errDiv.style.display = 'block';
+  } finally {
+    btn.disabled = false;
+    lbl.textContent = 'Analyse ✦';
+  }
+};
+
+function renderStudyResults(data, originalText) {
+  // 1. Normalized Devanagari + IAST
+  document.getElementById('studyNormalDeva').textContent = data.normalized_deva || '';
+  document.getElementById('studyIAST').textContent = data.iast || '';
+
+  // 2. Meter + L/G grid
+  const meterName = data.meter_name || 'unknown';
+  document.getElementById('studyMeterName').textContent =
+    meterName !== 'unknown' ? meterName.charAt(0).toUpperCase() + meterName.slice(1) : '—';
+
+  const lgGrid = document.getElementById('studyLGGrid');
+  lgGrid.innerHTML = '';
+  if (data.syllables && data.syllables.length) {
+    let lastPada = -1;
+    data.syllables.forEach(syl => {
+      if (lastPada >= 0 && syl.pada_index !== lastPada) {
+        const br = document.createElement('div');
+        br.className = 'study-lg-pill pada-break';
+        lgGrid.appendChild(br);
+      }
+      const pill = document.createElement('div');
+      pill.className = `study-lg-pill ${syl.weight || 'L'}`;
+      pill.textContent = syl.weight || '?';
+      pill.title = `${syl.text} (${syl.slp1}) — ${syl.weight_cause || ''}`;
+      lgGrid.appendChild(pill);
+      lastPada = syl.pada_index;
+    });
+  } else {
+    lgGrid.innerHTML = '<span style="color:var(--ink-soft);font-size:12px">Meter data unavailable (vagdhenu not installed)</span>';
+  }
+
+  // 3. Verse reference
+  const refDiv = document.getElementById('studyVerseRef');
+  if (data.verse_source) {
+    const vs = data.verse_source;
+    refDiv.innerHTML =
+      `📖 <strong>${vs.treatise}</strong> · ${vs.sthana} · Chapter ${vs.chapter}, Verse ${vs.verse}` +
+      (vs.chapter_title ? ` <em>(${vs.chapter_title})</em>` : '') +
+      ` <span style="opacity:.55;font-size:10px">[${Math.round(vs.match_confidence*100)}% match]</span>`;
+    refDiv.style.display = 'block';
+  } else {
+    refDiv.style.display = 'none';
+  }
+
+  // 4. Sandhi-viccheda
+  const sandhiList = document.getElementById('studySandhiList');
+  sandhiList.innerHTML = '';
+  const sv = data.sandhi_vicched || [];
+  if (sv.length === 0 || (sv.length === 1 && sv[0].type === 'none')) {
+    sandhiList.innerHTML = '<span style="color:var(--ink-soft);font-size:13px">No sandhi junctions detected.</span>';
+  } else {
+    sv.forEach(item => {
+      const row = document.createElement('div');
+      row.className = 'study-sandhi-row';
+      row.innerHTML = `
+        <span class="study-sandhi-joined">${item.joined}</span>
+        <span class="study-sandhi-arrow">→</span>
+        <span class="study-sandhi-split">${item.split}</span>
+        <span class="study-sandhi-type">${item.type}</span>
+        ${item.explanation ? `<span class="study-sandhi-note">${item.explanation}</span>` : ''}
+      `;
+      sandhiList.appendChild(row);
+    });
+  }
+
+  // 5. Word meanings
+  const wordGrid = document.getElementById('studyWordGrid');
+  wordGrid.innerHTML = '';
+  const words = data.word_meanings || [];
+  const glossSrc = document.getElementById('studyGlossSource');
+  if (words.length) {
+    glossSrc.textContent = 'via Gemini 2.5 Flash';
+    words.forEach(w => {
+      const card = document.createElement('div');
+      card.className = 'study-word-card';
+      card.innerHTML = `
+        <div class="study-word-deva">${w.devanagari || ''}</div>
+        <div class="study-word-iast">${w.iast || ''}</div>
+        <div class="study-word-gloss">${w.gloss_en || ''}</div>
+        <div class="study-word-grammar">${w.grammar || ''}</div>
+        ${w.root ? `<div class="study-word-root">√ ${w.root}</div>` : ''}
+        ${w.commentary_note ? `<div class="study-tooltip">${w.commentary_note}</div>` : ''}
+      `;
+      wordGrid.appendChild(card);
+    });
+  } else {
+    glossSrc.textContent = '';
+    wordGrid.innerHTML = '<span style="color:var(--ink-soft);font-size:13px;grid-column:1/-1">Word gloss unavailable (GEMINI_API_KEY not configured or local fallback active).</span>';
+  }
+
+  // 6. Show warning if ambiguous
+  if (data.is_ambiguous && data.warning_message) {
+    const errDiv = document.getElementById('studyError');
+    errDiv.textContent = '⚠ ' + data.warning_message;
+    errDiv.style.display = 'block';
+  }
+}
+
+window.studyRecite = async function() {
+  const text = document.getElementById('studyNormalDeva').textContent.trim() || _studyLastText;
+  if (!text) { showToast('Analyse first'); return; }
+
+  const btn = document.getElementById('studyReciteBtn');
+  const audioWrap = document.getElementById('studyAudioWrap');
+  const audio = document.getElementById('studyAudio');
+
+  btn.disabled = true;
+  btn.textContent = '⏳ Generating…';
+  audioWrap.style.display = 'none';
+
+  try {
+    const serverUrl = localStorage.getItem('vagdhenu_server_url') || '';
+    const params = new URLSearchParams({ text, meter: 'auto', seed: '42', speed: '0.90' });
+    if (serverUrl) params.set('server_url', serverUrl);
+    const resp = await fetch(`/api/recite?${params.toString()}`);
+    if (!resp.ok) throw new Error(`TTS error ${resp.status}`);
+    const blob = await resp.blob();
+    audio.src = URL.createObjectURL(blob);
+    audioWrap.style.display = 'block';
+    audio.play().catch(() => {});
+  } catch(e) {
+    showToast('Recitation failed: ' + e.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '🔊 Hear Reference Recitation';
+  }
+};
+
+// Wire showView to init study view
+const _origShowView = window.showView;
+if (_origShowView) {
+  window.showView = function(id) {
+    _origShowView(id);
+    if (id === 'study') {
+      setTimeout(() => document.getElementById('studyInput').focus(), 300);
+    }
+  };
+}
+
+})();
+</script>
 
 <!-- Scroll-to-next-section hint indicator -->
 <div class="scroll-next-hint" id="scrollNextHint">
