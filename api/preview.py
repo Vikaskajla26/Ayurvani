@@ -243,9 +243,14 @@ def lookup_verse_source(text):
     return None
 
 
+_LAST_GEMINI_ERROR = None
+
 def call_gemini_analysis(text):
+    global _LAST_GEMINI_ERROR
+    _LAST_GEMINI_ERROR = None
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
+        _LAST_GEMINI_ERROR = "GEMINI_API_KEY environment variable is missing or empty."
         return None
 
     prompt = (
@@ -335,6 +340,7 @@ def call_gemini_analysis(text):
             text_out = res["candidates"][0]["content"]["parts"][0]["text"]
             return json.loads(text_out)
     except Exception as e:
+        _LAST_GEMINI_ERROR = f"Gemini API call failed: {str(e)}"
         print(f"[preview] Gemini API call failed: {e}")
         return None
 
@@ -371,6 +377,9 @@ def preview_text(text):
         # 2. Fall back to local rule-based parser if Gemini is unavailable
         if not result:
             result = local_fallback_preview(text)
+            if _LAST_GEMINI_ERROR:
+                result["warning_message"] = f"AI features unavailable: {_LAST_GEMINI_ERROR}"
+                result["is_ambiguous"] = True
 
         # 3. Verse source lookup (Charaka index — fast, local, no API)
         verse_ref = lookup_verse_source(result.get("normalized_deva", text))
