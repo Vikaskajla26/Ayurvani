@@ -2847,7 +2847,7 @@ function renderStudyResults(data, originalText) {
   const words = data.word_meanings || [];
   const glossSrc = document.getElementById('studyGlossSource');
   if (words.length) {
-    glossSrc.textContent = 'via Gemini 2.5 Flash';
+    glossSrc.textContent = 'via Gemini 2.0 Flash';
     words.forEach(w => {
       const card = document.createElement('div');
       card.className = 'study-word-card';
@@ -2863,7 +2863,17 @@ function renderStudyResults(data, originalText) {
     });
   } else {
     glossSrc.textContent = '';
-    wordGrid.innerHTML = '<span style="color:var(--ink-soft);font-size:13px;grid-column:1/-1">Word gloss unavailable (GEMINI_API_KEY not configured or local fallback active).</span>';
+    let msg = 'Word gloss unavailable.';
+    if (data.warning_message) {
+      if (data.warning_message.includes('429')) {
+        msg = '⏱ Google Gemini API Rate Limit Reached (HTTP 429). Please wait 1–2 minutes and click Analyse again.';
+      } else if (data.warning_message.includes('missing or empty')) {
+        msg = '🔑 GEMINI_API_KEY environment variable is not configured on Vercel.';
+      } else {
+        msg = data.warning_message;
+      }
+    }
+    wordGrid.innerHTML = `<span style="color:var(--gold);font-size:13px;grid-column:1/-1;padding:8px 0;line-height:1.6">${msg}</span>`;
   }
 
   // 6. Show warning if ambiguous
