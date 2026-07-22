@@ -2865,12 +2865,17 @@ function renderStudyResults(data, originalText) {
     glossSrc.textContent = '';
     let msg = 'Word gloss unavailable.';
     if (data.warning_message) {
-      if (data.warning_message.includes('429')) {
-        msg = '⏱ Google Gemini API Rate Limit Reached (HTTP 429). Please wait 1–2 minutes and click Analyse again.';
-      } else if (data.warning_message.includes('missing or empty')) {
+      const wm = data.warning_message;
+      if (wm.includes('INVALID_KEY')) {
+        msg = '🔑 Gemini API key was rejected by Google — it may be invalid, the wrong type of credential, or missing access to the Generative Language API. Detail: ' + wm.replace(/^\d+\s*INVALID_KEY:\s*/, '');
+      } else if (wm.includes('RATE_LIMIT')) {
+        msg = '⏱ Google Gemini API rate limit/quota reached. Detail: ' + wm.replace(/^429\s*RATE_LIMIT:\s*/, '') + ' — please wait a bit and click Analyse again.';
+      } else if (wm.includes('MODEL_NOT_FOUND')) {
+        msg = '❓ The configured Gemini model is unavailable for this key/region. Detail: ' + wm.replace(/^404\s*MODEL_NOT_FOUND:\s*/, '');
+      } else if (wm.includes('missing or empty')) {
         msg = '🔑 GEMINI_API_KEY environment variable is not configured on Vercel.';
       } else {
-        msg = data.warning_message;
+        msg = wm;
       }
     }
     wordGrid.innerHTML = `<span style="color:var(--gold);font-size:13px;grid-column:1/-1;padding:8px 0;line-height:1.6">${msg}</span>`;

@@ -3,6 +3,7 @@ import json
 import urllib
 import urllib.parse
 import urllib.request
+import urllib.error
 import os
 import sys
 from http.server import BaseHTTPRequestHandler
@@ -344,6 +345,34 @@ def call_gemini_analysis(text):
             res = json.loads(resp.read().decode("utf-8"))
             text_out = res["candidates"][0]["content"]["parts"][0]["text"]
             return json.loads(text_out)
+    except urllib.error.HTTPError as e:
+        # Parse Google's actual JSON error body instead of just stringifying
+        # the exception -- a bare str(e) like "HTTP Error 429: Too Many
+        # Requests" or "HTTP Error 400: Bad Request" told us almost nothing
+        # about WHY, and the frontend was left guessing the cause from a
+        # fragile substring check. Google's Generative Language API returns
+        # a structured body ({"error": {"code", "message", "status"}}) that
+        # actually distinguishes an invalid/malformed API key (400,
+        # API_KEY_INVALID) from a genuine quota/rate-limit problem (429,
+        # RESOURCE_EXHAUSTED) from other failures -- surface that directly.
+        try:
+            body = json.loads(e.read().decode("utf-8"))
+            g_error = body.get("error", {})
+            g_status = g_error.get("status", "")
+            g_message = g_error.get("message", "")
+        except Exception:
+            g_status, g_message = "", ""
+
+        if e.code == 429 or g_status == "RESOURCE_EXHAUSTED":
+            _LAST_GEMINI_ERROR = f"429 RATE_LIMIT: {g_message or 'Gemini API quota/rate limit exceeded for this key.'}"
+        elif e.code in (400, 401, 403) or g_status in ("INVALID_ARGUMENT", "PERMISSION_DENIED", "UNAUTHENTICATED"):
+            _LAST_GEMINI_ERROR = f"{e.code} INVALID_KEY: {g_message or 'The configured GEMINI_API_KEY was rejected by Google (invalid, wrong type, or lacking access to the Generative Language API).'}"
+        elif e.code == 404:
+            _LAST_GEMINI_ERROR = f"404 MODEL_NOT_FOUND: {g_message or 'The requested Gemini model is not available for this API key/region.'}"
+        else:
+            _LAST_GEMINI_ERROR = f"{e.code} {g_status}: {g_message or str(e)}"
+        print(f"[preview] Gemini API HTTPError {e.code} ({g_status}): {g_message}")
+        return None
     except Exception as e:
         _LAST_GEMINI_ERROR = f"Gemini API call failed: {str(e)}"
         print(f"[preview] Gemini API call failed: {e}")
